@@ -18,6 +18,7 @@ namespace PockyBot.NET.Services.Triggers
         }
 
         protected abstract string Command { get; }
+        protected abstract bool DirectMessageAllowed { get; }
         protected abstract bool CanHaveArgs { get; }
         protected abstract bool PermissionsRequired { get; }
         protected string[] Permissions { get; } = new string[0];
@@ -43,7 +44,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool ShouldTriggerInDirectMessage(Message message)
         {
-            if (PermissionsRequired && !HasPermission(message.SenderId))
+            if (!DirectMessageAllowed || (PermissionsRequired && !HasPermission(message.SenderId)))
             {
                 return false;
             }

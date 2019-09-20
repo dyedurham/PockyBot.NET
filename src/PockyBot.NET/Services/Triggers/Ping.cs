@@ -12,6 +12,8 @@ namespace PockyBot.NET.Services.Triggers
 
         protected override string Command => Commands.Ping;
 
+        protected override bool DirectMessageAllowed => true;
+
         protected override bool CanHaveArgs => false;
 
         protected override bool PermissionsRequired => false;
