@@ -43,7 +43,7 @@ done through appsettings.json, or at the time of configuring the bot.
 }
 ```
 
-### Using Dependency Injection
+#### Using Dependency Injection
 
 In the `ConfigureServices` method of your `Startup.cs` file, add the following:
 
@@ -79,7 +79,7 @@ public IServiceProvider ConfigureServices(IServiceCollection services)
 }
 ```
 
-### Without Dependency Injection
+#### Without Dependency Injection
 
 You can get a concrete implementation of the library by calling the
 `PockyBotFactory.CreatePockyBot` method.
@@ -91,7 +91,7 @@ using PockyBot.NET.Configuration;
 
 // Some code here
 
-var chatHelper; // An implementation of GlobalX.ChatBots.Core.IChatHelper
+IChatHelper chatHelper; // An implementation of GlobalX.ChatBots.Core.IChatHelper
 
 var settings = new PockyBotSettings
 {
@@ -102,3 +102,65 @@ var settings = new PockyBotSettings
 
 IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper);
 ```
+
+### Using The Bot
+
+Once you have an instance of IPockyBot, you can use it to respond to a message like so:
+
+```cs
+using GlobalX.ChatBots.Core;
+using PockyBot.NET;
+
+Message message; // input from somewhere
+IPockyBot pockybot; // initialised elsewhere
+
+pockybot.Respond(message);
+```
+
+## Database
+
+PockyBot requires a postgres database. THe `database` folder in this
+repository contains a number of `.sql` files you can use to set this up.
+
+Table `generalconfig` is initalised with default values as follows:
+
+Value | Default | Explanation
+:-- | :-- | :--
+limit | 10 | The number of pegs each user is allowed to give out each cycle
+minimum | 5 | The minimum number of pegs each user is *required* to give out to be eligible to win
+winners | 3 | The number of winners displayed (using a dense ranking)
+commentsRequired | 1 | Boolean value of whether a reason is required to give a peg
+pegWithoutKeyword | 0 | Boolean value of whether the "peg" keyword is required to give a peg (if true, pegs can be given with `@PockyBot @Person <reason>`)
+requireValues | 1 | Boolean value of whether a keyword is required in the reason for a peg to be given
+
+Table `stringconfig` is used to define keywords.
+Name field is 'keyword' and 'value' is the value of the keyword desired.
+Default keywords are 'customer', 'brave', 'awesome', 'collaborative', and 'real', shorthands for the GlobalX company values.
+
+Existing roles are 'ADMIN', 'UNMETERED', 'RESULTS', 'FINISH', 'RESET', 'UPDATE', and 'WINNERS'.
+Users can have more than one role. Any users with the 'ADMIN' role are considered to have all other roles except for 'UNMETERED'.
+'UNMETERED' users are not restricted by the usual 'limit' value from `generalconfig`.
+All other roles relate to the commands of the same name displayed below.
+
+## Commands
+
+All commands related to PockyBot must begin with a mention of the bot, or be
+sent directly to the bot. In this readme, mentions will be identified by
+`@PockyBot`.
+
+### General Commands
+
+Use any of these commands in a room PockyBot is participating in to perform
+commands.
+
+- `@PockyBot ping` &mdash; verify that the bot is alive.
+
+#### Direct Message Commands
+
+PockyBot can be messaged directly with certain commands.
+
+- `ping`
+
+## Contributing
+
+For notes on how to contribute, please see our [Contribution Guildelines](https://github.com/GlobalX/PockyBot.NET/blob/master/CONTRIBUTING.md).
