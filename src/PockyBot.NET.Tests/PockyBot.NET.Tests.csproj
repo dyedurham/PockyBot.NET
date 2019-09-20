@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PockyBot.NET\PockyBot.NET.csproj" />
+  </ItemGroup>
+
 </Project>
