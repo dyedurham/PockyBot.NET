@@ -9,8 +9,8 @@ namespace PockyBot.NET.Services
 {
     internal class TriggerResponseTester : ITriggerResponseTester
     {
-        protected readonly PockyBotSettings _settings;
-        protected readonly IPockyUserRepository _pockyUserRepository;
+        private readonly PockyBotSettings _settings;
+        private readonly IPockyUserRepository _pockyUserRepository;
 
         public TriggerResponseTester(IOptions<PockyBotSettings> settings, IPockyUserRepository pockyUserRepository)
         {
