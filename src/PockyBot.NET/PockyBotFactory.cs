@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Persistence;
 using PockyBot.NET.Persistence.Repositories;
+using PockyBot.NET.Services;
 using PockyBot.NET.Services.Triggers;
 
 namespace PockyBot.NET
@@ -15,13 +16,14 @@ namespace PockyBot.NET
             var wrappedSettings = new OptionsWrapper<PockyBotSettings>(settings);
             var dbContext = DatabaseContextBuilder.BuildDatabaseContext(settings.DatabaseConnectionString);
             var pockyUserRepository = new PockyUserRepository(dbContext);
+            var triggerResponseTester = new TriggerResponseTester(wrappedSettings, pockyUserRepository);
 
             List<ITrigger> triggers = new List<ITrigger>
             {
-                new Ping(wrappedSettings, pockyUserRepository)
+                new Ping()
             };
 
-            return new PockyBot(triggers);
+            return new PockyBot(triggers, triggerResponseTester);
         }
     }
 }

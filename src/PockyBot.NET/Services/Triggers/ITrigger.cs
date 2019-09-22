@@ -4,8 +4,10 @@ namespace PockyBot.NET.Services.Triggers
 {
     internal interface ITrigger
     {
-        bool ShouldTriggerInRoom(Message message);
-        bool ShouldTriggerInDirectMessage(Message message);
+        string Command { get; }
+        bool DirectMessageAllowed { get; }
+        bool CanHaveArgs { get; }
+        string[] Permissions { get; }
         Message Respond(Message message);
     }
 }

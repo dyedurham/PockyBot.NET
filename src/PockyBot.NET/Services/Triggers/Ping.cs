@@ -1,24 +1,19 @@
 using GlobalX.ChatBots.Core.Messages;
-using Microsoft.Extensions.Options;
-using PockyBot.NET.Configuration;
 using PockyBot.NET.Constants;
-using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Ping : Trigger
+    internal class Ping : ITrigger
     {
-        public Ping(IOptions<PockyBotSettings> settings, IPockyUserRepository pockyUserRepository) : base(settings, pockyUserRepository) { }
+        public string Command => Commands.Ping;
 
-        protected override string Command => Commands.Ping;
+        public bool DirectMessageAllowed => true;
 
-        protected override bool DirectMessageAllowed => true;
+        public bool CanHaveArgs => false;
 
-        protected override bool CanHaveArgs => false;
+        public string[] Permissions => new string[0];
 
-        protected override bool PermissionsRequired => false;
-
-        public override Message Respond(Message message) {
+        public Message Respond(Message message) {
             return new Message {
                 Text = "pong. I'm alive!"
             };

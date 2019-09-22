@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Persistence;
+using PockyBot.NET.Services;
 using PockyBot.NET.Services.Triggers;
 
 namespace PockyBot.NET
@@ -26,6 +27,7 @@ namespace PockyBot.NET
         }
 
         private static IServiceCollection ConfigureCommonServices(this IServiceCollection services) {
+            services.AddTransient<ITriggerResponseTester, TriggerResponseTester>();
             services.AddTransient<IPockyBot, PockyBot>();
             services.AddTransient<ITrigger, Ping>();
             return services;
