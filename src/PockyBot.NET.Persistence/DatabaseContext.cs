@@ -13,9 +13,17 @@ namespace PockyBot.NET.Persistence
             {
                 table.UserId, table.UserRole
             });
+
+            builder.Entity<StringConfig>().HasKey(table => new
+            {
+                table.Name, table.Value
+            });
         }
 
         public DbSet<PockyUser> PockyUsers { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Peg> Pegs { get; set; }
+        public DbSet<GeneralConfig> GeneralConfig { get; set; }
+        public DbSet<StringConfig> StringConfig { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using GlobalX.ChatBots.Core.Rooms;
 using PockyBot.NET.Services;
@@ -11,14 +13,16 @@ namespace PockyBot.NET
     {
         private readonly IEnumerable<ITrigger> _triggers;
         private readonly ITriggerResponseTester _triggerResponseTester;
+        private readonly IChatHelper _chatHelper;
 
-        public PockyBot(IEnumerable<ITrigger> triggers, ITriggerResponseTester triggerResponseTester)
+        public PockyBot(IEnumerable<ITrigger> triggers, ITriggerResponseTester triggerResponseTester, IChatHelper chatHelper)
         {
             _triggers = triggers;
             _triggerResponseTester = triggerResponseTester;
+            _chatHelper = chatHelper;
         }
 
-        public void Respond(Message message)
+        public async Task Respond(Message message)
         {
             ITrigger responder = null;
 
@@ -31,7 +35,12 @@ namespace PockyBot.NET
                 responder = _triggers.FirstOrDefault(x => _triggerResponseTester.ShouldTriggerInDirectMessage(message, x));
             }
 
-            responder?.Respond(message);
+            var response = await responder?.Respond(message) ?? null;
+            if (response != null)
+            {
+                response.RoomId = message.RoomId;
+                await _chatHelper.Messages.SendMessageAsync(response);
+            }
         }
     }
 }

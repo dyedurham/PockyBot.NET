@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Persistence;
 using PockyBot.NET.Services;
+using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Services.Triggers;
 
 namespace PockyBot.NET
@@ -28,8 +29,12 @@ namespace PockyBot.NET
 
         private static IServiceCollection ConfigureCommonServices(this IServiceCollection services) {
             services.AddTransient<ITriggerResponseTester, TriggerResponseTester>();
+            services.AddTransient<IPegRequestValidator, PegRequestValidator>();
+            services.AddTransient<IPegCommentValidator, PegCommentValidator>();
+            services.AddTransient<IPegGiver, PegGiver>();
             services.AddTransient<IPockyBot, PockyBot>();
             services.AddTransient<ITrigger, Ping>();
+            services.AddTransient<ITrigger, Peg>();
             return services;
         }
     }

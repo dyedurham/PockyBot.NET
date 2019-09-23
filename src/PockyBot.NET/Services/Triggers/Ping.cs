@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
 
@@ -13,10 +14,10 @@ namespace PockyBot.NET.Services.Triggers
 
         public string[] Permissions => new string[0];
 
-        public Message Respond(Message message) {
-            return new Message {
+        public Task<Message> Respond(Message message) {
+            return Task.FromResult(new Message {
                 Text = "pong. I'm alive!"
-            };
+            });
         }
     }
 }

@@ -9,6 +9,8 @@ namespace PockyBot.NET.Persistence
         public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services, string databaseConnectionString)
         {
             services.AddTransient<IPockyUserRepository, PockyUserRepository>();
+            services.AddTransient<IPegRepository, PegRepository>();
+            services.AddTransient<IConfigRepository, ConfigRepository>();
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(databaseConnectionString));
             return services;
         }
