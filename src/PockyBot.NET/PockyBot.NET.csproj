@@ -6,8 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="GlobalX.ChatBots.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PockyBot.NET.Persistence\PockyBot.NET.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
