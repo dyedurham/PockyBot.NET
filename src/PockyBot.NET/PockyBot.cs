@@ -31,10 +31,7 @@ namespace PockyBot.NET
                 responder = _triggers.FirstOrDefault(x => _triggerResponseTester.ShouldTriggerInDirectMessage(message, x));
             }
 
-            if (responder != null)
-            {
-                responder.Respond(message);
-            }
+            responder?.Respond(message);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Options;
@@ -20,7 +21,8 @@ namespace PockyBot.NET.Services
 
         public bool ShouldTriggerInRoom(Message message, ITrigger trigger)
         {
-            if (message.MessageParts.Length < 2 || message.MessageParts[0].MessageType != MessageType.PersonMention
+            if (message.MessageParts.Length < 2
+                || message.MessageParts[0].MessageType != MessageType.PersonMention
                 || message.MessageParts[0].UserId != _settings.BotId
                 || (trigger.Permissions.Length > 0 && !HasPermission(message.SenderId, trigger.Permissions)))
             {
@@ -29,35 +31,35 @@ namespace PockyBot.NET.Services
 
             if (trigger.CanHaveArgs)
             {
-                return message.MessageParts[1].Text.Trim().ToLower().StartsWith(trigger.Command.ToLower());
+                return message.MessageParts[1].Text.Trim()
+                    .StartsWith(trigger.Command, StringComparison.InvariantCultureIgnoreCase);
             }
-            else
-            {
-                return message.MessageParts.Length == 2 && message.MessageParts[1].Text.Trim().ToLower() == trigger.Command.ToLower();
-            }
+
+            return message.MessageParts.Length == 2 && string.Equals(message.MessageParts[1].Text.Trim(),
+                       trigger.Command, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public bool ShouldTriggerInDirectMessage(Message message, ITrigger trigger)
         {
-            if (!trigger.DirectMessageAllowed || (trigger.Permissions.Length > 0 && !HasPermission(message.SenderId, trigger.Permissions)))
+            if (!trigger.DirectMessageAllowed ||
+                (trigger.Permissions.Length > 0 && !HasPermission(message.SenderId, trigger.Permissions)))
             {
                 return false;
             }
 
             if (trigger.CanHaveArgs)
             {
-                return message.Text.Trim().ToLower().StartsWith(trigger.Command.ToLower());
+                return message.Text.Trim().StartsWith(trigger.Command, StringComparison.InvariantCultureIgnoreCase);
             }
-            else
-            {
-                return message.Text.Trim().ToLower() == trigger.Command.ToLower();
-            }
+
+            return string.Equals(message.Text.Trim(), trigger.Command, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private bool HasPermission(string senderId, string[] permissions)
         {
             var user = _pockyUserRepository.GetUser(senderId);
-            return user != null && user.Roles.Any(x => permissions.Contains(x.UserRole));
+            return user != null && user.Roles.Any(x =>
+                       permissions.Contains(x.UserRole, StringComparer.InvariantCultureIgnoreCase));
         }
     }
 }
