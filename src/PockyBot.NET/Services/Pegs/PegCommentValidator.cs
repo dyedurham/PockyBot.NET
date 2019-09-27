@@ -12,7 +12,7 @@ namespace PockyBot.NET.Services.Pegs
                 return keywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
             }
 
-            return penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
+            return !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0);
         }
     }
 }
