@@ -21,7 +21,7 @@ namespace PockyBot.NET.Services.Pegs
 
         public bool ValidatePegRequest(Message message, out string errorMessage)
         {
-            if (message.MessageParts.Length < 4
+            if (message.MessageParts.Length < 3
                 || message.MessageParts[1].MessageType != MessageType.Text
                 || !string.Equals(message.MessageParts[1].Text.Trim(), Commands.Peg, StringComparison.InvariantCultureIgnoreCase)
                 || message.MessageParts[2].MessageType != MessageType.PersonMention)
@@ -41,13 +41,13 @@ namespace PockyBot.NET.Services.Pegs
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword");
             if (_configRepository.GetGeneralConfig("requireValues") == 1
                 && (!keywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0)
-                || !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0)))
+                && !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0)))
             {
                 errorMessage = $"I'm sorry, you have to include a keyword in your comment. Please include one of the below keywords in your comment:\n\n{string.Join(", ", keywords)}";
                 return false;
             }
 
-            errorMessage = string.Empty;
+            errorMessage = null;
             return true;
         }
     }
