@@ -59,7 +59,7 @@ namespace PockyBot.NET.Services.Triggers
                 _pegCommentValidator.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords));
 
             if (!sender.HasRole(Roles.Unmetered) &&
-                 (!isPegValid || numPegsGiven >= _configRepository.GetGeneralConfig("limit")))
+                (isPegValid && numPegsGiven >= _configRepository.GetGeneralConfig("limit")))
             {
                 return new Message
                 {
