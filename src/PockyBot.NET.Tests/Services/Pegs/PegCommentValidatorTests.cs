@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using NSubstitute;
 using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Tests.TestData.Pegs;
 using Shouldly;
 using TestStack.BDDfy;
 using Xunit;
 
-namespace PockyBot.NET.Tests.Services
+namespace PockyBot.NET.Tests.Services.Pegs
 {
     public class PegCommentValidatorTests
     {
