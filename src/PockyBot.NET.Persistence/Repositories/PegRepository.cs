@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
@@ -11,10 +12,10 @@ namespace PockyBot.NET.Persistence.Repositories
             _context = context;
         }
 
-        public Peg CreatePeg(Peg peg)
+        public async Task<Peg> CreatePeg(Peg peg)
         {
             var added = _context.Add(peg);
-            _context.SaveChanges();
+            await  _context.SaveChangesAsync();
             return added.Entity;
         }
     }

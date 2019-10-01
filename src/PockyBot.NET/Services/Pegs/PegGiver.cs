@@ -26,7 +26,7 @@ namespace PockyBot.NET.Services.Pegs
                 Receiver = receiver.UserId,
                 Comment = comment
             };
-            _pegRepository.CreatePeg(peg);
+            await _pegRepository.CreatePeg(peg);
 
             await PmSender(sender, receiver, numPegsGiven);
             await PmReceiver(comment, sender, receiver);
