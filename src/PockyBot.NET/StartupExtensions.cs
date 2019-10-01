@@ -9,7 +9,7 @@ using PockyBot.NET.Services.Triggers;
 
 namespace PockyBot.NET
 {
-    public static class Extensions
+    public static class StartupExtensions
     {
         public static IServiceCollection ConfigurePockyBot(this IServiceCollection services, PockyBotSettings settings) {
             var options = new OptionsWrapper<PockyBotSettings>(settings);
