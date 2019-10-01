@@ -26,7 +26,7 @@ namespace PockyBot.NET.Services.Pegs
                 || !string.Equals(message.MessageParts[1].Text.Trim(), Commands.Peg, StringComparison.InvariantCultureIgnoreCase)
                 || message.MessageParts[2].MessageType != MessageType.PersonMention)
             {
-                errorMessage = $"I'm sorry, I couldn't understand your peg request. Please use the following format: `@{_settings.BotName} peg @Person this is the reason for giving you a peg`.";;
+                errorMessage = $"I'm sorry, I couldn't understand your peg request. Please use the following format: `@{_settings.BotName} peg @Person this is the reason for giving you a peg`.";
                 return false;
             }
 

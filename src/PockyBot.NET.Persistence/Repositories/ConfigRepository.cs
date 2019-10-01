@@ -23,7 +23,7 @@ namespace PockyBot.NET.Persistence.Repositories
         {
             var config = _context.GeneralConfig.FirstOrDefault(x =>
                 string.Equals(x.Name, name, StringComparison.InvariantCultureIgnoreCase));
-            return config?.Value ?? null;
+            return config?.Value;
         }
 
         public List<StringConfig> GetAllStringConfig()

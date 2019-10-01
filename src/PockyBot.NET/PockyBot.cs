@@ -35,7 +35,7 @@ namespace PockyBot.NET
                 responder = _triggers.FirstOrDefault(x => _triggerResponseTester.ShouldTriggerInDirectMessage(message, x));
             }
 
-            var response = await responder?.Respond(message) ?? null;
+            var response = await responder?.Respond(message);
             if (response != null)
             {
                 response.RoomId = message.RoomId;
