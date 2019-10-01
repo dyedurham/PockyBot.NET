@@ -46,7 +46,7 @@ namespace PockyBot.NET.Services.Pegs
 
         private async Task PmReceiver(string comment, PockyUser sender, PockyUser receiver)
         {
-            var forString = comment.StartsWith("for ", StringComparison.InvariantCultureIgnoreCase)
+            var forString = comment.StartsWith("for ", StringComparison.OrdinalIgnoreCase)
                 ? string.Empty
                 : " for";
             await _chatHelper.Messages.SendMessageAsync(new Message

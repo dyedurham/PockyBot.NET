@@ -23,7 +23,7 @@ namespace PockyBot.NET.Services.Pegs
         {
             if (message.MessageParts.Length < 3
                 || message.MessageParts[1].MessageType != MessageType.Text
-                || !string.Equals(message.MessageParts[1].Text.Trim(), Commands.Peg, StringComparison.InvariantCultureIgnoreCase)
+                || !string.Equals(message.MessageParts[1].Text.Trim(), Commands.Peg, StringComparison.OrdinalIgnoreCase)
                 || message.MessageParts[2].MessageType != MessageType.PersonMention)
             {
                 errorMessage = $"I'm sorry, I couldn't understand your peg request. Please use the following format: `@{_settings.BotName} peg @Person this is the reason for giving you a peg`.";
@@ -40,8 +40,8 @@ namespace PockyBot.NET.Services.Pegs
             var keywords = _configRepository.GetStringConfig("keyword");
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword");
             if (_configRepository.GetGeneralConfig("requireValues") == 1
-                && (!keywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0)
-                && !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0)))
+                && (!keywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)
+                && !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)))
             {
                 errorMessage = $"I'm sorry, you have to include a keyword in your comment. Please include one of the below keywords in your comment:\n\n{string.Join(", ", keywords)}";
                 return false;

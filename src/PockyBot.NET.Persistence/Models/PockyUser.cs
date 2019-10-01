@@ -22,6 +22,6 @@ namespace PockyBot.NET.Persistence.Models
         public List<Peg> PegsReceived { get; set; }
 
         public bool HasRole(string role) =>
-            Roles.Any(x => string.Equals(role, x.UserRole, StringComparison.InvariantCultureIgnoreCase));
+            Roles.Any(x => string.Equals(role, x.UserRole, StringComparison.OrdinalIgnoreCase));
     }
 }

@@ -22,7 +22,7 @@ namespace PockyBot.NET.Persistence.Repositories
         public int? GetGeneralConfig(string name)
         {
             var config = _context.GeneralConfig.FirstOrDefault(x =>
-                string.Equals(x.Name, name, StringComparison.InvariantCultureIgnoreCase));
+                string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase));
             return config?.Value;
         }
 
@@ -34,7 +34,7 @@ namespace PockyBot.NET.Persistence.Repositories
         public List<string> GetStringConfig(string name)
         {
             return _context.StringConfig.Where(x =>
-                string.Equals(x.Name, name, StringComparison.InvariantCultureIgnoreCase))
+                string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase))
                 .Select(x => x.Value).ToList();
         }
     }
