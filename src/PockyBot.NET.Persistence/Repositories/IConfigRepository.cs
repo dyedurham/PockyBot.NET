@@ -5,9 +5,9 @@ namespace PockyBot.NET.Persistence.Repositories
 {
     public interface IConfigRepository
     {
-        List<GeneralConfig> GetAllGeneralConfig();
+        IList<GeneralConfig> GetAllGeneralConfig();
         int? GetGeneralConfig(string name);
-        List<StringConfig> GetAllStringConfig();
-        List<string> GetStringConfig(string name);
+        IList<StringConfig> GetAllStringConfig();
+        IList<string> GetStringConfig(string name);
     }
 }

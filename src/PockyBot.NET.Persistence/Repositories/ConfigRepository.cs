@@ -14,7 +14,7 @@ namespace PockyBot.NET.Persistence.Repositories
             _context = context;
         }
 
-        public List<GeneralConfig> GetAllGeneralConfig()
+        public IList<GeneralConfig> GetAllGeneralConfig()
         {
             return _context.GeneralConfig.ToList();
         }
@@ -26,12 +26,12 @@ namespace PockyBot.NET.Persistence.Repositories
             return config?.Value;
         }
 
-        public List<StringConfig> GetAllStringConfig()
+        public IList<StringConfig> GetAllStringConfig()
         {
             return _context.StringConfig.ToList();
         }
 
-        public List<string> GetStringConfig(string name)
+        public IList<string> GetStringConfig(string name)
         {
             return _context.StringConfig.Where(x =>
                 string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase))
