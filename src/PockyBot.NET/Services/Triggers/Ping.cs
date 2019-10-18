@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
@@ -12,7 +13,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => false;
 
-        public string[] Permissions => new string[0];
+        public string[] Permissions => Array.Empty<string>();
 
         public Task<Message> Respond(Message message) {
             return Task.FromResult(new Message {
