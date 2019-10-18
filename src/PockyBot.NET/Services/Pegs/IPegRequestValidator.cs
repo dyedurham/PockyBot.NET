@@ -4,6 +4,6 @@ namespace PockyBot.NET.Services.Pegs
 {
     internal interface IPegRequestValidator
     {
-        bool ValidatePegRequest(Message message, out string errorMessage);
+        void ValidatePegRequest(Message message);
     }
 }

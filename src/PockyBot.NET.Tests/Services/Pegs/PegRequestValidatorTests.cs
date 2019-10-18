@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Options;
 using NSubstitute;
 using PockyBot.NET.Configuration;
+using PockyBot.NET.Models.Exceptions;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Tests.TestData.Pegs;
@@ -20,8 +22,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
         private readonly IConfigRepository _configRepository;
 
         private Message _message;
-        private bool _result;
-        private string _errorMessage;
+        private Exception _exception;
 
         public PegRequestValidatorTests()
         {
@@ -41,7 +42,6 @@ namespace PockyBot.NET.Tests.Services.Pegs
                 .And(x => GivenAMessage(message))
                 .When(x => WhenValidatingAPegRequest())
                 .Then(x => ThenTheMessageShouldBeValid())
-                .And(x => ThenTheErrorMessageShouldBeNull())
                 .BDDfy();
         }
 
@@ -80,27 +80,23 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         private void WhenValidatingAPegRequest()
         {
-            _result = _subject.ValidatePegRequest(_message, out _errorMessage);
+            _exception = Record.Exception(() => _subject.ValidatePegRequest(_message));
         }
 
         private void ThenTheMessageShouldBeValid()
         {
-            _result.ShouldBeTrue();
+            _exception.ShouldBeNull();
         }
 
         private void ThenTheMessageShouldBeInvalid()
         {
-            _result.ShouldBeFalse();
-        }
-
-        private void ThenTheErrorMessageShouldBeNull()
-        {
-            _errorMessage.ShouldBeNull();
+            _exception.ShouldNotBeNull();
+            _exception.ShouldBeOfType<PegValidationException>();
         }
 
         private void ThenTheErrorMessageShouldBe(string errorMessage)
         {
-            _errorMessage.ShouldBe(errorMessage);
+            _exception.Message.ShouldBe(errorMessage);
         }
     }
 }

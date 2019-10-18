@@ -4,6 +4,7 @@ using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using GlobalX.ChatBots.Core.People;
 using NSubstitute;
+using PockyBot.NET.Models.Exceptions;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Pegs;
@@ -43,12 +44,12 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         [Theory]
         [MemberData(nameof(PegTestData.RespondTestData), MemberType = typeof(PegTestData))]
-        public void TestRespond(Message message, bool isMessageValid, string errorMessage, PockyUser senderUser,
+        public void TestRespond(Message message, string errorMessage, PockyUser senderUser,
             PockyUser receiverUser, int limit, string comment, bool isPegValid, Person receiverChatUser,
             Message response, bool givePeg)
         {
             this.Given(x => GivenAMessage(message))
-                .And(x => GivenMessageValidity(isMessageValid, errorMessage))
+                .And(x => GivenMessageValidity(errorMessage))
                 .And(x => GivenAUser(senderUser))
                 .And(x => GivenAUser(receiverUser))
                 .And(x => GivenAStringConfig("keyword", new List<string> {"keyword1", "keyword2"}))
@@ -68,13 +69,13 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _message = message;
         }
 
-        private void GivenMessageValidity(bool isMessageValid, string errorMessage)
+        private void GivenMessageValidity(string errorMessage)
         {
-            _pegRequestValidator.ValidatePegRequest(Arg.Any<Message>(), out Arg.Any<string>()).Returns(x =>
+            if (errorMessage != null)
             {
-                x[1] = errorMessage;
-                return isMessageValid;
-            });
+                SubstituteExtensions.When(_pegRequestValidator, x => x.ValidatePegRequest(Arg.Any<Message>()))
+                    .Do(x => throw new PegValidationException(errorMessage));
+            }
         }
 
         private void GivenAUser(PockyUser user)

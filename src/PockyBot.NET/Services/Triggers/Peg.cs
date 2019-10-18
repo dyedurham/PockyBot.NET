@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Models.Exceptions;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Pegs;
 
@@ -39,11 +40,15 @@ namespace PockyBot.NET.Services.Triggers
 
         public async Task<Message> Respond(Message message)
         {
-            if (!_pegRequestValidator.ValidatePegRequest(message, out var errorMessage))
+            try
+            {
+                _pegRequestValidator.ValidatePegRequest(message);
+            }
+            catch (PegValidationException e)
             {
                 return new Message
                 {
-                    Text = errorMessage
+                    Text = e.Message
                 };
             }
 
@@ -71,7 +76,8 @@ namespace PockyBot.NET.Services.Triggers
             var receiver = await _chatHelper.People.GetPersonAsync(receiverId);
             var dbReceiver = _pockyUserRepository.AddOrUpdateUser(receiver.UserId, receiver.Username);
 
-            return await _pegGiver.GivePeg(comment, sender, dbReceiver, isPegValid ? numPegsGiven + 1 : numPegsGiven);
+            await _pegGiver.GivePeg(comment, sender, dbReceiver, isPegValid ? numPegsGiven + 1 : numPegsGiven);
+            return null;
         }
     }
 }

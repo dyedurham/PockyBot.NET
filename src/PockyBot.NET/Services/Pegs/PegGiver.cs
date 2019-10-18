@@ -18,7 +18,7 @@ namespace PockyBot.NET.Services.Pegs
             _chatHelper = chatHelper;
         }
 
-        public async Task<Message> GivePeg(string comment, PockyUser sender, PockyUser receiver, int numPegsGiven)
+        public async Task GivePeg(string comment, PockyUser sender, PockyUser receiver, int numPegsGiven)
         {
             var peg = new Peg
             {
@@ -30,8 +30,6 @@ namespace PockyBot.NET.Services.Pegs
 
             await PmSender(sender, receiver, numPegsGiven);
             await PmReceiver(comment, sender, receiver);
-
-            return null;
         }
 
         private async Task PmSender(PockyUser sender, PockyUser receiver, int numPegsGiven)

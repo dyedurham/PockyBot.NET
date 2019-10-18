@@ -43,7 +43,6 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     SenderId = "testUser2Id",
                     SenderName = "Test User 2"
                 },
-                true, // is message valid
                 null, // error message
                 new PockyUser // sender
                 {
@@ -103,7 +102,6 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     SenderId = "testUser2Id",
                     SenderName = "Test User 2"
                 },
-                true, // is message valid
                 null, // error message
                 new PockyUser // sender
                 {
@@ -171,7 +169,6 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     SenderId = "testUser2Id",
                     SenderName = "Test User 2"
                 },
-                true, // is message valid
                 null, // error message
                 new PockyUser // sender
                 {
@@ -234,7 +231,6 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     SenderId = "testUser2Id",
                     SenderName = "Test User 2"
                 },
-                false, // is message valid
                 "this is an error", // error message
                 new PockyUser // sender
                 {
@@ -300,7 +296,6 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     SenderId = "testUser2Id",
                     SenderName = "Test User 2"
                 },
-                true, // is message valid
                 null, // error message
                 new PockyUser // sender
                 {

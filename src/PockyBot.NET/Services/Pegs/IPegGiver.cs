@@ -6,6 +6,6 @@ namespace PockyBot.NET.Services.Pegs
 {
     internal interface IPegGiver
     {
-        Task<Message> GivePeg(string comment, PockyUser sender, PockyUser receiver, int numPegsGiven);
+        Task GivePeg(string comment, PockyUser sender, PockyUser receiver, int numPegsGiven);
     }
 }
