@@ -49,7 +49,7 @@ namespace PockyBot.NET.Services.Pegs
                 : " for";
             await _chatHelper.Messages.SendMessageAsync(new Message
             {
-                Text = $"You have received a new peg from {sender.Username}{forString}: \"{comment}\".",
+                Text = $"You have received a new peg from {sender.Username} with message: \"{comment}\".",
                 RoomId = receiver.UserId
             });
         }
