@@ -35,7 +35,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 },
                 new Message
                 {
-                    Text = "You have received a new peg from Test User 1 for: \"this is a comment\".",
+                    Text = "You have received a new peg from Test User 1 with message: \"this is a comment\".",
                     RoomId = "TestUser2"
                 }
             };
@@ -67,7 +67,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 },
                 new Message
                 {
-                    Text = "You have received a new peg from Test User 1: \"for a reason\".",
+                    Text = "You have received a new peg from Test User 1 with message: \"for a reason\".",
                     RoomId = "TestUser2"
                 }
             };
@@ -99,7 +99,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 },
                 new Message
                 {
-                    Text = "You have received a new peg from Test User 1 for: \"this is a comment\".",
+                    Text = "You have received a new peg from Test User 1 with message: \"this is a comment\".",
                     RoomId = "TestUser2"
                 }
             };
