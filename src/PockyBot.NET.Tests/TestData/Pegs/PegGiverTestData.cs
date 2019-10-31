@@ -25,8 +25,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Peg
                 {
                     Comment = "this is a comment",
-                    Sender = "TestUser1",
-                    Receiver = "TestUser2"
+                    SenderId = "TestUser1",
+                    ReceiverId = "TestUser2"
                 },
                 new Message
                 {
@@ -57,8 +57,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Peg
                 {
                     Comment = "for a reason",
-                    Sender = "TestUser1",
-                    Receiver = "TestUser2"
+                    SenderId = "TestUser1",
+                    ReceiverId = "TestUser2"
                 },
                 new Message
                 {
@@ -89,8 +89,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Peg
                 {
                     Comment = "this is a comment",
-                    Sender = "TestUser1",
-                    Receiver = "TestUser2"
+                    SenderId = "TestUser1",
+                    ReceiverId = "TestUser2"
                 },
                 new Message
                 {

@@ -11,15 +11,15 @@ namespace PockyBot.NET.Persistence.Models
         [Column("id")]
         public int Id { get; set; }
         [Column("sender")]
-        public string Sender { get; set; }
+        [ForeignKey("sender")]
+        public string SenderId { get; set; }
         [Column("receiver")]
-        public string Receiver { get; set; }
+        [ForeignKey("receiver")]
+        public string ReceiverId { get; set; }
         [Column("comment")]
         public string Comment { get; set; }
 
-        [ForeignKey("sender")]
-        public PockyUser SenderUser { get; set; }
-        [ForeignKey("receiver")]
-        public PockyUser ReceiverUser { get; set; }
+        public PockyUser Sender { get; set; }
+        public PockyUser Receiver { get; set; }
     }
 }

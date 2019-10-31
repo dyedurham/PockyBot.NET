@@ -74,7 +74,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
         private void ThenItShouldCallCreatePeg(Peg peg)
         {
             _pegRepository.Received(1).CreatePeg(Arg.Is<Peg>(x =>
-                x.Sender == peg.Sender && x.Receiver == peg.Receiver && x.Comment == peg.Comment));
+                x.SenderId == peg.SenderId && x.ReceiverId == peg.ReceiverId && x.Comment == peg.Comment));
         }
 
         private void ThenItShouldPmTheSender(Message message)

@@ -16,9 +16,9 @@ namespace PockyBot.NET.Persistence.Models
         public string Username { get; set; }
 
         public List<Role> Roles { get; set; }
-        [InverseProperty("sender")]
+        [InverseProperty("Sender")]
         public List<Peg> PegsGiven { get; set; }
-        [InverseProperty("receiver")]
+        [InverseProperty("Receiver")]
         public List<Peg> PegsReceived { get; set; }
 
         public bool HasRole(string role) =>

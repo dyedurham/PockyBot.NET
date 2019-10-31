@@ -22,8 +22,8 @@ namespace PockyBot.NET.Services.Pegs
         {
             var peg = new Peg
             {
-                Sender = sender.UserId,
-                Receiver = receiver.UserId,
+                SenderId = sender.UserId,
+                ReceiverId = receiver.UserId,
                 Comment = comment
             };
             await _pegRepository.CreatePeg(peg);
