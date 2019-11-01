@@ -124,14 +124,14 @@ repository contains a number of `.sql` files you can use to set this up.
 
 Table `generalconfig` is initalised with default values as follows:
 
-Value | Default | Explanation
-:-- | :-- | :--
-limit | 10 | The number of pegs each user is allowed to give out each cycle
-minimum | 5 | The minimum number of pegs each user is *required* to give out to be eligible to win
-winners | 3 | The number of winners displayed (using a dense ranking)
-commentsRequired | 1 | Boolean value of whether a reason is required to give a peg
-pegWithoutKeyword | 0 | Boolean value of whether the "peg" keyword is required to give a peg (if true, pegs can be given with `@PockyBot @Person <reason>`)
-requireValues | 1 | Boolean value of whether a keyword is required in the reason for a peg to be given
+Value             | Default | Explanation
+:--               | :--     | :--
+limit             | 10      | The number of pegs each user is allowed to give out each cycle
+minimum           | 5       | The minimum number of pegs each user is *required* to give out to be eligible to win
+winners           | 3       | The number of winners displayed (using a dense ranking)
+commentsRequired  | 1       | Boolean value of whether a reason is required to give a peg
+pegWithoutKeyword | 0       | Boolean value of whether the "peg" keyword is required to give a peg (if true, pegs can be given with `@PockyBot @Person <reason>`)
+requireValues     | 1       | Boolean value of whether a keyword is required in the reason for a peg to be given
 
 Table `stringconfig` is used to define keywords.
 Name field is 'keyword' and 'value' is the value of the keyword desired.
