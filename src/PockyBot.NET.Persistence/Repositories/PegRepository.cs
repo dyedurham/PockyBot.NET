@@ -15,7 +15,7 @@ namespace PockyBot.NET.Persistence.Repositories
         public async Task<Peg> CreatePeg(Peg peg)
         {
             var added = _context.Add(peg);
-            await  _context.SaveChangesAsync();
+            await  _context.SaveChangesAsync().ConfigureAwait(false);
             return added.Entity;
         }
     }

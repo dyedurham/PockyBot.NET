@@ -35,11 +35,16 @@ namespace PockyBot.NET
                 responder = _triggers.FirstOrDefault(x => _triggerResponseTester.ShouldTriggerInDirectMessage(message, x));
             }
 
-            var response = await responder?.Respond(message);
+            Message response = null;
+            if (responder != null)
+            {
+                response = await responder.Respond(message).ConfigureAwait(false);
+            }
+
             if (response != null)
             {
                 response.RoomId = message.RoomId;
-                await _chatHelper.Messages.SendMessageAsync(response);
+                await _chatHelper.Messages.SendMessageAsync(response).ConfigureAwait(false);
             }
         }
     }
