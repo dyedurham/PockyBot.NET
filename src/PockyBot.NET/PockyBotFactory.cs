@@ -29,6 +29,7 @@ namespace PockyBot.NET
             {
                 new Ping(),
                 new Peg(pegRequestValidator, pockyUserRepository, pegCommentValidator, configRepository, chatHelper, pegGiver),
+                new Status(pockyUserRepository, configRepository, pegCommentValidator),
                 new Default(wrappedSettings)
             };
 
