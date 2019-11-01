@@ -39,9 +39,10 @@ namespace PockyBot.NET.Services.Triggers
 
             if (pockyUser == null || pockyUser.PegsGiven.Count == 0)
             {
+                var left = pockyUser?.HasRole(Roles.Unmetered) ?? false ? "unlimited" : limit.ToString();
                 return Task.FromResult(new Message
                 {
-                    Text = $"You have {limit} pegs left to give.\n\nYou have not given any pegs so far."
+                    Text = $"You have {left} pegs left to give.\n\nYou have not given any pegs so far."
                 });
             }
 
@@ -49,7 +50,11 @@ namespace PockyBot.NET.Services.Triggers
             var validPegs = groupedPegs.ContainsKey(true) ? groupedPegs[true] : new List<Persistence.Models.Peg>();
             var penaltyPegs = groupedPegs.ContainsKey(false) ? groupedPegs[false] : new List<Persistence.Models.Peg>();
 
-            var response = new StringBuilder($"You have {limit - validPegs.Count} pegs left to give.");
+            var response = new StringBuilder();
+
+            response.Append(pockyUser.HasRole(Roles.Unmetered)
+                ? "You have unlimited pegs left to give."
+                : $"You have {limit - validPegs.Count} pegs left to give.");
 
             if (validPegs.Count > 0)
             {
