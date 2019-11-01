@@ -18,7 +18,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some keyword2 things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new[]
                     {
                         new MessagePart
                         {

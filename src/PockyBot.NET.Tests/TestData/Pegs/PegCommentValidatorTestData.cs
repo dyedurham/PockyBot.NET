@@ -10,8 +10,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             {
                 "for doing a cool keyword2 thing",
                 1, // require keywords
-                new string[] { "keyword1", "keyword2", "keyword3" },
-                new string[] { "penaltyKeyword" },
+                new[] { "keyword1", "keyword2", "keyword3" },
+                new[] { "penaltyKeyword" },
                 true
             };
 
@@ -20,8 +20,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             {
                 "for doing a cool thing",
                 0, // require keywords
-                new string[] { "keyword1", "keyword2", "keyword3" },
-                new string[] { "penaltyKeyword" },
+                new[] { "keyword1", "keyword2", "keyword3" },
+                new[] { "penaltyKeyword" },
                 true
             };
 
@@ -30,8 +30,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             {
                 "for doing a cool keyword2 thing penaltyKeyword",
                 1, // require keywords
-                new string[] { "keyword1", "keyword2", "keyword3" },
-                new string[] { "penaltyKeyword" },
+                new[] { "keyword1", "keyword2", "keyword3" },
+                new[] { "penaltyKeyword" },
                 true
             };
 
@@ -40,8 +40,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             {
                 "for doing a cool penaltyKeyword thing",
                 1, // require keywords
-                new string[] { "keyword1", "keyword2", "keyword3" },
-                new string[] { "penaltyKeyword" },
+                new[] { "keyword1", "keyword2", "keyword3" },
+                new[] { "penaltyKeyword" },
                 false
             };
 
@@ -50,8 +50,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             {
                 "for doing a cool penaltyKeyword thing",
                 0, // require keywords
-                new string[] { "keyword1", "keyword2", "keyword3" },
-                new string[] { "penaltyKeyword" },
+                new[] { "keyword1", "keyword2", "keyword3" },
+                new[] { "penaltyKeyword" },
                 false
             };
         }
