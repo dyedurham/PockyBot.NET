@@ -42,7 +42,7 @@ namespace PockyBot.NET.Services.Pegs
             }
         }
 
-        private string GetCommentText(Message message)
+        private static string GetCommentText(Message message)
         {
             return string.Join(string.Empty, message.MessageParts.Skip(3).Select(x => x.Text)).Trim();
         }
