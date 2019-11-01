@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 NUGET_API_KEY=$1
 
 # Dry run semantic-release to get next version number
