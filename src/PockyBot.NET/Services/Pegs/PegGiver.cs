@@ -26,10 +26,10 @@ namespace PockyBot.NET.Services.Pegs
                 ReceiverId = receiver.UserId,
                 Comment = comment
             };
-            await _pegRepository.CreatePeg(peg);
+            await _pegRepository.CreatePeg(peg).ConfigureAwait(false);
 
-            await PmSender(sender, receiver, numPegsGiven);
-            await PmReceiver(comment, sender, receiver);
+            await PmSender(sender, receiver, numPegsGiven).ConfigureAwait(false);
+            await PmReceiver(comment, sender, receiver).ConfigureAwait(false);
         }
 
         private async Task PmSender(PockyUser sender, PockyUser receiver, int numPegsGiven)
@@ -39,7 +39,7 @@ namespace PockyBot.NET.Services.Pegs
             {
                 Text = $"Peg given to {receiver.Username}. You have given {numPegsGiven} {pegs} this fortnight.",
                 RoomId = sender.UserId
-            });
+            }).ConfigureAwait(false);
         }
 
         private async Task PmReceiver(string comment, PockyUser sender, PockyUser receiver)
@@ -48,7 +48,7 @@ namespace PockyBot.NET.Services.Pegs
             {
                 Text = $"You have received a new peg from {sender.Username} with message: \"{comment}\".",
                 RoomId = receiver.UserId
-            });
+            }).ConfigureAwait(false);
         }
     }
 }

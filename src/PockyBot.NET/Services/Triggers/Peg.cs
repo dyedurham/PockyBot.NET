@@ -74,10 +74,10 @@ namespace PockyBot.NET.Services.Triggers
             }
 
             var receiverId = message.MessageParts[2].UserId;
-            var receiver = await _chatHelper.People.GetPersonAsync(receiverId);
+            var receiver = await _chatHelper.People.GetPersonAsync(receiverId).ConfigureAwait(false);
             var dbReceiver = _pockyUserRepository.AddOrUpdateUser(receiver.UserId, receiver.Username);
 
-            await _pegGiver.GivePeg(comment, sender, dbReceiver, isPegValid ? numPegsGiven + 1 : numPegsGiven);
+            await _pegGiver.GivePeg(comment, sender, dbReceiver, isPegValid ? numPegsGiven + 1 : numPegsGiven).ConfigureAwait(false);
             return null;
         }
     }
