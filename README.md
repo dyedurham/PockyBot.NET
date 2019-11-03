@@ -125,7 +125,7 @@ repository contains a number of `.sql` files you can use to set this up.
 Table `generalconfig` is initalised with default values as follows:
 
 Value             | Default | Explanation
-:--               | :--     | :--
+:---------------- | :------ | :----------
 limit             | 10      | The number of pegs each user is allowed to give out each cycle
 minimum           | 5       | The minimum number of pegs each user is *required* to give out to be eligible to win
 winners           | 3       | The number of winners displayed (using a dense ranking)
@@ -154,12 +154,15 @@ Use any of these commands in a room PockyBot is participating in to perform
 commands.
 
 - `@PockyBot ping` &mdash; verify that the bot is alive.
+- `@PockyBot peg @Person <reason>` - give someone a peg.
+- `@PockyBot status` &mdash; get the list of pegs you have given.
 
 #### Direct Message Commands
 
 PockyBot can be messaged directly with certain commands.
 
 - `ping`
+- `status`
 
 ## Contributing
 
