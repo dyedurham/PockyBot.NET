@@ -6,18 +6,18 @@ This repository uses conventional commit messages. These are commits in the
 format `<type>(<optional scope>): <commit message>`. Allowed types for this
 project are:
 
-- `feat` &mdash; a new feature
-- `fix` &mdash; a bug fix
-- `docs` &mdash; documentation only changes
-- `style` &mdash; changes that do not affect the meaning of the code
-  (whitespace, formatting, missing semi-colons etc)
-- `refactor` &mdash; a code change that neither fixes a bug nor adds a feature
-- `perf` &mdash; a code change that improves performance
-- `test` &mdash; adding missing tests or correcting existing tests
-- `build` &mdash; changes that affect the build system or external dependencies
-- `ci` &mdash; changes to our CI configuration
-- `chore` &mdash; other changes that don't modify source or test files
-- `revert` &mdash; reverts a previous commit
+-   `feat` — a new feature
+-   `fix` — a bug fix
+-   `docs` — documentation only changes
+-   `style` — changes that do not affect the meaning of the code
+    (whitespace, formatting, missing semi-colons etc)
+-   `refactor` — a code change that neither fixes a bug nor adds a feature
+-   `perf` — a code change that improves performance
+-   `test` — adding missing tests or correcting existing tests
+-   `build` — changes that affect the build system or external dependencies
+-   `ci` — changes to our CI configuration
+-   `chore` — other changes that don't modify source or test files
+-   `revert` — reverts a previous commit
 
 ## Tools
 
@@ -32,5 +32,5 @@ npm install -g commitizen
 
 Then you can commit using:
 
-- `git add .`
-- `git cz`
+-   `git add .`
+-   `git cz`
