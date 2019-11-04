@@ -14,4 +14,6 @@ path_classifiers:
     # Override LGTM's default classification of test files by excluding all files.
     - exclude: /
     # Include test project
-    - src/PockyBot.NET.Tests
+    - "src/PockyBot.NET.Tests"
+  database:
+    - database
