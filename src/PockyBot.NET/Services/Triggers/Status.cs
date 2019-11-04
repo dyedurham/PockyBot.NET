@@ -81,7 +81,7 @@ namespace PockyBot.NET.Services.Triggers
         private static string GetValidPegsSentText(List<Persistence.Models.Peg> validPegs)
         {
             
-            if (validPegs.Count > 0)
+            if (validPegs.Any())
             {
                 var pegsSentList = validPegs.Select(FormatPeg);
                 return $"\n\nHere are the pegs you've given so far:\n{string.Join("\n", pegsSentList)}";
@@ -93,7 +93,7 @@ namespace PockyBot.NET.Services.Triggers
         private static string GetPenaltyPegsReceivedText(List<Persistence.Models.Peg> penaltyPegs)
         {
 
-            if (penaltyPegs.Count > 0)
+            if (penaltyPegs.Any())
             {
                 var pegsSentList = penaltyPegs.Select(FormatPeg);
                 return $"\n\nHere are the penalties you have received:\n{string.Join("\n", pegsSentList)}";
