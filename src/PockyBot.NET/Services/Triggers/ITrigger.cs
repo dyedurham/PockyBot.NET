@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 
 namespace PockyBot.NET.Services.Triggers
@@ -8,6 +9,6 @@ namespace PockyBot.NET.Services.Triggers
         bool DirectMessageAllowed { get; }
         bool CanHaveArgs { get; }
         string[] Permissions { get; }
-        Message Respond(Message message);
+        Task<Message> Respond(Message message);
     }
 }

@@ -16,5 +16,27 @@ namespace PockyBot.NET.Persistence.Repositories
         {
             return _context.PockyUsers.SingleOrDefault(x => x.UserId == userId);
         }
+
+        public PockyUser AddOrUpdateUser(string userId, string username)
+        {
+            var existingUser = _context.PockyUsers.SingleOrDefault(x => x.UserId == userId);
+
+            if (existingUser != null)
+            {
+                existingUser.Username = username;
+                _context.SaveChanges();
+                return existingUser;
+            }
+
+            PockyUser newPockyUser = new PockyUser
+            {
+                UserId = userId,
+                Username = username
+            };
+            _context.Add(newPockyUser);
+            _context.SaveChanges();
+
+            return newPockyUser;
+        }
     }
 }

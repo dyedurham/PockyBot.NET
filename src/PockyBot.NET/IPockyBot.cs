@@ -1,9 +1,10 @@
 using GlobalX.ChatBots.Core.Messages;
+using System.Threading.Tasks;
 
 namespace PockyBot.NET
 {
     public interface IPockyBot
     {
-        void Respond(Message message);
+        Task Respond(Message message);
     }
 }

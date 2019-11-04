@@ -32,11 +32,11 @@ namespace PockyBot.NET.Services
             if (trigger.CanHaveArgs)
             {
                 return message.MessageParts[1].Text.Trim()
-                    .StartsWith(trigger.Command, StringComparison.InvariantCultureIgnoreCase);
+                    .StartsWith(trigger.Command, StringComparison.OrdinalIgnoreCase);
             }
 
             return message.MessageParts.Length == 2 && string.Equals(message.MessageParts[1].Text.Trim(),
-                       trigger.Command, StringComparison.InvariantCultureIgnoreCase);
+                       trigger.Command, StringComparison.OrdinalIgnoreCase);
         }
 
         public bool ShouldTriggerInDirectMessage(Message message, ITrigger trigger)
@@ -49,17 +49,17 @@ namespace PockyBot.NET.Services
 
             if (trigger.CanHaveArgs)
             {
-                return message.Text.Trim().StartsWith(trigger.Command, StringComparison.InvariantCultureIgnoreCase);
+                return message.Text.Trim().StartsWith(trigger.Command, StringComparison.OrdinalIgnoreCase);
             }
 
-            return string.Equals(message.Text.Trim(), trigger.Command, StringComparison.InvariantCultureIgnoreCase);
+            return string.Equals(message.Text.Trim(), trigger.Command, StringComparison.OrdinalIgnoreCase);
         }
 
         private bool HasPermission(string senderId, string[] permissions)
         {
             var user = _pockyUserRepository.GetUser(senderId);
             return user != null && user.Roles.Any(x =>
-                       permissions.Contains(x.UserRole, StringComparer.InvariantCultureIgnoreCase));
+                       permissions.Contains(x.UserRole, StringComparer.OrdinalIgnoreCase));
         }
     }
 }
