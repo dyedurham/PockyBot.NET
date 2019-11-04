@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
@@ -35,14 +34,14 @@ namespace PockyBot.NET.Services.Triggers
         public Task<Message> Respond(Message message)
         {
             var pockyUser = _pockyUserRepository.GetUser(message.SenderId);
-            var limit = _configRepository.GetGeneralConfig("limit");
+            var limit = _configRepository.GetGeneralConfig("limit") ?? 1;
 
             if (pockyUser == null || pockyUser.PegsGiven.Count == 0)
             {
-                var left = pockyUser?.HasRole(Roles.Unmetered) ?? false ? "unlimited" : limit.ToString();
+                var userPegsLeftText = GetPegsLeftText(pockyUser, limit);
                 return Task.FromResult(new Message
                 {
-                    Text = $"You have {left} pegs left to give.\n\nYou have not given any pegs so far."
+                    Text = $"{userPegsLeftText}\n\nYou have not given any pegs so far."
                 });
             }
 
@@ -50,33 +49,13 @@ namespace PockyBot.NET.Services.Triggers
             var validPegs = groupedPegs.ContainsKey(true) ? groupedPegs[true] : new List<Persistence.Models.Peg>();
             var penaltyPegs = groupedPegs.ContainsKey(false) ? groupedPegs[false] : new List<Persistence.Models.Peg>();
 
-            var response = new StringBuilder();
-
-            response.Append(pockyUser.HasRole(Roles.Unmetered)
-                ? "You have unlimited pegs left to give."
-                : $"You have {limit - validPegs.Count} pegs left to give.");
-
-            if (validPegs.Count > 0)
-            {
-                response.Append("\n\nHere are the pegs you've given so far:\n");
-                foreach (var peg in validPegs)
-                {
-                    response.Append($"* **{peg.Receiver.Username} — \"_{peg.Comment}_\"\n");
-                }
-            }
-
-            if (penaltyPegs.Count > 0)
-            {
-                response.Append("\n\nHere are the penalties you have received:\n");
-                foreach (var peg in penaltyPegs)
-                {
-                    response.Append($"* **{peg.Receiver.Username} — \"_{peg.Comment}_\"\n");
-                }
-            }
+            var pegsLeftText = GetPegsLeftText(pockyUser, limit, validPegs.Count);
+            var validPegsSentText = GetValidPegsSentText(validPegs);
+            var penaltyPegsReceivedText = GetPenaltyPegsReceivedText(penaltyPegs);
 
             return Task.FromResult(new Message
             {
-                Text = response.ToString()
+                Text = $"{pegsLeftText}{validPegsSentText}{penaltyPegsReceivedText}"
             });
         }
 
@@ -91,6 +70,41 @@ namespace PockyBot.NET.Services.Triggers
                 .ToDictionary(x => x.Key, x => x.ToList());
 
             return groupedPegs;
+        }
+
+        private static string GetPegsLeftText(PockyUser pockyUser, int limit, int pegsGiven = 0)
+        {
+            var amountLeft = pockyUser?.HasRole(Roles.Unmetered) ?? false ? "unlimited" : (limit - pegsGiven).ToString();
+            return $"You have {amountLeft} pegs left to give.";
+        }
+
+        private static string GetValidPegsSentText(List<Persistence.Models.Peg> validPegs)
+        {
+            
+            if (validPegs.Count > 0)
+            {
+                var pegsSentList = validPegs.Select(FormatPeg);
+                return $"\n\nHere are the pegs you've given so far:\n{string.Join("\n", pegsSentList)}";
+            }
+
+            return string.Empty;
+        }
+
+        private static string GetPenaltyPegsReceivedText(List<Persistence.Models.Peg> penaltyPegs)
+        {
+
+            if (penaltyPegs.Count > 0)
+            {
+                var pegsSentList = penaltyPegs.Select(FormatPeg);
+                return $"\n\nHere are the penalties you have received:\n{string.Join("\n", pegsSentList)}";
+            }
+
+            return string.Empty;
+        }
+
+        private static string FormatPeg(Persistence.Models.Peg peg)
+        {
+            return $"* **{peg.Receiver.Username} — \"_{peg.Comment}_\"";
         }
     }
 }
