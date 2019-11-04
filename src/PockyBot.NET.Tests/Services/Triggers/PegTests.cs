@@ -107,7 +107,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _chatHelper.People.GetPersonAsync(person.UserId).Returns(Task.FromResult(person));
         }
 
-        private async void WhenRespondingToAMessage()
+        private async Task WhenRespondingToAMessage()
         {
             _result = await _subject.Respond(_message);
         }

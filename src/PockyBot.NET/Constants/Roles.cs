@@ -1,6 +1,6 @@
 namespace PockyBot.NET.Constants
 {
-    internal class Roles
+    internal static class Roles
     {
         public const string Unmetered = "UNMETERED";
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using NSubstitute;
 using PockyBot.NET.Persistence.Models;
@@ -84,7 +85,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             }
         }
 
-        private async void WhenRespondingToAMessage()
+        private async Task WhenRespondingToAMessage()
         {
             _result = await _subject.Respond(_message);
         }
