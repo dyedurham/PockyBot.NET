@@ -1,6 +1,8 @@
 language: csharp
 mono: none
 dotnet: 2.1.700
+env:
+  - CODACY_COVERAGE_VERSION=1.0.3
 install:
   - dotnet restore src/PockyBot.NET.sln
   - dotnet build src/PockyBot.NET/PockyBot.NET.csproj
