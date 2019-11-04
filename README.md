@@ -159,16 +159,16 @@ sent directly to the bot. In this readme, mentions will be identified by
 Use any of these commands in a room PockyBot is participating in to perform
 commands.
 
--   `@PockyBot ping` — verify that the bot is alive.
--   `@PockyBot peg @Person <reason>` — give someone a peg.
--   `@PockyBot status` — get the list of pegs you have given.
+- `@PockyBot ping` — verify that the bot is alive.
+- `@PockyBot peg @Person <reason>` — give someone a peg.
+- `@PockyBot status` — get the list of pegs you have given.
 
 #### Direct Message Commands
 
 PockyBot can be messaged directly with certain commands.
 
--   `ping`
--   `status`
+- `ping`
+- `status`
 
 ## Contributing
 
