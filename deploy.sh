@@ -1,4 +1,4 @@
-NUGET_API_KEY=$1
+#!/usr/bin/env bash
 
 # Dry run semantic-release to get next version number
 VERSION="$(npx -p semantic-release@15.13.19 -p @semantic-release/changelog@3.0.4 -p @semantic-release/git@7.0.16 \
@@ -14,7 +14,7 @@ fi
 echo "The next release number is $VERSION"
 
 mkdir -p ./artifacts
-dotnet pack src/PockyBot.NET/PockyBot.NET.csproj -p:PackageVersion=$VERSION -o ../../artifacts
+dotnet pack "src/PockyBot.NET/PockyBot.NET.csproj" -p:PackageVersion="$VERSION" -o "../../artifacts"
 
 # UNCOMMENT WHEN READY FOR RELEASE
 # npx -p semantic-release@15.13.19 -p @semantic-release/changelog@3.0.4 -p @semantic-release/git@7.0.16 \

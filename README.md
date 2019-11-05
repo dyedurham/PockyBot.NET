@@ -7,6 +7,12 @@
     <a href="https://travis-ci.org/GlobalX/PockyBot.NET">
         <img src="https://flat.badgen.net/travis/GlobalX/PockyBot.NET" alt="PockyBot.NET on Travis CI" />
     </a>
+    <a href="https://www.codacy.com/manual/Lauraducky/PockyBot.NET?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GlobalX/PockyBot.NET&amp;utm_campaign=Badge_Grade">
+        <img src="https://api.codacy.com/project/badge/Grade/03867acd8d03437c94f2f135b014e45b" alt="Codacy Grade Badge" />  
+    </a>
+    <a href="https://www.codacy.com/manual/Lauraducky/PockyBot.NET?utm_source=github.com&utm_medium=referral&utm_content=GlobalX/PockyBot.NET&utm_campaign=Badge_Coverage">
+        <img src="https://api.codacy.com/project/badge/Coverage/03867acd8d03437c94f2f135b014e45b" alt="Codacy Coverage Badge" />  
+    </a>
     <a href="https://codecov.io/gh/GlobalX/PockyBot.NET">
         <img src="https://flat.badgen.net/codecov/c/github/globalx/pockybot.net" alt="PockyBot.NET on Codecov" />
     </a>
@@ -124,14 +130,14 @@ repository contains a number of `.sql` files you can use to set this up.
 
 Table `generalconfig` is initalised with default values as follows:
 
-Value | Default | Explanation
-:-- | :-- | :--
-limit | 10 | The number of pegs each user is allowed to give out each cycle
-minimum | 5 | The minimum number of pegs each user is *required* to give out to be eligible to win
-winners | 3 | The number of winners displayed (using a dense ranking)
-commentsRequired | 1 | Boolean value of whether a reason is required to give a peg
-pegWithoutKeyword | 0 | Boolean value of whether the "peg" keyword is required to give a peg (if true, pegs can be given with `@PockyBot @Person <reason>`)
-requireValues | 1 | Boolean value of whether a keyword is required in the reason for a peg to be given
+| Value             | Default | Explanation                                                                                                                         |
+| :---------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------- |
+| limit             | 10      | The number of pegs each user is allowed to give out each cycle                                                                      |
+| minimum           | 5       | The minimum number of pegs each user is _required_ to give out to be eligible to win                                                |
+| winners           | 3       | The number of winners displayed (using a dense ranking)                                                                             |
+| commentsRequired  | 1       | Boolean value of whether a reason is required to give a peg                                                                         |
+| pegWithoutKeyword | 0       | Boolean value of whether the "peg" keyword is required to give a peg (if true, pegs can be given with `@PockyBot @Person <reason>`) |
+| requireValues     | 1       | Boolean value of whether a keyword is required in the reason for a peg to be given                                                  |
 
 Table `stringconfig` is used to define keywords.
 Name field is 'keyword' and 'value' is the value of the keyword desired.
@@ -153,13 +159,16 @@ sent directly to the bot. In this readme, mentions will be identified by
 Use any of these commands in a room PockyBot is participating in to perform
 commands.
 
-- `@PockyBot ping` &mdash; verify that the bot is alive.
+- `@PockyBot ping` — verify that the bot is alive.
+- `@PockyBot peg @Person <reason>` — give someone a peg.
+- `@PockyBot status` — get the list of pegs you have given.
 
 #### Direct Message Commands
 
 PockyBot can be messaged directly with certain commands.
 
 - `ping`
+- `status`
 
 ## Contributing
 

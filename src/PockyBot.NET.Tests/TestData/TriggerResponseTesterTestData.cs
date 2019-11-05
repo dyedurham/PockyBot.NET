@@ -20,7 +20,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "TestBot ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -49,7 +49,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "TestBot Ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -78,7 +78,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "TestBot ping with a lil extra",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -103,11 +103,11 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[] {"ping"} ),
+                GetPockyUser(new[] {"ping"} ),
                 new Message
                 {
                     Text = "TestBot ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -124,7 +124,7 @@ namespace PockyBot.NET.Tests.TestData
                     SenderId = "testUserId",
                     SenderName = "Test User"
                 },
-                GetTrigger("ping", true, false, new string[] { "ping", "admin" } ),
+                GetTrigger("ping", true, false, new[] { "ping", "admin" } ),
                 true
             };
 
@@ -136,7 +136,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "TestBot ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -165,7 +165,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "TestBot notping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -194,7 +194,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "TestBot ping with a lil extra",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -223,7 +223,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "TestBot ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -240,7 +240,7 @@ namespace PockyBot.NET.Tests.TestData
                     SenderId = "testUserId",
                     SenderName = "Test User"
                 },
-                GetTrigger("ping", true, false, new string[] { "ping" } ),
+                GetTrigger("ping", true, false, new[] { "ping" } ),
                 false
             };
         }
@@ -254,7 +254,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -276,7 +276,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "Ping  ",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -298,7 +298,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "ping with a lil extra",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -316,11 +316,11 @@ namespace PockyBot.NET.Tests.TestData
             // permissions correct, correct command, no args
             yield return new object[]
             {
-                GetPockyUser(new string[] {"ping"} ),
+                GetPockyUser(new[] {"ping"} ),
                 new Message
                 {
                     Text = "ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -331,7 +331,7 @@ namespace PockyBot.NET.Tests.TestData
                     SenderId = "testUserId",
                     SenderName = "Test User"
                 },
-                GetTrigger("ping", true, false, new string[] { "ping", "admin" } ),
+                GetTrigger("ping", true, false, new[] { "ping", "admin" } ),
                 true
             };
 
@@ -342,7 +342,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -364,7 +364,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "notping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -386,7 +386,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "ping with a lil extra",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -408,7 +408,7 @@ namespace PockyBot.NET.Tests.TestData
                 new Message
                 {
                     Text = "ping",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new[]
                     {
                         new MessagePart
                         {
@@ -419,7 +419,7 @@ namespace PockyBot.NET.Tests.TestData
                     SenderId = "testUserId",
                     SenderName = "Test User"
                 },
-                GetTrigger("ping", true, false, new string[] { "ping" } ),
+                GetTrigger("ping", true, false, new[] { "ping" } ),
                 false
             };
         }

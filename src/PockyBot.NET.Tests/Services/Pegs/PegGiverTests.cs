@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using NSubstitute;
@@ -66,7 +67,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
             _numPegsGiven = numPegsGiven;
         }
 
-        private async void WhenGivingAPeg()
+        private async Task WhenGivingAPeg()
         {
             await _subject.GivePeg(_comment, _sender, _receiver, _numPegsGiven);
         }

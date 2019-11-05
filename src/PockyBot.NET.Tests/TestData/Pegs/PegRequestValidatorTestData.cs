@@ -18,7 +18,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some keyword2 things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new[]
                     {
                         new MessagePart
                         {
@@ -59,7 +59,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 keyword2",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -100,7 +100,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -141,7 +141,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -177,7 +177,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some penaltyKeyword things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -218,7 +218,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some keyword2 things Test User 3",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -268,7 +268,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg ",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -299,7 +299,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some keyword2 things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -342,7 +342,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot pegg Test User 2 for doing some keyword2 things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -384,7 +384,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some keyword2 things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -426,7 +426,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {
@@ -463,7 +463,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some things",
-                    MessageParts = new MessagePart[]
+                    MessageParts = new []
                     {
                         new MessagePart
                         {

@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
