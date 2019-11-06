@@ -1,0 +1,25 @@
+path_classifiers:
+  test:
+    - exclude: /
+    - "src/PockyBot.NET.Tests"
+  test_data:
+    - "src/PockyBot.NET.Tests/TestData"
+
+queries:
+  - exclude: "*"
+  - include:
+      tags:
+        - "security"
+        - "correctness"
+      severity: "error"
+
+extraction:
+  csharp:
+    index:
+      solution:
+        - "src/PockyBot.NET.sln"
+      dotnet:
+        version: 2.1
+      msbuild:
+        configuration: release
+        platform: Any CPU
