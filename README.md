@@ -16,6 +16,9 @@
     <a href="https://codecov.io/gh/GlobalX/PockyBot.NET">
         <img src="https://flat.badgen.net/codecov/c/github/globalx/pockybot.net" alt="PockyBot.NET on Codecov" />
     </a>
+    <a href="https://lgtm.com/projects/g/GlobalX/PockyBot.NET/alerts/">
+        <img alt="Total alerts on LGTM" src="https://img.shields.io/lgtm/alerts/g/GlobalX/PockyBot.NET.svg?logo=lgtm&logoWidth=18"/>
+    </a>
     <img src="https://flat.badgen.net/github/commits/globalx/pockybot.net" alt="commits" />
     <img src="https://flat.badgen.net/github/contributors/globalx/pockybot.net" alt="contributors" />
     <img src="https://flat.badgen.net/badge/commitizen/friendly/green" alt="commitizen friendly" />
