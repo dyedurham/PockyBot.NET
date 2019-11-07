@@ -10,7 +10,7 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    class Status : ITrigger
+    internal class Status : ITrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IConfigRepository _configRepository;

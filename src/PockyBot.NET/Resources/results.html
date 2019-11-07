@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha256-zVUlvIh3NEZRYa9X/qpNY8P1aBy0d4FrI7bhfZSZVwc=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <style type="text/css">
+            h2 {
+                font-size: 170%;
+            }
+
+            .clickable {
+                cursor: pointer;
+                padding: 6px;
+            }
+            .clickable:hover {
+                background-color: #e9ecef;
+            }
+
+            .clickable > i.fa-plus, .clickable > tr > th > i.fa-plus {
+                display: none;
+            }
+            .clickable > i.fa-minus, .clickable > tr > th > i.fa-minus {
+                display: inline-block;
+            }
+            .clickable.collapsed > i.fa-plus, .clickable.collapsed > tr > th > i.fa-plus {
+                display: inline-block;
+            }
+            .clickable.collapsed > i.fa-minus, .clickable.collapsed > tr > th > i.fa-minus {
+                display: none;
+            }
+        </style>
+        <title>Pegs and Pocky {{ model.date | date.to_string `%Y-%m-%d` }}</title>
+    </head>
+    <body>
+        <div class="container content">
+            <h1 class="pt-3 pb-3">Pegs and Pocky {{ model.date | date.to_string `%Y-%m-%d` }}</h1>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="generalResults-tab" data-toggle="tab" href="#generalResults" aria-controls="generalResults" aria-selected="true">General Results</a>
+                <a class="nav-item nav-link" id="categoryResults-tab" data-toggle="tab" href="#categoryResults" role="tab" aria-controls="categoryResults" aria-selected="false">Category Results</a>
+                <a class="nav-item nav-link" id="penaltyResults-tab" data-toggle="tab" href="#penaltyResults" role="tab" aria-controls="penaltyResults" aria-selected="false">Penalty Results</a>
+            </div>
+
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="generalResults" role="tabpanel" aria-labelledby="generalResults-tab">
+                    <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-winners" aria-expanded="false" aria-controls="section-winners"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Winners</h2>
+                    <table id="section-winners" class="table pb-3 collapse">
+                        {{- for winner in model.winners }}
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-winners-0" aria-expanded="true" aria-controls="section-winners-0">
+                        <tr>
+                            <th colspan="5"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ winner.name }} ({{ winner.location }}) &mdash; {{ winner.total_points }} points, {{ winner.peg_count }} pegs, {{ winner.penalty_count }}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="section-winners-0" class="collapse show">
+                        {{- for peg in winner.pegs }}
+                        <tr>
+                            <td>{{ peg.sender_name }}</td>
+                            <td>{{ peg.weight }}</td>
+                            <td>{{ peg.comment }}</td>
+                            <td>{{ peg.keywords | array.join ", " }}</td>
+                            <td>{{ peg.sender_location }}</td>
+                        </tr>
+                        {{- end }}
+                        </tbody>
+                        {{- end }}
+                    </table>
+                    <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-losers" aria-expanded="false" aria-controls="section-losers"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Other Pegs Received</h2>
+                    <table id="section-losers" class="table pb-3 collapse">
+                        {{- for peg_recipient in model.peg_recipients }}
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-losers-0" aria-expanded="true" aria-controls="section-losers-0">
+                        <tr>
+                            <th colspan="5"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ peg_recipient.name }} ({{ peg_recipient.location }}) &mdash; {{ peg_recipient.total_points }} points, {{ peg_recipient.peg_count }} pegs, {{ peg_recipient.penalty_count }}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="section-losers-3" class="collapse show">
+                        {{- for peg in peg_recipient.pegs }}
+                        <tr>
+                            <td>{{ peg.sender_name }}</td>
+                            <td>{{ peg.weight }}</td>
+                            <td>{{ peg.comment }}</td>
+                            <td>{{ peg.keywords | array.join ", " }}</td>
+                            <td>{{ peg.sender_location }}</td>
+                        </tr>
+                        {{- end}}
+                        </tbody>
+                        {{- end}}
+                    </table>
+                </div>
+
+                <div class="tab-pane fade show" id="categoryResults" role="tabpanel" aria-labelledby="categoryResults-tab">
+                    {{- for category in model.categories }}
+                    <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-categoryresults-0" aria-expanded="false" aria-controls="section-categoryresults-0"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Category: {{ category.name }}</h2>
+                    <table id="section-categoryresults-0" class="table pb-3 collapse">
+                        {{- for recipient in category.recipients }}
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-categoryresults-0-0" aria-expanded="true" aria-controls="section-categoryresults-0-0">
+                        <tr>
+                            <th colspan="3"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ recipient.name }} &mdash; {{ recipient.peg_count }} total</th>
+                        </tr>
+                        </thead>
+                        <tbody id="section-categoryresults-0-0" class="collapse show">
+                        {{- for peg in recipient.pegs }}
+                        <tr>
+                            <td>{{ peg.sender_name }}</td>
+                            <td>{{ peg.comment }}</td>
+                            <td>{{ peg.keywords | array.join ", " }}</td>
+                        </tr>
+                        {{- end}}
+                        </tbody>
+                        {{- end }}
+                    </table>
+                    {{- end }}
+                </div>
+
+                <div class="tab-pane fade show" id="penaltyResults" role="tabpanel" aria-labelledby="penaltyResults-tab">
+                    <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-penalties" aria-expanded="false" aria-controls="section-penalties"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Penalties</h2>
+                    <table id="section-penalties" class="table pb-3 collapse">
+                        {{- for recipient in model.penalties }}
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-penalties-0" aria-expanded="true" aria-controls="section-penalties-0">
+                            <tr><th colspan="3"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ recipient.name }} &mdash; {{ recipient.penalty_count }}</th></tr>
+                        </thead>
+                        <tbody id="section-penalties-0" class="collapse show">
+                            {{- for penalty in recipient.penalties }}
+                            <tr>
+                                <td>{{ penalty.receiver_name }}</td>
+                                <td>{{ penalty.comment }}</td>
+                                <td>{{ penalty.receiver_location }}</td>
+                            </tr>
+                            {{- end }}
+                        </tbody>
+                        {{- end }}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha256-IeI0loa35pfuDxqZbGhQUiZmD2Cywv1/bdqiypGW46o=" crossorigin="anonymous"></script>
+    </body>
+</html>

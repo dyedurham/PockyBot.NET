@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
@@ -6,5 +7,6 @@ namespace PockyBot.NET.Persistence.Repositories
     {
         PockyUser GetUser(string userId);
         PockyUser AddOrUpdateUser(string userId, string username);
+        List<PockyUser> GetAllUsersWithPegs();
     }
 }
