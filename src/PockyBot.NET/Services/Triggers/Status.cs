@@ -14,13 +14,13 @@ namespace PockyBot.NET.Services.Triggers
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IConfigRepository _configRepository;
-        private readonly IPegCommentValidator _pegCommentValidator;
+        private readonly IPegHelper _pegHelper;
 
-        public Status(IPockyUserRepository pockyUserRepository, IConfigRepository configRepository, IPegCommentValidator pegCommentValidator)
+        public Status(IPockyUserRepository pockyUserRepository, IConfigRepository configRepository, IPegHelper pegHelper)
         {
             _pockyUserRepository = pockyUserRepository;
             _configRepository = configRepository;
-            _pegCommentValidator = pegCommentValidator;
+            _pegHelper = pegHelper;
         }
 
         public string Command => Commands.Status;
@@ -66,7 +66,7 @@ namespace PockyBot.NET.Services.Triggers
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
 
             var groupedPegs = pockyUser.PegsGiven.GroupBy(x =>
-                    _pegCommentValidator.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords))
+                    _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords))
                 .ToDictionary(x => x.Key, x => x.ToList());
 
             return groupedPegs;
@@ -80,7 +80,6 @@ namespace PockyBot.NET.Services.Triggers
 
         private static string GetValidPegsSentText(List<Persistence.Models.Peg> validPegs)
         {
-            
             if (validPegs.Any())
             {
                 var pegsSentList = validPegs.Select(FormatPeg);

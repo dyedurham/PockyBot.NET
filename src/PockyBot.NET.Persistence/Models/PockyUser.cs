@@ -20,6 +20,7 @@ namespace PockyBot.NET.Persistence.Models
         public List<Peg> PegsGiven { get; set; }
         [InverseProperty("Receiver")]
         public List<Peg> PegsReceived { get; set; }
+        public UserLocation Location { get; set; }
 
         public bool HasRole(string role) =>
             Roles.Any(x => string.Equals(role, x.UserRole, StringComparison.OrdinalIgnoreCase));

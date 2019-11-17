@@ -1,3 +1,5 @@
+using NSubstitute;
+using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Tests.TestData.Pegs;
 using Shouldly;
@@ -8,7 +10,9 @@ namespace PockyBot.NET.Tests.Services.Pegs
 {
     public class PegCommentValidatorTests
     {
-        private readonly PegCommentValidator _subject;
+        private readonly PegHelper _subject;
+
+        private IConfigRepository _configRepository;
 
         private string _comment;
         private int? _requireKeywords;
@@ -19,7 +23,8 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         public PegCommentValidatorTests()
         {
-            _subject = new PegCommentValidator();
+            _configRepository = Substitute.For<IConfigRepository>();
+            _subject = new PegHelper(_configRepository);
         }
 
         [Theory]

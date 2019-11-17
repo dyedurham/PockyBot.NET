@@ -20,7 +20,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IConfigRepository _configRepository;
-        private readonly IPegCommentValidator _pegCommentValidator;
+        private readonly IPegHelper _pegHelper;
 
         private Message _message;
         private Message _result;
@@ -29,8 +29,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         {
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
             _configRepository = Substitute.For<IConfigRepository>();
-            _pegCommentValidator = Substitute.For<IPegCommentValidator>();
-            _subject = new Status(_pockyUserRepository, _configRepository, _pegCommentValidator);
+            _pegHelper = Substitute.For<IPegHelper>();
+            _subject = new Status(_pockyUserRepository, _configRepository, _pegHelper);
         }
 
         [Theory]
@@ -80,7 +80,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         {
             foreach (var peg in pegValidity)
             {
-                _pegCommentValidator.IsPegValid(peg.Item1, Arg.Any<int>(), Arg.Any<string[]>(), Arg.Any<string[]>())
+                _pegHelper.IsPegValid(peg.Item1, Arg.Any<int>(), Arg.Any<string[]>(), Arg.Any<string[]>())
                     .Returns(peg.Item2);
             }
         }

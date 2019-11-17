@@ -19,17 +19,17 @@ namespace PockyBot.NET
             var pockyUserRepository = new PockyUserRepository(dbContext);
             var configRepository = new ConfigRepository(dbContext);
             var pegRepository = new PegRepository(dbContext);
-            
+
             var triggerResponseTester = new TriggerResponseTester(wrappedSettings, pockyUserRepository);
             var pegRequestValidator = new PegRequestValidator(wrappedSettings, configRepository);
-            var pegCommentValidator = new PegCommentValidator();
+            var pegHelper = new PegHelper(configRepository);
             var pegGiver = new PegGiver(pegRepository, chatHelper);
 
             List<ITrigger> triggers = new List<ITrigger>
             {
                 new Ping(),
-                new Peg(pegRequestValidator, pockyUserRepository, pegCommentValidator, configRepository, chatHelper, pegGiver),
-                new Status(pockyUserRepository, configRepository, pegCommentValidator),
+                new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver),
+                new Status(pockyUserRepository, configRepository, pegHelper),
                 new Default(wrappedSettings)
             };
 

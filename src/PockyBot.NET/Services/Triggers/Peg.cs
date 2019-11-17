@@ -14,18 +14,18 @@ namespace PockyBot.NET.Services.Triggers
     {
         private readonly IPegRequestValidator _pegRequestValidator;
         private readonly IPockyUserRepository _pockyUserRepository;
-        private readonly IPegCommentValidator _pegCommentValidator;
+        private readonly IPegHelper _pegHelper;
         private readonly IConfigRepository _configRepository;
         private readonly IChatHelper _chatHelper;
         private readonly IPegGiver _pegGiver;
 
         public Peg(IPegRequestValidator pegRequestValidator, IPockyUserRepository pockyUserRepository,
-            IPegCommentValidator pegCommentValidator, IConfigRepository configRepository, IChatHelper chatHelper,
+            IPegHelper pegHelper, IConfigRepository configRepository, IChatHelper chatHelper,
             IPegGiver pegGiver)
         {
             _pegRequestValidator = pegRequestValidator;
             _pockyUserRepository = pockyUserRepository;
-            _pegCommentValidator = pegCommentValidator;
+            _pegHelper = pegHelper;
             _configRepository = configRepository;
             _chatHelper = chatHelper;
             _pegGiver = pegGiver;
@@ -60,9 +60,9 @@ namespace PockyBot.NET.Services.Triggers
             var keywords = _configRepository.GetStringConfig("keyword").ToArray();
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
 
-            var isPegValid = _pegCommentValidator.IsPegValid(comment, requireKeywords, keywords, penaltyKeywords);
+            var isPegValid = _pegHelper.IsPegValid(comment, requireKeywords, keywords, penaltyKeywords);
             var numPegsGiven = sender.PegsGiven.Count(x =>
-                _pegCommentValidator.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords));
+                _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords));
 
             if (!sender.HasRole(Roles.Unmetered) &&
                 (isPegValid && numPegsGiven >= _configRepository.GetGeneralConfig("limit")))

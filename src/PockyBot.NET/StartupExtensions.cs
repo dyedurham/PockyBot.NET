@@ -30,7 +30,7 @@ namespace PockyBot.NET
         private static IServiceCollection ConfigureCommonServices(this IServiceCollection services) {
             services.AddTransient<ITriggerResponseTester, TriggerResponseTester>();
             services.AddTransient<IPegRequestValidator, PegRequestValidator>();
-            services.AddTransient<IPegCommentValidator, PegCommentValidator>();
+            services.AddTransient<IPegHelper, PegHelper>();
             services.AddTransient<IPegGiver, PegGiver>();
             services.AddTransient<IPockyBot, PockyBot>();
             services.AddTransient<ITrigger, Ping>();
