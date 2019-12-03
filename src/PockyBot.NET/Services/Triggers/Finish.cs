@@ -117,7 +117,7 @@ namespace PockyBot.NET.Services.Triggers
                     Name = x.Username,
                     UserId = x.UserId,
                     Location = x.Location?.Location ?? null,
-                    TotalPoints = validPegs.Sum(x => x.Weight) - penaltyPegs.Count,
+                    TotalPoints = validPegs.Sum(y => y.Weight) - penaltyPegs.Count,
                     PegCount = validPegs.Count,
                     PenaltyCount = penaltyPegs.Count,
                     PegsGivenCount = x.PegsGiven.Count - penaltyPegs.Count,
@@ -163,9 +163,9 @@ namespace PockyBot.NET.Services.Triggers
                             Penalties = y.Penalties
                         };
                     })
-                    .OrderByDescending(x => x.TotalPoints)
+                    .OrderByDescending(y => y.TotalPoints)
                     .ToList();
-                var topRecipients = categoryRecipients.Where(x => x.TotalPoints  == allRecipients[0].TotalPoints)
+                var topRecipients = categoryRecipients.Where(y => y.TotalPoints  == allRecipients[0].TotalPoints)
                     .ToList();
 
                 return new PegCategory
