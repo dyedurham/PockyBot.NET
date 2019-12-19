@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using NSubstitute;
+using PockyBot.NET.Models;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Pegs;
@@ -20,9 +19,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private readonly Finish _subject;
 
         private readonly IPockyUserRepository _pockyUserRepository;
+        private readonly IPegResultsHelper _pegResultsHelper;
         private readonly IResultsUploader _resultsUploader;
-        private readonly IConfigRepository _configRepository;
-        private readonly IPegHelper _pegHelper;
 
         private Message _message;
         private Message _result;
@@ -31,25 +29,20 @@ namespace PockyBot.NET.Tests.Services.Triggers
         {
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
             _resultsUploader = Substitute.For<IResultsUploader>();
-            _configRepository = Substitute.For<IConfigRepository>();
-            _pegHelper = Substitute.For<IPegHelper>();
-            _subject = new Finish(_pockyUserRepository, _resultsUploader, _configRepository, _pegHelper);
+            _pegResultsHelper = Substitute.For<IPegResultsHelper>();
+            _subject = new Finish(_pockyUserRepository, _pegResultsHelper, _resultsUploader);
         }
 
         [Theory]
         [MemberData(nameof(FinishTestData.RespondTestData), MemberType = typeof(FinishTestData))]
-        public void TestRespond(Message message, List<PockyUser> allUsersWithPegs, int minimum, int winners,
-            string uploadLocation, Message response)
+        internal void TestRespond(Message message, List<PockyUser> allUsersWithPegs, List<PegRecipient> mappedUsers,
+            List<PegRecipient> winners, List<PegCategory> categories, string uploadLocation, Message response)
         {
             this.Given(x => GivenAMessage(message))
                 .And(x => GivenAllUsersWithPegs(allUsersWithPegs))
-                .And(x => GivenAStringConfig("keyword", new List<string> {"keyword1", "keyword2"}))
-                .And(x => GivenAStringConfig("penaltyKeyword", new List<string> {"penaltyKeyword"}))
-                .And(x => GivenAGeneralConfig("requireValues", 1))
-                .And(x => GivenAGeneralConfig("minimum", minimum))
-                .And(x => GivenAGeneralConfig("winners", winners))
-                .And(x => GivenPegValidity("penaltyKeyword"))
-                .And(x => GivenPegWeighting(1))
+                .And(x => GivenMappedUsers(mappedUsers))
+                .And(x => GivenWinners(winners))
+                .And(x => GivenPegCategories(categories))
                 .And(x => GivenUploadedResultsLocation(uploadLocation))
                 .When(x => WhenRespondingToAMessage())
                 .Then(x => ThenItShouldReturnAResponse(response))
@@ -67,25 +60,19 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _pockyUserRepository.GetAllUsersWithPegs().Returns(allUsersWithPegs);
         }
 
-        private void GivenAStringConfig(string configName, List<string> config)
+        private void GivenMappedUsers(List<PegRecipient> mappedUsers)
         {
-            _configRepository.GetStringConfig(configName).Returns(config);
+            _pegResultsHelper.MapUsersToPegRecipients(Arg.Any<List<PockyUser>>()).Returns(mappedUsers);
         }
 
-        private void GivenAGeneralConfig(string configName, int config)
+        private void GivenWinners(List<PegRecipient> winners)
         {
-            _configRepository.GetGeneralConfig(configName).Returns(config);
+            _pegResultsHelper.GetWinners(Arg.Any<List<PegRecipient>>()).Returns(winners);
         }
 
-        private void GivenPegValidity(string penaltyKeyword)
+        private void GivenPegCategories(List<PegCategory> categories)
         {
-            _pegHelper.IsPegValid(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>()).Returns(
-                x => !((string) x[0]).Contains(penaltyKeyword));
-        }
-
-        private void GivenPegWeighting(int weighting)
-        {
-            _pegHelper.GetPegWeighting(Arg.Any<string>(), Arg.Any<string>()).Returns(weighting);
+            _pegResultsHelper.GetCategories(Arg.Any<List<PegRecipient>>()).Returns(categories);
         }
 
         private void GivenUploadedResultsLocation(string uploadLocation)

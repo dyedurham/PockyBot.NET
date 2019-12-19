@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using GlobalX.ChatBots.Core.Messages;
+using PockyBot.NET.Models;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Tests.TestData.Triggers
@@ -85,8 +84,147 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         }
                     },
                 },
-                1, // minimum
-                1, // winners
+                new List<PegRecipient>
+                {
+                    new PegRecipient
+                    {
+                        UserId = "User1Id",
+                        Name = "User 1",
+                        Location = "Location1",
+                        TotalPoints = 0,
+                        PegCount = 1,
+                        PenaltyCount = 1,
+                        PegsGivenCount = 0,
+                        Pegs = new List<PegDetails>
+                        {
+                            new PegDetails
+                            {
+                                SenderName = "User 2",
+                                Weight = 1,
+                                Comment = "This is a peg keyword1 keyword2",
+                                Keywords = new List<string> { "keyword1", "keyword2" },
+                                SenderLocation = "Location1"
+                            }
+                        },
+                        Penalties = new List<PegDetails>
+                        {
+                            new PegDetails
+                            {
+                                SenderName = "OtherBot",
+                                Weight = 1,
+                                Comment = "This is a shame peg penaltyKeyword",
+                                Keywords = new List<string> { "penaltyKeyword" },
+                                SenderLocation = "Location1"
+                            }
+                        }
+                    },
+                    new PegRecipient
+                    {
+                        UserId = "User2Id",
+                        Name = "User 2",
+                        TotalPoints = 0,
+                        PegCount = 0,
+                        PenaltyCount = 0,
+                        PegsGivenCount = 1,
+                        Pegs = new List<PegDetails>(),
+                        Penalties = new List<PegDetails>()
+                    }
+                },
+                new List<PegRecipient>
+                {
+                    new PegRecipient
+                    {
+                        UserId = "User2Id",
+                        Name = "User 2",
+                        TotalPoints = 0,
+                        PegCount = 0,
+                        PenaltyCount = 0,
+                        PegsGivenCount = 1,
+                        Pegs = new List<PegDetails>(),
+                        Penalties = new List<PegDetails>()
+                    }
+                },
+                new List<PegCategory>
+                {
+                    new PegCategory
+                    {
+                        Name = "keyword1",
+                        Recipients = new List<PegRecipient>
+                        {
+                            new PegRecipient
+                            {
+                                UserId = "User1Id",
+                                Name = "User 1",
+                                Location = "Location1",
+                                TotalPoints = 0,
+                                PegCount = 1,
+                                PenaltyCount = 1,
+                                PegsGivenCount = 0,
+                                Pegs = new List<PegDetails>
+                                {
+                                    new PegDetails
+                                    {
+                                        SenderName = "User 2",
+                                        Weight = 1,
+                                        Comment = "This is a peg keyword1 keyword2",
+                                        Keywords = new List<string> { "keyword1", "keyword2" },
+                                        SenderLocation = "Location1"
+                                    }
+                                },
+                                Penalties = new List<PegDetails>
+                                {
+                                    new PegDetails
+                                    {
+                                        SenderName = "OtherBot",
+                                        Weight = 1,
+                                        Comment = "This is a shame peg penaltyKeyword",
+                                        Keywords = new List<string> { "penaltyKeyword" },
+                                        SenderLocation = "Location1"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new PegCategory
+                    {
+                        Name = "keyword2",
+                        Recipients = new List<PegRecipient>
+                        {
+                            new PegRecipient
+                            {
+                                UserId = "User1Id",
+                                Name = "User 1",
+                                Location = "Location1",
+                                TotalPoints = 0,
+                                PegCount = 1,
+                                PenaltyCount = 1,
+                                PegsGivenCount = 0,
+                                Pegs = new List<PegDetails>
+                                {
+                                    new PegDetails
+                                    {
+                                        SenderName = "User 2",
+                                        Weight = 1,
+                                        Comment = "This is a peg keyword1 keyword2",
+                                        Keywords = new List<string> { "keyword1", "keyword2" },
+                                        SenderLocation = "Location1"
+                                    }
+                                },
+                                Penalties = new List<PegDetails>
+                                {
+                                    new PegDetails
+                                    {
+                                        SenderName = "OtherBot",
+                                        Weight = 1,
+                                        Comment = "This is a shame peg penaltyKeyword",
+                                        Keywords = new List<string> { "penaltyKeyword" },
+                                        SenderLocation = "Location1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "http://fakelocation.com",
                 new Message
                 {
