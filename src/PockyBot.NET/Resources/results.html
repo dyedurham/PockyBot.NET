@@ -48,42 +48,42 @@
                     <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-winners" aria-expanded="false" aria-controls="section-winners"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Winners</h2>
                     <table id="section-winners" class="table pb-3 collapse">
                         {{- for winner in model.winners }}
-                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-winners-0" aria-expanded="true" aria-controls="section-winners-0">
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-winners-{{ winner.user_id }}" aria-expanded="true" aria-controls="section-winners-{{ winner.user_id }}">
                         <tr>
                             <th colspan="5"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ winner.name }} ({{ winner.location }}) &mdash; {{ winner.total_points }} points, {{ winner.peg_count }} pegs, {{ winner.penalty_count }} penalties</th>
                         </tr>
                         </thead>
-                        <tbody id="section-winners-0" class="collapse show">
-                        {{- for peg in winner.pegs }}
-                        <tr>
-                            <td>{{ peg.sender_name }}</td>
-                            <td>{{ peg.weight }}</td>
-                            <td>{{ peg.comment }}</td>
-                            <td>{{ peg.keywords | array.join ", " }}</td>
-                            <td>{{ peg.sender_location }}</td>
-                        </tr>
-                        {{- end }}
+                        <tbody id="section-winners-{{ winner.user_id }}" class="collapse show">
+                            {{- for peg in winner.pegs }}
+                            <tr>
+                                <td>{{ peg.sender_name }}</td>
+                                <td>{{ peg.weight }}</td>
+                                <td>{{ peg.comment }}</td>
+                                <td>{{ peg.keywords | array.join ", " }}</td>
+                                <td>{{ peg.sender_location }}</td>
+                            </tr>
+                            {{- end }}
                         </tbody>
                         {{- end }}
                     </table>
                     <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-losers" aria-expanded="false" aria-controls="section-losers"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Other Pegs Received</h2>
                     <table id="section-losers" class="table pb-3 collapse">
                         {{- for peg_recipient in model.peg_recipients }}
-                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-losers-0" aria-expanded="true" aria-controls="section-losers-0">
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-losers-{{ peg_recipient.user_id }}" aria-expanded="true" aria-controls="section-losers-{{ peg_recipient.user_id }}">
                         <tr>
                             <th colspan="5"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ peg_recipient.name }} ({{ peg_recipient.location }}) &mdash; {{ peg_recipient.total_points }} points, {{ peg_recipient.peg_count }} pegs, {{ peg_recipient.penalty_count }} penalties</th>
                         </tr>
                         </thead>
-                        <tbody id="section-losers-3" class="collapse show">
-                        {{- for peg in peg_recipient.pegs }}
-                        <tr>
-                            <td>{{ peg.sender_name }}</td>
-                            <td>{{ peg.weight }}</td>
-                            <td>{{ peg.comment }}</td>
-                            <td>{{ peg.keywords | array.join ", " }}</td>
-                            <td>{{ peg.sender_location }}</td>
-                        </tr>
-                        {{- end}}
+                        <tbody id="section-losers-{{ peg_recipient.user_id }}" class="collapse show">
+                            {{- for peg in peg_recipient.pegs }}
+                            <tr>
+                                <td>{{ peg.sender_name }}</td>
+                                <td>{{ peg.weight }}</td>
+                                <td>{{ peg.comment }}</td>
+                                <td>{{ peg.keywords | array.join ", " }}</td>
+                                <td>{{ peg.sender_location }}</td>
+                            </tr>
+                            {{- end}}
                         </tbody>
                         {{- end}}
                     </table>
@@ -91,22 +91,22 @@
 
                 <div class="tab-pane fade show" id="categoryResults" role="tabpanel" aria-labelledby="categoryResults-tab">
                     {{- for category in model.categories }}
-                    <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-categoryresults-0" aria-expanded="false" aria-controls="section-categoryresults-0"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Category: {{ category.name }}</h2>
-                    <table id="section-categoryresults-0" class="table pb-3 collapse">
+                    <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-categoryresults-{{ category.name }}" aria-expanded="false" aria-controls="section-categoryresults-{{ category.name }}"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Category: {{ category.name }}</h2>
+                    <table id="section-categoryresults-{{ category.name }}" class="table pb-3 collapse">
                         {{- for recipient in category.recipients }}
-                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-categoryresults-0-0" aria-expanded="true" aria-controls="section-categoryresults-0-0">
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-categoryresults-{{ category.name }}-{{ recipient.user_id }}" aria-expanded="true" aria-controls="section-categoryresults-{{ category.name }}-{{ recipient.user_id }}">
                         <tr>
                             <th colspan="3"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ recipient.name }} &mdash; {{ recipient.total_points }} peg(s) total</th>
                         </tr>
                         </thead>
-                        <tbody id="section-categoryresults-0-0" class="collapse show">
-                        {{- for peg in recipient.pegs }}
-                        <tr>
-                            <td>{{ peg.sender_name }}</td>
-                            <td>{{ peg.comment }}</td>
-                            <td>{{ peg.keywords | array.join ", " }}</td>
-                        </tr>
-                        {{- end}}
+                        <tbody id="section-categoryresults-{{ category.name }}-{{ recipient.user_id }}" class="collapse show">
+                            {{- for peg in recipient.pegs }}
+                            <tr>
+                                <td>{{ peg.sender_name }}</td>
+                                <td>{{ peg.comment }}</td>
+                                <td>{{ peg.keywords | array.join ", " }}</td>
+                            </tr>
+                            {{- end}}
                         </tbody>
                         {{- end }}
                     </table>
@@ -117,10 +117,10 @@
                     <h2 class="clickable collapsed" data-toggle="collapse" data-target="#section-penalties" aria-expanded="false" aria-controls="section-penalties"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> Penalties</h2>
                     <table id="section-penalties" class="table pb-3 collapse">
                         {{- for recipient in model.penalties }}
-                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-penalties-0" aria-expanded="true" aria-controls="section-penalties-0">
+                        <thead class="thead-light clickable" data-toggle="collapse" data-target="#section-penalties-{{ recipient.user_id }}" aria-expanded="true" aria-controls="section-penalties-{{ recipient.user_id }}">
                             <tr><th colspan="3"><i class="fas fa-plus"></i><i class="fas fa-minus"></i> {{ recipient.name }} &mdash; {{ recipient.penalty_count }}</th></tr>
                         </thead>
-                        <tbody id="section-penalties-0" class="collapse show">
+                        <tbody id="section-penalties-{{ recipient.user_id }}" class="collapse show">
                             {{- for penalty in recipient.penalties }}
                             <tr>
                                 <td>{{ penalty.sender_name }}</td>

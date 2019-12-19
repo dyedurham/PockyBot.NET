@@ -168,9 +168,20 @@ namespace PockyBot.NET.Services.Triggers
                             Penalties = y.Penalties
                         };
                     })
+                    .Where(y => y.TotalPoints > 0)
                     .OrderByDescending(y => y.TotalPoints)
                     .ToList();
-                var topRecipients = categoryRecipients.Where(y => y.TotalPoints  == allRecipients[0].TotalPoints)
+
+                if (categoryRecipients.Count == 0)
+                {
+                    return new PegCategory
+                    {
+                        Name = x,
+                        Recipients = new List<PegRecipient>()
+                    };
+                }
+
+                var topRecipients = categoryRecipients.Where(y => y.TotalPoints  == categoryRecipients[0].TotalPoints)
                     .ToList();
 
                 return new PegCategory
