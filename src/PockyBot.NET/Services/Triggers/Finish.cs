@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
@@ -58,7 +58,7 @@ namespace PockyBot.NET.Services.Triggers
 
             var results = new PegResults
             {
-                Date = new DateTime(),
+                Date = DateTime.Now,
                 Winners = winners,
                 PegRecipients = nonWinners,
                 Categories = categories,
@@ -74,11 +74,16 @@ namespace PockyBot.NET.Services.Triggers
             }
 
             var parsedTemplate = Template.Parse(template);
-            var html = parsedTemplate.Render(results);
+            var html = parsedTemplate.Render(new {model = results });
 
-            File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\results-{DateTime.Now.ToString()}.html", html);
+            File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\results-{DateTime.Now.ToString("yyyyMMddhhmmss", CultureInfo.InvariantCulture)}.html", html);
 
-            return null;
+            var uri = await _resultsUploader.UploadResults(html);
+
+            return new Message
+            {
+                Text = $"[Here are all pegs given this cycle]({uri})"
+            };
         }
 
         private List<PegRecipient> MapUsersToPegRecipients(List<PockyUser> users)
@@ -88,27 +93,27 @@ namespace PockyBot.NET.Services.Triggers
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
 
             return users.Select(x => {
-                var receiverLocation = x.Location?.Location ?? null;
+                var receiverLocation = x.Location?.Location;
                 var validPegs = x.PegsReceived
                     .Where(y => _pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
                     .Select(y => new PegDetails
                         {
                             SenderName = y.Sender.Username,
-                            Weight = _pegHelper.GetPegWeighting(y.Sender.Location?.Location ?? null, receiverLocation),
+                            Weight = _pegHelper.GetPegWeighting(y.Sender.Location?.Location, receiverLocation),
                             Comment = y.Comment,
                             Keywords = keywords.Where(z => y.Comment.Contains(z)).ToList(),
-                            SenderLocation = y.Sender.Location?.Location ?? null
+                            SenderLocation = y.Sender.Location?.Location
                         })
                     .ToList();
                 var penaltyPegs = x.PegsGiven
                     .Where(y => !_pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
                     .Select(y => new PegDetails
                         {
-                            SenderName = y.Sender.Username,
+                            SenderName = y.Receiver.Username,
                             Weight = 1,
                             Comment = y.Comment,
                             Keywords = penaltyKeywords.Where(z => y.Comment.Contains(z)).ToList(),
-                            SenderLocation = y.Sender.Location?.Location ?? null
+                            SenderLocation = y.Receiver.Location?.Location
                         })
                     .ToList();
 
@@ -116,7 +121,7 @@ namespace PockyBot.NET.Services.Triggers
                 {
                     Name = x.Username,
                     UserId = x.UserId,
-                    Location = x.Location?.Location ?? null,
+                    Location = x.Location?.Location,
                     TotalPoints = validPegs.Sum(y => y.Weight) - penaltyPegs.Count,
                     PegCount = validPegs.Count,
                     PenaltyCount = penaltyPegs.Count,
