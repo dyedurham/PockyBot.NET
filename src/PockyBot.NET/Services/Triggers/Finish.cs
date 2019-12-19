@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -75,8 +74,6 @@ namespace PockyBot.NET.Services.Triggers
 
             var parsedTemplate = Template.Parse(template);
             var html = parsedTemplate.Render(new {model = results });
-
-            File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\results-{DateTime.Now.ToString("yyyyMMddhhmmss", CultureInfo.InvariantCulture)}.html", html);
 
             var uri = await _resultsUploader.UploadResults(html);
 
