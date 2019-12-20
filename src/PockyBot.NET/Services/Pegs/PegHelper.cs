@@ -32,10 +32,10 @@ namespace PockyBot.NET.Services.Pegs
                 return 1;
             }
 
-            var senderToReceiver = $"locationWeight{senderLocation}to{receiverLocation}";
-            var receiverToSender = $"locationWeight{receiverLocation}to{senderLocation}";
+            var senderToReceiver = $"locationWeight{senderLocation}to{receiverLocation}".ToLower();
+            var receiverToSender = $"locationWeight{receiverLocation}to{senderLocation}".ToLower();
             var config = _configRepository.GetAllGeneralConfig()
-                .FirstOrDefault(x => x.Name == senderToReceiver || x.Name == receiverToSender);
+                .FirstOrDefault(x => x.Name.ToLower() == senderToReceiver || x.Name.ToLower() == receiverToSender);
 
             if (config != null)
             {
