@@ -61,14 +61,15 @@ namespace PockyBot.NET.Services.Pegs
                     Pegs = validPegs,
                     Penalties = penaltyPegs
                 };
-            }).ToList();
+            }).Where(x => x.PegCount > 0 || x.PenaltyCount > 0)
+                .ToList();
         }
 
         public List<PegRecipient> GetWinners(List<PegRecipient> allRecipients)
         {
             var minimum = _configRepository.GetGeneralConfig("minimum") ?? 0;
             var winners = _configRepository.GetGeneralConfig("winners") ?? 3;
-            var eligibleWinners = allRecipients.Where(x => x.PegsGivenCount >= minimum);
+            var eligibleWinners = allRecipients.Where(x => x.PegsGivenCount >= minimum).ToList();
             var topCutoff = eligibleWinners.Select(x => x.TotalPoints)
                 .OrderByDescending(x => x)
                 .Take(winners)

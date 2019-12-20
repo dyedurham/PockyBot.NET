@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Pegs
