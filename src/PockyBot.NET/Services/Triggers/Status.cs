@@ -41,7 +41,8 @@ namespace PockyBot.NET.Services.Triggers
                 var userPegsLeftText = GetPegsLeftText(pockyUser, limit);
                 return Task.FromResult(new Message
                 {
-                    Text = $"{userPegsLeftText}\n\nYou have not given any pegs so far."
+                    Text = $"{userPegsLeftText}\n\nYou have not given any pegs so far.",
+                    RoomId = message.SenderId
                 });
             }
 
@@ -55,7 +56,8 @@ namespace PockyBot.NET.Services.Triggers
 
             return Task.FromResult(new Message
             {
-                Text = $"{pegsLeftText}{validPegsSentText}{penaltyPegsReceivedText}"
+                Text = $"{pegsLeftText}{validPegsSentText}{penaltyPegsReceivedText}",
+                RoomId = message.SenderId
             });
         }
 
