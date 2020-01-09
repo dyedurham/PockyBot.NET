@@ -43,7 +43,11 @@ namespace PockyBot.NET
 
             if (response != null)
             {
-                response.RoomId = message.RoomId;
+                if (response.RoomId == null)
+                {
+                    response.RoomId = message.RoomId;
+                }
+
                 await _chatHelper.Messages.SendMessageAsync(response).ConfigureAwait(false);
             }
         }

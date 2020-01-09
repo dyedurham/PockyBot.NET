@@ -94,6 +94,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         {
             _result.ShouldNotBeNull();
             _result.Text.ShouldBe(expectedResponse.Text);
+            _result.RoomId.ShouldBe(expectedResponse.RoomId);
         }
     }
 }
