@@ -88,6 +88,20 @@ public IServiceProvider ConfigureServices(IServiceCollection services)
 }
 ```
 
+You will also need to provide an implementation of `IResultsUploader` to upload
+the generated results to a location such as Google Cloud and return the link
+where those results are accessible.
+
+```cs
+using PockyBot.NET;
+
+public IServiceProvider ConfigureServices(IServiceCollection services)
+{
+    // other service registrations
+    services.AddTransient<IResultsUploader, MyResultsUploader>();
+}
+```
+
 #### Without Dependency Injection
 
 You can get a concrete implementation of the library by calling the
@@ -101,6 +115,7 @@ using PockyBot.NET.Configuration;
 // Some code here
 
 IChatHelper chatHelper; // An implementation of GlobalX.ChatBots.Core.IChatHelper
+IResultsUploader resultsUploader; // An implementation of PockyBot.NET.IResultsUploader
 
 var settings = new PockyBotSettings
 {
@@ -109,7 +124,7 @@ var settings = new PockyBotSettings
     DatabaseConnectionString = "Host=postgres.host.com;Port=5432;Username=user;Password=pass;Database=pockybot;"
 };
 
-IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper);
+IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper, resultsUploader);
 ```
 
 ### Using The Bot
@@ -165,6 +180,7 @@ commands.
 - `@PockyBot ping` — verify that the bot is alive.
 - `@PockyBot peg @Person <reason>` — give someone a peg.
 - `@PockyBot status` — get the list of pegs you have given.
+- `@PockyBot finish` — get the results of the cycle.
 
 #### Direct Message Commands
 
