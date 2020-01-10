@@ -124,7 +124,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 new Message
                 {
-                    Text = "You have 3 pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2 — \"_This is a comment_\"\n* **Test User 3 — \"_This is another comment_\"",
+                    Text = "You have 3 pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2** — \"_This is a comment_\"\n* **Test User 3** — \"_This is another comment_\"",
                     RoomId = "testUserId"
                 }
             };
@@ -171,7 +171,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 new Message
                 {
-                    Text = "You have 5 pegs left to give.\n\nHere are the penalties you have received:\n* **Test User 4 — \"_Shame shame_\"\n* **Test User 5 — \"_More shame_\"",
+                    Text = "You have 5 pegs left to give.\n\nHere are the penalties you have received:\n* **Test User 4** — \"_Shame shame_\"\n* **Test User 5** — \"_More shame_\"",
                     RoomId = "testUserId"
                 }
             };
@@ -222,7 +222,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 new Message
                 {
-                    Text = "You have 3 pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2 — \"_This is a comment_\"\n* **Test User 3 — \"_This is another comment_\"\n\nHere are the penalties you have received:\n* **Test User 4 — \"_Shame shame_\"\n* **Test User 5 — \"_More shame_\"",
+                    Text = "You have 3 pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2** — \"_This is a comment_\"\n* **Test User 3** — \"_This is another comment_\"\n\nHere are the penalties you have received:\n* **Test User 4** — \"_Shame shame_\"\n* **Test User 5** — \"_More shame_\"",
                     RoomId = "testUserId"
                 }
             };
@@ -314,7 +314,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 new Message
                 {
-                    Text = "You have unlimited pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2 — \"_This is a comment_\"\n* **Test User 3 — \"_This is another comment_\"",
+                    Text = "You have unlimited pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2** — \"_This is a comment_\"\n* **Test User 3** — \"_This is another comment_\"",
                     RoomId = "testUserId"
                 }
             };
@@ -364,7 +364,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 new Message
                 {
-                    Text = "You have unlimited pegs left to give.\n\nHere are the penalties you have received:\n* **Test User 4 — \"_Shame shame_\"\n* **Test User 5 — \"_More shame_\"",
+                    Text = "You have unlimited pegs left to give.\n\nHere are the penalties you have received:\n* **Test User 4** — \"_Shame shame_\"\n* **Test User 5** — \"_More shame_\"",
                     RoomId = "testUserId"
                 }
             };
@@ -418,7 +418,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 new Message
                 {
-                    Text = "You have unlimited pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2 — \"_This is a comment_\"\n* **Test User 3 — \"_This is another comment_\"\n\nHere are the penalties you have received:\n* **Test User 4 — \"_Shame shame_\"\n* **Test User 5 — \"_More shame_\"",
+                    Text = "You have unlimited pegs left to give.\n\nHere are the pegs you've given so far:\n* **Test User 2** — \"_This is a comment_\"\n* **Test User 3** — \"_This is another comment_\"\n\nHere are the penalties you have received:\n* **Test User 4** — \"_Shame shame_\"\n* **Test User 5** — \"_More shame_\"",
                     RoomId = "testUserId"
                 }
             };
