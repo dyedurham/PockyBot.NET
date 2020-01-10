@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Models;
 
@@ -14,21 +15,21 @@ namespace PockyBot.NET.Services
             _messageHandler = messageHandler;
         }
 
-        public void SendDirectMessages(List<PegRecipient> recipients)
+        public async Task SendDirectMessagesAsync(List<PegRecipient> recipients)
         {
             foreach (var recipient in recipients)
             {
-                SendDirectMessage(recipient);
+                await SendDirectMessageAsync(recipient);
             }
         }
 
-        private void SendDirectMessage(PegRecipient recipient)
+        private async Task SendDirectMessageAsync(PegRecipient recipient)
         {
             var message =
                 $"You have received {recipient.PegCount} pegs and {recipient.PenaltyCount} penalties this cycle, for a total of {recipient.TotalPoints} points:\n\n";
             message += string.Join("\n", recipient.Pegs.Select(FormatPeg));
 
-            _messageHandler.SendMessageAsync(new Message
+            await _messageHandler.SendMessageAsync(new Message
             {
                 Text = message,
                 RoomId = recipient.UserId

@@ -74,7 +74,7 @@ namespace PockyBot.NET.Services.Triggers
             var html = parsedTemplate.Render(new { model = results });
 
             var uri = await _resultsUploader.UploadResults(html);
-            _directResultsMessageSender.SendDirectMessages(mappedUsers);
+            await _directResultsMessageSender.SendDirectMessagesAsync(mappedUsers);
 
             return new Message
             {

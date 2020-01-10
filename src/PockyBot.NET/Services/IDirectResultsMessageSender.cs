@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using PockyBot.NET.Models;
 
 namespace PockyBot.NET.Services
 {
     internal interface IDirectResultsMessageSender
     {
-        void SendDirectMessages(List<PegRecipient> recipients);
+        Task SendDirectMessagesAsync(List<PegRecipient> recipients);
     }
 }
