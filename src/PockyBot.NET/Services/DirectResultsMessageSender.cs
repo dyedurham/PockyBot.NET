@@ -25,8 +25,11 @@ namespace PockyBot.NET.Services
 
         private async Task SendDirectMessageAsync(PegRecipient recipient)
         {
+            var pegsPlural = recipient.PegCount == 1 ? string.Empty : "s";
+            var penaltiesPlural = recipient.PenaltyCount == 1 ? "y" : "ies";
+            var pointsPlural = recipient.TotalPoints == 1 ? string.Empty : "s";
             var message =
-                $"You have received {recipient.PegCount} pegs and {recipient.PenaltyCount} penalties this cycle, for a total of {recipient.TotalPoints} points:\n\n";
+                $"You have received {recipient.PegCount} peg{pegsPlural} and {recipient.PenaltyCount} penalt{penaltiesPlural} this cycle, for a total of {recipient.TotalPoints} point{pointsPlural}:\n\n";
             message += string.Join("\n", recipient.Pegs.Select(FormatPeg));
 
             await _messageHandler.SendMessageAsync(new Message
@@ -38,8 +41,9 @@ namespace PockyBot.NET.Services
 
         private static string FormatPeg(PegDetails peg)
         {
-            var location = peg.SenderLocation != null ? peg.SenderLocation : "No Location";
-            return $"* **{peg.SenderName}** ({location}, {peg.Weight} point(s)) — \"_{peg.Comment}_\"";
+            var location = peg.SenderLocation ?? "No Location";
+            var pointsPlural = peg.Weight == 1 ? string.Empty : "s";
+            return $"* **{peg.SenderName}** ({location}, {peg.Weight} point{pointsPlural}) — \"_{peg.Comment}_\"";
         }
     }
 }

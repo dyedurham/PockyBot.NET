@@ -5,6 +5,7 @@ using NSubstitute;
 using PockyBot.NET.Models;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
+using PockyBot.NET.Services;
 using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Services.Triggers;
 using PockyBot.NET.Tests.TestData.Triggers;
@@ -21,6 +22,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IPegResultsHelper _pegResultsHelper;
         private readonly IResultsUploader _resultsUploader;
+        private readonly IDirectResultsMessageSender _directResultsMessageSender;
 
         private Message _message;
         private Message _result;
@@ -30,7 +32,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
             _resultsUploader = Substitute.For<IResultsUploader>();
             _pegResultsHelper = Substitute.For<IPegResultsHelper>();
-            _subject = new Finish(_pockyUserRepository, _pegResultsHelper, _resultsUploader);
+            _directResultsMessageSender = Substitute.For<IDirectResultsMessageSender>();
+            _subject = new Finish(_pockyUserRepository, _pegResultsHelper, _resultsUploader, _directResultsMessageSender);
         }
 
         [Theory]
@@ -46,7 +49,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 .And(x => GivenUploadedResultsLocation(uploadLocation))
                 .When(x => WhenRespondingToAMessage())
                 .Then(x => ThenItShouldReturnAResponse(response))
-                .And(x => ThenItShouldPmAllUsers())
+                .And(x => ThenItShouldPmAllUsers(mappedUsers))
                 .BDDfy();
         }
 
@@ -91,9 +94,9 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldBe(response.Text);
         }
 
-        private void ThenItShouldPmAllUsers()
+        private void ThenItShouldPmAllUsers(List<PegRecipient> mappedUsers)
         {
-            // TODO
+            _directResultsMessageSender.Received(1).SendDirectMessagesAsync(mappedUsers);
         }
     }
 }
