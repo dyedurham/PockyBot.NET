@@ -17,6 +17,7 @@ namespace PockyBot.NET.Services.Triggers
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IPegResultsHelper _pegResultsHelper;
         private readonly IResultsUploader _resultsUploader;
+        private readonly IDirectResultsMessageSender _directResultsMessageSender;
 
         public string Command => Commands.Finish;
 
@@ -26,11 +27,12 @@ namespace PockyBot.NET.Services.Triggers
 
         public string[] Permissions => new[] {Roles.Admin, Roles.Finish};
 
-        public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper, IResultsUploader resultsUploader)
+        public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper, IResultsUploader resultsUploader, IDirectResultsMessageSender directResultsMessageSender)
         {
             _pockyUserRepository = pockyUserRepository;
             _pegResultsHelper = pegResultsHelper;
             _resultsUploader = resultsUploader;
+            _directResultsMessageSender = directResultsMessageSender;
         }
 
         public async Task<Message> Respond(Message message)
@@ -69,9 +71,10 @@ namespace PockyBot.NET.Services.Triggers
             }
 
             var parsedTemplate = Template.Parse(template);
-            var html = parsedTemplate.Render(new {model = results });
+            var html = parsedTemplate.Render(new { model = results });
 
             var uri = await _resultsUploader.UploadResults(html);
+            _directResultsMessageSender.SendDirectMessages(mappedUsers);
 
             return new Message
             {

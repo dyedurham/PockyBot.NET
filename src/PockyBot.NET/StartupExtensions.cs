@@ -34,6 +34,7 @@ namespace PockyBot.NET
             services.AddTransient<IPegGiver, PegGiver>();
             services.AddTransient<IPockyBot, PockyBot>();
             services.AddTransient<IPegResultsHelper, PegResultsHelper>();
+            services.AddTransient<IDirectResultsMessageSender, DirectResultsMessageSender>();
             services.AddTransient<ITrigger, Ping>();
             services.AddTransient<ITrigger, Peg>();
             services.AddTransient<ITrigger, Status>();
