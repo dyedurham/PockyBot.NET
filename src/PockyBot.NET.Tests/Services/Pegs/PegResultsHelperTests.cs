@@ -134,7 +134,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
             }
         }
 
-        private void ComparePegRecipients(List<PegRecipient> actual, List<PegRecipient> expected)
+        private static void ComparePegRecipients(List<PegRecipient> actual, List<PegRecipient> expected)
         {
             actual.ShouldNotBeNull();
             actual.Count.ShouldBe(expected.Count);

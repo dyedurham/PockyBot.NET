@@ -19,7 +19,7 @@ namespace PockyBot.NET.Services
         {
             foreach (var recipient in recipients)
             {
-                await SendDirectMessageAsync(recipient);
+                await SendDirectMessageAsync(recipient).ConfigureAwait(false);
             }
         }
 

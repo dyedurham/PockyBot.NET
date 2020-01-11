@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using PockyBot.NET.Persistence.Repositories;
 
@@ -32,8 +33,8 @@ namespace PockyBot.NET.Services.Pegs
                 return 1;
             }
 
-            var senderToReceiver = $"locationWeight{senderLocation}to{receiverLocation}".ToLower();
-            var receiverToSender = $"locationWeight{receiverLocation}to{senderLocation}".ToLower();
+            var senderToReceiver = $"locationWeight{senderLocation}to{receiverLocation}".ToLower(CultureInfo.InvariantCulture);
+            var receiverToSender = $"locationWeight{receiverLocation}to{senderLocation}".ToLower(CultureInfo.InvariantCulture);
             var config = _configRepository.GetAllGeneralConfig()
                 .FirstOrDefault(x => x.Name.ToLower() == senderToReceiver || x.Name.ToLower() == receiverToSender);
 

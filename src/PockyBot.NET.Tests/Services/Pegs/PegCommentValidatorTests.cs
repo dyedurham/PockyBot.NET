@@ -12,8 +12,6 @@ namespace PockyBot.NET.Tests.Services.Pegs
     {
         private readonly PegHelper _subject;
 
-        private IConfigRepository _configRepository;
-
         private string _comment;
         private int? _requireKeywords;
         private string[] _keywords;
@@ -23,8 +21,8 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         public PegCommentValidatorTests()
         {
-            _configRepository = Substitute.For<IConfigRepository>();
-            _subject = new PegHelper(_configRepository);
+            var configRepository = Substitute.For<IConfigRepository>();
+            _subject = new PegHelper(configRepository);
         }
 
         [Theory]

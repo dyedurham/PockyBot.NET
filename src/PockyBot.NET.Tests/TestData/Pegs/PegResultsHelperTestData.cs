@@ -41,9 +41,9 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                                 }
                             }
                         },
-                        PegsGiven = new List<Peg>()
+                        PegsGiven = new List<Peg>
                         {
-                            new Peg()
+                            new Peg
                             {
                                 Comment = "This is a shame peg penaltyKeyword",
                                 Receiver = new PockyUser

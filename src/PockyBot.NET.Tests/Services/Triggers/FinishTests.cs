@@ -83,7 +83,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _resultsUploader.UploadResults(Arg.Any<string>()).Returns(Task.FromResult(uploadLocation));
         }
 
-        private async void WhenRespondingToAMessage()
+        private async Task WhenRespondingToAMessage()
         {
             _result = await _subject.Respond(_message);
         }

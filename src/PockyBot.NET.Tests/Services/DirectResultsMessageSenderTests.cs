@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using NSubstitute;
 using PockyBot.NET.Models;
@@ -38,7 +39,7 @@ namespace PockyBot.NET.Tests.Services
             _pegRecipients = pegRecipients;
         }
 
-        private async void WhenSendingDirectMessages()
+        private async Task WhenSendingDirectMessages()
         {
             await _subject.SendDirectMessagesAsync(_pegRecipients);
         }

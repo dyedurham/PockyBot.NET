@@ -52,7 +52,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         },
                         PegsGiven = new List<Peg>()
                         {
-                            new Peg()
+                            new Peg
                             {
                                 Comment = "This is a shame peg penaltyKeyword",
                                 Receiver = new PockyUser
@@ -70,7 +70,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         Roles = new List<Role>(),
                         Location = new UserLocation { Location = "Location1" },
                         PegsReceived = new List<Peg>(),
-                        PegsGiven = new List<Peg>()
+                        PegsGiven = new List<Peg>
                         {
                             new Peg
                             {
