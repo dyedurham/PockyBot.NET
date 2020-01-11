@@ -129,7 +129,8 @@ IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper, result
 
 ### Using The Bot
 
-Once you have an instance of IPockyBot, you can use it to respond to a message like so:
+Once you have an instance of IPockyBot, you can use it to respond to a message
+like so:
 
 ```cs
 using GlobalX.ChatBots.Core;
@@ -151,7 +152,7 @@ Table `generalconfig` is initalised with default values as follows:
 | Value             | Default | Explanation                                                                                                                         |
 | :---------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------- |
 | limit             | 10      | The number of pegs each user is allowed to give out each cycle                                                                      |
-| minimum           | 5       | The minimum number of pegs each user is _required_ to give out to be eligible to win                                                |
+| minimum           | 5       | The minimum number of pegs each user is *required* to give out to be eligible to win                                                |
 | winners           | 3       | The number of winners displayed (using a dense ranking)                                                                             |
 | commentsRequired  | 1       | Boolean value of whether a reason is required to give a peg                                                                         |
 | pegWithoutKeyword | 0       | Boolean value of whether the "peg" keyword is required to give a peg (if true, pegs can be given with `@PockyBot @Person <reason>`) |
@@ -159,12 +160,15 @@ Table `generalconfig` is initalised with default values as follows:
 
 Table `stringconfig` is used to define keywords.
 Name field is 'keyword' and 'value' is the value of the keyword desired.
-Default keywords are 'customer', 'brave', 'awesome', 'collaborative', and 'real', shorthands for the GlobalX company values.
+Default keywords are 'customer', 'brave', 'awesome', 'collaborative', and
+'real', shorthands for the GlobalX company values.
 
-Existing roles are 'ADMIN', 'UNMETERED', 'RESULTS', 'FINISH', 'RESET', 'UPDATE', and 'WINNERS'.
-Users can have more than one role. Any users with the 'ADMIN' role are considered to have all other roles except for 'UNMETERED'.
-'UNMETERED' users are not restricted by the usual 'limit' value from `generalconfig`.
-All other roles relate to the commands of the same name displayed below.
+Existing roles are 'ADMIN', 'UNMETERED', 'RESULTS', 'FINISH', 'RESET',
+'UPDATE', and 'WINNERS'. Users can have more than one role. Any users with the
+'ADMIN' role are considered to have all other roles except for 'UNMETERED'.
+'UNMETERED' users are not restricted by the usual 'limit' value from
+`generalconfig`. All other roles relate to the commands of the same name
+displayed below.
 
 ## Commands
 

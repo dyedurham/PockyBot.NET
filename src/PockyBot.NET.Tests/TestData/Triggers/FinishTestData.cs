@@ -50,7 +50,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                                 }
                             }
                         },
-                        PegsGiven = new List<Peg>()
+                        PegsGiven = new List<Peg>
                         {
                             new Peg
                             {
