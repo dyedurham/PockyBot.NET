@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
@@ -17,6 +18,11 @@ namespace PockyBot.NET.Persistence.Repositories
             var added = _context.Add(peg);
             await  _context.SaveChangesAsync().ConfigureAwait(false);
             return added.Entity;
+        }
+
+        public async Task ClearPegs()
+        {
+            await _context.Database.ExecuteSqlCommandAsync("DELETE FROM pegs;");
         }
     }
 }

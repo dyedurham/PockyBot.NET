@@ -33,6 +33,7 @@ namespace PockyBot.NET
                 new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver),
                 new Status(pockyUserRepository, configRepository, pegHelper),
                 new Finish(pockyUserRepository, pegResultsHelper, resultsUploader, directResultsMessageSender),
+                new Reset(pegRepository),
                 new Default(wrappedSettings)
             };
 
