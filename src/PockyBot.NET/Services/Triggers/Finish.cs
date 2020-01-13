@@ -62,13 +62,7 @@ namespace PockyBot.NET.Services.Triggers
                 Penalties = penalties
             };
 
-            var assembly = typeof(Finish).GetTypeInfo().Assembly;
-            string template;
-            using (Stream resource = assembly.GetManifestResourceStream("PockyBot.NET.Resources.results.html"))
-            using (StreamReader reader = new StreamReader(resource))
-            {
-                template = reader.ReadToEnd();
-            }
+            var template = GetTemplate();
 
             var parsedTemplate = Template.Parse(template);
             var html = parsedTemplate.Render(new { model = results });
@@ -80,6 +74,16 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = $"[Here are all pegs given this cycle]({uri})"
             };
+        }
+
+        private string GetTemplate()
+        {
+            var assembly = typeof(Finish).GetTypeInfo().Assembly;
+            using (Stream resource = assembly.GetManifestResourceStream("PockyBot.NET.Resources.results.html"))
+            using (StreamReader reader = new StreamReader(resource))
+            {
+                return reader.ReadToEnd();
+            }
         }
     }
 }
