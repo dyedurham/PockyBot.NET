@@ -118,7 +118,7 @@ namespace PockyBot.NET.Services.Pegs
                 .ToList();
         }
 
-        private List<PegRecipient> MapRecipientsToCategoryRecipients(List<PegRecipient> allRecipients, string keyword)
+        private static List<PegRecipient> MapRecipientsToCategoryRecipients(List<PegRecipient> allRecipients, string keyword)
         {
             return allRecipients.Select(recipient =>
                 {

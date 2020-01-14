@@ -76,7 +76,7 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
-        private string GetTemplate()
+        private static string GetTemplate()
         {
             var assembly = typeof(Finish).GetTypeInfo().Assembly;
             using (Stream resource = assembly.GetManifestResourceStream("PockyBot.NET.Resources.results.html"))
