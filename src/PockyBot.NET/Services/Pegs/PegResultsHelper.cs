@@ -26,29 +26,10 @@ namespace PockyBot.NET.Services.Pegs
             return users.Select(x =>
             {
                 var receiverLocation = x.Location?.Location;
-                var validPegs = x.PegsReceived
-                    .Where(y => _pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
-                    .Select(y => new PegDetails
-                    {
-                        SenderName = y.Sender.Username,
-                        Weight = _pegHelper.GetPegWeighting(y.Sender.Location?.Location, receiverLocation),
-                        Comment = y.Comment,
-                        Keywords = keywords.Where(z => y.Comment.Contains(z)).ToList(),
-                        SenderLocation = y.Sender.Location?.Location
-                    })
-                    .ToList();
-                var penaltyPegs = x.PegsGiven
-                    .Where(y => !_pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
-                    .Select(y => new PegDetails
-                    {
-                        SenderName = y.Receiver.Username,
-                        Weight = 1,
-                        Comment = y.Comment,
-                        Keywords = penaltyKeywords.Where(z => y.Comment.Contains(z)).ToList(),
-                        SenderLocation = y.Receiver.Location?.Location
-                    })
-                    .ToList();
-
+                var validPegs = GetValidPegs(x.PegsReceived, requireKeywords, keywords, penaltyKeywords,
+                    receiverLocation);
+                var penaltyPegs = GetPenaltyPegs(x.PegsGiven, requireKeywords, keywords, penaltyKeywords);
+                    
                 return new PegRecipient
                 {
                     Name = x.Username,
@@ -85,26 +66,7 @@ namespace PockyBot.NET.Services.Pegs
             var keywords = _configRepository.GetStringConfig("keyword").ToArray();
             return keywords.Select(x =>
             {
-                var categoryRecipients = allRecipients.Select(y =>
-                {
-                    var pegs = y.Pegs.Where(z => z.Keywords.Contains(x)).ToList();
-
-                    return new PegRecipient
-                    {
-                        Name = y.Name,
-                        UserId = y.UserId,
-                        Location = y.Location,
-                        TotalPoints = pegs.Count,
-                        PegCount = pegs.Count,
-                        PenaltyCount = 0,
-                        PegsGivenCount = y.PegsGivenCount,
-                        Pegs = pegs,
-                        Penalties = y.Penalties
-                    };
-                })
-                    .Where(y => y.TotalPoints > 0)
-                    .OrderByDescending(y => y.TotalPoints)
-                    .ToList();
+                var categoryRecipients = MapRecipientsToCategoryRecipients(allRecipients, x);
 
                 if (categoryRecipients.Count == 0)
                 {
@@ -124,6 +86,60 @@ namespace PockyBot.NET.Services.Pegs
                     Recipients = topRecipients
                 };
             }).ToList();
+        }
+
+        private List<PegDetails> GetValidPegs(List<Peg> pegs, int? requireKeywords, string[] keywords,
+            string[] penaltyKeywords, string receiverLocation)
+        {
+            return pegs.Where(y => _pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
+                .Select(y => new PegDetails
+                {
+                    SenderName = y.Sender.Username,
+                    Weight = _pegHelper.GetPegWeighting(y.Sender.Location?.Location, receiverLocation),
+                    Comment = y.Comment,
+                    Keywords = keywords.Where(z => y.Comment.Contains(z)).ToList(),
+                    SenderLocation = y.Sender.Location?.Location
+                })
+                .ToList();
+        }
+
+        private List<PegDetails> GetPenaltyPegs(List<Peg> pegs, int? requireKeywords, string[] keywords,
+            string[] penaltyKeywords)
+        {
+            return pegs.Where(y => !_pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
+                .Select(y => new PegDetails
+                {
+                    SenderName = y.Receiver.Username,
+                    Weight = 1,
+                    Comment = y.Comment,
+                    Keywords = penaltyKeywords.Where(z => y.Comment.Contains(z)).ToList(),
+                    SenderLocation = y.Receiver.Location?.Location
+                })
+                .ToList();
+        }
+
+        private List<PegRecipient> MapRecipientsToCategoryRecipients(List<PegRecipient> allRecipients, string keyword)
+        {
+            return allRecipients.Select(recipient =>
+                {
+                    var pegs = recipient.Pegs.Where(z => z.Keywords.Contains(keyword)).ToList();
+
+                    return new PegRecipient
+                    {
+                        Name = recipient.Name,
+                        UserId = recipient.UserId,
+                        Location = recipient.Location,
+                        TotalPoints = pegs.Count,
+                        PegCount = pegs.Count,
+                        PenaltyCount = 0,
+                        PegsGivenCount = recipient.PegsGivenCount,
+                        Pegs = pegs,
+                        Penalties = recipient.Penalties
+                    };
+                })
+                .Where(x => x.TotalPoints > 0)
+                .OrderByDescending(x => x.TotalPoints)
+                .ToList();
         }
     }
 }
