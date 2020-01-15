@@ -42,7 +42,7 @@ namespace PockyBot.NET.Persistence.Repositories
 
         public List<PockyUser> GetAllUsersWithPegs()
         {
-            return _context.PockyUsers.Where(x => x.PegsGiven.Count > 0 || x.PegsReceived.Count > 0).ToList();
+            return _context.PockyUsers.Where(x => x.PegsGiven.Any() || x.PegsReceived.Any()).ToList();
         }
     }
 }
