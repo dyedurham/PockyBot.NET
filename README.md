@@ -185,6 +185,7 @@ commands.
 - `@PockyBot peg @Person <reason>` — give someone a peg.
 - `@PockyBot status` — get the list of pegs you have given.
 - `@PockyBot finish` — get the results of the cycle.
+- `@PockyBot reset` — clear all pegs from the last cycle.
 
 #### Direct Message Commands
 
