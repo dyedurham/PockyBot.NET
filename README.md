@@ -16,6 +16,9 @@
     <a href="https://codecov.io/gh/GlobalX/PockyBot.NET">
         <img src="https://flat.badgen.net/codecov/c/github/globalx/pockybot.net" alt="PockyBot.NET on Codecov" />
     </a>
+    <a href="https://lgtm.com/projects/g/GlobalX/PockyBot.NET/alerts/">
+        <img alt="Total alerts on LGTM" src="https://img.shields.io/lgtm/alerts/g/GlobalX/PockyBot.NET.svg?logo=lgtm&logoWidth=18"/>
+    </a>
     <img src="https://flat.badgen.net/github/commits/globalx/pockybot.net" alt="commits" />
     <img src="https://flat.badgen.net/github/contributors/globalx/pockybot.net" alt="contributors" />
     <img src="https://flat.badgen.net/badge/commitizen/friendly/green" alt="commitizen friendly" />
@@ -85,6 +88,20 @@ public IServiceProvider ConfigureServices(IServiceCollection services)
 }
 ```
 
+You will also need to provide an implementation of `IResultsUploader` to upload
+the generated results to a location such as Google Cloud and return the link
+where those results are accessible.
+
+```cs
+using PockyBot.NET;
+
+public IServiceProvider ConfigureServices(IServiceCollection services)
+{
+    // other service registrations
+    services.AddTransient<IResultsUploader, MyResultsUploader>();
+}
+```
+
 #### Without Dependency Injection
 
 You can get a concrete implementation of the library by calling the
@@ -98,6 +115,7 @@ using PockyBot.NET.Configuration;
 // Some code here
 
 IChatHelper chatHelper; // An implementation of GlobalX.ChatBots.Core.IChatHelper
+IResultsUploader resultsUploader; // An implementation of PockyBot.NET.IResultsUploader
 
 var settings = new PockyBotSettings
 {
@@ -106,12 +124,13 @@ var settings = new PockyBotSettings
     DatabaseConnectionString = "Host=postgres.host.com;Port=5432;Username=user;Password=pass;Database=pockybot;"
 };
 
-IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper);
+IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper, resultsUploader);
 ```
 
 ### Using The Bot
 
-Once you have an instance of IPockyBot, you can use it to respond to a message like so:
+Once you have an instance of IPockyBot, you can use it to respond to a message
+like so:
 
 ```cs
 using GlobalX.ChatBots.Core;
@@ -133,7 +152,7 @@ Table `generalconfig` is initalised with default values as follows:
 | Value             | Default | Explanation                                                                                                                         |
 | :---------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------- |
 | limit             | 10      | The number of pegs each user is allowed to give out each cycle                                                                      |
-| minimum           | 5       | The minimum number of pegs each user is _required_ to give out to be eligible to win                                                |
+| minimum           | 5       | The minimum number of pegs each user is *required* to give out to be eligible to win                                                |
 | winners           | 3       | The number of winners displayed (using a dense ranking)                                                                             |
 | commentsRequired  | 1       | Boolean value of whether a reason is required to give a peg                                                                         |
 | pegWithoutKeyword | 0       | Boolean value of whether the "peg" keyword is required to give a peg (if true, pegs can be given with `@PockyBot @Person <reason>`) |
@@ -141,12 +160,15 @@ Table `generalconfig` is initalised with default values as follows:
 
 Table `stringconfig` is used to define keywords.
 Name field is 'keyword' and 'value' is the value of the keyword desired.
-Default keywords are 'customer', 'brave', 'awesome', 'collaborative', and 'real', shorthands for the GlobalX company values.
+Default keywords are 'customer', 'brave', 'awesome', 'collaborative', and
+'real', shorthands for the GlobalX company values.
 
-Existing roles are 'ADMIN', 'UNMETERED', 'RESULTS', 'FINISH', 'RESET', 'UPDATE', and 'WINNERS'.
-Users can have more than one role. Any users with the 'ADMIN' role are considered to have all other roles except for 'UNMETERED'.
-'UNMETERED' users are not restricted by the usual 'limit' value from `generalconfig`.
-All other roles relate to the commands of the same name displayed below.
+Existing roles are 'ADMIN', 'UNMETERED', 'RESULTS', 'FINISH', 'RESET',
+'UPDATE', and 'WINNERS'. Users can have more than one role. Any users with the
+'ADMIN' role are considered to have all other roles except for 'UNMETERED'.
+'UNMETERED' users are not restricted by the usual 'limit' value from
+`generalconfig`. All other roles relate to the commands of the same name
+displayed below.
 
 ## Commands
 
@@ -162,6 +184,7 @@ commands.
 - `@PockyBot ping` — verify that the bot is alive.
 - `@PockyBot peg @Person <reason>` — give someone a peg.
 - `@PockyBot status` — get the list of pegs you have given.
+- `@PockyBot finish` — get the results of the cycle.
 
 #### Direct Message Commands
 

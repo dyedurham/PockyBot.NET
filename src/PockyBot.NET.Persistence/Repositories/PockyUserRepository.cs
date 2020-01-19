@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using PockyBot.NET.Persistence.Models;
 
@@ -37,6 +38,11 @@ namespace PockyBot.NET.Persistence.Repositories
             _context.SaveChanges();
 
             return newPockyUser;
+        }
+
+        public List<PockyUser> GetAllUsersWithPegs()
+        {
+            return _context.PockyUsers.Where(x => x.PegsGiven.Any() || x.PegsReceived.Any()).ToList();
         }
     }
 }

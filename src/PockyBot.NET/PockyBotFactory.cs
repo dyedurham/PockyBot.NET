@@ -12,24 +12,27 @@ namespace PockyBot.NET
 {
     public static class PockyBotFactory
     {
-        public static IPockyBot CreatePockyBot(PockyBotSettings settings, IChatHelper chatHelper)
+        public static IPockyBot CreatePockyBot(PockyBotSettings settings, IChatHelper chatHelper, IResultsUploader resultsUploader)
         {
             var wrappedSettings = new OptionsWrapper<PockyBotSettings>(settings);
             var dbContext = DatabaseContextBuilder.BuildDatabaseContext(settings.DatabaseConnectionString);
             var pockyUserRepository = new PockyUserRepository(dbContext);
             var configRepository = new ConfigRepository(dbContext);
             var pegRepository = new PegRepository(dbContext);
-            
+
             var triggerResponseTester = new TriggerResponseTester(wrappedSettings, pockyUserRepository);
             var pegRequestValidator = new PegRequestValidator(wrappedSettings, configRepository);
-            var pegCommentValidator = new PegCommentValidator();
+            var pegHelper = new PegHelper(configRepository);
             var pegGiver = new PegGiver(pegRepository, chatHelper);
+            var directResultsMessageSender = new DirectResultsMessageSender(chatHelper.Messages);
+            var pegResultsHelper = new PegResultsHelper(configRepository, pegHelper);
 
             List<ITrigger> triggers = new List<ITrigger>
             {
                 new Ping(),
-                new Peg(pegRequestValidator, pockyUserRepository, pegCommentValidator, configRepository, chatHelper, pegGiver),
-                new Status(pockyUserRepository, configRepository, pegCommentValidator),
+                new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver),
+                new Status(pockyUserRepository, configRepository, pegHelper),
+                new Finish(pockyUserRepository, pegResultsHelper, resultsUploader, directResultsMessageSender),
                 new Default(wrappedSettings)
             };
 

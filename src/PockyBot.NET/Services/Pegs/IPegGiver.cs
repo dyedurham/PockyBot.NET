@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Services.Pegs

@@ -21,7 +21,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private readonly IPegRequestValidator _pegRequestValidator;
         private readonly IPockyUserRepository _pockyUserRepository;
-        private readonly IPegCommentValidator _pegCommentValidator;
+        private readonly IPegHelper _pegHelper;
         private readonly IConfigRepository _configRepository;
         private readonly IChatHelper _chatHelper;
         private readonly IPegGiver _pegGiver;
@@ -33,12 +33,12 @@ namespace PockyBot.NET.Tests.Services.Triggers
         {
             _pegRequestValidator = Substitute.For<IPegRequestValidator>();
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _pegCommentValidator = Substitute.For<IPegCommentValidator>();
+            _pegHelper = Substitute.For<IPegHelper>();
             _configRepository = Substitute.For<IConfigRepository>();
             _chatHelper = Substitute.For<IChatHelper>();
             _chatHelper.People.Returns(Substitute.For<IPersonHandler>());
             _pegGiver = Substitute.For<IPegGiver>();
-            _subject = new NET.Services.Triggers.Peg(_pegRequestValidator, _pockyUserRepository, _pegCommentValidator,
+            _subject = new NET.Services.Triggers.Peg(_pegRequestValidator, _pockyUserRepository, _pegHelper,
                 _configRepository, _chatHelper, _pegGiver);
         }
 
@@ -95,9 +95,9 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void GivenPegValidity(string comment, bool isPegValid)
         {
-            _pegCommentValidator.IsPegValid(comment, Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>())
+            _pegHelper.IsPegValid(comment, Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>())
                 .Returns(isPegValid);
-            _pegCommentValidator
+            _pegHelper
                 .IsPegValid(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>())
                 .Returns(isPegValid);
         }

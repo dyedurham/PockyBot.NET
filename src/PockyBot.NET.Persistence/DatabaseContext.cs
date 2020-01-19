@@ -25,5 +25,7 @@ namespace PockyBot.NET.Persistence
         public DbSet<Peg> Pegs { get; set; }
         public DbSet<GeneralConfig> GeneralConfig { get; set; }
         public DbSet<StringConfig> StringConfig { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<UserLocation> UserLocations { get; set; }
     }
 }
