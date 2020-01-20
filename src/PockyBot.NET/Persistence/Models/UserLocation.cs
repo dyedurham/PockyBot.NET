@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PockyBot.NET.Persistence.Models
 {
     [Table("user_locations")]
-    public class UserLocation
+    internal class UserLocation
     {
         [Key]
         [Column("userid")]

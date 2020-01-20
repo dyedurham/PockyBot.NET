@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PockyBot.NET.Persistence.Models
 {
     [Table("pegs")]
-    public class Peg
+    internal class Peg
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

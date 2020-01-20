@@ -5,7 +5,7 @@ using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
 {
-    public class ConfigRepository : IConfigRepository
+    internal class ConfigRepository : IConfigRepository
     {
         private readonly DatabaseContext _context;
 

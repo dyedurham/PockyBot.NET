@@ -4,7 +4,7 @@ using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
 {
-    public class PegRepository : IPegRepository
+    internal class PegRepository : IPegRepository
     {
         private readonly DatabaseContext _context;
 

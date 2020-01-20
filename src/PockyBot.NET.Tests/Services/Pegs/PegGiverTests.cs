@@ -33,7 +33,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         [Theory]
         [MemberData(nameof(PegGiverTestData.ValidTestData), MemberType = typeof(PegGiverTestData))]
-        public void TestGivePeg(string comment, PockyUser sender, PockyUser receiver, int numPegsGiven,
+        internal void TestGivePeg(string comment, PockyUser sender, PockyUser receiver, int numPegsGiven,
             Peg peg, Message senderPm, Message receiverPm)
         {
             this.Given(x => GivenAComment(comment))
