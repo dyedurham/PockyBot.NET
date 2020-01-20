@@ -3,7 +3,7 @@ using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
 {
-    public interface IConfigRepository
+    internal interface IConfigRepository
     {
         IList<GeneralConfig> GetAllGeneralConfig();
         int? GetGeneralConfig(string name);

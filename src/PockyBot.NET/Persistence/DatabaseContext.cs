@@ -3,7 +3,7 @@ using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence
 {
-    public class DatabaseContext : DbContext
+    internal class DatabaseContext : DbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 

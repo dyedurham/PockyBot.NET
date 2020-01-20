@@ -7,7 +7,7 @@ using System.Linq;
 namespace PockyBot.NET.Persistence.Models
 {
     [Table("pockyusers")]
-    public class PockyUser
+    internal class PockyUser
     {
         [Key]
         [Column("userid")]

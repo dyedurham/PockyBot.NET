@@ -4,7 +4,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Persistence
 {
-    public static class Extensions
+    internal static class PersistenceStartupExtensions
     {
         public static IServiceCollection ConfigurePersistenceServices(this IServiceCollection services, string databaseConnectionString)
         {

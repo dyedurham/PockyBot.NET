@@ -44,7 +44,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         [Theory]
         [MemberData(nameof(PegTestData.RespondTestData), MemberType = typeof(PegTestData))]
-        public void TestRespond(Message message, string errorMessage, PockyUser senderUser,
+        internal void TestRespond(Message message, string errorMessage, PockyUser senderUser,
             PockyUser receiverUser, int limit, string comment, bool isPegValid, Person receiverChatUser,
             Message response, bool givePeg)
         {

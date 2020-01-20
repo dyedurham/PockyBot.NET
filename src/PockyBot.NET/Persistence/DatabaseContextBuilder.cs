@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PockyBot.NET.Persistence
 {
-    public static class DatabaseContextBuilder
+    internal static class DatabaseContextBuilder
     {
         public static DatabaseContext BuildDatabaseContext(string databaseConnectionString)
         {

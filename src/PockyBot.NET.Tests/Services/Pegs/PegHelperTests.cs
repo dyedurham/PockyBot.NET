@@ -49,7 +49,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         [Theory]
         [MemberData(nameof(PegHelperTestData.GetPegWeightingTestData), MemberType = typeof(PegHelperTestData))]
-        public void GetPegWeightingTest(string senderLocation, string receiverLocation, List<GeneralConfig> allGeneralConfig, int? defaultRemoteLocationWeighting, int pegWeighting)
+        internal void GetPegWeightingTest(string senderLocation, string receiverLocation, List<GeneralConfig> allGeneralConfig, int? defaultRemoteLocationWeighting, int pegWeighting)
         {
             this.Given(x => GivenASenderLocation(senderLocation))
                 .And(x => GivenAReceiverLocation(receiverLocation))

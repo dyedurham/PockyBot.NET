@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PockyBot.NET.Persistence.Models
 {
     [Table("generalconfig")]
-    public class GeneralConfig
+    internal class GeneralConfig
     {
         [Key]
         [Column("name")]

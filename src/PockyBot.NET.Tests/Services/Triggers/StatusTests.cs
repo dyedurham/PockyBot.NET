@@ -35,7 +35,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         [Theory]
         [MemberData(nameof(StatusTestData.RespondTestData), MemberType = typeof(StatusTestData))]
-        public void TestRespond(Message message, PockyUser sender, int limit, List<Tuple<string, bool>> pegValidity, Message expectedResponse)
+        internal void TestRespond(Message message, PockyUser sender, int limit, List<Tuple<string, bool>> pegValidity, Message expectedResponse)
         {
             this.Given(x => GivenAMessage(message))
                 .And(x => GivenAPockyUser(sender))
