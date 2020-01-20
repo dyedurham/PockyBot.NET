@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.0...v1.0.1) (2020-01-20)
+
+
+### Bug Fixes
+
+* move persistence into main project so it doesn't get referenced separately ([f69b980](https://github.com/GlobalX/PockyBot.NET/commit/f69b98019c1d6a19e79640d4ff05b8439db82b01))
+
 # 1.0.0 (2020-01-20)
 
 
