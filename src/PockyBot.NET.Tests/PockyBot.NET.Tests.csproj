@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PockyBot.NET\PockyBot.NET.csproj" />
-    <ProjectReference Include="..\PockyBot.NET.Persistence\PockyBot.NET.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
