@@ -18,6 +18,10 @@ namespace PockyBot.NET.Persistence
             {
                 table.Name, table.Value
             });
+
+            builder.Entity<PockyUser>().HasOne(x => x.Location)
+                .WithOne(x => x.User)
+                .HasForeignKey<PockyUser>(x => x.UserId);
         }
 
         public DbSet<PockyUser> PockyUsers { get; set; }
