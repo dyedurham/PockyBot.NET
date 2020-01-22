@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GlobalX.ChatBots.Core.Messages;
+using GlobalX.ChatBots.Core.People;
 using PockyBot.NET.Configuration;
 
 namespace PockyBot.NET.Tests.TestData.Pegs
@@ -43,8 +44,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 }
             };
 
@@ -84,8 +89,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 }
             };
 
@@ -125,8 +134,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 }
             };
 
@@ -161,8 +174,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             UserId = "testUser2Id"
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 }
             };
 
@@ -202,8 +219,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 }
             };
 
@@ -249,8 +270,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             UserId = "testUser3Id"
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 }
             };
         }
@@ -282,8 +307,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 "I'm sorry, I couldn't understand your peg request. Please use the following format: `@TestBot peg @Person this is the reason for giving you a peg`."
             };
@@ -325,8 +354,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 "I'm sorry, I couldn't understand your peg request. Please use the following format: `@TestBot peg @Person this is the reason for giving you a peg`."
             };
@@ -367,8 +400,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 "I'm sorry, I couldn't understand your peg request. Please use the following format: `@TestBot peg @Person this is the reason for giving you a peg`."
             };
@@ -409,8 +446,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 "I'm sorry, I couldn't understand your peg request. Please use the following format: `@TestBot peg @Person this is the reason for giving you a peg`."
             };
@@ -446,8 +487,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             UserId = "testUser2Id"
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 "Please provide a comment with your peg."
             };
@@ -488,8 +533,12 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 "I'm sorry, you have to include a keyword in your comment. Please include one of the below keywords in your comment:\n\nkeyword1, keyword2, keyword3"
             };

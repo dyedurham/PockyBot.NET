@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GlobalX.ChatBots.Core.Messages;
+using GlobalX.ChatBots.Core.People;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Models;
 
@@ -30,8 +31,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {
@@ -69,8 +74,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 null,
                 5, // limit
@@ -102,8 +111,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {
@@ -149,8 +162,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {
@@ -196,8 +213,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {
@@ -247,8 +268,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {
@@ -289,8 +314,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {
@@ -339,8 +368,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {
@@ -389,8 +422,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 new PockyUser // sender
                 {

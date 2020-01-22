@@ -33,7 +33,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public Task<Message> Respond(Message message)
         {
-            var pockyUser = _pockyUserRepository.GetUser(message.SenderId);
+            var pockyUser = _pockyUserRepository.GetUser(message.Sender.UserId);
             var limit = _configRepository.GetGeneralConfig("limit") ?? 1;
 
             if (pockyUser == null || pockyUser.PegsGiven.Count == 0)
@@ -42,7 +42,7 @@ namespace PockyBot.NET.Services.Triggers
                 return Task.FromResult(new Message
                 {
                     Text = $"{userPegsLeftText}\n\nYou have not given any pegs so far.",
-                    RoomId = message.SenderId
+                    RoomId = message.Sender.UserId
                 });
             }
 
@@ -57,7 +57,7 @@ namespace PockyBot.NET.Services.Triggers
             return Task.FromResult(new Message
             {
                 Text = $"{pegsLeftText}{validPegsSentText}{penaltyPegsReceivedText}",
-                RoomId = message.SenderId
+                RoomId = message.Sender.UserId
             });
         }
 

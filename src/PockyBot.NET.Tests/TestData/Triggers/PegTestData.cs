@@ -40,8 +40,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUser2Id",
-                    SenderName = "Test User 2"
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    }
                 },
                 null, // error message
                 new PockyUser // sender
@@ -99,8 +103,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUser2Id",
-                    SenderName = "Test User 2"
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    }
                 },
                 null, // error message
                 new PockyUser // sender
@@ -166,8 +174,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUser2Id",
-                    SenderName = "Test User 2"
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    }
                 },
                 null, // error message
                 new PockyUser // sender
@@ -228,8 +240,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUser2Id",
-                    SenderName = "Test User 2"
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    }
                 },
                 "this is an error", // error message
                 new PockyUser // sender
@@ -293,8 +309,12 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUser2Id",
-                    SenderName = "Test User 2"
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    }
                 },
                 null, // error message
                 new PockyUser // sender

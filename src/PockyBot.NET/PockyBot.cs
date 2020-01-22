@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
+using GlobalX.ChatBots.Core.People;
 using GlobalX.ChatBots.Core.Rooms;
 using PockyBot.NET.Services;
 using PockyBot.NET.Services.Triggers;
@@ -25,6 +26,11 @@ namespace PockyBot.NET
         public async Task Respond(Message message)
         {
             ITrigger responder = null;
+
+            if (message.Sender.Type == PersonType.Bot)
+            {
+                return;
+            }
 
             if (message.RoomType == RoomType.Group)
             {

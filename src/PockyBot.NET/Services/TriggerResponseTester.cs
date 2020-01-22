@@ -24,7 +24,7 @@ namespace PockyBot.NET.Services
             if (message.MessageParts.Length < 2
                 || message.MessageParts[0].MessageType != MessageType.PersonMention
                 || message.MessageParts[0].UserId != _settings.BotId
-                || (trigger.Permissions.Length > 0 && !HasPermission(message.SenderId, trigger.Permissions)))
+                || (trigger.Permissions.Length > 0 && !HasPermission(message.Sender.UserId, trigger.Permissions)))
             {
                 return false;
             }
@@ -42,7 +42,7 @@ namespace PockyBot.NET.Services
         public bool ShouldTriggerInDirectMessage(Message message, ITrigger trigger)
         {
             if (!trigger.DirectMessageAllowed ||
-                (trigger.Permissions.Length > 0 && !HasPermission(message.SenderId, trigger.Permissions)))
+                (trigger.Permissions.Length > 0 && !HasPermission(message.Sender.UserId, trigger.Permissions)))
             {
                 return false;
             }

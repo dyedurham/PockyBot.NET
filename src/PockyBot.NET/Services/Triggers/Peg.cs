@@ -53,7 +53,7 @@ namespace PockyBot.NET.Services.Triggers
                 };
             }
 
-            var sender = _pockyUserRepository.AddOrUpdateUser(message.SenderId, message.SenderName);
+            var sender = _pockyUserRepository.AddOrUpdateUser(message.Sender.UserId, message.Sender.Username);
             var comment = string.Join(string.Empty, message.MessageParts.Skip(3).Select(x => x.Text)).Trim();
 
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");
