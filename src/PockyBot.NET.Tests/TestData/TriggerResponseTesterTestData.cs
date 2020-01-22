@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GlobalX.ChatBots.Core.Messages;
+using GlobalX.ChatBots.Core.People;
 using NSubstitute;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Persistence.Models;
@@ -34,8 +35,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 true
@@ -63,8 +68,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 true
@@ -92,8 +101,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, true, new string[0]),
                 true
@@ -121,8 +134,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new[] { "ping", "admin" } ),
                 true
@@ -150,8 +167,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 false
@@ -179,8 +200,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 false
@@ -208,8 +233,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 false
@@ -237,8 +266,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new[] { "ping" } ),
                 false
@@ -262,8 +295,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 true
@@ -284,8 +321,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 true
@@ -306,8 +347,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, true, new string[0]),
                 true
@@ -328,8 +373,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new[] { "ping", "admin" } ),
                 true
@@ -350,8 +399,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", false, false, new string[0]),
                 false
@@ -372,8 +425,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 false
@@ -394,8 +451,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new string[0]),
                 false
@@ -416,8 +477,12 @@ namespace PockyBot.NET.Tests.TestData
                             MessageType = MessageType.Text
                         }
                     },
-                    SenderId = "testUserId",
-                    SenderName = "Test User"
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
                 },
                 GetTrigger("ping", true, false, new[] { "ping" } ),
                 false
