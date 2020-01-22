@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.1...v1.0.2) (2020-01-22)
+
+
+### Bug Fixes
+
+* ignore bots ([c2c3ca6](https://github.com/GlobalX/PockyBot.NET/commit/c2c3ca60ab6531a81534e2500e90b42bbcaf8a77))
+
 ## [1.0.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.0...v1.0.1) (2020-01-20)
 
 
