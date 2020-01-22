@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.2...v1.0.3) (2020-01-22)
+
+
+### Bug Fixes
+
+* specify foreign key relationship of userlocation ([9c2f95c](https://github.com/GlobalX/PockyBot.NET/commit/9c2f95cac8304b831e6f743f4c050a65da02000a))
+
 ## [1.0.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.1...v1.0.2) (2020-01-22)
 
 
