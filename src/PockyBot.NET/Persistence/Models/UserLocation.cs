@@ -11,5 +11,7 @@ namespace PockyBot.NET.Persistence.Models
         public string UserId { get; set; }
         [Column("location")]
         public string Location { get; set; }
+
+        public PockyUser User { get; set; }
     }
 }
