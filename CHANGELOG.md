@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.3...v1.0.4) (2020-01-23)
+
+
+### Bug Fixes
+
+* make sure correct things are pulled from the db in each place ([09e3d62](https://github.com/GlobalX/PockyBot.NET/commit/09e3d628f74c749ad26587db215be434d5026920))
+
 ## [1.0.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.2...v1.0.3) (2020-01-22)
 
 
