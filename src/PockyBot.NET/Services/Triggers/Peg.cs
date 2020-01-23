@@ -61,8 +61,8 @@ namespace PockyBot.NET.Services.Triggers
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
 
             var isPegValid = _pegHelper.IsPegValid(comment, requireKeywords, keywords, penaltyKeywords);
-            var numPegsGiven = sender.PegsGiven.Count(x =>
-                _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords));
+            var numPegsGiven = sender.PegsGiven?.Count(x =>
+                                   _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords)) ?? 0;
 
             if (!sender.HasRole(Roles.Unmetered) &&
                 (isPegValid && numPegsGiven >= _configRepository.GetGeneralConfig("limit")))
