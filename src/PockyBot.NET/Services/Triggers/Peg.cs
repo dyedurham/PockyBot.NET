@@ -86,7 +86,7 @@ namespace PockyBot.NET.Services.Triggers
             var dbReceiver = _pockyUserRepository.AddOrUpdateUser(receiver.UserId, receiver.Username);
 
             _logger.LogInformation(
-                "Giving peg with comment {comment}, sender {senderId}, receiver {receiverId}, validity {isPegValid}",
+                "Giving peg with sender {senderId}, receiver {receiverId}, validity {isPegValid}, comment {comment}",
                 comment, sender.UserId, receiver.UserId, isPegValid);
             await _pegGiver.GivePeg(comment, sender, dbReceiver, isPegValid ? numPegsGiven + 1 : numPegsGiven).ConfigureAwait(false);
             return null;
