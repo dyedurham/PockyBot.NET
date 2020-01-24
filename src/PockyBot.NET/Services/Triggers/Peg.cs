@@ -87,7 +87,7 @@ namespace PockyBot.NET.Services.Triggers
 
             _logger.LogInformation(
                 "Giving peg with sender {senderId}, receiver {receiverId}, validity {isPegValid}, comment {comment}",
-                comment, sender.UserId, receiver.UserId, isPegValid);
+                sender.UserId, receiver.UserId, isPegValid, comment);
             await _pegGiver.GivePeg(comment, sender, dbReceiver, isPegValid ? numPegsGiven + 1 : numPegsGiven).ConfigureAwait(false);
             return null;
         }
