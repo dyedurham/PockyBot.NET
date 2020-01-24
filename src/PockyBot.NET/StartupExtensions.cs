@@ -27,7 +27,7 @@ namespace PockyBot.NET
             return services;
         }
 
-        private static IServiceCollection ConfigureCommonServices(this IServiceCollection services) {
+        private static void ConfigureCommonServices(this IServiceCollection services) {
             services.AddTransient<ITriggerResponseTester, TriggerResponseTester>();
             services.AddTransient<IPegRequestValidator, PegRequestValidator>();
             services.AddTransient<IPegHelper, PegHelper>();
@@ -36,12 +36,12 @@ namespace PockyBot.NET
             services.AddTransient<IPegResultsHelper, PegResultsHelper>();
             services.AddTransient<IDirectResultsMessageSender, DirectResultsMessageSender>();
             services.AddTransient<ITrigger, Ping>();
+            services.AddTransient<ITrigger, Help>();
             services.AddTransient<ITrigger, Peg>();
             services.AddTransient<ITrigger, Status>();
             services.AddTransient<ITrigger, Finish>();
             services.AddTransient<ITrigger, Reset>();
             services.AddTransient<ITrigger, Default>();
-            return services;
         }
     }
 }

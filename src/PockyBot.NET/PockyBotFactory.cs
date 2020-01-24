@@ -30,6 +30,7 @@ namespace PockyBot.NET
             List<ITrigger> triggers = new List<ITrigger>
             {
                 new Ping(),
+                new Help(),
                 new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver),
                 new Status(pockyUserRepository, configRepository, pegHelper),
                 new Finish(pockyUserRepository, pegResultsHelper, resultsUploader, directResultsMessageSender),
