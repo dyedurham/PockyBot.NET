@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Models;
 using PockyBot.NET.Persistence.Repositories;
@@ -18,6 +19,7 @@ namespace PockyBot.NET.Services.Triggers
         private readonly IPegResultsHelper _pegResultsHelper;
         private readonly IResultsUploader _resultsUploader;
         private readonly IDirectResultsMessageSender _directResultsMessageSender;
+        private readonly ILogger<Finish> _logger;
 
         public string Command => Commands.Finish;
 
@@ -27,17 +29,21 @@ namespace PockyBot.NET.Services.Triggers
 
         public string[] Permissions => new[] {Roles.Admin, Roles.Finish};
 
-        public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper, IResultsUploader resultsUploader, IDirectResultsMessageSender directResultsMessageSender)
+        public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper,
+            IResultsUploader resultsUploader, IDirectResultsMessageSender directResultsMessageSender,
+            ILogger<Finish> logger)
         {
             _pockyUserRepository = pockyUserRepository;
             _pegResultsHelper = pegResultsHelper;
             _resultsUploader = resultsUploader;
+            _logger = logger;
             _directResultsMessageSender = directResultsMessageSender;
         }
 
         public async Task<Message> Respond(Message message)
         {
             var users = _pockyUserRepository.GetAllUsersWithPegs();
+            _logger.LogDebug("Mapping users...");
             var mappedUsers = _pegResultsHelper.MapUsersToPegRecipients(users);
 
             var winners = _pegResultsHelper.GetWinners(mappedUsers);
@@ -62,12 +68,14 @@ namespace PockyBot.NET.Services.Triggers
                 Penalties = penalties
             };
 
+            _logger.LogDebug("Generating HTML...");
             var template = GetTemplate();
 
             var parsedTemplate = Template.Parse(template);
             var html = parsedTemplate.Render(new { model = results });
 
             var uri = await _resultsUploader.UploadResults(html);
+            _logger.LogDebug("Sending Direct Messages...");
             await _directResultsMessageSender.SendDirectMessagesAsync(mappedUsers);
 
             return new Message

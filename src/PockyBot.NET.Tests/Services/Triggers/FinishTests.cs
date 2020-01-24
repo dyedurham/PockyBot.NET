@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PockyBot.NET.Models;
 using PockyBot.NET.Persistence.Models;
@@ -33,7 +34,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _resultsUploader = Substitute.For<IResultsUploader>();
             _pegResultsHelper = Substitute.For<IPegResultsHelper>();
             _directResultsMessageSender = Substitute.For<IDirectResultsMessageSender>();
-            _subject = new Finish(_pockyUserRepository, _pegResultsHelper, _resultsUploader, _directResultsMessageSender);
+            _subject = new Finish(_pockyUserRepository, _pegResultsHelper, _resultsUploader,
+                _directResultsMessageSender, Substitute.For<ILogger<Finish>>());
         }
 
         [Theory]

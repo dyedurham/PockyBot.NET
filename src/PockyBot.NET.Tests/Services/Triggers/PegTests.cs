@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using GlobalX.ChatBots.Core.People;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PockyBot.NET.Models.Exceptions;
 using PockyBot.NET.Persistence.Models;
@@ -39,7 +40,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _chatHelper.People.Returns(Substitute.For<IPersonHandler>());
             _pegGiver = Substitute.For<IPegGiver>();
             _subject = new NET.Services.Triggers.Peg(_pegRequestValidator, _pockyUserRepository, _pegHelper,
-                _configRepository, _chatHelper, _pegGiver);
+                _configRepository, _chatHelper, _pegGiver, Substitute.For<ILogger<NET.Services.Triggers.Peg>>());
         }
 
         [Theory]

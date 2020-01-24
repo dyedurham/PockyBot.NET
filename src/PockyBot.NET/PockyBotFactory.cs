@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GlobalX.ChatBots.Core;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Persistence;
@@ -12,7 +13,7 @@ namespace PockyBot.NET
 {
     public static class PockyBotFactory
     {
-        public static IPockyBot CreatePockyBot(PockyBotSettings settings, IChatHelper chatHelper, IResultsUploader resultsUploader)
+        public static IPockyBot CreatePockyBot(PockyBotSettings settings, IChatHelper chatHelper, IResultsUploader resultsUploader, ILoggerFactory loggerFactory)
         {
             var wrappedSettings = new OptionsWrapper<PockyBotSettings>(settings);
             var dbContext = DatabaseContextBuilder.BuildDatabaseContext(settings.DatabaseConnectionString);
@@ -30,14 +31,14 @@ namespace PockyBot.NET
             List<ITrigger> triggers = new List<ITrigger>
             {
                 new Ping(),
-                new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver),
-                new Status(pockyUserRepository, configRepository, pegHelper),
-                new Finish(pockyUserRepository, pegResultsHelper, resultsUploader, directResultsMessageSender),
-                new Reset(pegRepository),
+                new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver, loggerFactory.CreateLogger<Peg>()),
+                new Status(pockyUserRepository, configRepository, pegHelper, loggerFactory.CreateLogger<Status>()),
+                new Finish(pockyUserRepository, pegResultsHelper, resultsUploader, directResultsMessageSender, loggerFactory.CreateLogger<Finish>()),
+                new Reset(pegRepository, loggerFactory.CreateLogger<Reset>()),
                 new Default(wrappedSettings)
             };
 
-            return new PockyBot(triggers, triggerResponseTester, chatHelper);
+            return new PockyBot(triggers, triggerResponseTester, chatHelper, loggerFactory.CreateLogger<PockyBot>());
         }
     }
 }
