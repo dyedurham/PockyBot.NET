@@ -6,5 +6,6 @@ namespace PockyBot.NET.Constants
         public const string Admin = "ADMIN";
         public const string Finish = "FINISH";
         public const string Reset = "RESET";
+        public const string Config = "CONFIG";
     }
 }
