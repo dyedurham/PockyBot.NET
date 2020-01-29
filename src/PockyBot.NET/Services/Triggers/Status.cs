@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
@@ -15,12 +16,15 @@ namespace PockyBot.NET.Services.Triggers
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IConfigRepository _configRepository;
         private readonly IPegHelper _pegHelper;
+        private readonly ILogger<Status> _logger;
 
-        public Status(IPockyUserRepository pockyUserRepository, IConfigRepository configRepository, IPegHelper pegHelper)
+        public Status(IPockyUserRepository pockyUserRepository, IConfigRepository configRepository,
+            IPegHelper pegHelper, ILogger<Status> logger)
         {
             _pockyUserRepository = pockyUserRepository;
             _configRepository = configRepository;
             _pegHelper = pegHelper;
+            _logger = logger;
         }
 
         public string Command => Commands.Status;
@@ -38,6 +42,7 @@ namespace PockyBot.NET.Services.Triggers
 
             if (pockyUser == null || pockyUser.PegsGiven.Count == 0)
             {
+                _logger.LogInformation("User {userId} has not given any pegs", message.Sender.UserId);
                 var userPegsLeftText = GetPegsLeftText(pockyUser, limit);
                 return Task.FromResult(new Message
                 {
@@ -46,6 +51,7 @@ namespace PockyBot.NET.Services.Triggers
                 });
             }
 
+            _logger.LogDebug("Grouping pegs...");
             var groupedPegs = GroupPegsByValidity(pockyUser);
             var validPegs = groupedPegs.ContainsKey(true) ? groupedPegs[true] : new List<Persistence.Models.Peg>();
             var penaltyPegs = groupedPegs.ContainsKey(false) ? groupedPegs[false] : new List<Persistence.Models.Peg>();
@@ -54,6 +60,7 @@ namespace PockyBot.NET.Services.Triggers
             var validPegsSentText = GetValidPegsSentText(validPegs);
             var penaltyPegsReceivedText = GetPenaltyPegsReceivedText(penaltyPegs);
 
+            _logger.LogDebug("Sending status message...");
             return Task.FromResult(new Message
             {
                 Text = $"{pegsLeftText}{validPegsSentText}{penaltyPegsReceivedText}",

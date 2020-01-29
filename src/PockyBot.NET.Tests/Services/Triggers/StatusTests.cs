@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
@@ -30,7 +31,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
             _configRepository = Substitute.For<IConfigRepository>();
             _pegHelper = Substitute.For<IPegHelper>();
-            _subject = new Status(_pockyUserRepository, _configRepository, _pegHelper);
+            _subject = new Status(_pockyUserRepository, _configRepository, _pegHelper,
+                Substitute.For<ILogger<Status>>());
         }
 
         [Theory]

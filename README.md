@@ -102,6 +102,9 @@ public IServiceProvider ConfigureServices(IServiceCollection services)
 }
 ```
 
+You will also need to inject logging classes.
+[See this documentation for details](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1).
+
 #### Without Dependency Injection
 
 You can get a concrete implementation of the library by calling the
@@ -124,7 +127,8 @@ var settings = new PockyBotSettings
     DatabaseConnectionString = "Host=postgres.host.com;Port=5432;Username=user;Password=pass;Database=pockybot;"
 };
 
-IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper, resultsUploader);
+ILoggerFactory factory = new LoggerFactory().AddConsole(); // add any providers you want here
+IPockyBot pockybot = PockyBotFactory.CreatePockyBot(settings, chatHelper, resultsUploader, factory);
 ```
 
 ### Using The Bot
