@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.1.0...v1.1.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* make sure objects are logged as json ([382fef7](https://github.com/GlobalX/PockyBot.NET/commit/382fef73ff4f4afcf8c063280bc23fdd2476c5b2))
+
 # [1.1.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.4...v1.1.0) (2020-01-29)
 
 
