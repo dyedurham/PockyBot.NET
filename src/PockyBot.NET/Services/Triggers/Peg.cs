@@ -51,7 +51,7 @@ namespace PockyBot.NET.Services.Triggers
             }
             catch (PegValidationException e)
             {
-                _logger.LogWarning("Peg message is invalid: {error}", e);
+                _logger.LogWarning("Peg message is invalid: {@error}", e);
                 return new Message
                 {
                     Text = e.Message

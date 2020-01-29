@@ -28,7 +28,7 @@ namespace PockyBot.NET
 
         public async Task Respond(Message message)
         {
-            _logger.LogInformation("Received message: {message}", message);
+            _logger.LogInformation("Received message: {@message}", message);
             ITrigger responder = null;
 
             if (message.Sender.Type == PersonType.Bot)
@@ -59,7 +59,7 @@ namespace PockyBot.NET
 
             if (response != null)
             {
-                _logger.LogInformation("Sending response message {response}", response);
+                _logger.LogInformation("Sending response message {@response}", response);
                 if (response.RoomId == null)
                 {
                     response.RoomId = message.RoomId;
