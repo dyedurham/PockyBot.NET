@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.1.1...v1.2.0) (2020-01-29)
+
+
+### Bug Fixes
+
+* fix up stripping out command logic ([f1c7fa9](https://github.com/GlobalX/PockyBot.NET/commit/f1c7fa9302ab8defc34212502d85c0b40d708b70))
+
+
+### Features
+
+* finish implementing help trigger ([90a7a6e](https://github.com/GlobalX/PockyBot.NET/commit/90a7a6e06b1ac11ab5f540cabfa76bf3f233ceac))
+* start implementing help trigger ([91ab450](https://github.com/GlobalX/PockyBot.NET/commit/91ab450f55e19d451266efe733ec89b138e06133))
+
 ## [1.1.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.1.0...v1.1.1) (2020-01-29)
 
 
