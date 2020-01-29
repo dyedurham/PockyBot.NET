@@ -35,7 +35,7 @@ namespace PockyBot.NET.Services.Triggers
             }
             catch (Exception e)
             {
-                _logger.LogError("Error clearing pegs: {e}", e);
+                _logger.LogError("Error clearing pegs: {@e}", e);
                 return new Message
                 {
                     Text = "Error clearing pegs."
