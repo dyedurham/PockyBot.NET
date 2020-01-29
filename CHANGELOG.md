@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.4...v1.1.0) (2020-01-29)
+
+
+### Bug Fixes
+
+* do it properly ([1191caf](https://github.com/GlobalX/PockyBot.NET/commit/1191cafa0806939bb7602164c5cd136ca339ae25))
+
+
+### Features
+
+* add some fairly high level logging ([a49c349](https://github.com/GlobalX/PockyBot.NET/commit/a49c34945329be044c3eaf8a80a5f94841fb2069))
+* rearrange peg log so that comment comes at the end ([8c89e3b](https://github.com/GlobalX/PockyBot.NET/commit/8c89e3b28424c3fa715fe45657b44a925b7ba6a3))
+
 ## [1.0.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.3...v1.0.4) (2020-01-23)
 
 
