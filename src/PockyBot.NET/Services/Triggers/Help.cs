@@ -30,8 +30,7 @@ namespace PockyBot.NET.Services.Triggers
         public async Task<Message> Respond(Message message)
         {
             var partsToSkip = message.MessageParts[0].MessageType == MessageType.PersonMention ? 1 : 0;
-            var command = string.Join("", message.MessageParts.Skip(partsToSkip).Select(x => x.Text))
-                .Trim().Remove(0, 4).Trim();
+            var command = string.Join("", message.MessageParts.Skip(partsToSkip).Select(x => x.Text)).Trim().Remove(0, 4).Trim();
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
             var newMessage = CreateHelpResponseMessage(command, user);
             return new Message
