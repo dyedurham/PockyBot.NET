@@ -29,7 +29,9 @@ namespace PockyBot.NET.Services.Triggers
 
         public async Task<Message> Respond(Message message)
         {
-            var command = string.Join(" ", message.MessageParts.Where(x => x.MessageType == MessageType.Text).Select(x => x.Text).ToArray());
+            var partsToSkip = message.MessageParts[0].MessageType == MessageType.PersonMention ? 1 : 0;
+            var command = string.Join("", message.MessageParts.Skip(partsToSkip).Select(x => x.Text))
+                .Trim().Remove(0, 4).Trim();
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
             var newMessage = CreateHelpResponseMessage(command, user);
             return new Message
@@ -316,7 +318,7 @@ namespace PockyBot.NET.Services.Triggers
         //     return CreateDefaultHelpMessage();
         // }
 
-        private bool HasPermission(PockyUser user, string[] permissions)
+        private static bool HasPermission(PockyUser user, string[] permissions)
         {
             return user != null && user.Roles.Any(x =>
                        permissions.Contains(x.UserRole, StringComparer.OrdinalIgnoreCase));
