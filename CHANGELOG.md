@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.2.0...v1.3.0) (2020-01-30)
+
+
+### Features
+
+* add welcome trigger ([6e2df3a](https://github.com/GlobalX/PockyBot.NET/commit/6e2df3af2de28bf0ed299f3f70804731b7cb0912))
+
 # [1.2.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.1.1...v1.2.0) (2020-01-29)
 
 
