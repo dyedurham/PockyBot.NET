@@ -37,6 +37,7 @@ namespace PockyBot.NET
             services.AddTransient<IDirectResultsMessageSender, DirectResultsMessageSender>();
             services.AddTransient<ITrigger, Ping>();
             services.AddTransient<ITrigger, Help>();
+            services.AddTransient<ITrigger, Welcome>();
             services.AddTransient<ITrigger, Peg>();
             services.AddTransient<ITrigger, Status>();
             services.AddTransient<ITrigger, Finish>();
