@@ -55,8 +55,8 @@ namespace PockyBot.NET.Services.Triggers
                     return CreatePingHelpMessage();
                 case Commands.Welcome:
                     return CreateWelcomeHelpMessage();
-                // case Commands.Rotation:
-                //     return CreateRotationHelpMessage();
+                case Commands.Rotation:
+                    return CreateRotationHelpMessage();
                 // case Commands.Winners:
                 //     return CreateWinnersHelpMessage(user);
                 // case Commands.Results:
@@ -98,8 +98,8 @@ namespace PockyBot.NET.Services.Triggers
                  $"* {Commands.Status}\n" +
                  //$"* {Commands.Keywords}\n" +
                  $"* {Commands.Ping}\n" +
-                 $"* {Commands.Welcome}\n";
-                 //$"* {Commands.Rotation}\n" +
+                 $"* {Commands.Welcome}\n" +
+                 $"* {Commands.Rotation}\n";
                  //$"* {Commands.LocationConfig}\n" +
                  //$"* {Commands.UserLocation}\n";
 
@@ -180,13 +180,13 @@ namespace PockyBot.NET.Services.Triggers
                 "1. I will respond in the room you messaged me in.";
         }
 
-        // private string CreateRotationHelpMessage()
-        // {
-        //     return "### How to check the rotation 🔄!\n" +
-        //         $"1. To check the rotation of teams responsible for buying snacks, type `@{_pockyBotSettings.BotName} {Commands.Rotation}` OR direct message me with `{Commands.Rotation}`.\n" +
-        //         "1. I will respond in the room you messaged me in.";
-        // }
-        //
+        private string CreateRotationHelpMessage()
+        {
+            return "### How to check the rotation 🔄!\n" +
+                $"1. To check the rotation of teams responsible for buying snacks, type `@{_pockyBotSettings.BotName} {Commands.Rotation}` OR direct message me with `{Commands.Rotation}`.\n" +
+                "1. I will respond in the room you messaged me in.";
+        }
+
         // private string CreateWinnersHelpMessage(PockyUser user)
         // {
         //     if (HasPermission(user, new[] {Roles.Admin, Roles.Winners})){
