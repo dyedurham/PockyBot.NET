@@ -53,8 +53,8 @@ namespace PockyBot.NET.Services.Triggers
                 //     return CreateKeywordsHelpMessage();
                 case Commands.Ping:
                     return CreatePingHelpMessage();
-                // case Commands.Welcome:
-                //     return CreateWelcomeHelpMessage();
+                case Commands.Welcome:
+                    return CreateWelcomeHelpMessage();
                 // case Commands.Rotation:
                 //     return CreateRotationHelpMessage();
                 // case Commands.Winners:
@@ -97,8 +97,8 @@ namespace PockyBot.NET.Services.Triggers
                  $"* {Commands.Peg}\n" +
                  $"* {Commands.Status}\n" +
                  //$"* {Commands.Keywords}\n" +
-                 $"* {Commands.Ping}\n";
-                 //$"* {Commands.Welcome}\n" +
+                 $"* {Commands.Ping}\n" +
+                 $"* {Commands.Welcome}\n";
                  //$"* {Commands.Rotation}\n" +
                  //$"* {Commands.LocationConfig}\n" +
                  //$"* {Commands.UserLocation}\n";
@@ -173,13 +173,13 @@ namespace PockyBot.NET.Services.Triggers
                 "1. I will respond in the room you messaged me in if I am alive.";
         }
 
-        // private string CreateWelcomeHelpMessage()
-        // {
-        //     return "### How to welcome someone 👐!\n" +
-        //         $"1. To get a welcome message from me, type `@${_pockyBotSettings.BotName} ${Commands.Welcome}` OR direct message me with `${Commands.Welcome}`.\n" +
-        //         "1. I will respond in the room you messaged me in.";
-        // }
-        //
+        private string CreateWelcomeHelpMessage()
+        {
+            return "### How to welcome someone 👐!\n" +
+                $"1. To get a welcome message from me, type `@{_pockyBotSettings.BotName} {Commands.Welcome}` OR direct message me with `{Commands.Welcome}`.\n" +
+                "1. I will respond in the room you messaged me in.";
+        }
+
         // private string CreateRotationHelpMessage()
         // {
         //     return "### How to check the rotation 🔄!\n" +
