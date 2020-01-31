@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.3.1...v1.4.0) (2020-01-31)
+
+
+### Features
+
+* implement rotation trigger and add to help messages ([518f507](https://github.com/GlobalX/PockyBot.NET/commit/518f5073d81df5ffb5868b71e318d1f62051b681))
+
 ## [1.3.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.3.0...v1.3.1) (2020-01-31)
 
 
