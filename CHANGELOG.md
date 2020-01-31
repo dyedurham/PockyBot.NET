@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.3.0...v1.3.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* fix default trigger markdown ([02efa83](https://github.com/GlobalX/PockyBot.NET/commit/02efa83373cb8a094736c1ec4c1b09f658309b79))
+* update welcome trigger to allow args and add it to the help trigger ([57ed60b](https://github.com/GlobalX/PockyBot.NET/commit/57ed60be82245e3a69abce975b7df38c88d8142c))
+
 # [1.3.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.2.0...v1.3.0) (2020-01-30)
 
 
