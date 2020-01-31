@@ -9,5 +9,6 @@ namespace PockyBot.NET.Constants
         public const string Status = "status";
         public const string Finish = "finish";
         public const string Reset = "reset";
+        public const string Rotation = "rotation";
     }
 }
