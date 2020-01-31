@@ -15,7 +15,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public string Command => Commands.Welcome;
         public bool DirectMessageAllowed => true;
-        public bool CanHaveArgs => false;
+        public bool CanHaveArgs => true;
         public string[] Permissions => Array.Empty<string>();
 
         public Welcome(IOptions<PockyBotSettings> pockyBotOptions, IConfigRepository configRepository)
