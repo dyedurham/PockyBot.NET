@@ -29,8 +29,8 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = $@"## I'm sorry, I didn't understand that, here's what I can do:
 
-1. To give someone a peg type: \`@{_settings.BotName} peg @bob {{comment}}\`.
-1. For a full list of commands type \`@{_settings.BotName} help\`.
+1. To give someone a peg type: `@{_settings.BotName} peg @bob {{comment}}`.
+1. For a full list of commands type `@{_settings.BotName} help`.
 
 I am still being worked on, so more features to come : )"
             });

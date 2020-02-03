@@ -1,3 +1,58 @@
+# [1.4.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.3.1...v1.4.0) (2020-01-31)
+
+
+### Features
+
+* implement rotation trigger and add to help messages ([518f507](https://github.com/GlobalX/PockyBot.NET/commit/518f5073d81df5ffb5868b71e318d1f62051b681))
+
+## [1.3.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.3.0...v1.3.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* fix default trigger markdown ([02efa83](https://github.com/GlobalX/PockyBot.NET/commit/02efa83373cb8a094736c1ec4c1b09f658309b79))
+* update welcome trigger to allow args and add it to the help trigger ([57ed60b](https://github.com/GlobalX/PockyBot.NET/commit/57ed60be82245e3a69abce975b7df38c88d8142c))
+
+# [1.3.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.2.0...v1.3.0) (2020-01-30)
+
+
+### Features
+
+* add welcome trigger ([6e2df3a](https://github.com/GlobalX/PockyBot.NET/commit/6e2df3af2de28bf0ed299f3f70804731b7cb0912))
+
+# [1.2.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.1.1...v1.2.0) (2020-01-29)
+
+
+### Bug Fixes
+
+* fix up stripping out command logic ([f1c7fa9](https://github.com/GlobalX/PockyBot.NET/commit/f1c7fa9302ab8defc34212502d85c0b40d708b70))
+
+
+### Features
+
+* finish implementing help trigger ([90a7a6e](https://github.com/GlobalX/PockyBot.NET/commit/90a7a6e06b1ac11ab5f540cabfa76bf3f233ceac))
+* start implementing help trigger ([91ab450](https://github.com/GlobalX/PockyBot.NET/commit/91ab450f55e19d451266efe733ec89b138e06133))
+
+## [1.1.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.1.0...v1.1.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* make sure objects are logged as json ([382fef7](https://github.com/GlobalX/PockyBot.NET/commit/382fef73ff4f4afcf8c063280bc23fdd2476c5b2))
+
+# [1.1.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.4...v1.1.0) (2020-01-29)
+
+
+### Bug Fixes
+
+* do it properly ([1191caf](https://github.com/GlobalX/PockyBot.NET/commit/1191cafa0806939bb7602164c5cd136ca339ae25))
+
+
+### Features
+
+* add some fairly high level logging ([a49c349](https://github.com/GlobalX/PockyBot.NET/commit/a49c34945329be044c3eaf8a80a5f94841fb2069))
+* rearrange peg log so that comment comes at the end ([8c89e3b](https://github.com/GlobalX/PockyBot.NET/commit/8c89e3b28424c3fa715fe45657b44a925b7ba6a3))
+
 ## [1.0.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.0.3...v1.0.4) (2020-01-23)
 
 
