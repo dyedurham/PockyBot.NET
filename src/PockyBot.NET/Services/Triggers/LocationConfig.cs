@@ -30,7 +30,7 @@ namespace PockyBot.NET.Services.Triggers
         {
             var fullText = message.MessageParts.Skip(1).Select(x => x.Text);
             var commands = string.Join("", fullText)
-                .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (commands.Length < 2)
             {
@@ -69,7 +69,7 @@ namespace PockyBot.NET.Services.Triggers
         {
             if (locations.Length == 0)
             {
-                return "No locations set";
+                return "No locations set.";
             }
 
             return $"Here are the current locations:\n* {string.Join("\n* ", locations)}";
