@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
@@ -44,7 +45,7 @@ namespace PockyBot.NET.Services.Triggers
             if (string.IsNullOrEmpty(command)) {
                 return CreateCommandListMessage(user);
             }
-            switch (command.ToLower()) {
+            switch (command.ToLower(CultureInfo.InvariantCulture)) {
                 case Commands.Peg:
                     return CreatePegHelpMessage();
                 case Commands.Status:

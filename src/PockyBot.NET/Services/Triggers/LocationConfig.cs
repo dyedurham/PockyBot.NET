@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
@@ -43,16 +44,16 @@ namespace PockyBot.NET.Services.Triggers
             string[] locations = _locationRepository.GetAllLocations();
             string response;
             
-            switch (commands[1].ToLower())
+            switch (commands[1].ToLower(CultureInfo.InvariantCulture))
             {
                 case Actions.Get:
                     response = GetLocationMessage(locations);
                     break;
                 case Actions.Set:
-                    response = await SetLocation(message, commands, locations);
+                    response = await SetLocation(message, commands, locations).ConfigureAwait(false);
                     break;
                 case Actions.Delete:
-                    response = await DeleteLocation(message, commands, locations);
+                    response = await DeleteLocation(message, commands, locations).ConfigureAwait(false);
                     break;
                 default:
                     response = "Unknown command. Possible values are get, set and delete.";
@@ -65,7 +66,7 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
-        private string GetLocationMessage(string[] locations)
+        private static string GetLocationMessage(string[] locations)
         {
             if (locations.Length == 0)
             {
