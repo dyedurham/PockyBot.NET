@@ -63,5 +63,10 @@ namespace PockyBot.NET.Persistence.Repositories
                 .Include(x => x.Roles)
                 .Where(x => x.PegsGiven.Any() || x.PegsReceived.Any()).ToList();
         }
+
+        public List<PockyUser> GetAllUsersLocations()
+        {
+            return _context.PockyUsers.Include(x => x.Location).ToList();
+        }
     }
 }
