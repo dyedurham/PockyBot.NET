@@ -188,6 +188,15 @@ commands.
 - `@PockyBot ping` — verify that the bot is alive.
 - `@PockyBot peg @Person <reason>` — give someone a peg.
 - `@PockyBot status` — get the list of pegs you have given.
+- `@PockyBot help` — get help with using the bot.
+- `@PockyBot rotation` — get the snack buying rotation.
+- `@PockyBot welcome` — welcome users.
+- `@PockyBot locationconfig get|set|delete <location>` — manage locations.
+
+#### Admin-only commands
+
+These commands require special permissions to use.
+
 - `@PockyBot finish` — get the results of the cycle.
 - `@PockyBot reset` — clear all pegs from the last cycle.
 
@@ -197,6 +206,9 @@ PockyBot can be messaged directly with certain commands.
 
 - `ping`
 - `status`
+- `help`
+- `rotation`
+- `welcome`
 
 ## Contributing
 
