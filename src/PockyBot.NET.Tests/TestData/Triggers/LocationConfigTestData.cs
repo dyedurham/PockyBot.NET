@@ -46,7 +46,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 Array.Empty<string>(),
                 new Message
                 {
-                    Text = "Please specify a command. Possible values are get, set and delete."
+                    Text = "Please specify a command. Possible values are get, add, and delete."
                 }
             };
 
@@ -84,7 +84,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 Array.Empty<string>(),
                 new Message
                 {
-                    Text = "Unknown command. Possible values are get, set and delete."
+                    Text = "Unknown command. Possible values are get, add, and delete."
                 }
             };
 
@@ -122,11 +122,11 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 Array.Empty<string>(),
                 new Message
                 {
-                    Text = "No locations set."
+                    Text = "No locations added."
                 }
             };
 
-            // get command, some locations set
+            // get command, some locations added
             yield return new object[]
             {
                 new Message
@@ -169,7 +169,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 }
             };
 
-            // set command, no permission
+            // add command, no permission
             yield return new object[]
             {
                 new Message
@@ -190,7 +190,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig set Location1"
+                            Text = " locationconfig add Location1"
                         }
                     }
                 },
@@ -207,7 +207,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 }
             };
 
-            // set command, no location name
+            // add command, no location name
             yield return new object[]
             {
                 new Message
@@ -228,7 +228,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig set "
+                            Text = " locationconfig add "
                         }
                     }
                 },
@@ -241,11 +241,11 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 Array.Empty<string>(),
                 new Message
                 {
-                    Text = "You must specify a location name to set."
+                    Text = "You must specify a location name to add."
                 }
             };
 
-            // set command, location already set
+            // add command, location already added
             yield return new object[]
             {
                 new Message
@@ -266,7 +266,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig set Location1"
+                            Text = " locationconfig add Location1"
                         }
                     }
                 },
@@ -279,7 +279,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 new List<string> { "Location1" },
                 new Message
                 {
-                    Text = "Location value Location1 has already been set."
+                    Text = "Location value Location1 has already been added."
                 }
             };
 
@@ -398,7 +398,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
             };
         }
 
-        public static IEnumerable<object[]> SetLocationTestData()
+        public static IEnumerable<object[]> AddLocationTestData()
         {
             yield return new object[]
             {
@@ -420,7 +420,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig set Location1"
+                            Text = " locationconfig add Location1"
                         }
                     }
                 },
@@ -433,7 +433,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 new List<string> { "Location2" },
                 new Message
                 {
-                    Text = "Location has been set."
+                    Text = "Location has been added."
                 },
                 "Location1"
             };

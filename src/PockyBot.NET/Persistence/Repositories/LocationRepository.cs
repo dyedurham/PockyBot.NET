@@ -18,7 +18,7 @@ namespace PockyBot.NET.Persistence.Repositories
             return _context.Locations.Select(x => x.Name).ToArray();
         }
 
-        public async Task SetLocation(string location)
+        public async Task AddLocation(string location)
         {
             Location newLocation = new Location
             {

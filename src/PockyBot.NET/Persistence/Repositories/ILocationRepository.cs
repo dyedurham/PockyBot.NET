@@ -6,6 +6,6 @@ namespace PockyBot.NET.Persistence.Repositories
     {
         Task DeleteLocation(string location);
         string[] GetAllLocations();
-        Task SetLocation(string location);
+        Task AddLocation(string location);
     }
 }

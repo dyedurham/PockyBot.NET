@@ -272,7 +272,7 @@ namespace PockyBot.NET.Services.Triggers
         {
             if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
                 return "### How to configure location config values 🌏!\n" +
-                    $"1. To get/edit/delete locations, type `@{_pockyBotSettings.BotName} ${Commands.LocationConfig} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{location}}`\n" +
+                    $"1. To get/edit/delete locations, type `@{_pockyBotSettings.BotName} ${Commands.LocationConfig} {Actions.Get}|{Actions.Add}|{Actions.Delete} {{location}}`\n" +
                     "1. I will respond in the room you messaged me in.";
             }
             return "### How to get location values 🌏!\n" +

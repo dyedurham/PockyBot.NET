@@ -37,7 +37,7 @@ namespace PockyBot.NET.Services.Triggers
             {
                 return new Message
                 {
-                    Text = "Please specify a command. Possible values are get, set and delete."
+                    Text = "Please specify a command. Possible values are get, add, and delete."
                 };
             }
 
@@ -49,14 +49,14 @@ namespace PockyBot.NET.Services.Triggers
                 case Actions.Get:
                     response = GetLocationMessage(locations);
                     break;
-                case Actions.Set:
-                    response = await SetLocation(message, commands, locations).ConfigureAwait(false);
+                case Actions.Add:
+                    response = await AddLocation(message, commands, locations).ConfigureAwait(false);
                     break;
                 case Actions.Delete:
                     response = await DeleteLocation(message, commands, locations).ConfigureAwait(false);
                     break;
                 default:
-                    response = "Unknown command. Possible values are get, set and delete.";
+                    response = "Unknown command. Possible values are get, add, and delete.";
                     break;
             }
 
@@ -70,13 +70,13 @@ namespace PockyBot.NET.Services.Triggers
         {
             if (locations.Length == 0)
             {
-                return "No locations set.";
+                return "No locations added.";
             }
 
             return $"Here are the current locations:\n* {string.Join("\n* ", locations)}";
         }
 
-        private async Task<string> SetLocation(Message message, string[] commands, string[] locations)
+        private async Task<string> AddLocation(Message message, string[] commands, string[] locations)
         {
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
             if (!(user.HasRole(Roles.Admin) || user.HasRole(Roles.Config)))
@@ -86,16 +86,16 @@ namespace PockyBot.NET.Services.Triggers
 
             if (commands.Length != 3)
             {
-                return "You must specify a location name to set.";
+                return "You must specify a location name to add.";
             }
 
             if (locations.Contains(commands[2], StringComparer.InvariantCultureIgnoreCase))
             {
-                return $"Location value {commands[2]} has already been set.";
+                return $"Location value {commands[2]} has already been added.";
             }
 
-            await _locationRepository.SetLocation(commands[2]);
-            return "Location has been set.";
+            await _locationRepository.AddLocation(commands[2]);
+            return "Location has been added.";
         }
 
         private async Task<string> DeleteLocation(Message message, string[] commands, string[] locations)

@@ -41,8 +41,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         }
 
         [Theory]
-        [MemberData(nameof(LocationConfigTestData.SetLocationTestData), MemberType = typeof(LocationConfigTestData))]
-        internal void TestSetLocation(Message message, PockyUser user, string[] locations, Message response,
+        [MemberData(nameof(LocationConfigTestData.AddLocationTestData), MemberType = typeof(LocationConfigTestData))]
+        internal void TestAddLocation(Message message, PockyUser user, string[] locations, Message response,
             string locationName)
         {
             this.Given(x => GivenAMessage(message))
@@ -50,7 +50,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 .And(x => GivenLocations(locations))
                 .When(x => WhenRespondingToAMessage())
                 .Then(x => ThenItShouldReturnAResponse(response))
-                .And(x => ThenItShouldSetALocation(locationName))
+                .And(x => ThenItShouldAddALocation(locationName))
                 .BDDfy();
         }
 
@@ -94,9 +94,9 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _response.Text.ShouldBe(response.Text);
         }
 
-        private void ThenItShouldSetALocation(string locationName)
+        private void ThenItShouldAddALocation(string locationName)
         {
-            _locationRepository.Received(1).SetLocation(locationName);
+            _locationRepository.Received(1).AddLocation(locationName);
         }
 
         private void ThenItShouldDeleteALocation(string locationName)
