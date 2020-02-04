@@ -97,6 +97,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
+        [InlineData(Commands.LocationConfig)]
         public void ItShouldShowTheHelpMessageForNonAdminCommands(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -112,6 +113,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
+        [InlineData(Commands.LocationConfig)]
         public void ItShouldShowTheHelpMessageForNonAdminCommandsInADirectMessage(string command)
         {
             this.Given(x => GivenADirectMessageHelpMessage(command))
@@ -213,6 +215,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                                   $"* {Commands.Ping}\n" +
                                   $"* {Commands.Welcome}\n" +
                                   $"* {Commands.Rotation}\n" +
+                                  $"* {Commands.LocationConfig}\n" +
                                   $"\nFor more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`\n" +
                                   "\nI am still being worked on, so more features to come.");
         }
@@ -225,6 +228,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                                   $"* {Commands.Ping}\n" +
                                   $"* {Commands.Welcome}\n" +
                                   $"* {Commands.Rotation}\n" +
+                                  $"* {Commands.LocationConfig}\n" +
                                   $"* {Commands.Reset}\n" +
                                   $"* {Commands.Finish}\n" +
                                   $"\nFor more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`\n" +
