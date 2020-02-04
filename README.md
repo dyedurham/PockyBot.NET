@@ -191,7 +191,7 @@ commands.
 - `@PockyBot help` — get help with using the bot.
 - `@PockyBot rotation` — get the snack buying rotation.
 - `@PockyBot welcome` — welcome users.
-- `@PockyBot locationconfig get|set|delete <location>` — manage locations.
+- `@PockyBot locationconfig get|add|delete <location>` — manage locations.
 
 #### Admin-only commands
 
