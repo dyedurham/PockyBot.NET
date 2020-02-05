@@ -5,23 +5,20 @@ using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Repositories;
-using PockyBot.NET.Utilities;
 
 namespace PockyBot.NET.Services.Triggers
 {
     internal class StringConfig : ITrigger
     {
         private readonly IConfigRepository _configRepository;
-        private readonly ITableHelper _tableHelper;
         public string Command => Commands.StringConfig;
         public bool DirectMessageAllowed => false;
         public bool CanHaveArgs => true;
         public string[] Permissions => new[] {Roles.Admin, Roles.Config};
 
-        public StringConfig(IConfigRepository configRepository, ITableHelper tableHelper)
+        public StringConfig(IConfigRepository configRepository)
         {
             _configRepository = configRepository;
-            _tableHelper = tableHelper;
         }
 
         public async Task<Message> Respond(Message message)
@@ -63,19 +60,17 @@ namespace PockyBot.NET.Services.Triggers
         private string GetStringConfig()
         {
             var stringConfig = _configRepository.GetAllStringConfig();
-            var columnWidths = _tableHelper.GetStringConfigColumnWidths(stringConfig);
+            var groupedConfig = stringConfig.GroupBy(x => x.Name);
+            var message = "Here is the current config (**name:** value):\n";
 
-            var message = "Here is the current config:\n```\n";
-
-            message += _tableHelper.PadString("Name", columnWidths[0]) + " | Value\n";
-            message += "".PadLeft(columnWidths[0], '-') + "-+-" + "".PadRight(columnWidths[1], '-') + "\n";
-
-            foreach (var config in stringConfig)
+            foreach (var grouping in groupedConfig)
             {
-                message += config.Name.PadRight(columnWidths[0]) + " | " + config.Value + "\n";
+                message += $"* **{grouping.Key}:**\n";
+                foreach (var config in grouping)
+                {
+                    message += $"    * {config.Value}\n";
+                }
             }
-
-            message += "```";
             return message;
         }
 
