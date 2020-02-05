@@ -69,8 +69,8 @@ namespace PockyBot.NET.Services.Triggers
                     return CreateFinishHelpMessage(user);
                 // case Commands.NumberConfig:
                 //     return CreateNumberConfigHelpMessage(user);
-                // case Commands.StringConfig:
-                //     return CreateStringConfigHelpMessage(user);
+                case Commands.StringConfig:
+                    return CreateStringConfigHelpMessage(user);
                 // case Commands.RoleConfig:
                 //     return CreateRoleConfigHelpMessage(user);
                 // case Commands.LocationConfig:
@@ -124,12 +124,12 @@ namespace PockyBot.NET.Services.Triggers
                 newMessage += $"* {Commands.Finish}\n";
             }
 
-            // if (HasPermission(user, new []{Roles.Admin, Roles.Config})) {
-            //     newMessage += $"* {Commands.NumberConfig}\n";
-            //     newMessage += $"* {Commands.StringConfig}\n";
-            //     newMessage += $"* {Commands.RoleConfig}\n";
-            //     newMessage += $"* {Commands.LocationWeight}\n";
-            // }
+            if (HasPermission(user, new []{Roles.Admin, Roles.Config})) {
+                // newMessage += $"* {Commands.NumberConfig}\n";
+                newMessage += $"* {Commands.StringConfig}\n";
+                // newMessage += $"* {Commands.RoleConfig}\n";
+                // newMessage += $"* {Commands.LocationWeight}\n";
+            }
 
             // if (HasPermission(user, new []{Roles.Admin, Roles.RemoveUser})) {
             //     newMessage += $"* {Commands.RemoveUser}\n";
@@ -246,17 +246,17 @@ namespace PockyBot.NET.Services.Triggers
         //     }
         //     return CreateDefaultHelpMessage();
         // }
-        //
-        // private string CreateStringConfigHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
-        //         return "### How to configure string config values 🎻!\n" +
-        //             $"1. To get/edit/refresh/delete string config values, type `@{_pockyBotSettings.BotName} {Commands.StringConfig} {Object.values(ConfigAction).join('|')} {{name}} {{value}}`\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
-        //
+
+        private string CreateStringConfigHelpMessage(PockyUser user)
+        {
+            if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+                return "### How to configure string config values 🎻!\n" +
+                    $"1. To get/edit/refresh/delete string config values, type `@{_pockyBotSettings.BotName} {Commands.StringConfig} {string.Join("|",ConfigActions.All())} {{name}} {{value}}`\n" +
+                    "1. I will respond in the room you messaged me in.";
+            }
+            return CreateDefaultHelpMessage();
+        }
+
         // private string CreateRoleConfigHelpMessage(PockyUser user)
         // {
         //     if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
