@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
@@ -31,21 +33,24 @@ namespace PockyBot.NET.Services.Triggers
             {
                 return new Message
                 {
-                    Text = $"Please specify a command. Possible values are {ConfigActions.Get}, {ConfigActions.Set}, {ConfigActions.Refresh}, {ConfigActions.Delete}."
+                    Text = $"Please specify a command. Possible values are {string.Join(", ", ConfigActions.All())}."
                 };
             }
 
-            var newMessage = "";
+            string newMessage;
             switch (commandWords[1])
             {
                 case ConfigActions.Get:
                     newMessage = GetStringConfig();
                     break;
-                case ConfigActions.Set:
-                    break;
-                case ConfigActions.Refresh:
+                case ConfigActions.Add:
+                    newMessage = await AddStringConfig(commandWords);
                     break;
                 case ConfigActions.Delete:
+                    newMessage = await DeleteStringConfig(commandWords);
+                    break;
+                default:
+                    newMessage = $"Invalid string config command. Possible values are {string.Join(", ", ConfigActions.All())}";
                     break;
             }
 
@@ -72,6 +77,35 @@ namespace PockyBot.NET.Services.Triggers
 
             message += "```";
             return message;
+        }
+
+        private async Task<string> AddStringConfig(List<string> commandWords)
+        {
+            if (commandWords.Count < 4) {
+                return "You must specify a config name and value to add.";
+            }
+
+            if (_configRepository.GetStringConfig(commandWords[2]).Contains(commandWords[3], StringComparer.OrdinalIgnoreCase))
+            {
+                return $"String config name:value pair {commandWords[2]}:{commandWords[3]} already exists";
+            }
+
+            await _configRepository.AddStringConfig(commandWords[2].ToLower(), commandWords[3]);
+            return "Config has been set";
+        }
+
+        private async Task<string> DeleteStringConfig(List<string> commandWords)
+        {
+            if (commandWords.Count < 4) {
+                return "You must specify a config name and value to be deleted";
+            }
+
+            if (!_configRepository.GetStringConfig(commandWords[2]).Contains(commandWords[3], StringComparer.OrdinalIgnoreCase)) {
+                return $"String config name:value pair {commandWords[2]}:{commandWords[3]} does not exist";
+            }
+
+            await _configRepository.DeleteStringConfig(commandWords[2].ToLower(), commandWords[3]);
+            return "Config has been deleted";
         }
     }
 }
