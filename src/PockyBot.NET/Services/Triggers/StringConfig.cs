@@ -47,7 +47,7 @@ namespace PockyBot.NET.Services.Triggers
                     newMessage = await DeleteStringConfig(commandWords);
                     break;
                 default:
-                    newMessage = $"Invalid string config command. Possible values are {string.Join(", ", ConfigActions.All())}";
+                    newMessage = $"Invalid string config command. Possible values are {string.Join(", ", ConfigActions.All())}.";
                     break;
             }
 
@@ -65,10 +65,17 @@ namespace PockyBot.NET.Services.Triggers
 
             foreach (var grouping in groupedConfig)
             {
-                message += $"* **{grouping.Key}:**\n";
-                foreach (var config in grouping)
+                if (grouping.Count() == 1)
                 {
-                    message += $"    * {config.Value}\n";
+                    message += $"* **{grouping.Key}:** {grouping.First().Value}\n";
+                }
+                else
+                {
+                    message += $"* **{grouping.Key}:**\n";
+                    foreach (var config in grouping)
+                    {
+                        message += $"    * {config.Value}\n";
+                    }
                 }
             }
             return message;
@@ -82,25 +89,25 @@ namespace PockyBot.NET.Services.Triggers
 
             if (_configRepository.GetStringConfig(commandWords[2]).Contains(commandWords[3], StringComparer.OrdinalIgnoreCase))
             {
-                return $"String config name:value pair {commandWords[2]}:{commandWords[3]} already exists";
+                return $"String config name:value pair {commandWords[2]}:{commandWords[3]} already exists.";
             }
 
             await _configRepository.AddStringConfig(commandWords[2].ToLower(), commandWords[3]);
-            return "Config has been set";
+            return $"Config has been updated: {commandWords[2]}:{commandWords[3]} has been added.";
         }
 
         private async Task<string> DeleteStringConfig(List<string> commandWords)
         {
             if (commandWords.Count < 4) {
-                return "You must specify a config name and value to be deleted";
+                return "You must specify a config name and value to be deleted.";
             }
 
             if (!_configRepository.GetStringConfig(commandWords[2]).Contains(commandWords[3], StringComparer.OrdinalIgnoreCase)) {
-                return $"String config name:value pair {commandWords[2]}:{commandWords[3]} does not exist";
+                return $"String config name:value pair {commandWords[2]}:{commandWords[3]} does not exist.";
             }
 
             await _configRepository.DeleteStringConfig(commandWords[2].ToLower(), commandWords[3]);
-            return "Config has been deleted";
+            return $"Config has been updated: {commandWords[2]}:{commandWords[3]} has been deleted.";
         }
     }
 }
