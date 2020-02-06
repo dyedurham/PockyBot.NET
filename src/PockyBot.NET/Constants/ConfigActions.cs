@@ -10,7 +10,7 @@ namespace PockyBot.NET.Constants
 
         public static string[] All()
         {
-            return new string[]
+            return new []
             {
                 Get, Add, Delete
             };

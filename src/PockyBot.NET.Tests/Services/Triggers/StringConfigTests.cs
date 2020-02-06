@@ -14,8 +14,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
 {
     public class StringConfigTests
     {
-        private StringConfig _subject;
-        private IConfigRepository _configRepository;
+        private readonly StringConfig _subject;
+        private readonly IConfigRepository _configRepository;
 
         private Message _message;
         private Message _result;
@@ -135,7 +135,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void GivenTheConfigRepositoryReturnsTheStringConfig()
         {
-            _configRepository.GetAllStringConfig().Returns(new List<Persistence.Models.StringConfig>()
+            _configRepository.GetAllStringConfig().Returns(new List<Persistence.Models.StringConfig>
             {
                 new Persistence.Models.StringConfig
                 {

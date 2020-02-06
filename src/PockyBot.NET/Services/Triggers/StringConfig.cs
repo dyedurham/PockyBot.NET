@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
@@ -41,10 +43,10 @@ namespace PockyBot.NET.Services.Triggers
                     newMessage = GetStringConfig();
                     break;
                 case ConfigActions.Add:
-                    newMessage = await AddStringConfig(commandWords);
+                    newMessage = await AddStringConfig(commandWords).ConfigureAwait(false);
                     break;
                 case ConfigActions.Delete:
-                    newMessage = await DeleteStringConfig(commandWords);
+                    newMessage = await DeleteStringConfig(commandWords).ConfigureAwait(false);
                     break;
                 default:
                     newMessage = $"Invalid string config command. Possible values are {string.Join(", ", ConfigActions.All())}.";
@@ -61,24 +63,26 @@ namespace PockyBot.NET.Services.Triggers
         {
             var stringConfig = _configRepository.GetAllStringConfig();
             var groupedConfig = stringConfig.GroupBy(x => x.Name);
-            var message = "Here is the current config (**name:** value):\n";
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("Here is the current config (**name:** value):\n");
 
             foreach (var grouping in groupedConfig)
             {
                 if (grouping.Count() == 1)
                 {
-                    message += $"* **{grouping.Key}:** {grouping.First().Value}\n";
+                    stringBuilder.Append($"* **{grouping.Key}:** {grouping.First().Value}\n");
                 }
                 else
                 {
-                    message += $"* **{grouping.Key}:**\n";
+                    stringBuilder.Append($"* **{grouping.Key}:**\n");
                     foreach (var config in grouping)
                     {
-                        message += $"    * {config.Value}\n";
+                        stringBuilder.Append($"    * {config.Value}\n");
                     }
                 }
             }
-            return message;
+            return stringBuilder.ToString();
         }
 
         private async Task<string> AddStringConfig(List<string> commandWords)
@@ -92,7 +96,7 @@ namespace PockyBot.NET.Services.Triggers
                 return $"String config name:value pair {commandWords[2]}:{commandWords[3]} already exists.";
             }
 
-            await _configRepository.AddStringConfig(commandWords[2].ToLower(), commandWords[3]);
+            await _configRepository.AddStringConfig(commandWords[2].ToLower(CultureInfo.InvariantCulture), commandWords[3]);
             return $"Config has been updated: {commandWords[2]}:{commandWords[3]} has been added.";
         }
 
@@ -106,7 +110,7 @@ namespace PockyBot.NET.Services.Triggers
                 return $"String config name:value pair {commandWords[2]}:{commandWords[3]} does not exist.";
             }
 
-            await _configRepository.DeleteStringConfig(commandWords[2].ToLower(), commandWords[3]);
+            await _configRepository.DeleteStringConfig(commandWords[2].ToLower(CultureInfo.InvariantCulture), commandWords[3]);
             return $"Config has been updated: {commandWords[2]}:{commandWords[3]} has been deleted.";
         }
     }
