@@ -64,9 +64,7 @@ namespace PockyBot.NET.Services.Triggers
             var stringConfig = _configRepository.GetAllStringConfig();
             var groupedConfig = stringConfig.GroupBy(x => x.Name);
 
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("Here is the current config (**name:** value):\n");
-
+            var stringBuilder = new StringBuilder("Here is the current config (**name:** value):\n");
             foreach (var grouping in groupedConfig)
             {
                 if (grouping.Count() == 1)
@@ -87,7 +85,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private async Task<string> AddStringConfig(List<string> commandWords)
         {
-            if (commandWords.Count < 4) {
+            if (commandWords.Count != 4) {
                 return "You must specify a config name and value to add.";
             }
 
@@ -102,7 +100,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private async Task<string> DeleteStringConfig(List<string> commandWords)
         {
-            if (commandWords.Count < 4) {
+            if (commandWords.Count != 4) {
                 return "You must specify a config name and value to be deleted.";
             }
 
