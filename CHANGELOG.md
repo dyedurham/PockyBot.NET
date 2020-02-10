@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.5.0...v1.5.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* update stringconfig help message ([8b9e635](https://github.com/GlobalX/PockyBot.NET/commit/8b9e63510d59bedde750cb2d750a240c54a9d893))
+
 # [1.5.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.4.0...v1.5.0) (2020-02-10)
 
 
