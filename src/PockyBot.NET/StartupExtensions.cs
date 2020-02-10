@@ -44,6 +44,7 @@ namespace PockyBot.NET
             services.AddTransient<ITrigger, Reset>();
             services.AddTransient<ITrigger, Rotation>();
             services.AddTransient<ITrigger, StringConfig>();
+            services.AddTransient<ITrigger, RemoveUser>();
             services.AddTransient<ITrigger, Default>();
         }
     }

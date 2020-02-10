@@ -8,5 +8,6 @@ namespace PockyBot.NET.Constants
         public const string Finish = "FINISH";
         public const string Reset = "RESET";
         public const string Config = "CONFIG";
+        public const string RemoveUser = "REMOVEUSER";
     }
 }
