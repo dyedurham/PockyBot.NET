@@ -38,6 +38,7 @@ namespace PockyBot.NET
                 new Finish(pockyUserRepository, pegResultsHelper, resultsUploader, directResultsMessageSender, loggerFactory.CreateLogger<Finish>()),
                 new Reset(pegRepository, loggerFactory.CreateLogger<Reset>()),
                 new Rotation(configRepository),
+                new StringConfig(configRepository),
                 new Default(wrappedSettings)
             };
 
