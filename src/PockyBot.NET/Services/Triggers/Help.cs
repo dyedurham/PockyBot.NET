@@ -251,7 +251,7 @@ namespace PockyBot.NET.Services.Triggers
         {
             if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
                 return "### How to configure string config values 🎻!\n" +
-                    $"1. To get/edit/refresh/delete string config values, type `@{_pockyBotSettings.BotName} {Commands.StringConfig} {string.Join("|",ConfigActions.All())} {{name}} {{value}}`\n" +
+                    $"1. To get/add/delete string config values, type `@{_pockyBotSettings.BotName} {Commands.StringConfig} {string.Join("|",ConfigActions.All())} {{name}} {{value}}`\n" +
                     "1. I will respond in the room you messaged me in.";
             }
             return CreateDefaultHelpMessage();
