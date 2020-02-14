@@ -23,7 +23,7 @@ namespace PockyBot.NET.Services.Triggers
         public async Task<Message> Respond(Message message)
         {
             var messageParts = message.MessageParts.Skip(1).ToList();
-            messageParts[0].Text = messageParts[0].Text.TrimStart().Remove(Commands.RemoveUser.Length);
+            messageParts[0].Text = messageParts[0].Text.Trim().Remove(0, Commands.RemoveUser.Length).Trim();
             messageParts = messageParts.Where(x => !string.IsNullOrWhiteSpace(x.Text)).ToList();
 
             if (messageParts.Count < 1)
