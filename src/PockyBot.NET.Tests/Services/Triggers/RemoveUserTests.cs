@@ -14,8 +14,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
 {
     public class RemoveUserTests
     {
-        private RemoveUser _subject;
-        private IPockyUserRepository _pockyUserRepository;
+        private readonly RemoveUser _subject;
+        private readonly IPockyUserRepository _pockyUserRepository;
 
         private Message _message;
         private Message _response;
