@@ -11,5 +11,6 @@ namespace PockyBot.NET.Constants
         public const string Reset = "reset";
         public const string Rotation = "rotation";
         public const string StringConfig = "stringconfig";
+        public const string RemoveUser = "removeuser";
     }
 }
