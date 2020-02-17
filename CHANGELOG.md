@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.5.1...v1.6.0) (2020-02-17)
+
+
+### Bug Fixes
+
+* code style issues - make test objects readonly ([1334a30](https://github.com/GlobalX/PockyBot.NET/commit/1334a3058d5f11695073867ccd7d96bcb31dcbaa))
+
+
+### Features
+
+* add removeuser trigger ([07d9213](https://github.com/GlobalX/PockyBot.NET/commit/07d9213fcf0cbb9f4cb1b6628d9d31e1de79eb46))
+
 ## [1.5.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.5.0...v1.5.1) (2020-02-10)
 
 
