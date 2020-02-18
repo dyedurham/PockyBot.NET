@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PockyBot.NET.Persistence.Models;
@@ -27,17 +29,28 @@ namespace PockyBot.NET.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddUserLocation(PockyUser user, Location location)
+        public async Task UpsertUserLocation(PockyUser user, string location)
         {
-            // TODO: check if all three of these are needed?
-            var userLocation = new UserLocation
-            {
-                Location = location.Name,
-                User = user,
-                UserId = user.UserId
-            };
+            var userLocation = await _context.UserLocations.FirstOrDefaultAsync(x =>
+                x.UserId == (user != null ? user.UserId : null));
 
-            _context.UserLocations.Add(userLocation);
+            if (userLocation == null)
+            {
+                // TODO: check if all three of these properties are needed?
+                userLocation = new UserLocation
+                {
+                    Location = location,
+                    User = user,
+                    UserId = user.UserId
+                };
+                await _context.UserLocations.AddAsync(userLocation);
+            }
+            else
+            {
+                userLocation.Location = location;
+                _context.UserLocations.Update(userLocation);
+            }
+
             await _context.SaveChangesAsync();
         }
     }

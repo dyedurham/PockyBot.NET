@@ -41,9 +41,9 @@ namespace PockyBot.NET.Services.Triggers
                 };
             }
 
-            string[] locations = _locationRepository.GetAllLocations();
+            var locations = _locationRepository.GetAllLocations();
             string response;
-            
+
             switch (commands[1].ToLower(CultureInfo.InvariantCulture))
             {
                 case Actions.Get:

@@ -58,14 +58,14 @@ namespace PockyBot.NET.Services.Triggers
             switch (command.ToLowerInvariant())
             {
                 case Actions.Get:
-                    response = UserLocationGetMessage(commands, mentionedUsers, meId);
+                    response = GetUserLocation(commands, mentionedUsers, meId);
                     break;
                 case Actions.Set:
                     throw new NotImplementedException();
-                    //response = await UserLocationSet(commands, mentionedUsers, userIsAdmin, meId);
+                    response = await SetUserLocation(commands, mentionedUsers, userIsAdmin, meId);
                     break;
                 case Actions.Delete:
-                    response = await UserLocationDelete(commands, mentionedUsers, userIsAdmin, meId);
+                    response = await DeleteUserLocation(commands, mentionedUsers, userIsAdmin, meId);
                     break;
                 default:
                     response = "Unknown command. Possible values are get, set, and delete.";
@@ -84,7 +84,7 @@ namespace PockyBot.NET.Services.Triggers
             return user.HasRole(Roles.Admin) || user.HasRole(Roles.Config);
         }
 
-        private string UserLocationGetMessage(string[] commands, string[] mentionedUsers, string meId)
+        private string GetUserLocation(string[] commands, string[] mentionedUsers, string meId)
         {
             if (commands.Length < 1)
             {
@@ -152,7 +152,45 @@ namespace PockyBot.NET.Services.Triggers
             return builder.ToString();
         }
 
-        private async Task<string> UserLocationDelete(string[] commands, string[] mentionedUsers, bool userIsAdmin, string meId)
+        private async Task<string> SetUserLocation(string[] commands, string[] mentionedUsers, bool userIsAdmin, string meId)
+        {
+            if (commands.Length < 2)
+            {
+                if (userIsAdmin)
+                {
+                    return "User or location was not specified. Possible arguments are \"<location> me\" or \"<location> <list of users>\"";
+                }
+
+                return "User or location was not specified. Argument must be in the form of \"<location> me";
+            }
+
+            var locations = _locationRepository.GetAllLocations();
+            var givenLocation = commands[0];
+            var users = commands.Skip(1);
+
+            // Ensure specified location is valid
+            if (!locations.Any(validLocation => givenLocation.Contains(validLocation, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return $"Location {givenLocation} does not exist. Valid values are: {string.Join(", ", locations)}.";
+            }
+
+            // Update user "me"
+            if (string.Equals(commands[0], UserLocationTypes.Me, StringComparison.InvariantCultureIgnoreCase))
+            {
+                await _userLocationRepository.UpsertUserLocation(_pockyUserRepository.GetUser(meId), givenLocation);
+                return "User location added.";
+            }
+
+            // Update user list
+            var tasks = mentionedUsers.Select(user =>
+                _userLocationRepository.UpsertUserLocation(_pockyUserRepository.GetUser(user), givenLocation)).ToList();
+
+            await Task.WhenAll(tasks);
+            return "User locations added.";
+        }
+
+
+        private async Task<string> DeleteUserLocation(string[] commands, string[] mentionedUsers, bool userIsAdmin, string meId)
         {
             if (commands.Length < 1)
             {
@@ -176,19 +214,13 @@ namespace PockyBot.NET.Services.Triggers
 
             await DeleteMentionedUsers(mentionedUsers);
 
-            return "All user locations removed.";
+            return "User locations removed.";
         }
 
         private async Task DeleteMentionedUsers(string[] mentionedUsers)
         {
-            // TODO: replace this with await foreach (var user in mentionedUsers) if we upgrade to C# 8
-
-            var tasks = new List<Task>();
-
-            foreach (var user in mentionedUsers)
-            {
-                tasks.Add(_userLocationRepository.DeleteUserLocation(user));
-            }
+            var tasks = mentionedUsers.Select(user =>
+                _userLocationRepository.DeleteUserLocation(user)).ToList();
 
             await Task.WhenAll(tasks);
         }
