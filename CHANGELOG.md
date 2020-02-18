@@ -1,3 +1,39 @@
+# [1.6.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.5.1...v1.6.0) (2020-02-17)
+
+
+### Bug Fixes
+
+* code style issues - make test objects readonly ([1334a30](https://github.com/GlobalX/PockyBot.NET/commit/1334a3058d5f11695073867ccd7d96bcb31dcbaa))
+
+
+### Features
+
+* add removeuser trigger ([07d9213](https://github.com/GlobalX/PockyBot.NET/commit/07d9213fcf0cbb9f4cb1b6628d9d31e1de79eb46))
+
+## [1.5.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.5.0...v1.5.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* update stringconfig help message ([8b9e635](https://github.com/GlobalX/PockyBot.NET/commit/8b9e63510d59bedde750cb2d750a240c54a9d893))
+
+# [1.5.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.4.0...v1.5.0) (2020-02-10)
+
+
+### Bug Fixes
+
+* code style fixes ([a77086b](https://github.com/GlobalX/PockyBot.NET/commit/a77086b3b237871aa29614bb0c2741aa5278e708))
+* PR comments for string config ([20ef1cb](https://github.com/GlobalX/PockyBot.NET/commit/20ef1cb314f1ce453614655899082a530d55c6eb))
+
+
+### Features
+
+* add stringconfig to factory and startup extensions, and add unit tests ([e29cbfb](https://github.com/GlobalX/PockyBot.NET/commit/e29cbfbeaa13ddb282c5c19d029e1516f62ad86e))
+* add stringconfig to help and update unit tests ([8bff45f](https://github.com/GlobalX/PockyBot.NET/commit/8bff45f7a005bc3751532b117389e7ee6ef9dcea))
+* implement stringconfig add and delete ([d045921](https://github.com/GlobalX/PockyBot.NET/commit/d0459215a12137bfaa363e20744c40bf23029548))
+* implement stringconfig get ([e5bb292](https://github.com/GlobalX/PockyBot.NET/commit/e5bb2923463ea28e6df676c76da00c2c58e4232b))
+* update stringconfig to display configuration in a list rather than a table ([f772211](https://github.com/GlobalX/PockyBot.NET/commit/f772211fbf66a671018e9c467e42c3692522eb63))
+
 # [1.4.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.3.1...v1.4.0) (2020-01-31)
 
 
