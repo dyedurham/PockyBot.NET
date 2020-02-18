@@ -29,6 +29,7 @@ namespace PockyBot.NET
             var pegGiver = new PegGiver(pegRepository, chatHelper);
             var directResultsMessageSender = new DirectResultsMessageSender(chatHelper.Messages);
             var pegResultsHelper = new PegResultsHelper(configRepository, pegHelper);
+            var userLocationService = new UserLocationService(pockyUserRepository, locationRepository, userLocationRepository);
 
             List<ITrigger> triggers = new List<ITrigger>
             {
@@ -41,7 +42,7 @@ namespace PockyBot.NET
                 new Reset(pegRepository, loggerFactory.CreateLogger<Reset>()),
                 new Rotation(configRepository),
                 new LocationConfig(locationRepository, pockyUserRepository),
-                new UserLocation(locationRepository, pockyUserRepository, userLocationRepository),
+                new UserLocation(pockyUserRepository, userLocationService),
                 new Default(wrappedSettings)
             };
 
