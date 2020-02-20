@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
@@ -10,14 +11,16 @@ namespace PockyBot.NET.Services.Triggers
     internal class RemoveUser : ITrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
+        private readonly ILogger<RemoveUser> _logger;
         public string Command => Commands.RemoveUser;
         public bool DirectMessageAllowed => false;
         public bool CanHaveArgs => true;
         public string[] Permissions => new []{Roles.Admin, Roles.RemoveUser};
 
-        public RemoveUser(IPockyUserRepository pockyUserRepository)
+        public RemoveUser(IPockyUserRepository pockyUserRepository, ILogger<RemoveUser> logger)
         {
             _pockyUserRepository = pockyUserRepository;
+            _logger = logger;
         }
 
         public async Task<Message> Respond(Message message)
@@ -63,6 +66,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private async Task<string> RemoveUserByUsername(string username)
         {
+            _logger.LogDebug($"Finding user to remove with username {username}");
             var pockyUsers = _pockyUserRepository.GetUsersByUsername(username);
             if (pockyUsers.Count() > 1)
             {
@@ -98,7 +102,8 @@ namespace PockyBot.NET.Services.Triggers
 
         private static bool UserHasOutstandingPegs(PockyUser user)
         {
-            return user.PegsGiven.Any() || user.PegsReceived.Any();
+            if (user == null) return false;
+            return (user.PegsGiven != null && user.PegsGiven.Any()) || (user.PegsReceived != null && user.PegsReceived.Any());
         }
     }
 }
