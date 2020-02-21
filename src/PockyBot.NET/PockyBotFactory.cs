@@ -39,7 +39,7 @@ namespace PockyBot.NET
                 new Reset(pegRepository, loggerFactory.CreateLogger<Reset>()),
                 new Rotation(configRepository),
                 new StringConfig(configRepository),
-                new RemoveUser(pockyUserRepository),
+                new RemoveUser(pockyUserRepository, loggerFactory.CreateLogger<RemoveUser>()),
                 new Default(wrappedSettings)
             };
 
