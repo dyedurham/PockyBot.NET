@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.1...v1.6.2) (2020-02-25)
+
+
+### Bug Fixes
+
+* fix db representation so that users can be accessed and removed properly ([4d2f153](https://github.com/GlobalX/PockyBot.NET/commit/4d2f15370591dc37805a0a361a2890d3d6ad95f1))
+
 ## [1.6.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.0...v1.6.1) (2020-02-21)
 
 
