@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using GlobalX.ChatBots.Core.Messages;
 using GlobalX.ChatBots.Core.People;
-using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Tests.TestData.Triggers
 {
-    public static class LocationConfigTestData
+    public static class LocationWeightTestData
     {
         public static IEnumerable<object[]> RespondTestData()
         {
@@ -32,20 +31,15 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig "
+                            Text = " locationweight "
                         }
                     }
                 },
-                new PockyUser
-                {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role>()
-                },
                 Array.Empty<string>(),
+                new List<GeneralConfig>(),
                 new Message
                 {
-                    Text = "Please specify a command. Possible values are get, add, and delete."
+                    Text = "Please specify a command. Possible values are get, set, and delete."
                 }
             };
 
@@ -70,24 +64,19 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig blah"
+                            Text = " locationweight blah"
                         }
                     }
-                },
-                new PockyUser
-                {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role>()
                 },
                 Array.Empty<string>(),
+                new List<GeneralConfig>(),
                 new Message
                 {
-                    Text = "Unknown command. Possible values are get, add, and delete."
+                    Text = "Unknown command. Possible values are get, set, and delete."
                 }
             };
 
-            // get command, no locations
+            // get command, no location weights
             yield return new object[]
             {
                 new Message
@@ -108,24 +97,90 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig get"
+                            Text = " locationweight get"
                         }
                     }
                 },
-                new PockyUser
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
+                new Message
                 {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role>()
+                    Text = "No location weights set."
+                }
+            };
+
+            // get command, location weights set
+            yield return new object[]
+            {
+                new Message
+                {
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User"
+                    },
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            MessageType = MessageType.PersonMention,
+                            Text = "TestBot",
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            MessageType = MessageType.Text,
+                            Text = " locationweight get"
+                        }
+                    }
+                },
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>
+                {
+                    new GeneralConfig { Name = "NotALocationWeight", Value = 0 },
+                    new GeneralConfig { Name = "locationWeightLocation1toLocation2", Value = 66 },
+                    new GeneralConfig { Name = "locationWeightlocation3ToLocation1", Value = 3 }
+                },
+                new Message
+                {
+                    Text = "Here are the current location weights:\n\n* Location1 <-> Location2: 66\n* Location1 <-> Location3: 3"
+                }
+            };
+
+            // set command, not enough arguments
+            yield return new object[]
+            {
+                new Message
+                {
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User"
+                    },
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            MessageType = MessageType.PersonMention,
+                            Text = "TestBot",
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            MessageType = MessageType.Text,
+                            Text = " locationweight set"
+                        }
+                    }
                 },
                 Array.Empty<string>(),
+                new List<GeneralConfig>(),
                 new Message
                 {
-                    Text = "No locations added."
+                    Text = "Please specify two locations and a weight."
                 }
             };
 
-            // get command, some locations added
+            // set command, invalid first location
             yield return new object[]
             {
                 new Message
@@ -146,29 +201,19 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig get"
+                            Text = " locationweight set blah Location2 3"
                         }
                     }
                 },
-                new PockyUser
-                {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role>()
-                },
-                new []
-                {
-                    "Location1",
-                    "Location2",
-                    "Location3"
-                },
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
                 new Message
                 {
-                    Text = "Here are the current locations:\n* Location1\n* Location2\n* Location3"
+                    Text = "Location value \"blah\" is invalid."
                 }
             };
 
-            // add command, no permission
+            // set command, invalid second location
             yield return new object[]
             {
                 new Message
@@ -189,24 +234,118 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig add Location1"
+                            Text = " locationweight set Location1 blah2 3"
                         }
                     }
                 },
-                new PockyUser
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
+                new Message
                 {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role>()
+                    Text = "Location value \"blah2\" is invalid."
+                }
+            };
+
+            // set command, non integer
+            yield return new object[]
+            {
+                new Message
+                {
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User"
+                    },
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            MessageType = MessageType.PersonMention,
+                            Text = "TestBot",
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            MessageType = MessageType.Text,
+                            Text = " locationweight set Location1 Location2 3.5"
+                        }
+                    }
+                },
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
+                new Message
+                {
+                    Text = "Weight must be set to a whole number."
+                }
+            };
+
+            // set command, less than zero
+            yield return new object[]
+            {
+                new Message
+                {
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User"
+                    },
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            MessageType = MessageType.PersonMention,
+                            Text = "TestBot",
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            MessageType = MessageType.Text,
+                            Text = " locationweight set Location1 Location2 -3"
+                        }
+                    }
+                },
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
+                new Message
+                {
+                    Text = "Weight must be greater than or equal to zero."
+                }
+            };
+
+            // delete command, not enough arguments
+            yield return new object[]
+            {
+                new Message
+                {
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User"
+                    },
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            MessageType = MessageType.PersonMention,
+                            Text = "TestBot",
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            MessageType = MessageType.Text,
+                            Text = " locationweight delete"
+                        }
+                    }
                 },
                 Array.Empty<string>(),
+                new List<GeneralConfig>(),
                 new Message
                 {
-                    Text = "Permission denied. You may only use the 'get' command."
+                    Text = "You must specify a two location names to delete the weighting for."
                 }
             };
 
-            // add command, no location name
+            // delete command, invalid first location
             yield return new object[]
             {
                 new Message
@@ -227,24 +366,19 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig add "
+                            Text = " locationweight delete blah Location2"
                         }
                     }
                 },
-                new PockyUser
-                {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Admin } }
-                },
-                Array.Empty<string>(),
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
                 new Message
                 {
-                    Text = "You must specify a location name to add."
+                    Text = "Location value \"blah\" is invalid."
                 }
             };
 
-            // add command, location already added
+            // delete command, invalid second location
             yield return new object[]
             {
                 new Message
@@ -265,24 +399,19 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig add Location1"
+                            Text = " locationweight delete Location1 blah2"
                         }
                     }
                 },
-                new PockyUser
-                {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
-                },
-                new List<string> { "Location1" },
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
                 new Message
                 {
-                    Text = "Location value Location1 has already been added."
+                    Text = "Location value \"blah2\" is invalid."
                 }
             };
 
-            // delete command, no permission
+            // delete command, no existing config
             yield return new object[]
             {
                 new Message
@@ -303,101 +432,102 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig delete Location1"
+                            Text = " locationweight delete Location1 Location2"
                         }
                     }
                 },
-                new PockyUser
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>
                 {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role>()
+                    new GeneralConfig { Name = "NotALocationWeight", Value = 0 },
+                    new GeneralConfig { Name = "locationWeightlocation3ToLocation1", Value = 3 }
                 },
-                Array.Empty<string>(),
                 new Message
                 {
-                    Text = "Permission denied. You may only use the 'get' command."
-                }
-            };
-
-            // delete command, no location name
-            yield return new object[]
-            {
-                new Message
-                {
-                    Sender = new Person
-                    {
-                        UserId = "testUserId",
-                        Username = "Test User"
-                    },
-                    MessageParts = new []
-                    {
-                        new MessagePart
-                        {
-                            MessageType = MessageType.PersonMention,
-                            Text = "TestBot",
-                            UserId = "testBotId"
-                        },
-                        new MessagePart
-                        {
-                            MessageType = MessageType.Text,
-                            Text = " locationconfig delete "
-                        }
-                    }
-                },
-                new PockyUser
-                {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Admin } }
-                },
-                Array.Empty<string>(),
-                new Message
-                {
-                    Text = "You must specify a location name to delete."
-                }
-            };
-
-            // delete command, location already deleted
-            yield return new object[]
-            {
-                new Message
-                {
-                    Sender = new Person
-                    {
-                        UserId = "testUserId",
-                        Username = "Test User"
-                    },
-                    MessageParts = new []
-                    {
-                        new MessagePart
-                        {
-                            MessageType = MessageType.PersonMention,
-                            Text = "TestBot",
-                            UserId = "testBotId"
-                        },
-                        new MessagePart
-                        {
-                            MessageType = MessageType.Text,
-                            Text = " locationconfig delete Location1"
-                        }
-                    }
-                },
-                new PockyUser
-                {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
-                },
-                new List<string> { "Location2" },
-                new Message
-                {
-                    Text = "Location value Location1 does not exist."
+                    Text = "No weighting found for locations Location1 and Location2."
                 }
             };
         }
 
-        public static IEnumerable<object[]> AddLocationTestData()
+        public static IEnumerable<object[]> SetLocationWeightTestData()
+        {
+            // successful
+            yield return new object[]
+            {
+                new Message
+                {
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User"
+                    },
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            MessageType = MessageType.PersonMention,
+                            Text = "TestBot",
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            MessageType = MessageType.Text,
+                            Text = " locationweight set Location1 Location2 3"
+                        }
+                    }
+                },
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>(),
+                new Message
+                {
+                    Text = "Location weight has been set."
+                },
+                "locationWeightLocation1toLocation2",
+                3
+            };
+
+            // override existing config
+            yield return new object[]
+            {
+                new Message
+                {
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User"
+                    },
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            MessageType = MessageType.PersonMention,
+                            Text = "TestBot",
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            MessageType = MessageType.Text,
+                            Text = " locationweight set Location1 Location2 3"
+                        }
+                    }
+                },
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>
+                {
+                    new GeneralConfig { Name = "NotALocationWeight", Value = 0 },
+                    new GeneralConfig { Name = "locationWeightLocation1toLocation2", Value = 66 },
+                    new GeneralConfig { Name = "locationWeightlocation3ToLocation1", Value = 3 }
+                },
+                new Message
+                {
+                    Text = "Location weight has been set."
+                },
+                "locationWeightLocation1toLocation2",
+                3
+            };
+        }
+
+        public static IEnumerable<object[]> DeleteLocationWeightTestData()
         {
             yield return new object[]
             {
@@ -419,26 +549,24 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig add Location1"
+                            Text = " locationweight delete Location1 Location2"
                         }
                     }
                 },
-                new PockyUser
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>
                 {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
+                    new GeneralConfig { Name = "NotALocationWeight", Value = 0 },
+                    new GeneralConfig { Name = "locationWeightLocation1toLocation2", Value = 66 },
+                    new GeneralConfig { Name = "locationWeightlocation3ToLocation1", Value = 3 }
                 },
-                new List<string> { "Location2" },
                 new Message
                 {
-                    Text = "Location has been added."
+                    Text = "Location weight has been deleted."
                 },
-                "Location1"
+                new GeneralConfig { Name = "locationWeightLocation1toLocation2", Value = 66 }
             };
-        }
-        public static IEnumerable<object[]> DeleteLocationTestData()
-        {
+
             yield return new object[]
             {
                 new Message
@@ -459,22 +587,22 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new MessagePart
                         {
                             MessageType = MessageType.Text,
-                            Text = " locationconfig delete Location1"
+                            Text = " locationweight delete Location1 Location2"
                         }
                     }
                 },
-                new PockyUser
+                new[] { "Location1", "Location2", "Location3" },
+                new List<GeneralConfig>
                 {
-                    UserId = "testUserId",
-                    Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
+                    new GeneralConfig { Name = "NotALocationWeight", Value = 0 },
+                    new GeneralConfig { Name = "locationWeightLocation2toLocation1", Value = 66 },
+                    new GeneralConfig { Name = "locationWeightlocation3ToLocation1", Value = 3 }
                 },
-                new List<string> { "Location1" },
                 new Message
                 {
-                    Text = "Location has been deleted."
+                    Text = "Location weight has been deleted."
                 },
-                "Location1"
+                new GeneralConfig { Name = "locationWeightLocation2toLocation1", Value = 66 }
             };
         }
     }
