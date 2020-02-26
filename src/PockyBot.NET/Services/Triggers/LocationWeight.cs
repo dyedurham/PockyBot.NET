@@ -93,7 +93,7 @@ namespace PockyBot.NET.Services.Triggers
             return $"Here are the current location weights:\n\n* {string.Join("\n* ", locationWeights)}";
         }
 
-        private GeneralConfig GetLocationWeightConfig(string location1, string location2, IList<GeneralConfig> allConfigs)
+        private static GeneralConfig GetLocationWeightConfig(string location1, string location2, IList<GeneralConfig> allConfigs)
         {
             var senderToReceiver = $"locationWeight{location1}to{location2}".ToLower(CultureInfo.InvariantCulture);
             var receiverToSender = $"locationWeight{location2}to{location1}".ToLower(CultureInfo.InvariantCulture);
@@ -120,7 +120,7 @@ namespace PockyBot.NET.Services.Triggers
                 return $"Location value \"{commands[3]}\" is invalid.";
             }
 
-            var isValidInteger = int.TryParse(commands[4], out int desiredValue);
+            var isValidInteger = int.TryParse(commands[4], out var desiredValue);
 
             if (!isValidInteger)
             {
