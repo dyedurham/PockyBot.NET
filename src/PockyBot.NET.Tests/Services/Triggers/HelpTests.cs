@@ -130,6 +130,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Reset, Roles.Admin)]
         [InlineData(Commands.StringConfig, Roles.Admin)]
         [InlineData(Commands.StringConfig, Roles.Config)]
+        [InlineData(Commands.LocationWeight, Roles.Admin)]
+        [InlineData(Commands.LocationWeight, Roles.Config)]
         public void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, string userRole)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -143,6 +145,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Finish)]
         [InlineData(Commands.Reset)]
         [InlineData(Commands.StringConfig)]
+        [InlineData(Commands.LocationWeight)]
         public void ItShouldShowTheDefaultHelpMessageForAdminCommandsToNonAdminUsers(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -235,6 +238,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                                   $"* {Commands.Reset}\n" +
                                   $"* {Commands.Finish}\n" +
                                   $"* {Commands.StringConfig}\n" +
+                                  $"* {Commands.LocationWeight}\n" +
                                   $"\nFor more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`\n" +
                                   "\nI am still being worked on, so more features to come.");
         }
