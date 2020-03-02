@@ -94,6 +94,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
+        [InlineData(Commands.Keywords)]
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
@@ -109,6 +110,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
+        [InlineData(Commands.Keywords)]
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
@@ -216,6 +218,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldBe("## What I can do (List of Commands)\n\n" +
                                   $"* {Commands.Peg}\n" +
                                   $"* {Commands.Status}\n" +
+                                  $"* {Commands.Keywords}\n" +
                                   $"* {Commands.Ping}\n" +
                                   $"* {Commands.Welcome}\n" +
                                   $"* {Commands.Rotation}\n" +
@@ -228,6 +231,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldBe("## What I can do (List of Commands)\n\n" +
                                   $"* {Commands.Peg}\n" +
                                   $"* {Commands.Status}\n" +
+                                  $"* {Commands.Keywords}\n" +
                                   $"* {Commands.Ping}\n" +
                                   $"* {Commands.Welcome}\n" +
                                   $"* {Commands.Rotation}\n" +
