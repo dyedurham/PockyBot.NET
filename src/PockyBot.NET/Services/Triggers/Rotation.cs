@@ -20,7 +20,7 @@ namespace PockyBot.NET.Services.Triggers
             _configRepository = configRepository;
         }
 
-        public async Task<Message> Respond(Message message)
+        public Task<Message> Respond(Message message)
         {
             var rotation = _configRepository.GetStringConfig("rotation").First();
             var newMessage = "## Here's the snack buying rotation:\n\n";
@@ -30,10 +30,10 @@ namespace PockyBot.NET.Services.Triggers
                 newMessage += $"* {item}\n";
             }
 
-            return new Message
+            return Task.FromResult(new Message
             {
                 Text = newMessage
-            };
+            });
         }
     }
 }
