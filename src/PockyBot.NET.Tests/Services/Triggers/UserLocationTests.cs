@@ -18,8 +18,11 @@ namespace PockyBot.NET.Tests.Services.Triggers
     {
         private readonly UserLocation _subject;
 
-        private IPockyUserRepository _pockyUserRepository;
-        private IUserLocationService _userLocationService;
+        private readonly IPockyUserRepository _pockyUserRepository;
+        private readonly IUserLocationGetter _userLocationGetter;
+        private readonly IUserLocationSetter _userLocationSetter;
+        private readonly IUserLocationDeleter _userLocationDeleter;
+
 
         private Message _message;
         private Message _response;
@@ -28,8 +31,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public UserLocationTests()
         {
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _userLocationService = Substitute.For<IUserLocationService>();
-            _subject = new UserLocation(_pockyUserRepository, _userLocationService);
+            _userLocationGetter = Substitute.For<IUserLocationGetter>();
+            _userLocationSetter = Substitute.For<IUserLocationSetter>();
+            _userLocationDeleter = Substitute.For<IUserLocationDeleter>();
+            _subject = new UserLocation(_pockyUserRepository, _userLocationGetter, _userLocationSetter, _userLocationDeleter);
         }
 
         [Theory]
@@ -109,7 +114,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldCallGetUserLocation(string[] commands)
         {
-            _userLocationService.Received(1)
+            _userLocationGetter.Received(1)
                 .GetUserLocation(
                     Arg.Is<string[]>(x => x.SequenceEqual(commands)),
                     Arg.Is<string[]>(x => x.SequenceEqual(_mentionedUsers)),
@@ -118,7 +123,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldCallSetUserLocation(string[] commands, bool hasPermission)
         {
-            _userLocationService.Received(1)
+            _userLocationSetter.Received(1)
                 .SetUserLocation(
                     Arg.Is<string[]>(x => x.SequenceEqual(commands)),
                     Arg.Is<string[]>(x => x.SequenceEqual(_mentionedUsers)),
@@ -128,8 +133,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldCallDeleteUserLocation(string[] commands, bool hasPermission)
         {
-            _userLocationService.Received(1)
-                .SetUserLocation(
+            _userLocationDeleter.Received(1)
+                .DeleteUserLocation(
                     Arg.Is<string[]>(x => x.SequenceEqual(commands)),
                     Arg.Is<string[]>(x => x.SequenceEqual(_mentionedUsers)),
                     hasPermission,

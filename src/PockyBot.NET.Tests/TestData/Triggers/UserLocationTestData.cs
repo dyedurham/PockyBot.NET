@@ -60,21 +60,21 @@ namespace PockyBot.NET.Tests.TestData.Triggers
 
             yield return new object[]
             {
-                CreateMultipleMentionMessage("userlocation set here me"),
+                CreateMultipleMentionMessage("userlocation delete here me"),
                 true,
                 new[] { "here", "me" }
             };
 
             yield return new object[]
             {
-                CreateMultipleMentionMessage("userlocation set here", "Alice"),
+                CreateMultipleMentionMessage("userlocation delete here", "Alice"),
                 true,
                 new[] { "here", "Alice" }
             };
 
             yield return new object[]
             {
-                CreateMultipleMentionMessage("userlocation set here", "Alice", "Bob"),
+                CreateMultipleMentionMessage("userlocation delete here", "Alice", "Bob"),
                 false,
                 new[] { "here", "Alice", "Bob" }
             };
