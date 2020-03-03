@@ -191,11 +191,13 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private void ThenItShouldAddTheStringConfigItem(string name, string value)
         {
             _result.Text.ShouldBe($"Config has been updated: {name}:{value} has been added.");
+            _configRepository.Received(1).AddStringConfig(name, value);
         }
 
         private void ThenItShouldDeleteTheStringConfigItem(string name, string value)
         {
             _result.Text.ShouldBe($"Config has been updated: {name}:{value} has been deleted.");
+            _configRepository.Received(1).DeleteStringConfig(name, value);
         }
 
         private void ItShouldDisplayAMessage(string message)

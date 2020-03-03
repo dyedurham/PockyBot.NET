@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace PockyBot.NET.Constants
 {
     internal static class ConfigActions
