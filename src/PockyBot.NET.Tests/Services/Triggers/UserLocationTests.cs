@@ -46,6 +46,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         {
             _message = message;
             _mentionedUsers = message.MessageParts
+                .Skip(1)
                 .Where(x => x.MessageType == MessageType.PersonMention)
                 .Select(x => x.UserId).ToArray();
         }

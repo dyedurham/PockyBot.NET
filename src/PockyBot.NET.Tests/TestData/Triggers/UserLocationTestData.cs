@@ -12,22 +12,23 @@ namespace PockyBot.NET.Tests.TestData.Triggers
             yield return new object[]
             {
                 CreateSingleMentionMessage("userlocation get me"),
-                new[] { "me" },
-                false
+                false,
+                new[] { "me" }
+
             };
 
             yield return new object[]
             {
                 CreateSingleMentionMessage("userlocation get unset"),
-                new[] { "unset" },
-                false
+                false,
+                new[] { "unset" }
             };
 
             yield return new object[]
             {
                 CreateSingleMentionMessage("userlocation get all"),
-                new[] { "all" },
-                true
+                true,
+                new[] { "all" }
             };
 
         }
