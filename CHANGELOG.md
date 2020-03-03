@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.2...v1.7.0) (2020-03-03)
+
+
+### Features
+
+* add keywords trigger ([b9e6bbd](https://github.com/GlobalX/PockyBot.NET/commit/b9e6bbd3117ca594a3cd52fc67555164ff9e5e9e))
+
 ## [1.6.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.1...v1.6.2) (2020-02-25)
 
 
