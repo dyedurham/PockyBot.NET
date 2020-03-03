@@ -13,5 +13,6 @@ namespace PockyBot.NET.Constants
         public const string StringConfig = "stringconfig";
         public const string RemoveUser = "removeuser";
         public const string Keywords = "keywords";
+        public const string RoleConfig = "roleconfig";
     }
 }

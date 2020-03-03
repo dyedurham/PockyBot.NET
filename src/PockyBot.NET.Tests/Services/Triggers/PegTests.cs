@@ -81,7 +81,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void GivenAUser(PockyUser user)
         {
-            _pockyUserRepository.AddOrUpdateUser(user.UserId, Arg.Any<string>()).Returns(Task.FromResult(user));
+            _pockyUserRepository.AddOrUpdateUserAsync(user.UserId, Arg.Any<string>()).Returns(Task.FromResult(user));
         }
 
         private void GivenAStringConfig(string configName, List<string> config)

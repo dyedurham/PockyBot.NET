@@ -8,12 +8,9 @@ namespace PockyBot.NET.Constants
         public const string Add = "add";
         public const string Delete = "delete";
 
-        public static string[] All()
+        public static string[] All() => new[]
         {
-            return new []
-            {
-                Get, Add, Delete
-            };
-        }
+            Get, Add, Delete
+        };
     }
 }

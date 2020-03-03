@@ -8,8 +8,11 @@ namespace PockyBot.NET.Persistence.Repositories
     {
         PockyUser GetUser(string userId);
         List<PockyUser> GetUsersByUsername(string username);
-        Task<PockyUser> AddOrUpdateUser(string userId, string username);
+        Task<PockyUser> AddOrUpdateUserAsync(string userId, string username);
         List<PockyUser> GetAllUsersWithPegs();
-        Task RemoveUser(PockyUser user);
+        Task RemoveUserAsync(PockyUser user);
+        Task<List<PockyUser>> GetAllUserRolesAsync();
+        Task AddRoleAsync(string userId, string role);
+        Task RemoveRoleAsync(string userId, string role);
     }
 }

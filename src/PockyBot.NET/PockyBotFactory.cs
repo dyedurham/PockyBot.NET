@@ -40,6 +40,7 @@ namespace PockyBot.NET
                 new Keywords(configRepository),
                 new Rotation(configRepository),
                 new StringConfig(configRepository),
+                new RoleConfig(pockyUserRepository, chatHelper),
                 new RemoveUser(pockyUserRepository, loggerFactory.CreateLogger<RemoveUser>()),
                 new Default(wrappedSettings)
             };

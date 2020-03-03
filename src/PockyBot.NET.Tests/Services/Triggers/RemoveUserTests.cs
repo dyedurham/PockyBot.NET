@@ -252,7 +252,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldRemoveTheUser()
         {
-            _pockyUserRepository.Received().RemoveUser(Arg.Is<PockyUser>(x =>
+            _pockyUserRepository.Received().RemoveUserAsync(Arg.Is<PockyUser>(x =>
                 x.UserId == UserToRemoveId &&
                 x.Username == UserToRemoveUsername
             ));
