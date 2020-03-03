@@ -30,30 +30,68 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 true,
                 new[] { "all" }
             };
-
         }
 
         public static IEnumerable<object[]> SetUserTestData() {
 
             yield return new object[]
             {
-                CreateSingleMentionMessage("userlocation set here me"),
-                new[] { "here", "me" },
-                true
+                CreateMultipleMentionMessage("userlocation set here me"),
+                true,
+                new[] { "here", "me" }
             };
 
             yield return new object[]
             {
-                CreateSingleMentionMessage("userlocation delete me"),
-                CreateSimpleTextMessage("delete me"),
-                true
+                CreateMultipleMentionMessage("userlocation set here", "Alice"),
+                true,
+                new[] { "here", "Alice" }
             };
 
             yield return new object[]
             {
-                CreateSingleMentionMessage("userlocation get all"),
-                CreateSimpleTextMessage("get all"),
-                true
+                CreateMultipleMentionMessage("userlocation set here", "Alice", "Bob"),
+                false,
+                new[] { "here", "Alice", "Bob" }
+            };
+        }
+
+        public static IEnumerable<object[]> DeleteUserTestData() {
+
+            yield return new object[]
+            {
+                CreateMultipleMentionMessage("userlocation set here me"),
+                true,
+                new[] { "here", "me" }
+            };
+
+            yield return new object[]
+            {
+                CreateMultipleMentionMessage("userlocation set here", "Alice"),
+                true,
+                new[] { "here", "Alice" }
+            };
+
+            yield return new object[]
+            {
+                CreateMultipleMentionMessage("userlocation set here", "Alice", "Bob"),
+                false,
+                new[] { "here", "Alice", "Bob" }
+            };
+        }
+
+        public static IEnumerable<object[]> BadCommandTestData()
+        {
+            yield return new object[]
+            {
+                CreateSingleMentionMessage("userlocation"),
+                "Please specify a command. Possible values are get, set, and delete."
+            };
+
+            yield return new object[]
+            {
+                CreateSingleMentionMessage("userlocation hello"),
+                "Unknown command. Possible values are get, set, and delete."
             };
         }
 
@@ -83,15 +121,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
             };
         }
 
-        private static Message CreateSimpleTextMessage(string message)
-        {
-            return new Message
-            {
-                Text = message
-            };
-        }
-
-        private static Message CreateMultipleMentionMessage(string message, string[] userids)
+        private static Message CreateMultipleMentionMessage(string message, params string[] userIds)
         {
             var staticDefinedMessageParts = new List<MessagePart>
             {
@@ -108,19 +138,31 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 }
             };
 
-            var userMentions = userids.Select(userid => new MessagePart
+            var userMentions = userIds.SelectMany(userid => new MessagePart[]
             {
-                Text = userid,
-                MessageType = MessageType.PersonMention,
-                UserId = userid
+                new MessagePart
+                {
+                    Text = userid,
+                    MessageType = MessageType.PersonMention,
+                    UserId = userid
+                },
+                new MessagePart
+                {
+                    Text = " ",
+                    MessageType = MessageType.Text
+                }
             }).ToList();
 
             var messageParts = staticDefinedMessageParts.Concat(userMentions);
 
             return new Message
             {
-                Text = $"TestBot {message} {string.Join(' ', userids)}",
-                MessageParts = messageParts.ToArray()
+                Text = $"TestBot {message} {string.Join(' ', userIds)}",
+                MessageParts = messageParts.ToArray(),
+                Sender = new Person
+                {
+                    UserId = "senderid"
+                }
             };
         }
     }

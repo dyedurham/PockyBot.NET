@@ -22,6 +22,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private IUserLocationService _userLocationService;
 
         private Message _message;
+        private Message _response;
         private string[] _mentionedUsers;
 
         public UserLocationTests()
@@ -39,6 +40,39 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 .And(x => GivenUserHasPermission(hasPermission))
                 .When(x => WhenRespondingToTheMessage())
                 .Then(x => ThenItShouldCallGetUserLocation(commands))
+                .BDDfy();
+        }
+
+        [Theory]
+        [MemberData(nameof(UserLocationTestData.SetUserTestData), MemberType = typeof(UserLocationTestData))]
+        internal void TestSetUserLocation(Message message, bool hasPermission, string[] commands)
+        {
+            this.Given(x => GivenAMessage(message))
+                .And(x => GivenUserHasPermission(hasPermission))
+                .When(x => WhenRespondingToTheMessage())
+                .Then(x => ThenItShouldCallSetUserLocation(commands, hasPermission))
+                .BDDfy();
+        }
+
+        [Theory]
+        [MemberData(nameof(UserLocationTestData.DeleteUserTestData), MemberType = typeof(UserLocationTestData))]
+        internal void TestDeleteUserLocation(Message message, bool hasPermission, string[] commands)
+        {
+            this.Given(x => GivenAMessage(message))
+                .And(x => GivenUserHasPermission(hasPermission))
+                .When(x => WhenRespondingToTheMessage())
+                .Then(x => ThenItShouldCallDeleteUserLocation(commands, hasPermission))
+                .BDDfy();
+        }
+
+        [Theory]
+        [MemberData(nameof(UserLocationTestData.BadCommandTestData), MemberType = typeof(UserLocationTestData))]
+        internal void TestBadCommand(Message message, string response)
+        {
+            this.Given(x => GivenAMessage(message))
+                .And(x => GivenUserHasPermission(false))
+                .When(x => WhenRespondingToTheMessage())
+                .Then(x => ThenItShouldReturn(response))
                 .BDDfy();
         }
 
@@ -70,7 +104,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private async Task WhenRespondingToTheMessage()
         {
-            await _subject.Respond(_message);
+            _response = await _subject.Respond(_message);
         }
 
         private void ThenItShouldCallGetUserLocation(string[] commands)
@@ -82,5 +116,29 @@ namespace PockyBot.NET.Tests.Services.Triggers
                     _message.Sender.UserId);
         }
 
+        private void ThenItShouldCallSetUserLocation(string[] commands, bool hasPermission)
+        {
+            _userLocationService.Received(1)
+                .SetUserLocation(
+                    Arg.Is<string[]>(x => x.SequenceEqual(commands)),
+                    Arg.Is<string[]>(x => x.SequenceEqual(_mentionedUsers)),
+                    hasPermission,
+                    _message.Sender.UserId);
+        }
+
+        private void ThenItShouldCallDeleteUserLocation(string[] commands, bool hasPermission)
+        {
+            _userLocationService.Received(1)
+                .SetUserLocation(
+                    Arg.Is<string[]>(x => x.SequenceEqual(commands)),
+                    Arg.Is<string[]>(x => x.SequenceEqual(_mentionedUsers)),
+                    hasPermission,
+                    _message.Sender.UserId);
+        }
+
+        private void ThenItShouldReturn(string response)
+        {
+            _response.Text.ShouldBe(response);
+        }
     }
 }
