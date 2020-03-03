@@ -21,7 +21,7 @@ namespace PockyBot.NET.Persistence
 
             builder.Entity<PockyUser>().HasOne(x => x.Location)
                 .WithOne(x => x.User)
-                .HasForeignKey<PockyUser>(x => x.UserId);
+                .HasForeignKey<UserLocation>(x => x.UserId);
         }
 
         public DbSet<PockyUser> PockyUsers { get; set; }

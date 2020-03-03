@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
@@ -26,7 +27,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public RemoveUserTests()
         {
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _subject = new RemoveUser(_pockyUserRepository);
+            _subject = new RemoveUser(_pockyUserRepository, Substitute.For<ILogger<RemoveUser>>());
         }
 
         [Fact]
@@ -178,7 +179,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                     new MessagePart
                     {
                         MessageType = MessageType.Text,
-                        Text = "removeuser "
+                        Text = " removeuser "
                     },
                     new MessagePart
                     {
@@ -211,7 +212,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                     new MessagePart
                     {
                         MessageType = MessageType.Text,
-                        Text = "removeuser " + command
+                        Text = " removeuser " + command
                     }
                 }
             };
@@ -224,7 +225,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 UserId = UserToRemoveId,
                 Username = UserToRemoveUsername,
                 PegsGiven = hasOutstandingPegs ? new List<Peg>{new Peg()} : new List<Peg>(),
-                PegsReceived = new List<Peg>()
+                PegsReceived = null
             });
         }
 

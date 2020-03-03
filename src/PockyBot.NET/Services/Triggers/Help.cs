@@ -50,8 +50,8 @@ namespace PockyBot.NET.Services.Triggers
                     return CreatePegHelpMessage();
                 case Commands.Status:
                     return CreateStatusHelpMessage();
-                // case Commands.Keywords:
-                //     return CreateKeywordsHelpMessage();
+                case Commands.Keywords:
+                    return CreateKeywordsHelpMessage();
                 case Commands.Ping:
                     return CreatePingHelpMessage();
                 case Commands.Welcome:
@@ -78,10 +78,10 @@ namespace PockyBot.NET.Services.Triggers
                     return CreateLocationConfigHelpMessage(user);
                 // case Commands.UserLocation:
                 //     return CreateUserLocationHelpMessage(user);
-                // case Commands.RemoveUser:
-                //     return CreateRemoveUserHelpMessage(user);
                 case Commands.LocationWeight:
                     return CreateLocationWeightHelpMessage(user);
+                case Commands.RemoveUser:
+                    return CreateRemoveUserHelpMessage(user);
                 default:
                     return CreateDefaultHelpMessage();
             }
@@ -97,7 +97,7 @@ namespace PockyBot.NET.Services.Triggers
             var newMessage = "## What I can do (List of Commands)\n\n" +
                  $"* {Commands.Peg}\n" +
                  $"* {Commands.Status}\n" +
-                 //$"* {Commands.Keywords}\n" +
+                 $"* {Commands.Keywords}\n" +
                  $"* {Commands.Ping}\n" +
                  $"* {Commands.Welcome}\n" +
                  $"* {Commands.Rotation}\n" +
@@ -132,9 +132,9 @@ namespace PockyBot.NET.Services.Triggers
                 newMessage += $"* {Commands.LocationWeight}\n";
             }
 
-            // if (HasPermission(user, new []{Roles.Admin, Roles.RemoveUser})) {
-            //     newMessage += $"* {Commands.RemoveUser}\n";
-            // }
+            if (HasPermission(user, new []{Roles.Admin, Roles.RemoveUser})) {
+                newMessage += $"* {Commands.RemoveUser}\n";
+            }
 
             newMessage += $"\nFor more information on a command type `@{_pockyBotSettings.BotName} help command-name` or direct message me with `help command-name`\n";
             newMessage += "\nI am still being worked on, so more features to come.";
@@ -160,12 +160,12 @@ namespace PockyBot.NET.Services.Triggers
                 "1. I will PM you number of pegs you have left and who you gave it to.";
         }
 
-        // private string CreateKeywordsHelpMessage()
-        // {
-        //     return "### How to check the available keywords 🔑!\n" +
-        //         $"1. To get a list of the available keywords, type: `@{_pockyBotSettings.BotName} {Commands.Keywords}` OR direct message me with `{Commands.Keywords}`.\n" +
-        //         "1. I will respond in the room you messaged me in with a list of keywords.";
-        // }
+        private string CreateKeywordsHelpMessage()
+        {
+            return "### How to check the available keywords 🔑!\n" +
+                $"1. To get a list of the available keywords, type: `@{_pockyBotSettings.BotName} {Commands.Keywords}` OR direct message me with `{Commands.Keywords}`.\n" +
+                "1. I will respond in the room you messaged me in with a list of keywords.";
+        }
 
         private string CreatePingHelpMessage()
         {
@@ -297,23 +297,24 @@ namespace PockyBot.NET.Services.Triggers
         //         $"1. To delete your user location, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {LocationAction.Delete} me`\n" +
         //         "1. I will respond in the room you messaged me in.";
         // }
-        //
-        // private string CreateRemoveUserHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.RemoveUser})) {
-        //         return "### How to remove users 🛑!\n" +
-        //             $"1. To remove a user, type `@{_pockyBotSettings.BotName} {Commands.RemoveUser} {{@User}}|'{{username}}'`\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
-        
+
         private string CreateLocationWeightHelpMessage(PockyUser user)
         {
             if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
                 return "### How to configure location weight values ⚖️!\n" +
                     $"1. To get/edit/delete location weight values, type `@{_pockyBotSettings.BotName} {Commands.LocationWeight} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{location1}} {{location2}} {{weight}}`\n" +
                     "1. I will respond in the room you messaged me in.";
+            }
+            return CreateDefaultHelpMessage();
+        }
+
+        private string CreateRemoveUserHelpMessage(PockyUser user)
+        {
+            if (HasPermission(user, new[] { Roles.Admin, Roles.RemoveUser }))
+            {
+                return "### How to remove users 🛑!\n" +
+                       $"1. To remove a user, type `@{_pockyBotSettings.BotName} {Commands.RemoveUser} {{@User}}|'{{username}}'`\n" +
+                       "1. I will respond in the room you messaged me in.";
             }
             return CreateDefaultHelpMessage();
         }

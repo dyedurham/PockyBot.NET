@@ -1,3 +1,18 @@
+## [1.6.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.1...v1.6.2) (2020-02-25)
+
+
+### Bug Fixes
+
+* fix db representation so that users can be accessed and removed properly ([4d2f153](https://github.com/GlobalX/PockyBot.NET/commit/4d2f15370591dc37805a0a361a2890d3d6ad95f1))
+
+## [1.6.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.0...v1.6.1) (2020-02-21)
+
+
+### Bug Fixes
+
+* add removeuser to help trigger ([42a5970](https://github.com/GlobalX/PockyBot.NET/commit/42a5970d08a237857b23904f40a3ce0694b41676))
+* fix removeuser null reference and add logging ([3e6519c](https://github.com/GlobalX/PockyBot.NET/commit/3e6519c67c9dc5f3ad6259f5788e30eea6d1fcbb))
+
 # [1.6.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.5.1...v1.6.0) (2020-02-17)
 
 

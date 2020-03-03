@@ -94,6 +94,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
+        [InlineData(Commands.Keywords)]
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
@@ -110,6 +111,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
+        [InlineData(Commands.Keywords)]
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
@@ -132,6 +134,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.StringConfig, Roles.Config)]
         [InlineData(Commands.LocationWeight, Roles.Admin)]
         [InlineData(Commands.LocationWeight, Roles.Config)]
+        [InlineData(Commands.RemoveUser, Roles.Admin)]
+        [InlineData(Commands.RemoveUser, Roles.RemoveUser)]
         public void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, string userRole)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -146,6 +150,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Reset)]
         [InlineData(Commands.StringConfig)]
         [InlineData(Commands.LocationWeight)]
+        [InlineData(Commands.RemoveUser)]
         public void ItShouldShowTheDefaultHelpMessageForAdminCommandsToNonAdminUsers(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -218,6 +223,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldBe("## What I can do (List of Commands)\n\n" +
                                   $"* {Commands.Peg}\n" +
                                   $"* {Commands.Status}\n" +
+                                  $"* {Commands.Keywords}\n" +
                                   $"* {Commands.Ping}\n" +
                                   $"* {Commands.Welcome}\n" +
                                   $"* {Commands.Rotation}\n" +
@@ -231,6 +237,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldBe("## What I can do (List of Commands)\n\n" +
                                   $"* {Commands.Peg}\n" +
                                   $"* {Commands.Status}\n" +
+                                  $"* {Commands.Keywords}\n" +
                                   $"* {Commands.Ping}\n" +
                                   $"* {Commands.Welcome}\n" +
                                   $"* {Commands.Rotation}\n" +
@@ -239,6 +246,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                                   $"* {Commands.Finish}\n" +
                                   $"* {Commands.StringConfig}\n" +
                                   $"* {Commands.LocationWeight}\n" +
+                                  $"* {Commands.RemoveUser}\n" +
                                   $"\nFor more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`\n" +
                                   "\nI am still being worked on, so more features to come.");
         }

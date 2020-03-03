@@ -32,7 +32,7 @@ namespace PockyBot.NET.Persistence.Repositories
             return _context.PockyUsers
                 .Where(x => x.Username == username)
                 .Include(x => x.PegsGiven)
-                .ThenInclude(x => x.Receiver)
+                    .ThenInclude(x => x.Receiver)
                 .Include(x => x.PegsReceived)
                 .Include(x => x.Location)
                 .Include(x => x.Roles)

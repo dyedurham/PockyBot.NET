@@ -38,10 +38,11 @@ namespace PockyBot.NET
                 new Status(pockyUserRepository, configRepository, pegHelper, loggerFactory.CreateLogger<Status>()),
                 new Finish(pockyUserRepository, pegResultsHelper, resultsUploader, directResultsMessageSender, loggerFactory.CreateLogger<Finish>()),
                 new Reset(pegRepository, loggerFactory.CreateLogger<Reset>()),
+                new Keywords(configRepository),
                 new Rotation(configRepository),
                 new LocationConfig(locationRepository, pockyUserRepository),
                 new StringConfig(configRepository),
-                new RemoveUser(pockyUserRepository),
+                new RemoveUser(pockyUserRepository, loggerFactory.CreateLogger<RemoveUser>()),
                 new LocationWeight(configRepository, locationRepository),
                 new Default(wrappedSettings)
             };
