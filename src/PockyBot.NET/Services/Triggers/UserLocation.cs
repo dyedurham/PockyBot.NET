@@ -48,27 +48,17 @@ namespace PockyBot.NET.Services.Triggers
             var userIsAdmin = UserIsAdmin(meId);
             var command = commands[1];
             commands = commands.Skip(2).ToArray();
-            string response;
-
-            switch (command.ToLowerInvariant())
-            {
-                case Actions.Get:
-                    response = _userLocationService.GetUserLocation(commands, mentionedUsers, meId);
-                    break;
-                case Actions.Set:
-                    response = await _userLocationService.SetUserLocation(commands, mentionedUsers, userIsAdmin, meId);
-                    break;
-                case Actions.Delete:
-                    response = await _userLocationService.DeleteUserLocation(commands, mentionedUsers, userIsAdmin, meId);
-                    break;
-                default:
-                    response = "Unknown command. Possible values are get, set, and delete.";
-                    break;
-            }
 
             return new Message
             {
-                Text = response
+                Text = command.ToLowerInvariant() switch
+                {
+                    Actions.Get => _userLocationService.GetUserLocation(commands, mentionedUsers, meId),
+                    Actions.Set => await _userLocationService.SetUserLocation(commands, mentionedUsers, userIsAdmin, meId),
+                    Actions.Delete => await _userLocationService.DeleteUserLocation(commands, mentionedUsers, userIsAdmin,
+                        meId),
+                    _ => "Unknown command. Possible values are get, set, and delete."
+                }
             };
         }
 

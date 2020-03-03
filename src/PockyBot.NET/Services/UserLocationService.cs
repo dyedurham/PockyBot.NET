@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,7 @@ namespace PockyBot.NET.Services
             var users = commands.Skip(1).ToArray();
 
             // Ensure specified location is valid
-            if (!locations.Any(validLocation => givenLocation.Contains(validLocation, StringComparison.InvariantCultureIgnoreCase)))
+            if (!locations.Any(validLocation => givenLocation.Equals(validLocation, StringComparison.InvariantCultureIgnoreCase)))
             {
                 return $"Location {givenLocation} does not exist. Valid values are: {string.Join(", ", locations)}.";
             }
