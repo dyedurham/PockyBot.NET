@@ -66,6 +66,16 @@ namespace PockyBot.NET.Tests.Services
                 .BDDfy();
         }
 
+        [Fact]
+        internal void MentionedUsersCommandShouldReturnMentionedUsers()
+        {
+            this.Given(x => GivenMentionCommand("User2", "User3", "User4"))
+                .And(x => GivenSomeMentionedUsersHaveLocations())
+                .When(x => WhenGetUserLocationIsCalled())
+                .Then(x => ThenItShouldReturnMentionedLocations())
+                .BDDfy();
+        }
+
         private void GivenNoCommands()
         {
             _commands = new string[] { };
@@ -77,6 +87,12 @@ namespace PockyBot.NET.Tests.Services
         {
             _commands = new[] { command };
             _mentionedUsers = new string[] { };
+            _meId = "me";
+        }
+        private void GivenMentionCommand(params string[] userIds)
+        {
+            _commands = userIds;
+            _mentionedUsers = userIds;
             _meId = "me";
         }
 
@@ -94,6 +110,13 @@ namespace PockyBot.NET.Tests.Services
                 GetUser("User3", "Location3"),
                 GetUser("User4", "")
             });
+        }
+
+        private void GivenSomeMentionedUsersHaveLocations()
+        {
+            _pockyUserRepository.GetUser(Arg.Is("User2")).Returns(GetUser("User2", null));
+            _pockyUserRepository.GetUser(Arg.Is("User3")).Returns(GetUser("User3", "Location3"));
+            _pockyUserRepository.GetUser(Arg.Is("User4")).Returns(GetUser("User4", ""));
         }
 
         private void WhenGetUserLocationIsCalled()
@@ -122,6 +145,14 @@ namespace PockyBot.NET.Tests.Services
             _result.ShouldContain("* User4");
             _result.ShouldNotContain("User1");
             _result.ShouldNotContain("User3");
+        }
+
+        private void ThenItShouldReturnMentionedLocations()
+        {
+            _result.ShouldContain("Here are the users' locations:");
+            _result.ShouldContain("* **User3**: Location3");
+            _result.ShouldContain("* **User2**: No location set");
+            _result.ShouldContain("* **User4**: No location set");
         }
 
         private PockyUser GetUser(string username, string location)

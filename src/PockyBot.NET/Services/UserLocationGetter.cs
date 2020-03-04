@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore.Internal;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Repositories;
 
@@ -75,7 +77,14 @@ namespace PockyBot.NET.Services
             foreach (var userId in mentionedUsers)
             {
                 var user = _pockyUserRepository.GetUser(userId);
-                builder.AppendLine($"* **{user.Username}**: {user.Location.Location}");
+                if (user.Location != null && !string.IsNullOrWhiteSpace(user.Location.Location))
+                {
+                    builder.AppendLine($"* **{user.Username}**: {user.Location.Location}");
+                }
+                else
+                {
+                    builder.AppendLine($"* **{user.Username}**: No location set");
+                }
             }
 
             return builder.ToString();
