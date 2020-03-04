@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace PockyBot.NET.Constants
 {
-    class Actions
+    internal static class Actions
     {
         public const string Get = "get";
         public const string Set = "set";

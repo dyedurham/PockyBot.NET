@@ -47,13 +47,13 @@ namespace PockyBot.NET.Services.Triggers
             switch (command)
             {
                 case Actions.Get:
-                    responseText = await GetRoleConfigMessage();
+                    responseText = await GetRoleConfigMessage().ConfigureAwait(false);
                     break;
                 case Actions.Set:
-                    responseText = await SetRoleConfigMessage(message);
+                    responseText = await SetRoleConfigMessage(message).ConfigureAwait(false);
                     break;
                 case Actions.Delete:
-                    responseText = await DeleteRoleConfigMessage(message);
+                    responseText = await DeleteRoleConfigMessage(message).ConfigureAwait(false);
                     break;
                 default:
                     responseText = "Unknown command. Possible values are get, set, and delete.";
