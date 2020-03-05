@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
@@ -36,6 +37,22 @@ namespace PockyBot.NET.Persistence.Repositories
             return _context.StringConfig.Where(x =>
                 string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase))
                 .Select(x => x.Value).ToList();
+        }
+
+        public async Task AddStringConfig(string name, string value)
+        {
+            _context.StringConfig.Add(new StringConfig
+            {
+                Name = name, Value = value
+            });
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteStringConfig(string name, string value)
+        {
+            var configToDelete = _context.StringConfig.First(x => x.Name == name && x.Value == value);
+            _context.StringConfig.Remove(configToDelete);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -94,6 +94,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
+        [InlineData(Commands.Keywords)]
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
@@ -110,6 +111,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
+        [InlineData(Commands.Keywords)]
         [InlineData(Commands.Ping)]
         [InlineData(Commands.Welcome)]
         [InlineData(Commands.Rotation)]
@@ -128,6 +130,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Finish, Roles.Admin)]
         [InlineData(Commands.Reset, Roles.Reset)]
         [InlineData(Commands.Reset, Roles.Admin)]
+        [InlineData(Commands.StringConfig, Roles.Admin)]
+        [InlineData(Commands.StringConfig, Roles.Config)]
+        [InlineData(Commands.RemoveUser, Roles.Admin)]
+        [InlineData(Commands.RemoveUser, Roles.RemoveUser)]
         public void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, string userRole)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -140,6 +146,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Finish)]
         [InlineData(Commands.Reset)]
+        [InlineData(Commands.StringConfig)]
+        [InlineData(Commands.RemoveUser)]
         public void ItShouldShowTheDefaultHelpMessageForAdminCommandsToNonAdminUsers(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -212,6 +220,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldStartWith("## What I can do (List of Commands)");
             _result.Text.ShouldContain($"* {Commands.Peg}");
             _result.Text.ShouldContain($"* {Commands.Status}");
+            _result.Text.ShouldContain($"* {Commands.Keywords}");
             _result.Text.ShouldContain($"* {Commands.Ping}");
             _result.Text.ShouldContain($"* {Commands.Welcome}");
             _result.Text.ShouldContain($"* {Commands.Rotation}");
@@ -226,6 +235,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldStartWith("## What I can do (List of Commands)");
             _result.Text.ShouldContain($"* {Commands.Peg}");
             _result.Text.ShouldContain($"* {Commands.Status}");
+            _result.Text.ShouldContain($"* {Commands.Keywords}");
             _result.Text.ShouldContain($"* {Commands.Ping}");
             _result.Text.ShouldContain($"* {Commands.Welcome}");
             _result.Text.ShouldContain($"* {Commands.Rotation}");
@@ -233,6 +243,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldContain($"* {Commands.UserLocation}");
             _result.Text.ShouldContain($"* {Commands.Reset}");
             _result.Text.ShouldContain($"* {Commands.Finish}");
+            _result.Text.ShouldContain($"* {Commands.StringConfig}");
+            _result.Text.ShouldContain($"* {Commands.RemoveUser}");
             _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");
             _result.Text.ShouldContain("I am still being worked on, so more features to come.");
         }
