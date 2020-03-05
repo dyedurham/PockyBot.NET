@@ -21,20 +21,20 @@ namespace PockyBot.NET.Services
             {
                 if (userIsAdmin)
                 {
-                    return "No user specified. Possible argument are me or a list of mentioned users.";
+                    return "No user specified. Possible arguments are me or a list of mentioned users.";
                 }
 
                 return "No user specified. Possible arguments are me.";
             }
 
-            if (string.Equals(commands[0], UserLocationTypes.Me, StringComparison.InvariantCultureIgnoreCase))
-            {
-                await _userLocationRepository.DeleteUserLocation(meId);
-            }
-
-            if (!userIsAdmin)
+            if (!userIsAdmin && mentionedUsers != null && mentionedUsers.Length > 0)
             {
                 return "Permission denied. You may only delete yourself.";
+            }
+
+            if (commands.Contains(UserLocationTypes.Me, StringComparer.InvariantCultureIgnoreCase))
+            {
+                await _userLocationRepository.DeleteUserLocation(meId);
             }
 
             await DeleteMentionedUsers(mentionedUsers);
