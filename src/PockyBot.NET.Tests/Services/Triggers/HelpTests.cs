@@ -209,30 +209,32 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldShowAListOfNonAdminCommands()
         {
-            _result.Text.ShouldBe("## What I can do (List of Commands)\n\n" +
-                                  $"* {Commands.Peg}\n" +
-                                  $"* {Commands.Status}\n" +
-                                  $"* {Commands.Ping}\n" +
-                                  $"* {Commands.Welcome}\n" +
-                                  $"* {Commands.Rotation}\n" +
-                                  $"* {Commands.LocationConfig}\n" +
-                                  $"\nFor more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`\n" +
-                                  "\nI am still being worked on, so more features to come.");
+            _result.Text.ShouldStartWith("## What I can do (List of Commands)");
+            _result.Text.ShouldContain($"* {Commands.Peg}");
+            _result.Text.ShouldContain($"* {Commands.Status}");
+            _result.Text.ShouldContain($"* {Commands.Ping}");
+            _result.Text.ShouldContain($"* {Commands.Welcome}");
+            _result.Text.ShouldContain($"* {Commands.Rotation}");
+            _result.Text.ShouldContain($"* {Commands.LocationConfig}");
+            _result.Text.ShouldContain($"* {Commands.UserLocation}");
+            _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");
+            _result.Text.ShouldContain("I am still being worked on, so more features to come.");
         }
 
         private void ThenItShouldShowAListOfAdminCommands()
         {
-            _result.Text.ShouldBe("## What I can do (List of Commands)\n\n" +
-                                  $"* {Commands.Peg}\n" +
-                                  $"* {Commands.Status}\n" +
-                                  $"* {Commands.Ping}\n" +
-                                  $"* {Commands.Welcome}\n" +
-                                  $"* {Commands.Rotation}\n" +
-                                  $"* {Commands.LocationConfig}\n" +
-                                  $"* {Commands.Reset}\n" +
-                                  $"* {Commands.Finish}\n" +
-                                  $"\nFor more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`\n" +
-                                  "\nI am still being worked on, so more features to come.");
+            _result.Text.ShouldStartWith("## What I can do (List of Commands)");
+            _result.Text.ShouldContain($"* {Commands.Peg}");
+            _result.Text.ShouldContain($"* {Commands.Status}");
+            _result.Text.ShouldContain($"* {Commands.Ping}");
+            _result.Text.ShouldContain($"* {Commands.Welcome}");
+            _result.Text.ShouldContain($"* {Commands.Rotation}");
+            _result.Text.ShouldContain($"* {Commands.LocationConfig}");
+            _result.Text.ShouldContain($"* {Commands.UserLocation}");
+            _result.Text.ShouldContain($"* {Commands.Reset}");
+            _result.Text.ShouldContain($"* {Commands.Finish}");
+            _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");
+            _result.Text.ShouldContain("I am still being worked on, so more features to come.");
         }
 
         private void ThenItShouldShowTheDefaultHelpMessage()

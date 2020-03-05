@@ -76,8 +76,8 @@ namespace PockyBot.NET.Services.Triggers
                 //     return CreateRoleConfigHelpMessage(user);
                 case Commands.LocationConfig:
                     return CreateLocationConfigHelpMessage(user);
-                // case Commands.UserLocation:
-                //     return CreateUserLocationHelpMessage(user);
+                case Commands.UserLocation:
+                    return CreateUserLocationHelpMessage(user);
                 // case Commands.RemoveUser:
                 //     return CreateRemoveUserHelpMessage(user);
                 // case Commands.LocationWeight:
@@ -101,8 +101,8 @@ namespace PockyBot.NET.Services.Triggers
                  $"* {Commands.Ping}\n" +
                  $"* {Commands.Welcome}\n" +
                  $"* {Commands.Rotation}\n" +
-                 $"* {Commands.LocationConfig}\n";
-                 //$"* {Commands.UserLocation}\n";
+                 $"* {Commands.LocationConfig}\n" +
+                 $"* {Commands.UserLocation}\n";
 
             // if (HasPermission(user, new []{Roles.Admin, Roles.Winners})) {
             //     newMessage += $"* {Commands.Winners}\n";
@@ -267,7 +267,7 @@ namespace PockyBot.NET.Services.Triggers
         //     }
         //     return CreateDefaultHelpMessage();
         // }
-        
+
         private string CreateLocationConfigHelpMessage(PockyUser user)
         {
             if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
@@ -280,24 +280,24 @@ namespace PockyBot.NET.Services.Triggers
                 "    * To configure locations, please ask an admin.\n" +
                 "1. I will respond in the room you messaged me in.";
         }
-        
-        // private string CreateUserLocationHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.UserLocation})) {
-        //         return "### How to configure user location values 🧭!\n" +
-        //             $"1. To get user locations for yourself or others, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {LocationAction.Get} me|all|unset|@User`\n" +
-        //             $"1. To set user locations, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {LocationAction.Set} {{location}} me|@User1 @User2`\n" +
-        //             $"1. To delete user locations, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {LocationAction.Delete} me|@User1 @User2`\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return "### How to config your user location value 🧭!\n" +
-        //         $"1. To get user locations for yourself or others, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {LocationAction.Get} me|all|unset|@User`\n" +
-        //         $"1. To set your user location, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {LocationAction.Set} {{location}} me`\n" +
-        //         "    * To bulk configure user locations, please ask an admin.\n" +
-        //         $"1. To delete your user location, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {LocationAction.Delete} me`\n" +
-        //         "1. I will respond in the room you messaged me in.";
-        // }
-        //
+
+        private string CreateUserLocationHelpMessage(PockyUser user)
+        {
+            if (HasPermission(user, new[] { Roles.Admin, Roles.Config })) {
+                return "### How to configure user location values!\n" +
+                    $"1. To get user locations for yourself or others, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Get} me|all|unset|@User`\n" +
+                    $"1. To set user locations, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Set} {{location}} me|@User1 @User2`\n" +
+                    $"1. To delete user locations, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Delete} me|@User1 @User2`\n" +
+                    "1. I will respond in the room you messaged me in.";
+            }
+            return "### How to config your user location value!\n" +
+                $"1. To get user locations for yourself or others, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Get} me|all|unset|@User`\n" +
+                $"1. To set your user location, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Set} {{location}} me`\n" +
+                "    * To bulk configure user locations, please ask an admin.\n" +
+                $"1. To delete your user location, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Delete} me`\n" +
+                "1. I will respond in the room you messaged me in.";
+        }
+
         // private string CreateRemoveUserHelpMessage(PockyUser user)
         // {
         //     if (HasPermission(user, new[] {Roles.Admin, Roles.RemoveUser})) {
