@@ -1,12 +1,9 @@
-using System;
 using Shouldly;
 using TestStack.BDDfy;
 using Xunit;
 using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services;
-using Xunit.Sdk;
 
 namespace PockyBot.NET.Tests.Services
 {
@@ -135,6 +132,7 @@ namespace PockyBot.NET.Tests.Services
             if (userIds == null || userIds.Length == 0)
             {
                 _userLocationRepository.DidNotReceiveWithAnyArgs().DeleteUserLocation("");
+                return;
             }
 
             foreach (var userId in userIds)

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using GlobalX.ChatBots.Core.Messages;
 using GlobalX.ChatBots.Core.People;
 using PockyBot.NET.Constants;

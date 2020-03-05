@@ -1,6 +1,4 @@
-using System.Linq;
 using System.Text;
-using Microsoft.EntityFrameworkCore.Internal;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Repositories;
 

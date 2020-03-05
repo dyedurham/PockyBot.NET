@@ -29,7 +29,7 @@ namespace PockyBot.NET.Services
                     return "User or location was not specified. Possible arguments are \"<location> me\" or \"<location> <list of users>\"";
                 }
 
-                return "User or location was not specified. Argument must be in the form of \"<location> me";
+                return "User or location was not specified. Argument must be in the form of \"<location> me\"";
             }
 
             var locations = _locationRepository.GetAllLocations();
@@ -42,19 +42,32 @@ namespace PockyBot.NET.Services
                 return $"Location {givenLocation} does not exist. Valid values are: {string.Join(", ", locations)}.";
             }
 
-            // Update user "me"
-            if (string.Equals(users[0], UserLocationTypes.Me, StringComparison.InvariantCultureIgnoreCase))
+            if (!userIsAdmin && mentionedUsers != null && mentionedUsers.Length > 0)
             {
-                await _userLocationRepository.UpsertUserLocation(_pockyUserRepository.GetUser(meId), givenLocation);
-                return "User location added.";
+                return "Permission denied. You may only set location for yourself.";
             }
 
-            // Update user list
+            // Update user "me"
+            if (users.Contains(UserLocationTypes.Me, StringComparer.InvariantCultureIgnoreCase))
+            {
+                await _userLocationRepository.UpsertUserLocation(_pockyUserRepository.GetUser(meId), givenLocation);
+            }
+
+            await SetMentionedUserLocations(givenLocation, mentionedUsers);
+
+            return "User locations added.";
+        }
+
+        private async Task SetMentionedUserLocations(string givenLocation, string[] mentionedUsers)
+        {
+            if (mentionedUsers == null)
+            {
+                return;
+            }
             var tasks = mentionedUsers.Select(user =>
                 _userLocationRepository.UpsertUserLocation(_pockyUserRepository.GetUser(user), givenLocation)).ToList();
 
             await Task.WhenAll(tasks);
-            return "User locations added.";
         }
     }
 }
