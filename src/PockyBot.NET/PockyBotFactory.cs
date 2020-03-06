@@ -49,6 +49,7 @@ namespace PockyBot.NET
                 new UserLocation(pockyUserRepository, userLocationGetter, userLocationSetter, userLocationDeleter),
                 new StringConfig(configRepository),
                 new RemoveUser(pockyUserRepository, loggerFactory.CreateLogger<RemoveUser>()),
+                new LocationWeight(configRepository, locationRepository),
                 new Default(wrappedSettings)
             };
 

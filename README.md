@@ -191,7 +191,7 @@ commands.
 - `@PockyBot help` — get help with using the bot.
 - `@PockyBot rotation` — get the snack buying rotation.
 - `@PockyBot welcome` — welcome users.
-- `@PockyBot locationconfig get|set|delete <location>` — manage locations.
+- `@PockyBot locationconfig get|add|set|delete <location>` — manage locations.
 - `@PockyBot userlocation`:
     - `@PockyBot userlocation get me|all|unset|@User` — get users' locations.
     - `@PockyBot userlocation set <location> me` — set your location.

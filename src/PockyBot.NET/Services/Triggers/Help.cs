@@ -28,16 +28,16 @@ namespace PockyBot.NET.Services.Triggers
             _pockyBotSettings = pockySettings.Value;
         }
 
-        public async Task<Message> Respond(Message message)
+        public Task<Message> Respond(Message message)
         {
             var partsToSkip = message.MessageParts[0].MessageType == MessageType.PersonMention ? 1 : 0;
             var command = string.Join("", message.MessageParts.Skip(partsToSkip).Select(x => x.Text)).Trim().Remove(0, 4).Trim();
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
             var newMessage = CreateHelpResponseMessage(command, user);
-            return new Message
+            return Task.FromResult(new Message
             {
                 Text = newMessage
-            };
+            });
         }
 
         private string CreateHelpResponseMessage(string command, PockyUser user)
@@ -78,10 +78,10 @@ namespace PockyBot.NET.Services.Triggers
                     return CreateLocationConfigHelpMessage(user);
                 case Commands.UserLocation:
                     return CreateUserLocationHelpMessage(user);
+                case Commands.LocationWeight:
+                    return CreateLocationWeightHelpMessage(user);
                 case Commands.RemoveUser:
                     return CreateRemoveUserHelpMessage(user);
-                // case Commands.LocationWeight:
-                //     return CreateLocationWeightHelpMessage(user);
                 default:
                     return CreateDefaultHelpMessage();
             }
@@ -129,7 +129,7 @@ namespace PockyBot.NET.Services.Triggers
                 // newMessage += $"* {Commands.NumberConfig}\n";
                 newMessage += $"* {Commands.StringConfig}\n";
                 // newMessage += $"* {Commands.RoleConfig}\n";
-                // newMessage += $"* {Commands.LocationWeight}\n";
+                newMessage += $"* {Commands.LocationWeight}\n";
             }
 
             if (HasPermission(user, new []{Roles.Admin, Roles.RemoveUser})) {
@@ -272,7 +272,7 @@ namespace PockyBot.NET.Services.Triggers
         {
             if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
                 return "### How to configure location config values 🌏!\n" +
-                    $"1. To get/edit/delete locations, type `@{_pockyBotSettings.BotName} ${Commands.LocationConfig} {Actions.Get}|{Actions.Add}|{Actions.Delete} {{location}}`\n" +
+                    $"1. To get/edit/delete locations, type `@{_pockyBotSettings.BotName} {Commands.LocationConfig} {Actions.Get}|{Actions.Add}|{Actions.Delete} {{location}}`\n" +
                     "1. I will respond in the room you messaged me in.";
             }
             return "### How to get location values 🌏!\n" +
@@ -298,25 +298,26 @@ namespace PockyBot.NET.Services.Triggers
                 "1. I will respond in the room you messaged me in.";
         }
 
-        private string CreateRemoveUserHelpMessage(PockyUser user)
+        private string CreateLocationWeightHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] {Roles.Admin, Roles.RemoveUser})) {
-                return "### How to remove users 🛑!\n" +
-                    $"1. To remove a user, type `@{_pockyBotSettings.BotName} {Commands.RemoveUser} {{@User}}|'{{username}}'`\n" +
+            if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+                return "### How to configure location weight values ⚖️!\n" +
+                    $"1. To get/edit/delete location weight values, type `@{_pockyBotSettings.BotName} {Commands.LocationWeight} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{location1}} {{location2}} {{weight}}`\n" +
                     "1. I will respond in the room you messaged me in.";
             }
             return CreateDefaultHelpMessage();
         }
 
-        // private string CreateLocationWeightHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
-        //         return "### How to configure location weight values ⚖️!\n" +
-        //             $"1. To get/edit/delete location weight values, type `@{_pockyBotSettings.BotName} {Commands.LocationWeight} {Object.values(LocationAction).join('|')} {{location1}} {{location2}} {{weight}}`\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
+        private string CreateRemoveUserHelpMessage(PockyUser user)
+        {
+            if (HasPermission(user, new[] { Roles.Admin, Roles.RemoveUser }))
+            {
+                return "### How to remove users 🛑!\n" +
+                       $"1. To remove a user, type `@{_pockyBotSettings.BotName} {Commands.RemoveUser} {{@User}}|'{{username}}'`\n" +
+                       "1. I will respond in the room you messaged me in.";
+            }
+            return CreateDefaultHelpMessage();
+        }
 
         private static bool HasPermission(PockyUser user, string[] permissions)
         {

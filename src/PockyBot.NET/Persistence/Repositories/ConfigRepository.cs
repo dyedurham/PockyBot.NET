@@ -27,6 +27,36 @@ namespace PockyBot.NET.Persistence.Repositories
             return config?.Value;
         }
 
+        public async Task SetGeneralConfig(string name, int value)
+        {
+            var existingConfig =
+                _context.GeneralConfig.FirstOrDefault(x =>
+                    string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase));
+
+            if (existingConfig != null)
+            {
+                _context.Attach(existingConfig);
+                existingConfig.Value = value;
+                _context.Entry(existingConfig).Property(x => x.Value).IsModified = true;
+            }
+            else
+            {
+                _context.GeneralConfig.Add(new GeneralConfig
+                {
+                    Name = name,
+                    Value = value
+                });
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteGeneralConfig(GeneralConfig config)
+        {
+            _context.GeneralConfig.Remove(config);
+            await _context.SaveChangesAsync();
+        }
+
         public IList<StringConfig> GetAllStringConfig()
         {
             return _context.StringConfig.ToList();
