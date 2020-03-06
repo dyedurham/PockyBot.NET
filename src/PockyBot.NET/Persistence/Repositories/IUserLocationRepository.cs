@@ -5,7 +5,6 @@ namespace PockyBot.NET.Persistence.Repositories
 {
     internal interface IUserLocationRepository
     {
-        Task DeleteUserLocation(PockyUser user);
         Task DeleteUserLocation(string userId);
         Task UpsertUserLocation(PockyUser user, string location);
     }

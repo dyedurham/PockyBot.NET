@@ -4,18 +4,13 @@ using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
 {
-    class UserLocationRepository : IUserLocationRepository
+    internal class UserLocationRepository : IUserLocationRepository
     {
         private readonly DatabaseContext _context;
 
         public UserLocationRepository(DatabaseContext context)
         {
             _context = context;
-        }
-
-        public async Task DeleteUserLocation(PockyUser user)
-        {
-            await DeleteUserLocation(user.UserId).ConfigureAwait(false);
         }
 
         public async Task DeleteUserLocation(string userId)
