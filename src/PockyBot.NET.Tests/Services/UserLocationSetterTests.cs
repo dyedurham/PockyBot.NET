@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Shouldly;
 using TestStack.BDDfy;
@@ -12,16 +13,16 @@ namespace PockyBot.NET.Tests.Services
 {
     public class UserLocationSetterTests
     {
-        private IPockyUserRepository _pockyUserRepository;
-        private ILocationRepository _locationRepository;
-        private IUserLocationRepository _userLocationRepository;
+        private readonly IPockyUserRepository _pockyUserRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly IUserLocationRepository _userLocationRepository;
 
         private string[] _commands;
         private string[] _mentionedUsers;
         private bool _userIsAdmin;
         private string _meId;
 
-        private UserLocationSetter _subject;
+        private readonly IUserLocationSetter _subject;
         private string _result;
 
         public UserLocationSetterTests()
@@ -141,7 +142,7 @@ namespace PockyBot.NET.Tests.Services
             _locationRepository.GetAllLocations().Returns(new[] { "location2", "location3" });
         }
 
-        private async void WhenSetUserLocationIsCalled()
+        private async Task WhenSetUserLocationIsCalled()
         {
             _result = await _subject.SetUserLocation(_commands, _mentionedUsers, _userIsAdmin, _meId);
         }

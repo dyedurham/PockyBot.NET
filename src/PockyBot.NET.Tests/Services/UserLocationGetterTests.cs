@@ -11,7 +11,7 @@ namespace PockyBot.NET.Tests.Services
 {
     public class UserLocationGetterTests
     {
-        private IPockyUserRepository _pockyUserRepository;
+        private readonly IPockyUserRepository _pockyUserRepository;
 
         private readonly IUserLocationGetter _subject;
         private string _result;
@@ -155,7 +155,7 @@ namespace PockyBot.NET.Tests.Services
             _result.ShouldContain("* **User4**: No location set");
         }
 
-        private PockyUser GetUser(string username, string location)
+        private static PockyUser GetUser(string username, string location)
         {
             return new PockyUser
             {

@@ -37,7 +37,7 @@ namespace PockyBot.NET.Services
                 await _userLocationRepository.DeleteUserLocation(meId);
             }
 
-            await DeleteMentionedUsers(mentionedUsers);
+            await DeleteMentionedUsers(mentionedUsers).ConfigureAwait(false);
 
             return "User locations removed.";
         }

@@ -53,7 +53,7 @@ namespace PockyBot.NET.Services
                 await _userLocationRepository.UpsertUserLocation(_pockyUserRepository.GetUser(meId), givenLocation);
             }
 
-            await SetMentionedUserLocations(givenLocation, mentionedUsers);
+            await SetMentionedUserLocations(givenLocation, mentionedUsers).ConfigureAwait(false);
 
             return "User locations added.";
         }

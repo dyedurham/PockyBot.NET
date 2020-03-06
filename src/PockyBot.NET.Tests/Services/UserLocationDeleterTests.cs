@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Shouldly;
 using TestStack.BDDfy;
 using Xunit;
@@ -9,14 +10,14 @@ namespace PockyBot.NET.Tests.Services
 {
     public class UserLocationDeleterTests
     {
-        private IUserLocationRepository _userLocationRepository;
+        private readonly IUserLocationRepository _userLocationRepository;
 
         private string[] _commands;
         private string[] _mentionedUsers;
         private bool _userIsAdmin;
         private string _meId;
 
-        private UserLocationDeleter _subject;
+        private readonly IUserLocationDeleter _subject;
         private string _result;
 
         public UserLocationDeleterTests()
@@ -122,7 +123,7 @@ namespace PockyBot.NET.Tests.Services
             _meId = userId;
         }
 
-        private async void WhenDeleteUserLocationIsCalled()
+        private async Task WhenDeleteUserLocationIsCalled()
         {
             _result = await _subject.DeleteUserLocation(_commands, _mentionedUsers, _userIsAdmin, _meId);
         }

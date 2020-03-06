@@ -15,7 +15,7 @@ namespace PockyBot.NET.Persistence.Repositories
 
         public async Task DeleteUserLocation(PockyUser user)
         {
-            await DeleteUserLocation(user.UserId);
+            await DeleteUserLocation(user.UserId).ConfigureAwait(false);
         }
 
         public async Task DeleteUserLocation(string userId)

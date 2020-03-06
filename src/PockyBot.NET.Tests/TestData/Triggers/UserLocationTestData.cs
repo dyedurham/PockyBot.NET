@@ -5,7 +5,7 @@ using GlobalX.ChatBots.Core.People;
 
 namespace PockyBot.NET.Tests.TestData.Triggers
 {
-    public class UserLocationTestData
+    public static class UserLocationTestData
     {
         public static IEnumerable<object[]> GetUserTestData()
         {
@@ -138,7 +138,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 }
             };
 
-            var userMentions = userIds.SelectMany(userid => new MessagePart[]
+            var userMentions = userIds.SelectMany(userid => new[]
             {
                 new MessagePart
                 {
