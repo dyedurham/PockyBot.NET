@@ -17,9 +17,11 @@ namespace PockyBot.NET.Persistence.Repositories
         {
             var userLocationToDelete = await _context.UserLocations.FirstOrDefaultAsync(x => x.UserId == userId);
 
-            // unclear what this does if userLocationToDelete is null
-            _context.UserLocations.Remove(userLocationToDelete);
-            await _context.SaveChangesAsync();
+            if (userLocationToDelete != null)
+            {
+                _context.UserLocations.Remove(userLocationToDelete);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task UpsertUserLocation(PockyUser user, string location)

@@ -34,9 +34,11 @@ namespace PockyBot.NET.Persistence.Repositories
         {
             var locationToDelete = await _context.Locations.FirstOrDefaultAsync(x => x.Name == location);
 
-            // unclear what this does if locationToDelete is null
-            _context.Locations.Remove(locationToDelete);
-            await _context.SaveChangesAsync();
+            if (locationToDelete != null)
+            {
+                _context.Locations.Remove(locationToDelete);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
