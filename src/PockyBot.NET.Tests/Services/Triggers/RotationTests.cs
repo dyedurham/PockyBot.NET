@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
@@ -68,8 +69,9 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldReturnTheRotationMessage()
         {
+            var nl = Environment.NewLine;
             _result.Text.ShouldBe("## Here's the snack buying rotation:\n\n" +
-                                  "* team1\n* team2\n");
+                                  $"* team1{nl}* team2{nl}");
         }
     }
 }

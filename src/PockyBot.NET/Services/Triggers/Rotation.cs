@@ -28,7 +28,7 @@ namespace PockyBot.NET.Services.Triggers
 
             foreach (var item in rotation.Split(','))
             {
-                builder.Append($"* {item}\n");
+                builder.AppendLine($"* {item}");
             }
 
             return new Message

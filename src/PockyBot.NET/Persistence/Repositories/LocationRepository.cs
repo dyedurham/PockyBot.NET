@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Persistence.Repositories
@@ -31,9 +32,13 @@ namespace PockyBot.NET.Persistence.Repositories
 
         public async Task DeleteLocation(string location)
         {
-            var locationToDelete = _context.Locations.FirstOrDefault(x => x.Name == location);
-            _context.Locations.Remove(locationToDelete);
-            await _context.SaveChangesAsync();
+            var locationToDelete = await _context.Locations.FirstOrDefaultAsync(x => x.Name == location);
+
+            if (locationToDelete != null)
+            {
+                _context.Locations.Remove(locationToDelete);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
