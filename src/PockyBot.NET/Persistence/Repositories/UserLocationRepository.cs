@@ -31,11 +31,9 @@ namespace PockyBot.NET.Persistence.Repositories
 
             if (userLocation == null)
             {
-                // TODO: check if all three of these properties are needed?
                 userLocation = new UserLocation
                 {
                     Location = location,
-                    User = user,
                     UserId = user.UserId
                 };
                 await _context.UserLocations.AddAsync(userLocation);
