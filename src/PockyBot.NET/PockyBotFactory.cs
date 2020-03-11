@@ -20,6 +20,8 @@ namespace PockyBot.NET
             var pockyUserRepository = new PockyUserRepository(dbContext);
             var configRepository = new ConfigRepository(dbContext);
             var pegRepository = new PegRepository(dbContext);
+            var locationRepository = new LocationRepository(dbContext);
+            var userLocationRepository = new UserLocationRepository(dbContext);
 
             var triggerResponseTester = new TriggerResponseTester(wrappedSettings, pockyUserRepository);
             var pegRequestValidator = new PegRequestValidator(wrappedSettings, configRepository);
@@ -27,8 +29,12 @@ namespace PockyBot.NET
             var pegGiver = new PegGiver(pegRepository, chatHelper);
             var directResultsMessageSender = new DirectResultsMessageSender(chatHelper.Messages);
             var pegResultsHelper = new PegResultsHelper(configRepository, pegHelper);
+            var userLocationGetter = new UserLocationGetter(pockyUserRepository);
+            var userLocationSetter =
+                new UserLocationSetter(pockyUserRepository, locationRepository, userLocationRepository);
+            var userLocationDeleter = new UserLocationDeleter(userLocationRepository);
 
-            List<ITrigger> triggers = new List<ITrigger>
+            var triggers = new List<ITrigger>
             {
                 new Ping(),
                 new Help(pockyUserRepository, wrappedSettings, configRepository),
@@ -39,8 +45,11 @@ namespace PockyBot.NET
                 new Reset(pegRepository, loggerFactory.CreateLogger<Reset>()),
                 new Keywords(configRepository),
                 new Rotation(configRepository),
+                new LocationConfig(locationRepository, pockyUserRepository),
+                new UserLocation(pockyUserRepository, userLocationGetter, userLocationSetter, userLocationDeleter),
                 new StringConfig(configRepository),
                 new RemoveUser(pockyUserRepository, loggerFactory.CreateLogger<RemoveUser>()),
+                new LocationWeight(configRepository, locationRepository),
                 new Default(wrappedSettings)
             };
 

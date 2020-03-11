@@ -78,6 +78,11 @@ namespace PockyBot.NET.Persistence.Repositories
                 .Where(x => x.PegsGiven.Any() || x.PegsReceived.Any()).ToList();
         }
 
+        public List<PockyUser> GetAllUsersLocations()
+        {
+            return _context.PockyUsers.Include(x => x.Location).ToList();
+        }
+
         public async Task RemoveUser(PockyUser user)
         {
             var userLocations = _context.UserLocations.Where(x => x.UserId == user.UserId);

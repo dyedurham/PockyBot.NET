@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
@@ -23,16 +24,16 @@ namespace PockyBot.NET.Services.Triggers
         public async Task<Message> Respond(Message message)
         {
             var rotation = _configRepository.GetStringConfig("rotation").First();
-            var newMessage = "## Here's the snack buying rotation:\n\n";
+            var builder = new StringBuilder("## Here's the snack buying rotation:\n\n");
 
             foreach (var item in rotation.Split(','))
             {
-                newMessage += $"* {item}\n";
+                builder.AppendLine($"* {item}");
             }
 
             return new Message
             {
-                Text = newMessage
+                Text = builder.ToString()
             };
         }
     }
