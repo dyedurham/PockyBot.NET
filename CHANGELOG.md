@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.0...v1.8.1) (2020-03-11)
+
+
+### Bug Fixes
+
+* inject missing dependencies ([f7a37b6](https://github.com/GlobalX/PockyBot.NET/commit/f7a37b61116f46c895ffe8cec7f249b72c8c757a))
+
 # [1.8.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.7.0...v1.8.0) (2020-03-11)
 
 
