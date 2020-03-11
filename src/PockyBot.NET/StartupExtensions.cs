@@ -35,6 +35,9 @@ namespace PockyBot.NET
             services.AddTransient<IPockyBot, PockyBot>();
             services.AddTransient<IPegResultsHelper, PegResultsHelper>();
             services.AddTransient<IDirectResultsMessageSender, DirectResultsMessageSender>();
+            services.AddTransient<IUserLocationGetter, UserLocationGetter>();
+            services.AddTransient<IUserLocationSetter, UserLocationSetter>();
+            services.AddTransient<IUserLocationDeleter, UserLocationDeleter>();
             services.AddTransient<ITrigger, Ping>();
             services.AddTransient<ITrigger, Help>();
             services.AddTransient<ITrigger, Welcome>();
@@ -45,6 +48,7 @@ namespace PockyBot.NET
             services.AddTransient<ITrigger, Keywords>();
             services.AddTransient<ITrigger, Rotation>();
             services.AddTransient<ITrigger, LocationConfig>();
+            services.AddTransient<ITrigger, UserLocation>();
             services.AddTransient<ITrigger, StringConfig>();
             services.AddTransient<ITrigger, RemoveUser>();
             services.AddTransient<ITrigger, LocationWeight>();
