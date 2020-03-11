@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.7.0...v1.8.0) (2020-03-11)
+
+
+### Features
+
+* add location config trigger to startup code ([b46029e](https://github.com/GlobalX/PockyBot.NET/commit/b46029e1d5bcd52c080f575742c8abfdcbb2fb2f))
+* add location weight trigger ([c42acbd](https://github.com/GlobalX/PockyBot.NET/commit/c42acbdbdc8fe37f362545ff0729e55d7cb8d1b9))
+* add locationconfig to help trigger ([23b6d7d](https://github.com/GlobalX/PockyBot.NET/commit/23b6d7d4a8e6a7649d2980b33cac5b97b0691672))
+* add locationconfig trigger ([989a8da](https://github.com/GlobalX/PockyBot.NET/commit/989a8da3a9376f2c89b6d36113774c7ecd58d5f3))
+* add locationweight command to help message ([74a1c7d](https://github.com/GlobalX/PockyBot.NET/commit/74a1c7dd3c90f3459a0b261a472bb0cadb8b603d))
+* rename 'set' to 'add' ([39ca4da](https://github.com/GlobalX/PockyBot.NET/commit/39ca4da6fd8a4050864ad4517c921267b76c1d80))
+
 # [1.7.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.2...v1.7.0) (2020-03-03)
 
 
