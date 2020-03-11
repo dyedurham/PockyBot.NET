@@ -6,13 +6,13 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services
 {
-    public class UserLocationSetter : IUserLocationSetter
+    internal class UserLocationSetter : IUserLocationSetter
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly ILocationRepository _locationRepository;
         private readonly IUserLocationRepository _userLocationRepository;
 
-        internal UserLocationSetter(IPockyUserRepository pockyUserRepository, ILocationRepository locationRepository,
+        public UserLocationSetter(IPockyUserRepository pockyUserRepository, ILocationRepository locationRepository,
             IUserLocationRepository userLocationRepository)
         {
             _pockyUserRepository = pockyUserRepository;
