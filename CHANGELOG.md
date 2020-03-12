@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.1...v1.8.2) (2020-03-12)
+
+
+### Bug Fixes
+
+* make helper classes' constructors public ([edec725](https://github.com/GlobalX/PockyBot.NET/commit/edec725731ee881a90add721f1ec3c95ed66d561))
+
 ## [1.8.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.0...v1.8.1) (2020-03-11)
 
 
