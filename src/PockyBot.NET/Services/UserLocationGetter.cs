@@ -4,11 +4,11 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services
 {
-    public class UserLocationGetter : IUserLocationGetter
+    internal class UserLocationGetter : IUserLocationGetter
     {
         private readonly IPockyUserRepository _pockyUserRepository;
 
-        internal UserLocationGetter(IPockyUserRepository pockyUserRepository)
+        public UserLocationGetter(IPockyUserRepository pockyUserRepository)
         {
             _pockyUserRepository = pockyUserRepository;
         }
