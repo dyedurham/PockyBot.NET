@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.2...v1.8.3) (2020-03-13)
+
+
+### Bug Fixes
+
+* **user-location:** handle case where new user has location set ([228fe41](https://github.com/GlobalX/PockyBot.NET/commit/228fe41eb89f21d0ce90b0d61e3e18f21fa79d65))
+
 ## [1.8.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.1...v1.8.2) (2020-03-12)
 
 
