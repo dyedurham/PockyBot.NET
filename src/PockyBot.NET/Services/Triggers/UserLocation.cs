@@ -2,7 +2,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using GlobalX.ChatBots.Core.People;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -30,6 +32,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public async Task<Message> Respond(Message message)
         {
+            var createUser = CreateUser(message.Sender);
             var fullText = message.MessageParts.Skip(1).Select(x => x.Text);
 
             var mentionedUsers = message.MessageParts.Skip(1)
@@ -52,6 +55,8 @@ namespace PockyBot.NET.Services.Triggers
             var command = commands[1];
             commands = commands.Skip(2).ToArray();
 
+            await createUser;
+
             return new Message
             {
                 Text = command.ToLowerInvariant() switch
@@ -63,6 +68,11 @@ namespace PockyBot.NET.Services.Triggers
                     _ => "Unknown command. Possible values are get, set, and delete."
                 }
             };
+        }
+
+        private async Task CreateUser(Person user)
+        {
+            await _pockyUserRepository.AddOrUpdateUser(user.UserId, user.Username);
         }
 
         private bool UserIsAdmin(string userId)
