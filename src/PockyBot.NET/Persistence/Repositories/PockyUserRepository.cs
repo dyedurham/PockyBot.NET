@@ -39,7 +39,7 @@ namespace PockyBot.NET.Persistence.Repositories
                 .ToList();
         }
 
-        public PockyUser AddOrUpdateUser(string userId, string username)
+        public async Task<PockyUser> AddOrUpdateUser(string userId, string username)
         {
             var existingUser = _context.PockyUsers
                 .Include(x => x.PegsGiven)
@@ -49,7 +49,7 @@ namespace PockyBot.NET.Persistence.Repositories
             if (existingUser != null)
             {
                 existingUser.Username = username;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return existingUser;
             }
 
@@ -59,7 +59,7 @@ namespace PockyBot.NET.Persistence.Repositories
                 Username = username
             };
             _context.Add(newPockyUser);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return newPockyUser;
         }

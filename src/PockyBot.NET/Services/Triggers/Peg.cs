@@ -60,7 +60,7 @@ namespace PockyBot.NET.Services.Triggers
 
             _logger.LogDebug("Getting user information for id {userid}, username {username}", message.Sender.UserId,
                 message.Sender.Username);
-            var sender = _pockyUserRepository.AddOrUpdateUser(message.Sender.UserId, message.Sender.Username);
+            var sender = await _pockyUserRepository.AddOrUpdateUser(message.Sender.UserId, message.Sender.Username);
             var comment = string.Join(string.Empty, message.MessageParts.Skip(3).Select(x => x.Text)).Trim();
 
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");
@@ -83,7 +83,7 @@ namespace PockyBot.NET.Services.Triggers
 
             var receiverId = message.MessageParts[2].UserId;
             var receiver = await _chatHelper.People.GetPersonAsync(receiverId).ConfigureAwait(false);
-            var dbReceiver = _pockyUserRepository.AddOrUpdateUser(receiver.UserId, receiver.Username);
+            var dbReceiver = await _pockyUserRepository.AddOrUpdateUser(receiver.UserId, receiver.Username);
 
             _logger.LogInformation(
                 "Giving peg with sender {senderId}, receiver {receiverId}, validity {isPegValid}, comment {comment}",

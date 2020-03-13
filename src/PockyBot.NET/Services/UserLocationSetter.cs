@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using GlobalX.ChatBots.Core;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Repositories;
 
@@ -11,13 +12,15 @@ namespace PockyBot.NET.Services
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly ILocationRepository _locationRepository;
         private readonly IUserLocationRepository _userLocationRepository;
+        private readonly IChatHelper _chatHelper;
 
         public UserLocationSetter(IPockyUserRepository pockyUserRepository, ILocationRepository locationRepository,
-            IUserLocationRepository userLocationRepository)
+            IUserLocationRepository userLocationRepository, IChatHelper chatHelper)
         {
             _pockyUserRepository = pockyUserRepository;
             _locationRepository = locationRepository;
             _userLocationRepository = userLocationRepository;
+            _chatHelper = chatHelper;
         }
 
         public async Task<string> SetUserLocation(string[] commands, string[] mentionedUsers, bool userIsAdmin, string meId)
@@ -64,8 +67,17 @@ namespace PockyBot.NET.Services
             {
                 return;
             }
-            var tasks = mentionedUsers.Select(user =>
-                _userLocationRepository.UpsertUserLocation(_pockyUserRepository.GetUser(user), givenLocation)).ToList();
+
+            var tasks = mentionedUsers.Select(async mentionedUser =>
+            {
+                var user = _pockyUserRepository.GetUser(mentionedUser);
+                if (user == null)
+                {
+                    var chatUser = await _chatHelper.People.GetPersonAsync(mentionedUser);
+                    user = await _pockyUserRepository.AddOrUpdateUser(chatUser.UserId, chatUser.Username);
+                }
+                await _userLocationRepository.UpsertUserLocation(user, givenLocation);
+            }).ToList();
 
             await Task.WhenAll(tasks);
         }

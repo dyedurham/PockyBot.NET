@@ -27,7 +27,7 @@ namespace PockyBot.NET.Persistence.Repositories
         public async Task UpsertUserLocation(PockyUser user, string location)
         {
             var userLocation = await _context.UserLocations.FirstOrDefaultAsync(x =>
-                x.UserId == (user != null ? user.UserId : null));
+                x.UserId == user.UserId);
 
             if (userLocation == null)
             {
