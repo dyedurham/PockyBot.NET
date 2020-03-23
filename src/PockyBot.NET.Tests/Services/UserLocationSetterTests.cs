@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using GlobalX.ChatBots.Core;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Shouldly;
 using TestStack.BDDfy;
@@ -16,6 +17,7 @@ namespace PockyBot.NET.Tests.Services
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly ILocationRepository _locationRepository;
         private readonly IUserLocationRepository _userLocationRepository;
+        private readonly IChatHelper _chatHelper;
 
         private string[] _commands;
         private string[] _mentionedUsers;
@@ -35,7 +37,8 @@ namespace PockyBot.NET.Tests.Services
 
             _locationRepository = Substitute.For<ILocationRepository>();
             _userLocationRepository = Substitute.For<IUserLocationRepository>();
-            _subject = new UserLocationSetter(_pockyUserRepository, _locationRepository, _userLocationRepository);
+            _chatHelper = Substitute.For<IChatHelper>();
+            _subject = new UserLocationSetter(_pockyUserRepository, _locationRepository, _userLocationRepository, _chatHelper);
         }
 
         [Theory]

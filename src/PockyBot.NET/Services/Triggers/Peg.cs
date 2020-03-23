@@ -83,7 +83,11 @@ namespace PockyBot.NET.Services.Triggers
 
             var receiverId = message.MessageParts[2].UserId;
             var receiver = await _chatHelper.People.GetPersonAsync(receiverId).ConfigureAwait(false);
+<<<<<<< HEAD
             var dbReceiver = await _pockyUserRepository.AddOrUpdateUserAsync(receiver.UserId, receiver.Username);
+=======
+            var dbReceiver = await _pockyUserRepository.AddOrUpdateUser(receiver.UserId, receiver.Username);
+>>>>>>> d6769e441c6dec38cdd545aa4ea94577d86c9beb
 
             _logger.LogInformation(
                 "Giving peg with sender {senderId}, receiver {receiverId}, validity {isPegValid}, comment {comment}",

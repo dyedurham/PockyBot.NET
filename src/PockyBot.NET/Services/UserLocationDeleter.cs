@@ -6,11 +6,11 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services
 {
-    public class UserLocationDeleter : IUserLocationDeleter
+    internal class UserLocationDeleter : IUserLocationDeleter
     {
         private readonly IUserLocationRepository _userLocationRepository;
 
-        internal UserLocationDeleter(IUserLocationRepository userLocationRepository)
+        public UserLocationDeleter(IUserLocationRepository userLocationRepository)
         {
             _userLocationRepository = userLocationRepository;
         }

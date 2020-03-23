@@ -49,7 +49,7 @@ namespace PockyBot.NET.Persistence.Repositories
             if (existingUser != null)
             {
                 existingUser.Username = username;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return existingUser;
             }
 

@@ -31,7 +31,7 @@ namespace PockyBot.NET
             var pegResultsHelper = new PegResultsHelper(configRepository, pegHelper);
             var userLocationGetter = new UserLocationGetter(pockyUserRepository);
             var userLocationSetter =
-                new UserLocationSetter(pockyUserRepository, locationRepository, userLocationRepository);
+                new UserLocationSetter(pockyUserRepository, locationRepository, userLocationRepository, chatHelper);
             var userLocationDeleter = new UserLocationDeleter(userLocationRepository);
 
             var triggers = new List<ITrigger>

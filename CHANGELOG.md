@@ -1,3 +1,36 @@
+## [1.8.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.2...v1.8.3) (2020-03-13)
+
+
+### Bug Fixes
+
+* **user-location:** handle case where new user has location set ([228fe41](https://github.com/GlobalX/PockyBot.NET/commit/228fe41eb89f21d0ce90b0d61e3e18f21fa79d65))
+
+## [1.8.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.1...v1.8.2) (2020-03-12)
+
+
+### Bug Fixes
+
+* make helper classes' constructors public ([edec725](https://github.com/GlobalX/PockyBot.NET/commit/edec725731ee881a90add721f1ec3c95ed66d561))
+
+## [1.8.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.0...v1.8.1) (2020-03-11)
+
+
+### Bug Fixes
+
+* inject missing dependencies ([f7a37b6](https://github.com/GlobalX/PockyBot.NET/commit/f7a37b61116f46c895ffe8cec7f249b72c8c757a))
+
+# [1.8.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.7.0...v1.8.0) (2020-03-11)
+
+
+### Features
+
+* add location config trigger to startup code ([b46029e](https://github.com/GlobalX/PockyBot.NET/commit/b46029e1d5bcd52c080f575742c8abfdcbb2fb2f))
+* add location weight trigger ([c42acbd](https://github.com/GlobalX/PockyBot.NET/commit/c42acbdbdc8fe37f362545ff0729e55d7cb8d1b9))
+* add locationconfig to help trigger ([23b6d7d](https://github.com/GlobalX/PockyBot.NET/commit/23b6d7d4a8e6a7649d2980b33cac5b97b0691672))
+* add locationconfig trigger ([989a8da](https://github.com/GlobalX/PockyBot.NET/commit/989a8da3a9376f2c89b6d36113774c7ecd58d5f3))
+* add locationweight command to help message ([74a1c7d](https://github.com/GlobalX/PockyBot.NET/commit/74a1c7dd3c90f3459a0b261a472bb0cadb8b603d))
+* rename 'set' to 'add' ([39ca4da](https://github.com/GlobalX/PockyBot.NET/commit/39ca4da6fd8a4050864ad4517c921267b76c1d80))
+
 # [1.7.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.6.2...v1.7.0) (2020-03-03)
 
 

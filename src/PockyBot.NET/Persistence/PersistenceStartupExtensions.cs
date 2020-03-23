@@ -11,6 +11,8 @@ namespace PockyBot.NET.Persistence
             services.AddTransient<IPockyUserRepository, PockyUserRepository>();
             services.AddTransient<IPegRepository, PegRepository>();
             services.AddTransient<IConfigRepository, ConfigRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<IUserLocationRepository, UserLocationRepository>();
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(databaseConnectionString));
             return services;
         }
