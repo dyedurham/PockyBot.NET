@@ -74,7 +74,7 @@ namespace PockyBot.NET.Services
                 if (user == null)
                 {
                     var chatUser = await _chatHelper.People.GetPersonAsync(mentionedUser);
-                    user = await _pockyUserRepository.AddOrUpdateUser(chatUser.UserId, chatUser.Username);
+                    user = await _pockyUserRepository.AddOrUpdateUserAsync(chatUser.UserId, chatUser.Username);
                 }
                 await _userLocationRepository.UpsertUserLocation(user, givenLocation);
             }).ToList();

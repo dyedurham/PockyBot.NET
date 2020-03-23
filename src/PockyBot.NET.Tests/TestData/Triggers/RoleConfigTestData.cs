@@ -37,10 +37,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     }
                 },
                 new List<PockyUser>(),
-                new Message
-                {
-                    Text = "Please specify a command. Possible values are get, set, and delete."
-                }
+                new[] { "Please specify a command. Possible values are get, set, and delete." }
             };
 
             yield return new object[]
@@ -70,10 +67,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     }
                 },
                 new List<PockyUser>(),
-                new Message
-                {
-                    Text = "Unknown command. Possible values are get, set, and delete."
-                }
+                new[] { "Unknown command. Possible values are get, set, and delete." }
             };
 
             yield return new object[]
@@ -103,10 +97,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     }
                 },
                 new List<PockyUser>(),
-                new Message
-                {
-                    Text = "No roles have been set."
-                }
+                new[] { "No roles have been set." }
             };
 
             yield return new object[]
@@ -160,10 +151,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         Roles = new List<Role>{ new Role { UserRole = Roles.Admin } }
                     }
                 },
-                new Message
-                {
-                    Text = "Here is the current config:\n\n- Mr Mime: UNMETERED, REMOVEUSER\n- Jigglypuff: ADMIN\n- Pikachu: ADMIN\n"
-                }
+                new[] { "Here is the current config:", "* Mr Mime: UNMETERED, REMOVEUSER", "* Jigglypuff: ADMIN", "* Pikachu: ADMIN" }
             };
         }
 

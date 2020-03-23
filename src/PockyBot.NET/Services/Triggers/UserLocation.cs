@@ -72,7 +72,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private async Task CreateUser(Person user)
         {
-            await _pockyUserRepository.AddOrUpdateUser(user.UserId, user.Username);
+            await _pockyUserRepository.AddOrUpdateUserAsync(user.UserId, user.Username);
         }
 
         private bool UserIsAdmin(string userId)

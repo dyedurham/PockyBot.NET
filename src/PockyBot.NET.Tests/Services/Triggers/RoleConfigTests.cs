@@ -35,12 +35,12 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         [Theory]
         [MemberData(nameof(RoleConfigTestData.GetRoleConfigTestData), MemberType = typeof(RoleConfigTestData))]
-        internal void TestGetRoleConfig(Message message, List<PockyUser> users, Message response)
+        internal void TestGetRoleConfig(Message message, List<PockyUser> users, string[] responseLines)
         {
             this.Given(x => GivenAMessage(message))
                 .And(x => GivenAListOfUserRoles(users))
                 .When(x => WhenRespondingToAMessage())
-                .Then(x => ThenItShouldReturnAResponse(response))
+                .Then(x => ThenItShouldReturnAResponse(responseLines))
                 .BDDfy();
         }
 
@@ -130,6 +130,15 @@ namespace PockyBot.NET.Tests.Services.Triggers
         {
             _response.ShouldNotBeNull();
             _response.Text.ShouldBe(response.Text);
+        }
+
+        private void ThenItShouldReturnAResponse(string[] responseLines)
+        {
+            _response.ShouldNotBeNull();
+            foreach (var line in responseLines)
+            {
+                _response.Text.ShouldContain(line);
+            }
         }
 
         private void ThenItShouldNotCallAddRole()

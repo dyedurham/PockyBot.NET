@@ -78,8 +78,8 @@ namespace PockyBot.NET.Services.Triggers
             var roleConfigMessageBuilder = new StringBuilder("Here is the current config:\n\n");
             foreach (var user in users)
             {
-                roleConfigMessageBuilder.Append(
-                    $"- {user.Username}: {string.Join(", ", user.Roles.Select(x => x.UserRole))}\n");
+                roleConfigMessageBuilder.AppendLine(
+                    $"* {user.Username}: {string.Join(", ", user.Roles.Select(x => x.UserRole))}");
             }
 
             return roleConfigMessageBuilder.ToString();
