@@ -72,8 +72,8 @@ namespace PockyBot.NET.Services.Triggers
                 //     return CreateNumberConfigHelpMessage(user);
                 case Commands.StringConfig:
                     return CreateStringConfigHelpMessage(user);
-                // case Commands.RoleConfig:
-                //     return CreateRoleConfigHelpMessage(user);
+                case Commands.RoleConfig:
+                    return CreateRoleConfigHelpMessage(user);
                 case Commands.LocationConfig:
                     return CreateLocationConfigHelpMessage(user);
                 case Commands.UserLocation:
@@ -128,7 +128,7 @@ namespace PockyBot.NET.Services.Triggers
             if (HasPermission(user, new []{Roles.Admin, Roles.Config})) {
                 // newMessage += $"* {Commands.NumberConfig}\n";
                 newMessage += $"* {Commands.StringConfig}\n";
-                // newMessage += $"* {Commands.RoleConfig}\n";
+                newMessage += $"* {Commands.RoleConfig}\n";
                 newMessage += $"* {Commands.LocationWeight}\n";
             }
 
@@ -258,15 +258,15 @@ namespace PockyBot.NET.Services.Triggers
             return CreateDefaultHelpMessage();
         }
 
-        // private string CreateRoleConfigHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
-        //         return "### How to configure role config values 🗞️!\n" +
-        //             $"1. To get/edit/refresh/delete user roles, type `@{_pockyBotSettings.BotName} {Commands.RoleConfig} {Object.values(ConfigAction).join('|')} {{@User}} {{role}}`\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
+        private string CreateRoleConfigHelpMessage(PockyUser user)
+        {
+            if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+                return "### How to configure role config values 🗞️!\n" +
+                    $"1. To get/set/delete user roles, type `@{_pockyBotSettings.BotName} {Commands.RoleConfig} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{@User}} {{role}}`\n" +
+                    "1. I will respond in the room you messaged me in.";
+            }
+            return CreateDefaultHelpMessage();
+        }
 
         private string CreateLocationConfigHelpMessage(PockyUser user)
         {

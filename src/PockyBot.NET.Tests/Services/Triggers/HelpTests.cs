@@ -132,6 +132,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Reset, Roles.Admin)]
         [InlineData(Commands.StringConfig, Roles.Admin)]
         [InlineData(Commands.StringConfig, Roles.Config)]
+        [InlineData(Commands.RoleConfig, Roles.Admin)]
+        [InlineData(Commands.RoleConfig, Roles.Config)]
         [InlineData(Commands.LocationWeight, Roles.Admin)]
         [InlineData(Commands.LocationWeight, Roles.Config)]
         [InlineData(Commands.RemoveUser, Roles.Admin)]
@@ -149,6 +151,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Finish)]
         [InlineData(Commands.Reset)]
         [InlineData(Commands.StringConfig)]
+        [InlineData(Commands.RoleConfig)]
         [InlineData(Commands.LocationWeight)]
         [InlineData(Commands.RemoveUser)]
         public void ItShouldShowTheDefaultHelpMessageForAdminCommandsToNonAdminUsers(string command)
@@ -247,6 +250,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldContain($"* {Commands.Reset}");
             _result.Text.ShouldContain($"* {Commands.Finish}");
             _result.Text.ShouldContain($"* {Commands.StringConfig}");
+            _result.Text.ShouldContain($"* {Commands.RoleConfig}");
             _result.Text.ShouldContain($"* {Commands.LocationWeight}");
             _result.Text.ShouldContain($"* {Commands.RemoveUser}");
             _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");

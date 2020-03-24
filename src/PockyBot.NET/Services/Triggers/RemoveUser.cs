@@ -83,7 +83,7 @@ namespace PockyBot.NET.Services.Triggers
                 return $"Cannot remove user '{username}', they still have outstanding pegs";
             }
 
-            await _pockyUserRepository.RemoveUser(pockyUser);
+            await _pockyUserRepository.RemoveUserAsync(pockyUser);
             return $"User '{pockyUser.Username}' has been removed.";
         }
 
@@ -96,7 +96,7 @@ namespace PockyBot.NET.Services.Triggers
                 return $"Cannot remove user '{pockyUser.Username}', they still have outstanding pegs";
             }
 
-            await _pockyUserRepository.RemoveUser(pockyUser);
+            await _pockyUserRepository.RemoveUserAsync(pockyUser);
             return $"User '{pockyUser.Username}' has been removed.";
         }
 

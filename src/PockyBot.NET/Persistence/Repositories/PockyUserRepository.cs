@@ -39,7 +39,7 @@ namespace PockyBot.NET.Persistence.Repositories
                 .ToList();
         }
 
-        public async Task<PockyUser> AddOrUpdateUser(string userId, string username)
+        public async Task<PockyUser> AddOrUpdateUserAsync(string userId, string username)
         {
             var existingUser = _context.PockyUsers
                 .Include(x => x.PegsGiven)
@@ -83,12 +83,46 @@ namespace PockyBot.NET.Persistence.Repositories
             return _context.PockyUsers.Include(x => x.Location).ToList();
         }
 
-        public async Task RemoveUser(PockyUser user)
+        public async Task RemoveUserAsync(PockyUser user)
         {
             var userLocations = _context.UserLocations.Where(x => x.UserId == user.UserId);
             _context.UserLocations.RemoveRange(userLocations);
 
             _context.PockyUsers.Remove(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<PockyUser>> GetAllUserRolesAsync()
+        {
+            return await _context.PockyUsers
+                .Include(x => x.Roles)
+                .Where(x => x.Roles.Count > 0)
+                .ToListAsync();
+        }
+
+        public async Task AddRoleAsync(string userId, string role)
+        {
+            var user = await _context.PockyUsers
+                .Where(x => x.UserId == userId)
+                .Include(x => x.Roles)
+                .SingleAsync();
+
+            user.Roles.Add(new Role
+            {
+                UserId = userId,
+                UserRole = role
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveRoleAsync(string userId, string role)
+        {
+            var existingRole = await _context.Roles
+                .Where(x => x.UserId == userId && x.UserRole == role)
+                .SingleAsync();
+
+            _context.Roles.Remove(existingRole);
             await _context.SaveChangesAsync();
         }
     }

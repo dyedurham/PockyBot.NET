@@ -24,7 +24,7 @@ namespace PockyBot.NET.Services.Triggers
             _pockyBotSettings = pockyBotOptions.Value;
         }
 
-        public async Task<Message> Respond(Message message)
+        public Task<Message> Respond(Message message)
         {
             var newMessage = "## Hello world!\n" +
                              $"I'm {_pockyBotSettings.BotName}. I help you spread the word about the great work that your team mates are doing! " +
@@ -43,10 +43,10 @@ namespace PockyBot.NET.Services.Triggers
             newMessage += "\n\nBut also... if you spot someone shaming our PC security by leaving their desktop unlocked - you can award them a shame peg!\n\n" +
                           $"Find out how I work by typing @{_pockyBotSettings.BotName} help";
 
-            return new Message
+            return Task.FromResult(new Message
             {
                 Text = newMessage
-            };
+            });
         }
     }
 }
