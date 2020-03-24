@@ -1,3 +1,17 @@
+# [1.9.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.3...v1.9.0) (2020-03-24)
+
+
+### Bug Fixes
+
+* update async code ([ed51ebc](https://github.com/GlobalX/PockyBot.NET/commit/ed51ebccbded6ec91dd415d95edae0917027ed78))
+* use AppendLine ([c4d4bc3](https://github.com/GlobalX/PockyBot.NET/commit/c4d4bc320394df55965cf65c1b1b747080a35cdb))
+
+
+### Features
+
+* add roleconfig to help message ([6728d75](https://github.com/GlobalX/PockyBot.NET/commit/6728d75a391daf1ca357d234a2be5808757181a4))
+* implement roleconfig trigger ([6c71ea9](https://github.com/GlobalX/PockyBot.NET/commit/6c71ea9744a369563ae3e5672906510f2f8f3279))
+
 ## [1.8.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.2...v1.8.3) (2020-03-13)
 
 
