@@ -57,6 +57,14 @@ namespace PockyBot.NET.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteGeneralConfig(string name)
+        {
+            var existingConfig = _context.GeneralConfig.First(x =>
+                string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase));
+            _context.Remove(existingConfig);
+            await _context.SaveChangesAsync();
+        }
+
         public IList<StringConfig> GetAllStringConfig()
         {
             return _context.StringConfig.ToList();
