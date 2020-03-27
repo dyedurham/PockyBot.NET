@@ -94,23 +94,23 @@ namespace PockyBot.NET.Services.Triggers
 
             if (value < 0)
             {
-                return "Value should be greater than or equal to zero.";
+                return "Value must be greater than or equal to zero.";
             }
 
             if (commandWords[2] == "minimum" && value > _configRepository.GetGeneralConfig("limit"))
             {
-                return "Minimum pegs must be less than or equal to peg limit";
+                return "Minimum pegs must be less than or equal to peg limit.";
             }
 
             await _configRepository.SetGeneralConfig(commandWords[2], value);
-            return "Value has been set";
+            return "Value has been set.";
         }
 
         private async Task<string> DeleteNumberConfigMessage(List<string> commandWords)
         {
             if (commandWords.Count != 3)
             {
-                return "You must specify a config name to delete";
+                return "You must specify a config name to delete.";
             }
 
             if (!_configRepository.GetGeneralConfig(commandWords[2]).HasValue)
