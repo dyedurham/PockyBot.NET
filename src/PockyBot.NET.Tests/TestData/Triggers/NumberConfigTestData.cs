@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Tests.TestData.Triggers
 {
-    public class NumberConfigTestData
+    public static class NumberConfigTestData
     {
         public static IEnumerable<object[]> GetNumberConfigTestData()
         {
