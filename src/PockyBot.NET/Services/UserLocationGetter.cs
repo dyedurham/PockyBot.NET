@@ -24,7 +24,7 @@ namespace PockyBot.NET.Services
             {
                 case UserLocationTypes.Me:
                     var me = _pockyUserRepository.GetUser(meId);
-                    return $"Your location is {me.Location.Location}";
+                    return $"Your location is {me.Location?.Location ?? "unset"}";
                 case UserLocationTypes.All:
                     return GetAllUserLocations();
                 case UserLocationTypes.Unset:
