@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.9.0...v1.9.1) (2020-03-30)
+
+
+### Bug Fixes
+
+* **user-location-getter:** handle nulls gracefully ([80718bc](https://github.com/GlobalX/PockyBot.NET/commit/80718bc78919fa8c7420d9fe8ca59b9f9a1a468e))
+
 # [1.9.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.8.3...v1.9.0) (2020-03-24)
 
 
