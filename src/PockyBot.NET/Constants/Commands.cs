@@ -17,5 +17,6 @@ namespace PockyBot.NET.Constants
         public const string LocationWeight = "locationweight";
         public const string Keywords = "keywords";
         public const string RoleConfig = "roleconfig";
+        public const string NumberConfig = "numberconfig";
     }
 }

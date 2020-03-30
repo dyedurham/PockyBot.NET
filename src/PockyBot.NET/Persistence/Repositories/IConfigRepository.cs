@@ -10,6 +10,7 @@ namespace PockyBot.NET.Persistence.Repositories
         int? GetGeneralConfig(string name);
         Task SetGeneralConfig(string name, int value);
         Task DeleteGeneralConfig(GeneralConfig config);
+        Task DeleteGeneralConfig(string name);
         IList<StringConfig> GetAllStringConfig();
         IList<string> GetStringConfig(string name);
         Task AddStringConfig(string name, string value);
