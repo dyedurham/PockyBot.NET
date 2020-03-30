@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.9.1...v1.10.0) (2020-03-30)
+
+
+### Features
+
+* add numberconfig trigger ([a331c4b](https://github.com/GlobalX/PockyBot.NET/commit/a331c4bac122b2e4a3e337fbe1fa6916e997e109))
+
 ## [1.9.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.9.0...v1.9.1) (2020-03-30)
 
 
