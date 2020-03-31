@@ -34,7 +34,7 @@ namespace PockyBot.NET.Services.Triggers
             _logger.LogDebug("Mapping users...");
             var mappedUsers = _pegResultsHelper.MapUsersToPegRecipients(users);
 
-            var uri = _resultsFileGenerator.GenerateResultsFileAndReturnLink(mappedUsers);
+            var uri = await _resultsFileGenerator.GenerateResultsFileAndReturnLink(mappedUsers);
 
             return new Message
             {
