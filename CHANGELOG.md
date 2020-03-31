@@ -1,3 +1,11 @@
+## [1.10.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.10.0...v1.10.1) (2020-03-31)
+
+
+### Bug Fixes
+
+* update enum mapping ([59ed4f7](https://github.com/GlobalX/PockyBot.NET/commit/59ed4f76365a1e42ceaaa1c5c127de0ed4120867))
+* use enums for role ([44e56f9](https://github.com/GlobalX/PockyBot.NET/commit/44e56f9bc904ea7edf1d3384c922bad7ccad91c2))
+
 # [1.10.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.9.1...v1.10.0) (2020-03-30)
 
 
