@@ -15,14 +15,14 @@ namespace PockyBot.NET.Persistence.Models
         [Column("username")]
         public string Username { get; set; }
 
-        public List<Role> Roles { get; set; }
+        public List<UserRole> Roles { get; set; }
         [InverseProperty("sender")]
         public List<Peg> PegsGiven { get; set; }
         [InverseProperty("receiver")]
         public List<Peg> PegsReceived { get; set; }
         public UserLocation Location { get; set; }
 
-        public bool HasRole(string role) =>
-            Roles?.Any(x => string.Equals(role, x.UserRole, StringComparison.OrdinalIgnoreCase)) ?? false;
+        public bool HasRole(Role role) =>
+            Roles?.Any(x => x.Role == role) ?? false;
     }
 }

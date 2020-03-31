@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Services.Triggers
 {
@@ -8,7 +9,7 @@ namespace PockyBot.NET.Services.Triggers
         string Command { get; }
         bool DirectMessageAllowed { get; }
         bool CanHaveArgs { get; }
-        string[] Permissions { get; }
+        Role[] Permissions { get; }
         Task<Message> Respond(Message message);
     }
 }

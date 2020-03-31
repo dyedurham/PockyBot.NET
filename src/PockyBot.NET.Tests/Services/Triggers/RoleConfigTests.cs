@@ -75,7 +75,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [MemberData(nameof(RoleConfigTestData.SuccessfulSetRoleConfigTestData), MemberType = typeof(RoleConfigTestData))]
         internal void TestSuccessfulSetRoleConfig(Message message, Person person, PockyUser pockyUser,
-            Message response, string userId, string role)
+            Message response, string userId, Role role)
         {
             this.Given(x => GivenAMessage(message))
                 .And(x => GivenAPerson(person))
@@ -89,7 +89,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [MemberData(nameof(RoleConfigTestData.SuccessfulDeleteRoleConfigTestData), MemberType = typeof(RoleConfigTestData))]
         internal void TestSuccessfulDeleteRoleConfig(Message message, Person person, PockyUser pockyUser,
-            Message response, string userId, string role)
+            Message response, string userId, Role role)
         {
             this.Given(x => GivenAMessage(message))
                 .And(x => GivenAPerson(person))
@@ -143,20 +143,20 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldNotCallAddRole()
         {
-            _pockyUserRepository.DidNotReceiveWithAnyArgs().AddRoleAsync(Arg.Any<string>(), Arg.Any<string>());
+            _pockyUserRepository.DidNotReceiveWithAnyArgs().AddRoleAsync(Arg.Any<string>(), Arg.Any<Role>());
         }
 
         private void ThenItShouldNotCallRemoveRole()
         {
-            _pockyUserRepository.DidNotReceiveWithAnyArgs().RemoveRoleAsync(Arg.Any<string>(), Arg.Any<string>());
+            _pockyUserRepository.DidNotReceiveWithAnyArgs().RemoveRoleAsync(Arg.Any<string>(), Arg.Any<Role>());
         }
 
-        private void ThenItShouldCallAddRole(string userId, string role)
+        private void ThenItShouldCallAddRole(string userId, Role role)
         {
             _pockyUserRepository.Received(1).AddRoleAsync(userId, role);
         }
 
-        private void ThenItShouldCallRemoveRole(string userId, string role)
+        private void ThenItShouldCallRemoveRole(string userId, Role role)
         {
             _pockyUserRepository.Received(1).RemoveRoleAsync(userId, role);
         }

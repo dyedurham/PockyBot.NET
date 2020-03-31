@@ -1,15 +1,28 @@
-using System.ComponentModel.DataAnnotations.Schema;
+using NpgsqlTypes;
 
 namespace PockyBot.NET.Persistence.Models
 {
-    [Table("roles")]
-    internal class Role
+    internal enum Role
     {
-        [Column("userid")]
-        public string UserId { get; set; }
-        [Column("role")]
-        public string UserRole { get; set; }
-
-        public PockyUser User { get; set; }
+        [PgName("ADMIN")]
+        Admin,
+        [PgName("UNMETERED")]
+        Unmetered,
+        [PgName("RESULTS")]
+        Results,
+        [PgName("FINISH")]
+        Finish,
+        [PgName("RESET")]
+        Reset,
+        [PgName("UPDATE")]
+        Update,
+        [PgName("WINNERS")]
+        Winners,
+        [PgName("CONFIG")]
+        Config,
+        [PgName("USERLOCATION")]
+        UserLocation,
+        [PgName("REMOVEUSER")]
+        RemoveUser
     }
 }

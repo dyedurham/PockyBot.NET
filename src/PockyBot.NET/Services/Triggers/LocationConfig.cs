@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -19,7 +20,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => true;
 
-        public string[] Permissions => Array.Empty<string>();
+        public Role[] Permissions => Array.Empty<Role>();
 
         public LocationConfig(ILocationRepository locationRepository, IPockyUserRepository pockyUserRepository)
         {
@@ -79,7 +80,7 @@ namespace PockyBot.NET.Services.Triggers
         private async Task<string> AddLocation(Message message, string[] commands, string[] locations)
         {
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
-            if (!(user.HasRole(Roles.Admin) || user.HasRole(Roles.Config)))
+            if (!(user.HasRole(Role.Admin) || user.HasRole(Role.Config)))
             {
                 return "Permission denied. You may only use the 'get' command.";
             }
@@ -101,7 +102,7 @@ namespace PockyBot.NET.Services.Triggers
         private async Task<string> DeleteLocation(Message message, string[] commands, string[] locations)
         {
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
-            if (!(user.HasRole(Roles.Admin) || user.HasRole(Roles.Config)))
+            if (!(user.HasRole(Role.Admin) || user.HasRole(Role.Config)))
             {
                 return "Permission denied. You may only use the 'get' command.";
             }

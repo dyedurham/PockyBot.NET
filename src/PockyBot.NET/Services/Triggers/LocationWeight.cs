@@ -21,7 +21,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => true;
 
-        public string[] Permissions => new[] { Roles.Admin, Roles.Config };
+        public Role[] Permissions => new[] { Role.Admin, Role.Config };
 
         public LocationWeight(IConfigRepository configRepository, ILocationRepository locationRepository)
         {

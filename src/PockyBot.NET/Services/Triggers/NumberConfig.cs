@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -18,7 +19,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => true;
 
-        public string[] Permissions => new[] { Roles.Admin, Roles.Config };
+        public Role[] Permissions => new[] { Role.Admin, Role.Config };
 
         public NumberConfig(IConfigRepository configRepository)
         {

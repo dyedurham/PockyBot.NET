@@ -19,7 +19,7 @@ namespace PockyBot.NET.Services.Triggers
         public string Command => Commands.Help;
         public bool DirectMessageAllowed => true;
         public bool CanHaveArgs => true;
-        public string[] Permissions => Array.Empty<string>();
+        public Role[] Permissions => Array.Empty<Role>();
 
         public Help(IPockyUserRepository pockyUserRepository, IOptions<PockyBotSettings> pockySettings, IConfigRepository configRepository)
         {
@@ -104,35 +104,35 @@ namespace PockyBot.NET.Services.Triggers
                  $"* {Commands.LocationConfig}\n" +
                  $"* {Commands.UserLocation}\n";
 
-            // if (HasPermission(user, new []{Roles.Admin, Roles.Winners})) {
+            // if (HasPermission(user, new []{Role.ADMIN, Role.WINNERS})) {
             //     newMessage += $"* {Commands.Winners}\n";
             // }
 
-            // if (HasPermission(user, new []{Roles.Admin, Roles.Results})) {
+            // if (HasPermission(user, new []{Role.ADMIN, Role.RESULTS})) {
             //     newMessage += $"* {Commands.Results}\n";
             // }
 
 
-            if (HasPermission(user, new []{Roles.Admin, Roles.Reset})) {
+            if (HasPermission(user, new []{Role.Admin, Role.Reset})) {
                 newMessage += $"* {Commands.Reset}\n";
             }
 
-            // if (HasPermission(user, new []{Roles.Admin, Roles.Update})) {
+            // if (HasPermission(user, new []{Role.ADMIN, Role.UPDATE})) {
             //     newMessage += $"* {Commands.Update}\n";
             // }
 
-            if (HasPermission(user, new []{Roles.Admin, Roles.Finish})) {
+            if (HasPermission(user, new []{Role.Admin, Role.Finish})) {
                 newMessage += $"* {Commands.Finish}\n";
             }
 
-            if (HasPermission(user, new []{Roles.Admin, Roles.Config})) {
+            if (HasPermission(user, new []{Role.Admin, Role.Config})) {
                 // newMessage += $"* {Commands.NumberConfig}\n";
                 newMessage += $"* {Commands.StringConfig}\n";
                 newMessage += $"* {Commands.RoleConfig}\n";
                 newMessage += $"* {Commands.LocationWeight}\n";
             }
 
-            if (HasPermission(user, new []{Roles.Admin, Roles.RemoveUser})) {
+            if (HasPermission(user, new []{Role.Admin, Role.RemoveUser})) {
                 newMessage += $"* {Commands.RemoveUser}\n";
             }
 
@@ -190,7 +190,7 @@ namespace PockyBot.NET.Services.Triggers
 
         // private string CreateWinnersHelpMessage(PockyUser user)
         // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.Winners})){
+        //     if (HasPermission(user, new[] {Role.ADMIN, Role.WINNERS})){
         //         return "### How to display the winners 🏆!\n" +
         //             $"1. To display winners, type `@{_pockyBotSettings.BotName} {Commands.Winners}`.\n" +
         //             "1. I will respond in the room you messaged me in.";
@@ -200,7 +200,7 @@ namespace PockyBot.NET.Services.Triggers
         //
         // private string CreateResultsHelpMessage(PockyUser user)
         // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.Results})) {
+        //     if (HasPermission(user, new[] {Role.ADMIN, Role.RESULTS})) {
         //         return "### How to display the results 📃!\n" +
         //             $"1. To display results, type `@{_pockyBotSettings.BotName} {Commands.Results}`.\n" +
         //             "1. I will respond in the room you messaged me in.";
@@ -210,7 +210,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateResetHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] {Roles.Admin, Roles.Reset})) {
+            if (HasPermission(user, new[] {Role.Admin, Role.Reset})) {
                 return "### How to reset all pegs 🙅!\n" +
                     $"1. To clear all pegs, type `@{_pockyBotSettings.BotName} {Commands.Reset}`.\n" +
                     "1. I will respond in the room you messaged me in.";
@@ -220,7 +220,7 @@ namespace PockyBot.NET.Services.Triggers
 
         // private string CreateUpdateHelpMessage(PockyUser user)
         // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.Update})) {
+        //     if (HasPermission(user, new[] {Role.ADMIN, Role.UPDATE})) {
         //         return "### How to update names 📛!\n" +
         //             $"1. To update user names with users' current display names, type `@{_pockyBotSettings.BotName} {Commands.Update}`.\n" +
         //             "1. I will respond in the room you messaged me in.";
@@ -230,7 +230,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateFinishHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] {Roles.Admin, Roles.Finish})) {
+            if (HasPermission(user, new[] {Role.Admin, Role.Finish})) {
                 return "### How to complete the cycle 🚲!\n" +
                     $"1. To display winners and results and clear the database, type `@{_pockyBotSettings.BotName} {Commands.Finish}`.\n" +
                     "1. I will respond in the room you messaged me in.";
@@ -240,7 +240,7 @@ namespace PockyBot.NET.Services.Triggers
 
         // private string CreateNumberConfigHelpMessage(PockyUser user)
         // {
-        //     if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+        //     if (HasPermission(user, new[] {Role.ADMIN, Role.CONFIG})) {
         //         return "### How to configure number config values 🔢!\n" +
         //             $"1. To get/edit/refresh/delete number config values, type `@{_pockyBotSettings.BotName} {Commands.NumberConfig} {Object.values(ConfigAction).join('|')} {{name}} {{number}}`\n" +
         //             "1. I will respond in the room you messaged me in.";
@@ -250,7 +250,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateStringConfigHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+            if (HasPermission(user, new[] {Role.Admin, Role.Config})) {
                 return "### How to configure string config values 🎻!\n" +
                     $"1. To get/add/delete string config values, type `@{_pockyBotSettings.BotName} {Commands.StringConfig} {string.Join("|",ConfigActions.All())} {{name}} {{value}}`\n" +
                     "1. I will respond in the room you messaged me in.";
@@ -260,7 +260,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateRoleConfigHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+            if (HasPermission(user, new[] {Role.Admin, Role.Config})) {
                 return "### How to configure role config values 🗞️!\n" +
                     $"1. To get/set/delete user roles, type `@{_pockyBotSettings.BotName} {Commands.RoleConfig} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{@User}} {{role}}`\n" +
                     "1. I will respond in the room you messaged me in.";
@@ -270,7 +270,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateLocationConfigHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+            if (HasPermission(user, new[] {Role.Admin, Role.Config})) {
                 return "### How to configure location config values 🌏!\n" +
                     $"1. To get/edit/delete locations, type `@{_pockyBotSettings.BotName} {Commands.LocationConfig} {Actions.Get}|{Actions.Add}|{Actions.Delete} {{location}}`\n" +
                     "1. I will respond in the room you messaged me in.";
@@ -283,7 +283,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateUserLocationHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] { Roles.Admin, Roles.Config })) {
+            if (HasPermission(user, new[] { Role.Admin, Role.Config })) {
                 return "### How to configure user location values!\n" +
                     $"1. To get user locations for yourself or others, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Get} me|all|unset|@User`\n" +
                     $"1. To set user locations, type `@{_pockyBotSettings.BotName} {Commands.UserLocation} {Actions.Set} {{location}} me|@User1 @User2`\n" +
@@ -300,7 +300,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateLocationWeightHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] {Roles.Admin, Roles.Config})) {
+            if (HasPermission(user, new[] {Role.Admin, Role.Config})) {
                 return "### How to configure location weight values ⚖️!\n" +
                     $"1. To get/edit/delete location weight values, type `@{_pockyBotSettings.BotName} {Commands.LocationWeight} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{location1}} {{location2}} {{weight}}`\n" +
                     "1. I will respond in the room you messaged me in.";
@@ -310,7 +310,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private string CreateRemoveUserHelpMessage(PockyUser user)
         {
-            if (HasPermission(user, new[] { Roles.Admin, Roles.RemoveUser }))
+            if (HasPermission(user, new[] { Role.Admin, Role.RemoveUser }))
             {
                 return "### How to remove users 🛑!\n" +
                        $"1. To remove a user, type `@{_pockyBotSettings.BotName} {Commands.RemoveUser} {{@User}}|'{{username}}'`\n" +
@@ -319,10 +319,10 @@ namespace PockyBot.NET.Services.Triggers
             return CreateDefaultHelpMessage();
         }
 
-        private static bool HasPermission(PockyUser user, string[] permissions)
+        private static bool HasPermission(PockyUser user, Role[] permissions)
         {
             return user != null && user.Roles.Any(x =>
-                       permissions.Contains(x.UserRole, StringComparer.OrdinalIgnoreCase));
+                       permissions.Contains(x.Role));
         }
     }
 }

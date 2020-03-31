@@ -16,7 +16,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                     {
                         Username = "User 1",
                         UserId = "User1Id",
-                        Roles = new List<Role>(),
+                        Roles = new List<UserRole>(),
                         Location = new UserLocation{ Location = "Location1" },
                         PegsReceived = new List<Peg>
                         {
@@ -58,7 +58,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                     {
                         Username = "User 2",
                         UserId = "User2Id",
-                        Roles = new List<Role>(),
+                        Roles = new List<UserRole>(),
                         Location = new UserLocation { Location = "Location1" },
                         PegsReceived = new List<Peg>(),
                         PegsGiven = new List<Peg>
@@ -78,7 +78,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                     {
                         Username = "User 3",
                         UserId = "User3Id",
-                        Roles = new List<Role>(),
+                        Roles = new List<UserRole>(),
                         Location = new UserLocation { Location = "Location2" },
                         PegsReceived = new List<Peg>(),
                         PegsGiven = new List<Peg>
