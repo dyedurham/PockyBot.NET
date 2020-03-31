@@ -8,7 +8,8 @@ namespace PockyBot.NET.Constants
         public const string Reset = "RESET";
         public const string Config = "CONFIG";
         public const string RemoveUser = "REMOVEUSER";
+        public const string Results = "RESULTS";
 
-        public static string[] All => new[] { Unmetered, Admin, Finish, Reset, Config, RemoveUser };
+        public static string[] All => new[] { Unmetered, Admin, Finish, Reset, Config, RemoveUser, Results };
     }
 }
