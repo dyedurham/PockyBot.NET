@@ -1,9 +1,11 @@
+using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -19,7 +21,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => true;
 
-        public string[] Permissions => new[] { Roles.Admin, Roles.Config };
+        public Role[] Permissions => new[] { Role.Admin, Role.Config };
 
         public RoleConfig(IPockyUserRepository pockyUserRepository, IChatHelper chatHelper)
         {
@@ -79,7 +81,7 @@ namespace PockyBot.NET.Services.Triggers
             foreach (var user in users)
             {
                 roleConfigMessageBuilder.AppendLine(
-                    $"* {user.Username}: {string.Join(", ", user.Roles.Select(x => x.UserRole))}");
+                    $"* {user.Username}: {string.Join(", ", user.Roles.Select(x => x.Role))}");
             }
 
             return roleConfigMessageBuilder.ToString();
@@ -97,23 +99,24 @@ namespace PockyBot.NET.Services.Triggers
                 return "Please mention a user you want to set a role for.";
             }
 
-            var validRoles = Roles.All;
             var desiredRole = message.MessageParts[3].Text.Trim().ToUpperInvariant();
-            if (!validRoles.Contains(desiredRole))
+            if (!EnumHelpers.IsEnumDefinedCaseInsensitive(typeof(Role), desiredRole))
             {
-                return $"Invalid role {desiredRole}. Valid values are: {string.Join(", ", validRoles)}.";
+                return $"Invalid role {desiredRole}. Valid values are: {string.Join(", ", Enum.GetValues(typeof(Role)))}.";
             }
+
+            var roleEnum = Enum.Parse<Role>(desiredRole, true);
 
             var userId = message.MessageParts[2].UserId;
             var user = await _chatHelper.People.GetPersonAsync(userId);
             var pockyUser = await _pockyUserRepository.AddOrUpdateUserAsync(userId, user.Username);
 
-            if (pockyUser.HasRole(desiredRole))
+            if (pockyUser.HasRole(roleEnum))
             {
                 return $"Role {desiredRole} is already set for user {pockyUser.Username}.";
             }
 
-            await _pockyUserRepository.AddRoleAsync(userId, desiredRole);
+            await _pockyUserRepository.AddRoleAsync(userId, roleEnum);
             return "Role has been set.";
         }
 
@@ -129,23 +132,25 @@ namespace PockyBot.NET.Services.Triggers
                 return "Please mention a user you want to delete a role for.";
             }
 
-            var validRoles = Roles.All;
             var roleToDelete = message.MessageParts[3].Text.Trim().ToUpperInvariant();
-            if (!validRoles.Contains(roleToDelete))
+            if (!EnumHelpers.IsEnumDefinedCaseInsensitive(typeof(Role), roleToDelete))
             {
-                return $"Invalid role {roleToDelete}. Valid values are: {string.Join(", ", validRoles)}.";
+                return
+                    $"Invalid role {roleToDelete}. Valid values are: {string.Join(", ", Enum.GetValues(typeof(Role)))}.";
             }
+
+            var roleEnum = Enum.Parse<Role>(roleToDelete, true);
 
             var userId = message.MessageParts[2].UserId;
             var user = await _chatHelper.People.GetPersonAsync(userId);
             var pockyUser = await _pockyUserRepository.AddOrUpdateUserAsync(userId, user.Username);
 
-            if (!pockyUser.HasRole(roleToDelete))
+            if (!pockyUser.HasRole(roleEnum))
             {
                 return $"Role {roleToDelete} is not set for user {pockyUser.Username}.";
             }
 
-            await _pockyUserRepository.RemoveRoleAsync(userId, roleToDelete);
+            await _pockyUserRepository.RemoveRoleAsync(userId, roleEnum);
             return "Role has been deleted.";
         }
     }

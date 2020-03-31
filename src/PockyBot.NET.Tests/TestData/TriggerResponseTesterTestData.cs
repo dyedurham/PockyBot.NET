@@ -17,7 +17,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "TestBot ping",
@@ -42,7 +42,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 true
             };
 
@@ -50,7 +50,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "TestBot Ping",
@@ -75,7 +75,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 true
             };
 
@@ -83,7 +83,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "TestBot ping with a lil extra",
@@ -108,7 +108,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, true, new string[0]),
+                GetTrigger("ping", true, true, new Role[0]),
                 true
             };
 
@@ -116,7 +116,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new[] {"ping"} ),
+                GetPockyUser(new[] {Role.Config} ),
                 new Message
                 {
                     Text = "TestBot ping",
@@ -141,7 +141,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { "ping", "admin" } ),
+                GetTrigger("ping", true, false, new[] { Role.Config, Role.Admin } ),
                 true
             };
 
@@ -149,7 +149,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "TestBot ping",
@@ -174,7 +174,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 false
             };
 
@@ -182,7 +182,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "TestBot notping",
@@ -207,7 +207,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 false
             };
 
@@ -215,7 +215,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "TestBot ping with a lil extra",
@@ -240,7 +240,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 false
             };
 
@@ -248,7 +248,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "TestBot ping",
@@ -273,7 +273,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { "ping" } ),
+                GetTrigger("ping", true, false, new[] { Role.Config } ),
                 false
             };
         }
@@ -283,7 +283,7 @@ namespace PockyBot.NET.Tests.TestData
             // no permissions, correct command, no args
             yield return new object[]
             {
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "ping",
@@ -302,14 +302,14 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 true
             };
 
             // no permissions, correct command (different casing and whitespace), no args
             yield return new object[]
             {
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "Ping  ",
@@ -328,14 +328,14 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 true
             };
 
             // no permissions, correct command, args (allowed)
             yield return new object[]
             {
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "ping with a lil extra",
@@ -354,14 +354,14 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, true, new string[0]),
+                GetTrigger("ping", true, true, new Role[0]),
                 true
             };
 
             // permissions correct, correct command, no args
             yield return new object[]
             {
-                GetPockyUser(new[] {"ping"} ),
+                GetPockyUser(new[] {Role.Config} ),
                 new Message
                 {
                     Text = "ping",
@@ -380,14 +380,14 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { "ping", "admin" } ),
+                GetTrigger("ping", true, false, new[] { Role.Config, Role.Admin } ),
                 true
             };
 
             // direct message not allowed
             yield return new object[]
             {
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "ping",
@@ -406,14 +406,14 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", false, false, new string[0]),
+                GetTrigger("ping", false, false, new Role[0]),
                 false
             };
 
             // no permissions, wrong command, no args
             yield return new object[]
             {
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "notping",
@@ -432,14 +432,14 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 false
             };
 
             // no permissions, correct command, args (none allowed)
             yield return new object[]
             {
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "ping with a lil extra",
@@ -458,14 +458,14 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new string[0]),
+                GetTrigger("ping", true, false, new Role[0]),
                 false
             };
 
             // incorrect permissions, correct command, no args
             yield return new object[]
             {
-                GetPockyUser(new string[0]),
+                GetPockyUser(new Role[0]),
                 new Message
                 {
                     Text = "ping",
@@ -484,7 +484,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { "ping" } ),
+                GetTrigger("ping", true, false, new[] { Role.Config } ),
                 false
             };
         }
@@ -498,17 +498,17 @@ namespace PockyBot.NET.Tests.TestData
             };
         }
 
-        private static PockyUser GetPockyUser(string[] roles)
+        private static PockyUser GetPockyUser(Role[] roles)
         {
             return new PockyUser
             {
                 UserId = "testUserId",
                 Username = "Test User",
-                Roles = roles.Select(x => new Role { UserId = "testUserId", UserRole = x } ).ToList()
+                Roles = roles.Select(x => new UserRole { UserId = "testUserId", Role = x } ).ToList()
             };
         }
 
-        private static ITrigger GetTrigger(string command, bool directMessageAllowed, bool canHaveArgs, string[] permissions)
+        private static ITrigger GetTrigger(string command, bool directMessageAllowed, bool canHaveArgs, Role[] permissions)
         {
             var trigger = Substitute.For<ITrigger>();
             trigger.Command.Returns(command);

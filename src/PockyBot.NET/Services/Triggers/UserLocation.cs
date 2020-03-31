@@ -19,7 +19,7 @@ namespace PockyBot.NET.Services.Triggers
         public string Command => Commands.UserLocation;
         public bool DirectMessageAllowed => false;
         public bool CanHaveArgs => true;
-        public string[] Permissions => Array.Empty<string>();
+        public Role[] Permissions => Array.Empty<Role>();
 
         public UserLocation(IPockyUserRepository pockyUserRepository, IUserLocationGetter userLocationGetter,
             IUserLocationSetter userLocationSetter, IUserLocationDeleter userLocationDeleter)
@@ -78,7 +78,7 @@ namespace PockyBot.NET.Services.Triggers
         private bool UserIsAdmin(string userId)
         {
             var user = _pockyUserRepository.GetUser(userId);
-            return user.HasRole(Roles.Admin) || user.HasRole(Roles.Config);
+            return user.HasRole(Role.Admin) || user.HasRole(Role.Config);
         }
     }
 }

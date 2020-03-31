@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -17,7 +18,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => false;
 
-        public string[] Permissions => Array.Empty<string>();
+        public Role[] Permissions => Array.Empty<Role>();
 
         public Keywords(IConfigRepository configRepository)
         {
