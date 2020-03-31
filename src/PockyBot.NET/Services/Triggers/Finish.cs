@@ -28,7 +28,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => false;
 
-        public Role[] Permissions => new[] {Role.ADMIN, Role.FINISH};
+        public Role[] Permissions => new[] {Role.Admin, Role.Finish};
 
         public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper,
             IResultsUploader resultsUploader, IDirectResultsMessageSender directResultsMessageSender,

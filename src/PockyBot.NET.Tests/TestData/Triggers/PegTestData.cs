@@ -122,7 +122,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     Roles = new List<UserRole>
                     {
                         new UserRole {
-                            Role = Role.UNMETERED
+                            Role = Role.Unmetered
                         }
                     }
                 },

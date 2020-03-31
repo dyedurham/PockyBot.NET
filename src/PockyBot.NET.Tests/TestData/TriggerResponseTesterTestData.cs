@@ -116,7 +116,7 @@ namespace PockyBot.NET.Tests.TestData
             yield return new object[]
             {
                 GetBasicSettings(),
-                GetPockyUser(new[] {Role.CONFIG} ),
+                GetPockyUser(new[] {Role.Config} ),
                 new Message
                 {
                     Text = "TestBot ping",
@@ -141,7 +141,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { Role.CONFIG, Role.ADMIN } ),
+                GetTrigger("ping", true, false, new[] { Role.Config, Role.Admin } ),
                 true
             };
 
@@ -273,7 +273,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { Role.CONFIG } ),
+                GetTrigger("ping", true, false, new[] { Role.Config } ),
                 false
             };
         }
@@ -361,7 +361,7 @@ namespace PockyBot.NET.Tests.TestData
             // permissions correct, correct command, no args
             yield return new object[]
             {
-                GetPockyUser(new[] {Role.CONFIG} ),
+                GetPockyUser(new[] {Role.Config} ),
                 new Message
                 {
                     Text = "ping",
@@ -380,7 +380,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { Role.CONFIG, Role.ADMIN } ),
+                GetTrigger("ping", true, false, new[] { Role.Config, Role.Admin } ),
                 true
             };
 
@@ -484,7 +484,7 @@ namespace PockyBot.NET.Tests.TestData
                         Type = PersonType.Person
                     }
                 },
-                GetTrigger("ping", true, false, new[] { Role.CONFIG } ),
+                GetTrigger("ping", true, false, new[] { Role.Config } ),
                 false
             };
         }

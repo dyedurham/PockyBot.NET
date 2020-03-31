@@ -95,7 +95,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             var roles = new List<UserRole>();
             if (hasPermission)
             {
-                roles.Add(new UserRole{Role = Role.CONFIG});
+                roles.Add(new UserRole{Role = Role.Config});
             }
 
             _pockyUserRepository.GetUser(Arg.Any<string>())

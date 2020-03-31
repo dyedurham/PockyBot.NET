@@ -72,7 +72,7 @@ namespace PockyBot.NET.Services.Triggers
             var numPegsGiven = sender.PegsGiven?.Count(x =>
                                    _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords)) ?? 0;
 
-            if (!sender.HasRole(Role.UNMETERED) &&
+            if (!sender.HasRole(Role.Unmetered) &&
                 (isPegValid && numPegsGiven >= _configRepository.GetGeneralConfig("limit")))
             {
                 _logger.LogDebug("User {userId} has reached their peg limit", sender.UserId);

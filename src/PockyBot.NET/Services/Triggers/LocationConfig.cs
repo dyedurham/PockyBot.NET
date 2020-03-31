@@ -80,7 +80,7 @@ namespace PockyBot.NET.Services.Triggers
         private async Task<string> AddLocation(Message message, string[] commands, string[] locations)
         {
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
-            if (!(user.HasRole(Role.ADMIN) || user.HasRole(Role.CONFIG)))
+            if (!(user.HasRole(Role.Admin) || user.HasRole(Role.Config)))
             {
                 return "Permission denied. You may only use the 'get' command.";
             }
@@ -102,7 +102,7 @@ namespace PockyBot.NET.Services.Triggers
         private async Task<string> DeleteLocation(Message message, string[] commands, string[] locations)
         {
             var user = _pockyUserRepository.GetUser(message.Sender.UserId);
-            if (!(user.HasRole(Role.ADMIN) || user.HasRole(Role.CONFIG)))
+            if (!(user.HasRole(Role.Admin) || user.HasRole(Role.Config)))
             {
                 return "Permission denied. You may only use the 'get' command.";
             }

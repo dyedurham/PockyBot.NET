@@ -17,7 +17,7 @@ namespace PockyBot.NET.Services.Triggers
         public string Command => Commands.StringConfig;
         public bool DirectMessageAllowed => false;
         public bool CanHaveArgs => true;
-        public Role[] Permissions => new[] {Role.ADMIN, Role.CONFIG};
+        public Role[] Permissions => new[] {Role.Admin, Role.Config};
 
         public StringConfig(IConfigRepository configRepository)
         {

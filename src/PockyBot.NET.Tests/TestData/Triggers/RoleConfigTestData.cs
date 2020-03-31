@@ -134,21 +134,21 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         Username = "Mr Mime",
                         Roles = new List<UserRole>
                         {
-                            new UserRole { Role = Role.UNMETERED },
-                            new UserRole { Role = Role.REMOVEUSER }
+                            new UserRole { Role = Role.Unmetered },
+                            new UserRole { Role = Role.RemoveUser }
                         }
                     },
                     new PockyUser
                     {
                         UserId = "puff",
                         Username = "Jigglypuff",
-                        Roles = new List<UserRole>{ new UserRole { Role = Role.ADMIN } }
+                        Roles = new List<UserRole>{ new UserRole { Role = Role.Admin } }
                     },
                     new PockyUser
                     {
                         UserId = "pika",
                         Username = "Pikachu",
-                        Roles = new List<UserRole>{ new UserRole { Role = Role.ADMIN } }
+                        Roles = new List<UserRole>{ new UserRole { Role = Role.Admin } }
                     }
                 },
                 new[] { "Here is the current config:", "* Mr Mime: UNMETERED, REMOVEUSER", "* Jigglypuff: ADMIN", "* Pikachu: ADMIN" }
@@ -192,7 +192,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "puff",
                     Username = "Jigglypuff",
-                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.Admin } }
                 },
                 new Message
                 {
@@ -245,7 +245,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "puff",
                     Username = "Jigglypuff",
-                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.Admin } }
                 },
                 new Message
                 {
@@ -299,7 +299,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "puff",
                     Username = "Jigglypuff",
-                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.Admin } }
                 },
                 new Message
                 {
@@ -353,7 +353,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "puff",
                     Username = "Jigglypuff",
-                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.Admin } }
                 },
                 new Message
                 {
@@ -624,7 +624,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     Text = "Role has been set."
                 },
                 "puff",
-                Role.ADMIN
+                Role.Admin
             };
 
             yield return new object[]
@@ -673,14 +673,14 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "puff",
                     Username = "Jigglypuff",
-                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.Admin } }
                 },
                 new Message
                 {
                     Text = "Role has been set."
                 },
                 "puff",
-                Role.UNMETERED
+                Role.Unmetered
             };
         }
 
@@ -732,14 +732,14 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "puff",
                     Username = "Jigglypuff",
-                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.Admin } }
                 },
                 new Message
                 {
                     Text = "Role has been deleted."
                 },
                 "puff",
-                Role.ADMIN
+                Role.Admin
             };
 
             yield return new object[]
@@ -788,14 +788,14 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "puff",
                     Username = "Jigglypuff",
-                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN }, new UserRole { Role = Role.UNMETERED} }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.Admin }, new UserRole { Role = Role.Unmetered} }
                 },
                 new Message
                 {
                     Text = "Role has been deleted."
                 },
                 "puff",
-                Role.UNMETERED
+                Role.Unmetered
             };
         }
     }

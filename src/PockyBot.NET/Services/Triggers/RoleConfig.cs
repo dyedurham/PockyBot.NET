@@ -21,7 +21,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => true;
 
-        public Role[] Permissions => new[] { Role.ADMIN, Role.CONFIG };
+        public Role[] Permissions => new[] { Role.Admin, Role.Config };
 
         public RoleConfig(IPockyUserRepository pockyUserRepository, IChatHelper chatHelper)
         {

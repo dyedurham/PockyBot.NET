@@ -24,7 +24,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private const string BotName = "Pocky";
         private const string SenderId = "testSender";
         private readonly List<UserRole> noRoles = new List<UserRole>();
-        private readonly List<UserRole> adminRole = new List<UserRole>{new UserRole{Role = Role.ADMIN}};
+        private readonly List<UserRole> adminRole = new List<UserRole>{new UserRole{Role = Role.Admin}};
 
         private Message _message;
         private Message _result;
@@ -126,18 +126,18 @@ namespace PockyBot.NET.Tests.Services.Triggers
         }
 
         [Theory]
-        [InlineData(Commands.Finish, Role.FINISH)]
-        [InlineData(Commands.Finish, Role.ADMIN)]
-        [InlineData(Commands.Reset, Role.RESET)]
-        [InlineData(Commands.Reset, Role.ADMIN)]
-        [InlineData(Commands.StringConfig, Role.ADMIN)]
-        [InlineData(Commands.StringConfig, Role.CONFIG)]
-        [InlineData(Commands.RoleConfig, Role.ADMIN)]
-        [InlineData(Commands.RoleConfig, Role.CONFIG)]
-        [InlineData(Commands.LocationWeight, Role.ADMIN)]
-        [InlineData(Commands.LocationWeight, Role.CONFIG)]
-        [InlineData(Commands.RemoveUser, Role.ADMIN)]
-        [InlineData(Commands.RemoveUser, Role.REMOVEUSER)]
+        [InlineData(Commands.Finish, Role.Finish)]
+        [InlineData(Commands.Finish, Role.Admin)]
+        [InlineData(Commands.Reset, Role.Reset)]
+        [InlineData(Commands.Reset, Role.Admin)]
+        [InlineData(Commands.StringConfig, Role.Admin)]
+        [InlineData(Commands.StringConfig, Role.Config)]
+        [InlineData(Commands.RoleConfig, Role.Admin)]
+        [InlineData(Commands.RoleConfig, Role.Config)]
+        [InlineData(Commands.LocationWeight, Role.Admin)]
+        [InlineData(Commands.LocationWeight, Role.Config)]
+        [InlineData(Commands.RemoveUser, Role.Admin)]
+        [InlineData(Commands.RemoveUser, Role.RemoveUser)]
         internal void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, Role userRole)
         {
             this.Given(x => GivenAHelpMessage(command))

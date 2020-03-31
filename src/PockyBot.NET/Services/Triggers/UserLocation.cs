@@ -78,7 +78,7 @@ namespace PockyBot.NET.Services.Triggers
         private bool UserIsAdmin(string userId)
         {
             var user = _pockyUserRepository.GetUser(userId);
-            return user.HasRole(Role.ADMIN) || user.HasRole(Role.CONFIG);
+            return user.HasRole(Role.Admin) || user.HasRole(Role.Config);
         }
     }
 }

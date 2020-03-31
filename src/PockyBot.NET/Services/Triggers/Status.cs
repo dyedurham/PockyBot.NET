@@ -83,7 +83,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private static string GetPegsLeftText(PockyUser pockyUser, int limit, int pegsGiven = 0)
         {
-            var amountLeft = pockyUser?.HasRole(Role.UNMETERED) ?? false ? "unlimited" : (limit - pegsGiven).ToString();
+            var amountLeft = pockyUser?.HasRole(Role.Unmetered) ?? false ? "unlimited" : (limit - pegsGiven).ToString();
             return $"You have {amountLeft} pegs left to give.";
         }
 

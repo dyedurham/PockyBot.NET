@@ -19,7 +19,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => false;
 
-        public Role[] Permissions => new[] { Role.ADMIN, Role.RESET };
+        public Role[] Permissions => new[] { Role.Admin, Role.Reset };
 
         public Reset(IPegRepository pegRepository, ILogger<Reset> logger)
         {

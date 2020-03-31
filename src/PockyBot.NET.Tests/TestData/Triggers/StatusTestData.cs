@@ -282,7 +282,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     PegsGiven = new List<Peg>(),
                     Roles = new List<UserRole>
                     {
-                        new UserRole { Role = Role.UNMETERED }
+                        new UserRole { Role = Role.Unmetered }
                     }
                 },
                 5, // limit
@@ -332,7 +332,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     },
                     Roles = new List<UserRole>
                     {
-                        new UserRole { Role = Role.UNMETERED }
+                        new UserRole { Role = Role.Unmetered }
                     }
                 },
                 5, // limit
@@ -386,7 +386,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     },
                     Roles = new List<UserRole>
                     {
-                        new UserRole{ Role = Role.UNMETERED }
+                        new UserRole{ Role = Role.Unmetered }
                     }
                 },
                 5, // limit
@@ -442,7 +442,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     },
                     Roles = new List<UserRole>
                     {
-                        new UserRole{ Role = Role.UNMETERED }
+                        new UserRole{ Role = Role.Unmetered }
                     }
                 },
                 5, // limit
