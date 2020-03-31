@@ -15,7 +15,7 @@ namespace PockyBot.NET.Services.Triggers
         public string Command => Commands.RemoveUser;
         public bool DirectMessageAllowed => false;
         public bool CanHaveArgs => true;
-        public string[] Permissions => new []{Roles.Admin, Roles.RemoveUser};
+        public Role[] Permissions => new []{Role.ADMIN, Role.REMOVEUSER};
 
         public RemoveUser(IPockyUserRepository pockyUserRepository, ILogger<RemoveUser> logger)
         {

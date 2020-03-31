@@ -7,6 +7,7 @@ using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Models;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Pegs;
 using Scriban;
@@ -27,7 +28,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => false;
 
-        public string[] Permissions => new[] {Roles.Admin, Roles.Finish};
+        public Role[] Permissions => new[] {Role.ADMIN, Role.FINISH};
 
         public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper,
             IResultsUploader resultsUploader, IDirectResultsMessageSender directResultsMessageSender,

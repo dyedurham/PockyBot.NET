@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -16,7 +17,7 @@ namespace PockyBot.NET.Services.Triggers
         public string Command => Commands.StringConfig;
         public bool DirectMessageAllowed => false;
         public bool CanHaveArgs => true;
-        public string[] Permissions => new[] {Roles.Admin, Roles.Config};
+        public Role[] Permissions => new[] {Role.ADMIN, Role.CONFIG};
 
         public StringConfig(IConfigRepository configRepository)
         {

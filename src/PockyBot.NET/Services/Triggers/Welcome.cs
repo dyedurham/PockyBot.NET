@@ -4,6 +4,7 @@ using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -16,7 +17,7 @@ namespace PockyBot.NET.Services.Triggers
         public string Command => Commands.Welcome;
         public bool DirectMessageAllowed => true;
         public bool CanHaveArgs => true;
-        public string[] Permissions => Array.Empty<string>();
+        public Role[] Permissions => Array.Empty<Role>();
 
         public Welcome(IOptions<PockyBotSettings> pockyBotOptions, IConfigRepository configRepository)
         {

@@ -43,7 +43,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     UserId = "testUserId",
                     Username = "Test User",
                     PegsGiven = new List<Peg>(),
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 5, // limit
                 new List<Tuple<string, bool>>(),
@@ -127,7 +127,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new Peg{ Comment = "This is a comment", Receiver = new PockyUser { Username = "Test User 2" } },
                         new Peg{ Comment = "This is another comment", Receiver = new PockyUser { Username = "Test User 3" } }
                     },
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 5, // limit
                 new List<Tuple<string, bool>>
@@ -178,7 +178,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new Peg{ Comment = "Shame shame", Receiver = new PockyUser { Username = "Test User 4" } },
                         new Peg{ Comment = "More shame", Receiver = new PockyUser { Username = "Test User 5" } }
                     },
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 5, // limit
                 new List<Tuple<string, bool>>
@@ -231,7 +231,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new Peg{ Comment = "Shame shame", Receiver = new PockyUser { Username = "Test User 4" } },
                         new Peg{ Comment = "More shame", Receiver = new PockyUser { Username = "Test User 5" } }
                     },
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 5, // limit
                 new List<Tuple<string, bool>>
@@ -280,9 +280,9 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     UserId = "testUserId",
                     Username = "Test User",
                     PegsGiven = new List<Peg>(),
-                    Roles = new List<Role>
+                    Roles = new List<UserRole>
                     {
-                        new Role { UserRole = Roles.Unmetered }
+                        new UserRole { Role = Role.UNMETERED }
                     }
                 },
                 5, // limit
@@ -330,9 +330,9 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new Peg{ Comment = "This is a comment", Receiver = new PockyUser { Username = "Test User 2" } },
                         new Peg{ Comment = "This is another comment", Receiver = new PockyUser { Username = "Test User 3" } }
                     },
-                    Roles = new List<Role>
+                    Roles = new List<UserRole>
                     {
-                        new Role { UserRole = Roles.Unmetered }
+                        new UserRole { Role = Role.UNMETERED }
                     }
                 },
                 5, // limit
@@ -384,9 +384,9 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new Peg{ Comment = "Shame shame", Receiver = new PockyUser { Username = "Test User 4" } },
                         new Peg{ Comment = "More shame", Receiver = new PockyUser { Username = "Test User 5" } }
                     },
-                    Roles = new List<Role>
+                    Roles = new List<UserRole>
                     {
-                        new Role{ UserRole = Roles.Unmetered }
+                        new UserRole{ Role = Role.UNMETERED }
                     }
                 },
                 5, // limit
@@ -440,9 +440,9 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         new Peg{ Comment = "Shame shame", Receiver = new PockyUser { Username = "Test User 4" } },
                         new Peg{ Comment = "More shame", Receiver = new PockyUser { Username = "Test User 5" } }
                     },
-                    Roles = new List<Role>
+                    Roles = new List<UserRole>
                     {
-                        new Role{ UserRole = Roles.Unmetered }
+                        new UserRole{ Role = Role.UNMETERED }
                     }
                 },
                 5, // limit

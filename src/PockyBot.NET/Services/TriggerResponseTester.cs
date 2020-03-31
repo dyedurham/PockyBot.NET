@@ -3,6 +3,7 @@ using System.Linq;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Triggers;
 
@@ -55,11 +56,11 @@ namespace PockyBot.NET.Services
             return string.Equals(message.Text.Trim(), trigger.Command, StringComparison.OrdinalIgnoreCase);
         }
 
-        private bool HasPermission(string senderId, string[] permissions)
+        private bool HasPermission(string senderId, Role[] permissions)
         {
             var user = _pockyUserRepository.GetUser(senderId);
             return user != null && user.Roles.Any(x =>
-                       permissions.Contains(x.UserRole, StringComparer.OrdinalIgnoreCase));
+                       permissions.Contains(x.Role));
         }
     }
 }

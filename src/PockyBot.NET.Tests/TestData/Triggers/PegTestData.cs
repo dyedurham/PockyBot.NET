@@ -53,7 +53,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     UserId = "testUser2Id",
                     Username = "Test User 2",
                     PegsGiven = new List<Peg>(),
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 new PockyUser // receiver
                 {
@@ -119,10 +119,10 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     {
                         new Peg { Comment = "this is a comment" }
                     },
-                    Roles = new List<Role>
+                    Roles = new List<UserRole>
                     {
-                        new Role {
-                            UserRole = Roles.Unmetered
+                        new UserRole {
+                            Role = Role.UNMETERED
                         }
                     }
                 },
@@ -190,7 +190,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     {
                         new Peg { Comment = "this is a comment" }
                     },
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 new PockyUser // receiver
                 {
@@ -256,7 +256,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     {
                         new Peg { Comment = "this is a comment" }
                     },
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 new PockyUser // receiver
                 {
@@ -325,7 +325,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     {
                         new Peg { Comment = "this is a comment" }
                     },
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 new PockyUser // receiver
                 {

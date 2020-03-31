@@ -35,7 +35,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     {
                         Username = "User 1",
                         UserId = "User1Id",
-                        Roles = new List<Role>(),
+                        Roles = new List<UserRole>(),
                         Location = new UserLocation{ Location = "Location1" },
                         PegsReceived = new List<Peg>
                         {
@@ -67,7 +67,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                     {
                         Username = "User 2",
                         UserId = "User2Id",
-                        Roles = new List<Role>(),
+                        Roles = new List<UserRole>(),
                         Location = new UserLocation { Location = "Location1" },
                         PegsReceived = new List<Peg>(),
                         PegsGiven = new List<Peg>

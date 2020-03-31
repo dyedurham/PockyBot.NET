@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
@@ -18,7 +19,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => false;
 
-        public string[] Permissions => new[] { Roles.Admin, Roles.Reset };
+        public Role[] Permissions => new[] { Role.ADMIN, Role.RESET };
 
         public Reset(IPegRepository pegRepository, ILogger<Reset> logger)
         {

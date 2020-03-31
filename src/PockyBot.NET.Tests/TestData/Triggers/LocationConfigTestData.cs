@@ -40,7 +40,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 Array.Empty<string>(),
                 new Message
@@ -78,7 +78,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 Array.Empty<string>(),
                 new Message
@@ -116,7 +116,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 Array.Empty<string>(),
                 new Message
@@ -154,7 +154,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 new []
                 {
@@ -197,7 +197,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 Array.Empty<string>(),
                 new Message
@@ -235,7 +235,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Admin } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
                 },
                 Array.Empty<string>(),
                 new Message
@@ -273,7 +273,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.CONFIG } }
                 },
                 new List<string> { "Location1" },
                 new Message
@@ -311,7 +311,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role>()
+                    Roles = new List<UserRole>()
                 },
                 Array.Empty<string>(),
                 new Message
@@ -349,7 +349,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Admin } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.ADMIN } }
                 },
                 Array.Empty<string>(),
                 new Message
@@ -387,7 +387,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.CONFIG } }
                 },
                 new List<string> { "Location2" },
                 new Message
@@ -427,7 +427,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.CONFIG } }
                 },
                 new List<string> { "Location2" },
                 new Message
@@ -467,7 +467,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 {
                     UserId = "testUserId",
                     Username = "Test User",
-                    Roles = new List<Role> { new Role { UserRole = Roles.Config } }
+                    Roles = new List<UserRole> { new UserRole { Role = Role.CONFIG } }
                 },
                 new List<string> { "Location1" },
                 new Message

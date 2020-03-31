@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
+using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Services.Triggers
 {
@@ -16,7 +17,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => true;
 
-        public string[] Permissions => Array.Empty<string>();
+        public Role[] Permissions => Array.Empty<Role>();
 
         public Default(IOptions<PockyBotSettings> settings)
         {

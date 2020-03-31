@@ -23,8 +23,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private const string BotName = "Pocky";
         private const string SenderId = "testSender";
-        private readonly List<Role> noRoles = new List<Role>();
-        private readonly List<Role> adminRole = new List<Role>{new Role{UserRole = Roles.Admin}};
+        private readonly List<UserRole> noRoles = new List<UserRole>();
+        private readonly List<UserRole> adminRole = new List<UserRole>{new UserRole{Role = Role.ADMIN}};
 
         private Message _message;
         private Message _result;
@@ -126,22 +126,22 @@ namespace PockyBot.NET.Tests.Services.Triggers
         }
 
         [Theory]
-        [InlineData(Commands.Finish, Roles.Finish)]
-        [InlineData(Commands.Finish, Roles.Admin)]
-        [InlineData(Commands.Reset, Roles.Reset)]
-        [InlineData(Commands.Reset, Roles.Admin)]
-        [InlineData(Commands.StringConfig, Roles.Admin)]
-        [InlineData(Commands.StringConfig, Roles.Config)]
-        [InlineData(Commands.RoleConfig, Roles.Admin)]
-        [InlineData(Commands.RoleConfig, Roles.Config)]
-        [InlineData(Commands.LocationWeight, Roles.Admin)]
-        [InlineData(Commands.LocationWeight, Roles.Config)]
-        [InlineData(Commands.RemoveUser, Roles.Admin)]
-        [InlineData(Commands.RemoveUser, Roles.RemoveUser)]
-        public void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, string userRole)
+        [InlineData(Commands.Finish, Role.FINISH)]
+        [InlineData(Commands.Finish, Role.ADMIN)]
+        [InlineData(Commands.Reset, Role.RESET)]
+        [InlineData(Commands.Reset, Role.ADMIN)]
+        [InlineData(Commands.StringConfig, Role.ADMIN)]
+        [InlineData(Commands.StringConfig, Role.CONFIG)]
+        [InlineData(Commands.RoleConfig, Role.ADMIN)]
+        [InlineData(Commands.RoleConfig, Role.CONFIG)]
+        [InlineData(Commands.LocationWeight, Role.ADMIN)]
+        [InlineData(Commands.LocationWeight, Role.CONFIG)]
+        [InlineData(Commands.RemoveUser, Role.ADMIN)]
+        [InlineData(Commands.RemoveUser, Role.REMOVEUSER)]
+        internal void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, Role userRole)
         {
             this.Given(x => GivenAHelpMessage(command))
-                .And(x => GivenTheUserHasRoles(new List<Role>{new Role{UserRole = userRole}}))
+                .And(x => GivenTheUserHasRoles(new List<UserRole>{new UserRole{Role = userRole}}))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheCommandHelpMessage(command))
                 .BDDfy();
@@ -207,7 +207,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             };
         }
 
-        private void GivenTheUserHasRoles(List<Role> roles)
+        private void GivenTheUserHasRoles(List<UserRole> roles)
         {
             _pockyUserRepository.GetUser(SenderId).Returns(new PockyUser
             {

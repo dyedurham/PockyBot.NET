@@ -6,6 +6,7 @@ using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Models.Exceptions;
+using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services.Pegs;
 
@@ -40,7 +41,7 @@ namespace PockyBot.NET.Services.Triggers
 
         public bool CanHaveArgs => true;
 
-        public string[] Permissions => Array.Empty<string>();
+        public Role[] Permissions => Array.Empty<Role>();
 
         public async Task<Message> Respond(Message message)
         {
@@ -71,7 +72,7 @@ namespace PockyBot.NET.Services.Triggers
             var numPegsGiven = sender.PegsGiven?.Count(x =>
                                    _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords)) ?? 0;
 
-            if (!sender.HasRole(Roles.Unmetered) &&
+            if (!sender.HasRole(Role.UNMETERED) &&
                 (isPegValid && numPegsGiven >= _configRepository.GetGeneralConfig("limit")))
             {
                 _logger.LogDebug("User {userId} has reached their peg limit", sender.UserId);

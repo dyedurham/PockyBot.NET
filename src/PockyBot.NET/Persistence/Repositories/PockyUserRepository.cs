@@ -100,26 +100,26 @@ namespace PockyBot.NET.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task AddRoleAsync(string userId, string role)
+        public async Task AddRoleAsync(string userId, Role role)
         {
             var user = await _context.PockyUsers
                 .Where(x => x.UserId == userId)
                 .Include(x => x.Roles)
                 .SingleAsync();
 
-            user.Roles.Add(new Role
+            user.Roles.Add(new UserRole
             {
                 UserId = userId,
-                UserRole = role
+                Role = role
             });
 
             await _context.SaveChangesAsync();
         }
 
-        public async Task RemoveRoleAsync(string userId, string role)
+        public async Task RemoveRoleAsync(string userId, Role role)
         {
             var existingRole = await _context.Roles
-                .Where(x => x.UserId == userId && x.UserRole == role)
+                .Where(x => x.UserId == userId && x.Role == role)
                 .SingleAsync();
 
             _context.Roles.Remove(existingRole);
