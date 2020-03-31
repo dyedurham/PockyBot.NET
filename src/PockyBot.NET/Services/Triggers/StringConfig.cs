@@ -28,7 +28,7 @@ namespace PockyBot.NET.Services.Triggers
             var command = string.Join("", message.MessageParts.Skip(1).Select(x => x.Text)).Trim().Remove(0, 4).Trim();
             var commandWords = command.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
 
-            if (commandWords.Count() < 2)
+            if (commandWords.Count < 2)
             {
                 return new Message
                 {
