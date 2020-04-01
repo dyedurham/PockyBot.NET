@@ -138,6 +138,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.LocationWeight, Role.Config)]
         [InlineData(Commands.RemoveUser, Role.Admin)]
         [InlineData(Commands.RemoveUser, Role.RemoveUser)]
+        [InlineData(Commands.Results, Role.Admin)]
+        [InlineData(Commands.Results, Role.Results)]
+        [InlineData(Commands.NumberConfig, Role.Admin)]
+        [InlineData(Commands.NumberConfig, Role.Config)]
         internal void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, Role userRole)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -154,6 +158,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.RoleConfig)]
         [InlineData(Commands.LocationWeight)]
         [InlineData(Commands.RemoveUser)]
+        [InlineData(Commands.Results)]
+        [InlineData(Commands.NumberConfig)]
         public void ItShouldShowTheDefaultHelpMessageForAdminCommandsToNonAdminUsers(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
@@ -234,6 +240,15 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldContain($"* {Commands.UserLocation}");
             _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");
             _result.Text.ShouldContain("I am still being worked on, so more features to come.");
+
+            _result.Text.ShouldNotContain($"* {Commands.Reset}");
+            _result.Text.ShouldNotContain($"* {Commands.Finish}");
+            _result.Text.ShouldNotContain($"* {Commands.StringConfig}");
+            _result.Text.ShouldNotContain($"* {Commands.RoleConfig}");
+            _result.Text.ShouldNotContain($"* {Commands.LocationWeight}");
+            _result.Text.ShouldNotContain($"* {Commands.RemoveUser}");
+            _result.Text.ShouldNotContain($"* {Commands.Results}");
+            _result.Text.ShouldNotContain($"* {Commands.NumberConfig}");
         }
 
         private void ThenItShouldShowAListOfAdminCommands()
@@ -253,6 +268,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldContain($"* {Commands.RoleConfig}");
             _result.Text.ShouldContain($"* {Commands.LocationWeight}");
             _result.Text.ShouldContain($"* {Commands.RemoveUser}");
+            _result.Text.ShouldContain($"* {Commands.Results}");
+            _result.Text.ShouldContain($"* {Commands.NumberConfig}");
             _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");
             _result.Text.ShouldContain("I am still being worked on, so more features to come.");
         }
