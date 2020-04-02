@@ -22,8 +22,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IPegResultsHelper _pegResultsHelper;
-        private readonly IResultsUploader _resultsUploader;
         private readonly IDirectResultsMessageSender _directResultsMessageSender;
+        private readonly IResultsFileGenerator _resultsFileGenerator;
 
         private Message _message;
         private Message _result;
@@ -31,11 +31,11 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public FinishTests()
         {
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _resultsUploader = Substitute.For<IResultsUploader>();
             _pegResultsHelper = Substitute.For<IPegResultsHelper>();
             _directResultsMessageSender = Substitute.For<IDirectResultsMessageSender>();
-            _subject = new Finish(_pockyUserRepository, _pegResultsHelper, _resultsUploader,
-                _directResultsMessageSender, Substitute.For<ILogger<Finish>>());
+            _resultsFileGenerator = Substitute.For<IResultsFileGenerator>();
+            _subject = new Finish(_pockyUserRepository, _pegResultsHelper,
+                _directResultsMessageSender, _resultsFileGenerator, Substitute.For<ILogger<Finish>>());
         }
 
         [Theory]
@@ -82,7 +82,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void GivenUploadedResultsLocation(string uploadLocation)
         {
-            _resultsUploader.UploadResults(Arg.Any<string>()).Returns(Task.FromResult(uploadLocation));
+            _resultsFileGenerator.GenerateResultsFileAndReturnLink(Arg.Any<List<PegRecipient>>())
+                .Returns(Task.FromResult(uploadLocation));
         }
 
         private async Task WhenRespondingToAMessage()

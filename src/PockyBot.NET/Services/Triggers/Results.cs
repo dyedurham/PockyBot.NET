@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
@@ -8,32 +8,26 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Finish : ITrigger
+    internal class Results: ITrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IPegResultsHelper _pegResultsHelper;
-        private readonly IDirectResultsMessageSender _directResultsMessageSender;
         private readonly IResultsFileGenerator _resultsFileGenerator;
-        private readonly ILogger<Finish> _logger;
+        private readonly ILogger _logger;
 
-        public string Command => Commands.Finish;
-
-        public bool DirectMessageAllowed => false;
-
-        public bool CanHaveArgs => false;
-
-        public Role[] Permissions => new[] {Role.Admin, Role.Finish};
-
-        public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper,
-            IDirectResultsMessageSender directResultsMessageSender, IResultsFileGenerator resultsFileGenerator,
-            ILogger<Finish> logger)
+        public Results(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper,
+            IResultsFileGenerator resultsFileGenerator, ILogger logger)
         {
             _pockyUserRepository = pockyUserRepository;
             _pegResultsHelper = pegResultsHelper;
-            _logger = logger;
-            _directResultsMessageSender = directResultsMessageSender;
             _resultsFileGenerator = resultsFileGenerator;
+            _logger = logger;
         }
+
+        public string Command => Commands.Results;
+        public bool DirectMessageAllowed => false;
+        public bool CanHaveArgs => false;
+        public Role[] Permissions => new[] { Role.Admin, Role.Results };
 
         public async Task<Message> Respond(Message message)
         {
@@ -42,9 +36,6 @@ namespace PockyBot.NET.Services.Triggers
             var mappedUsers = _pegResultsHelper.MapUsersToPegRecipients(users);
 
             var uri = await _resultsFileGenerator.GenerateResultsFileAndReturnLink(mappedUsers);
-
-            _logger.LogDebug("Sending Direct Messages...");
-            await _directResultsMessageSender.SendDirectMessagesAsync(mappedUsers);
 
             return new Message
             {

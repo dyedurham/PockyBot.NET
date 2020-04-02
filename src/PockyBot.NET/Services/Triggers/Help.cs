@@ -58,18 +58,14 @@ namespace PockyBot.NET.Services.Triggers
                     return CreateWelcomeHelpMessage();
                 case Commands.Rotation:
                     return CreateRotationHelpMessage();
-                // case Commands.Winners:
-                //     return CreateWinnersHelpMessage(user);
-                // case Commands.Results:
-                //     return CreateResultsHelpMessage(user);
+                case Commands.Results:
+                    return CreateResultsHelpMessage(user);
                 case Commands.Reset:
                     return CreateResetHelpMessage(user);
-                // case Commands.Update:
-                //     return CreateUpdateHelpMessage(user);
                 case Commands.Finish:
                     return CreateFinishHelpMessage(user);
-                // case Commands.NumberConfig:
-                //     return CreateNumberConfigHelpMessage(user);
+                case Commands.NumberConfig:
+                    return CreateNumberConfigHelpMessage(user);
                 case Commands.StringConfig:
                     return CreateStringConfigHelpMessage(user);
                 case Commands.RoleConfig:
@@ -104,29 +100,21 @@ namespace PockyBot.NET.Services.Triggers
                  $"* {Commands.LocationConfig}\n" +
                  $"* {Commands.UserLocation}\n";
 
-            // if (HasPermission(user, new []{Role.ADMIN, Role.WINNERS})) {
-            //     newMessage += $"* {Commands.Winners}\n";
-            // }
-
-            // if (HasPermission(user, new []{Role.ADMIN, Role.RESULTS})) {
-            //     newMessage += $"* {Commands.Results}\n";
-            // }
+            if (HasPermission(user, new []{Role.Admin, Role.Results})) {
+                newMessage += $"* {Commands.Results}\n";
+            }
 
 
             if (HasPermission(user, new []{Role.Admin, Role.Reset})) {
                 newMessage += $"* {Commands.Reset}\n";
             }
 
-            // if (HasPermission(user, new []{Role.ADMIN, Role.UPDATE})) {
-            //     newMessage += $"* {Commands.Update}\n";
-            // }
-
             if (HasPermission(user, new []{Role.Admin, Role.Finish})) {
                 newMessage += $"* {Commands.Finish}\n";
             }
 
             if (HasPermission(user, new []{Role.Admin, Role.Config})) {
-                // newMessage += $"* {Commands.NumberConfig}\n";
+                newMessage += $"* {Commands.NumberConfig}\n";
                 newMessage += $"* {Commands.StringConfig}\n";
                 newMessage += $"* {Commands.RoleConfig}\n";
                 newMessage += $"* {Commands.LocationWeight}\n";
@@ -188,25 +176,15 @@ namespace PockyBot.NET.Services.Triggers
                 "1. I will respond in the room you messaged me in.";
         }
 
-        // private string CreateWinnersHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Role.ADMIN, Role.WINNERS})){
-        //         return "### How to display the winners 🏆!\n" +
-        //             $"1. To display winners, type `@{_pockyBotSettings.BotName} {Commands.Winners}`.\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
-        //
-        // private string CreateResultsHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Role.ADMIN, Role.RESULTS})) {
-        //         return "### How to display the results 📃!\n" +
-        //             $"1. To display results, type `@{_pockyBotSettings.BotName} {Commands.Results}`.\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
+        private string CreateResultsHelpMessage(PockyUser user)
+        {
+            if (HasPermission(user, new[] {Role.Admin, Role.Results})) {
+                return "### How to display the results 📃!\n" +
+                    $"1. To display results, type `@{_pockyBotSettings.BotName} {Commands.Results}`.\n" +
+                    "1. I will respond in the room you messaged me in.";
+            }
+            return CreateDefaultHelpMessage();
+        }
 
         private string CreateResetHelpMessage(PockyUser user)
         {
@@ -218,16 +196,6 @@ namespace PockyBot.NET.Services.Triggers
             return CreateDefaultHelpMessage();
         }
 
-        // private string CreateUpdateHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Role.ADMIN, Role.UPDATE})) {
-        //         return "### How to update names 📛!\n" +
-        //             $"1. To update user names with users' current display names, type `@{_pockyBotSettings.BotName} {Commands.Update}`.\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
-
         private string CreateFinishHelpMessage(PockyUser user)
         {
             if (HasPermission(user, new[] {Role.Admin, Role.Finish})) {
@@ -238,15 +206,15 @@ namespace PockyBot.NET.Services.Triggers
             return CreateDefaultHelpMessage();
         }
 
-        // private string CreateNumberConfigHelpMessage(PockyUser user)
-        // {
-        //     if (HasPermission(user, new[] {Role.ADMIN, Role.CONFIG})) {
-        //         return "### How to configure number config values 🔢!\n" +
-        //             $"1. To get/edit/refresh/delete number config values, type `@{_pockyBotSettings.BotName} {Commands.NumberConfig} {Object.values(ConfigAction).join('|')} {{name}} {{number}}`\n" +
-        //             "1. I will respond in the room you messaged me in.";
-        //     }
-        //     return CreateDefaultHelpMessage();
-        // }
+        private string CreateNumberConfigHelpMessage(PockyUser user)
+        {
+            if (HasPermission(user, new[] {Role.Admin, Role.Config})) {
+                return "### How to configure number config values 🔢!\n" +
+                    $"1. To get/edit/refresh/delete number config values, type `@{_pockyBotSettings.BotName} {Commands.NumberConfig} {Actions.Get}|{Actions.Add}|{Actions.Delete} {{name}} {{number}}`\n" +
+                    "1. I will respond in the room you messaged me in.";
+            }
+            return CreateDefaultHelpMessage();
+        }
 
         private string CreateStringConfigHelpMessage(PockyUser user)
         {
