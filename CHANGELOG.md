@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.10.1...v1.11.0) (2020-04-02)
+
+
+### Features
+
+* add in results trigger ([a701667](https://github.com/GlobalX/PockyBot.NET/commit/a701667d8c26e45719c38e12af028d4600f47c25))
+* add Results and Numberconfig triggers to the help message ([da41b42](https://github.com/GlobalX/PockyBot.NET/commit/da41b42727c127beb9b6a2e5087b7e1c4f1be078))
+
 ## [1.10.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.10.0...v1.10.1) (2020-03-31)
 
 
