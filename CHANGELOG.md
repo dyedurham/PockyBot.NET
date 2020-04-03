@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.11.0...v1.11.1) (2020-04-03)
+
+
+### Bug Fixes
+
+* use correct logging dependency in constructors ([aa30ffb](https://github.com/GlobalX/PockyBot.NET/commit/aa30ffbb28179ea175ff1977c9f66e11d05f7760))
+
 # [1.11.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.10.1...v1.11.0) (2020-04-02)
 
 
