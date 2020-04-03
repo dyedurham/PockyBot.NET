@@ -17,7 +17,7 @@ namespace PockyBot.NET.Services
         private readonly ILogger _logger;
         private readonly IResultsUploader _resultsUploader;
 
-        public ResultsFileGenerator(IPegResultsHelper pegResultsHelper, ILogger logger, IResultsUploader resultsUploader)
+        public ResultsFileGenerator(IPegResultsHelper pegResultsHelper, ILogger<ResultsFileGenerator> logger, IResultsUploader resultsUploader)
         {
             _pegResultsHelper = pegResultsHelper;
             _logger = logger;
