@@ -16,7 +16,7 @@ namespace PockyBot.NET.Services.Triggers
         private readonly ILogger _logger;
 
         public Results(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper,
-            IResultsFileGenerator resultsFileGenerator, ILogger logger)
+            IResultsFileGenerator resultsFileGenerator, ILogger<Results> logger)
         {
             _pockyUserRepository = pockyUserRepository;
             _pegResultsHelper = pegResultsHelper;
