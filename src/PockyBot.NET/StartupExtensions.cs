@@ -39,6 +39,7 @@ namespace PockyBot.NET
             services.AddTransient<IUserLocationSetter, UserLocationSetter>();
             services.AddTransient<IUserLocationDeleter, UserLocationDeleter>();
             services.AddTransient<IResultsFileGenerator, ResultsFileGenerator>();
+            services.AddTransient<IUsernameUpdater, UsernameUpdater>();
             services.AddTransient<ITrigger, Ping>();
             services.AddTransient<ITrigger, Help>();
             services.AddTransient<ITrigger, Welcome>();

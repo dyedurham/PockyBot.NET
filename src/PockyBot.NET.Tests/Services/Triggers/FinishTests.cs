@@ -24,6 +24,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private readonly IPegResultsHelper _pegResultsHelper;
         private readonly IDirectResultsMessageSender _directResultsMessageSender;
         private readonly IResultsFileGenerator _resultsFileGenerator;
+        private readonly IUsernameUpdater _usernameUpdater;
 
         private Message _message;
         private Message _result;
@@ -34,8 +35,9 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _pegResultsHelper = Substitute.For<IPegResultsHelper>();
             _directResultsMessageSender = Substitute.For<IDirectResultsMessageSender>();
             _resultsFileGenerator = Substitute.For<IResultsFileGenerator>();
+            _usernameUpdater = Substitute.For<IUsernameUpdater>();
             _subject = new Finish(_pockyUserRepository, _pegResultsHelper,
-                _directResultsMessageSender, _resultsFileGenerator, Substitute.For<ILogger<Finish>>());
+                _directResultsMessageSender, _resultsFileGenerator, Substitute.For<ILogger<Finish>>(), _usernameUpdater);
         }
 
         [Theory]

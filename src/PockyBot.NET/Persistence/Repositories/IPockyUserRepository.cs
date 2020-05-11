@@ -15,5 +15,6 @@ namespace PockyBot.NET.Persistence.Repositories
         Task<List<PockyUser>> GetAllUserRolesAsync();
         Task AddRoleAsync(string userId, Role role);
         Task RemoveRoleAsync(string userId, Role role);
+        Task UpdateUsernameAsync(string userId, string username);
     }
 }
