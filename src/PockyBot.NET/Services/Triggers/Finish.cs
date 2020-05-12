@@ -15,6 +15,7 @@ namespace PockyBot.NET.Services.Triggers
         private readonly IDirectResultsMessageSender _directResultsMessageSender;
         private readonly IResultsFileGenerator _resultsFileGenerator;
         private readonly ILogger<Finish> _logger;
+        private readonly IUsernameUpdater _usernameUpdater;
 
         public string Command => Commands.Finish;
 
@@ -26,11 +27,12 @@ namespace PockyBot.NET.Services.Triggers
 
         public Finish(IPockyUserRepository pockyUserRepository, IPegResultsHelper pegResultsHelper,
             IDirectResultsMessageSender directResultsMessageSender, IResultsFileGenerator resultsFileGenerator,
-            ILogger<Finish> logger)
+            ILogger<Finish> logger, IUsernameUpdater usernameUpdater)
         {
             _pockyUserRepository = pockyUserRepository;
             _pegResultsHelper = pegResultsHelper;
             _logger = logger;
+            _usernameUpdater = usernameUpdater;
             _directResultsMessageSender = directResultsMessageSender;
             _resultsFileGenerator = resultsFileGenerator;
         }
@@ -38,6 +40,8 @@ namespace PockyBot.NET.Services.Triggers
         public async Task<Message> Respond(Message message)
         {
             var users = _pockyUserRepository.GetAllUsersWithPegs();
+            users = await _usernameUpdater.UpdateUsernames(users);
+
             _logger.LogDebug("Mapping users...");
             var mappedUsers = _pegResultsHelper.MapUsersToPegRecipients(users);
 

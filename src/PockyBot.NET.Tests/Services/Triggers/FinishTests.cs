@@ -24,6 +24,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private readonly IPegResultsHelper _pegResultsHelper;
         private readonly IDirectResultsMessageSender _directResultsMessageSender;
         private readonly IResultsFileGenerator _resultsFileGenerator;
+        private readonly IUsernameUpdater _usernameUpdater;
 
         private Message _message;
         private Message _result;
@@ -34,8 +35,9 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _pegResultsHelper = Substitute.For<IPegResultsHelper>();
             _directResultsMessageSender = Substitute.For<IDirectResultsMessageSender>();
             _resultsFileGenerator = Substitute.For<IResultsFileGenerator>();
+            _usernameUpdater = Substitute.For<IUsernameUpdater>();
             _subject = new Finish(_pockyUserRepository, _pegResultsHelper,
-                _directResultsMessageSender, _resultsFileGenerator, Substitute.For<ILogger<Finish>>());
+                _directResultsMessageSender, _resultsFileGenerator, Substitute.For<ILogger<Finish>>(), _usernameUpdater);
         }
 
         [Theory]
@@ -50,7 +52,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 .And(x => GivenPegCategories(categories))
                 .And(x => GivenUploadedResultsLocation(uploadLocation))
                 .When(x => WhenRespondingToAMessage())
-                .Then(x => ThenItShouldReturnAResponse(response))
+                .Then(x => ThenItShouldUpdateTheUsers())
+                .And(x => ThenItShouldReturnAResponse(response))
                 .And(x => ThenItShouldPmAllUsers(mappedUsers))
                 .BDDfy();
         }
@@ -89,6 +92,11 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private async Task WhenRespondingToAMessage()
         {
             _result = await _subject.Respond(_message);
+        }
+
+        private void ThenItShouldUpdateTheUsers()
+        {
+            _usernameUpdater.Received().UpdateUsernames(Arg.Any<List<PockyUser>>());
         }
 
         private void ThenItShouldReturnAResponse(Message response)

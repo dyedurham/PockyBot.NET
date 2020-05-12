@@ -125,5 +125,13 @@ namespace PockyBot.NET.Persistence.Repositories
             _context.Roles.Remove(existingRole);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateUsernameAsync(string userId, string username)
+        {
+            var existingUser = await _context.PockyUsers.Where(x => x.UserId == userId)
+                .SingleAsync();
+            existingUser.Username = username;
+            await _context.SaveChangesAsync();
+        }
     }
 }
