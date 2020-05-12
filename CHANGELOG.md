@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.11.1...v1.12.0) (2020-05-12)
+
+
+### Features
+
+* update usernames on finish command ([353d94f](https://github.com/GlobalX/PockyBot.NET/commit/353d94f2d39a9cf820145ffae279e71475116582))
+
 ## [1.11.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.11.0...v1.11.1) (2020-04-03)
 
 
