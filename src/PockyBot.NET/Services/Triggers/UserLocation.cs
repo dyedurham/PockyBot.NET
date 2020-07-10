@@ -6,6 +6,7 @@ using GlobalX.ChatBots.Core.People;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
+using PockyBot.NET.Services.UserLocation;
 
 namespace PockyBot.NET.Services.Triggers
 {

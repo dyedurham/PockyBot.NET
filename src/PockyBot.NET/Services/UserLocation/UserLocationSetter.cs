@@ -5,7 +5,7 @@ using GlobalX.ChatBots.Core;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Repositories;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.UserLocation
 {
     internal class UserLocationSetter : IUserLocationSetter
     {

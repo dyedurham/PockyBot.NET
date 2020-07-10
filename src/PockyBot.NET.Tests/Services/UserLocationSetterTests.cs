@@ -9,6 +9,7 @@ using NSubstitute.ReceivedExtensions;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services;
+using PockyBot.NET.Services.UserLocation;
 
 namespace PockyBot.NET.Tests.Services
 {

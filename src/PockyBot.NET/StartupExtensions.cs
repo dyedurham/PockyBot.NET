@@ -6,6 +6,7 @@ using PockyBot.NET.Persistence;
 using PockyBot.NET.Services;
 using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Services.Triggers;
+using PockyBot.NET.Services.UserLocation;
 
 namespace PockyBot.NET
 {
@@ -40,10 +41,14 @@ namespace PockyBot.NET
             services.AddTransient<IUserLocationDeleter, UserLocationDeleter>();
             services.AddTransient<IResultsFileGenerator, ResultsFileGenerator>();
             services.AddTransient<IUsernameUpdater, UsernameUpdater>();
+            services.AddSingleton<IRandomnessHandler, RandomnessHandler>();
+            services.AddHostedService<QueuedHostedService>();
+            services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
             services.AddTransient<ITrigger, Ping>();
             services.AddTransient<ITrigger, Help>();
             services.AddTransient<ITrigger, Welcome>();
             services.AddTransient<ITrigger, Peg>();
+            services.AddTransient<ITrigger, Unpeg>();
             services.AddTransient<ITrigger, Status>();
             services.AddTransient<ITrigger, Results>();
             services.AddTransient<ITrigger, Finish>();

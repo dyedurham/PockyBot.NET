@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.UserLocation
 {
     public interface IUserLocationDeleter
     {

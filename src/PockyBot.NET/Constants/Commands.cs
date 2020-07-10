@@ -19,5 +19,6 @@ namespace PockyBot.NET.Constants
         public const string Keywords = "keywords";
         public const string RoleConfig = "roleconfig";
         public const string NumberConfig = "numberconfig";
+        public const string Unpeg = "Unpeg";
     }
 }
