@@ -10,13 +10,13 @@ using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    class Unpeg : ITrigger
+    internal class Unpeg : ITrigger
     {
         private readonly IRandomnessHandler _randomnessHandler;
         private readonly IChatHelper _chatHelper;
         private readonly IBackgroundTaskQueue _backgroundTaskQueue;
         private readonly ILogger<Unpeg> _logger;
-        private readonly string[] separatorWords = new[] { "for", "because" };
+        private readonly string[] _separatorWords = { "for", "because" };
 
         public string Command => Commands.Unpeg;
 
@@ -125,10 +125,10 @@ namespace PockyBot.NET.Services.Triggers
         private string GetRecipientNameFromString(string message)
         {
             var separatorIndex = -1;
-            foreach (var separator in separatorWords)
+            foreach (var separator in _separatorWords)
             {
-                var index = message.IndexOf(separator);
-                if (separatorIndex == 1 || index < separatorIndex)
+                var index = message.IndexOf(separator, StringComparison.OrdinalIgnoreCase);
+                if (separatorIndex == -1 || (index > -1 && index < separatorIndex))
                 {
                     separatorIndex = index;
                 }
@@ -209,7 +209,7 @@ namespace PockyBot.NET.Services.Triggers
                 new MessagePart
                 {
                     Text =
-                        $"It looks like {recipientName} has hidder their pegs to well for me to find them"!
+                        $"It looks like {recipientName} has hidden their pegs too well for me to find them!"
                 }
             };
         }
