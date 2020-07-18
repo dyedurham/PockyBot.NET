@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.People;
 using NSubstitute;
@@ -17,7 +17,7 @@ namespace PockyBot.NET.Tests.Services
         private readonly IPersonHandler _personHandler;
         private readonly IPockyUserRepository _pockyUserRepository;
 
-        private List<PockyUser> _inputPockyUsers;
+        private readonly List<PockyUser> _inputPockyUsers;
 
         private List<PockyUser> _resultPockyUsers;
 

@@ -56,7 +56,7 @@ namespace PockyBot.NET.Services.Triggers
             var command = commands[1];
             commands = commands.Skip(2).ToArray();
 
-            await createUser;
+            await createUser.ConfigureAwait(false);
 
             return new Message
             {
