@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using PockyBot.NET.Services;
+using PockyBot.NET.Services.Helpers;
 using PockyBot.NET.Services.Triggers;
 using PockyBot.NET.Tests.TestData.Triggers;
 using Shouldly;
@@ -18,7 +20,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         private readonly Unpeg _subject;
         private readonly IRandomnessHandler _randomnessHandler;
         private readonly IChatHelper _chatHelper;
-        private readonly IBackgroundTaskQueue _backgroundTaskQueue;
+        private readonly IAsyncDelayer _asyncDelayer;
 
         private Message _message;
         private Message _result;
@@ -28,8 +30,16 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _randomnessHandler = Substitute.For<IRandomnessHandler>();
             _randomnessHandler.Random.Returns(Substitute.For<Random>());
             _chatHelper = Substitute.For<IChatHelper>();
-            _backgroundTaskQueue = Substitute.For<IBackgroundTaskQueue>();
-            _subject = new Unpeg(_randomnessHandler, _chatHelper, _backgroundTaskQueue, Substitute.For<ILogger<Unpeg>>());
+            _chatHelper.Messages.Returns(Substitute.For<IMessageHandler>());
+            _asyncDelayer = Substitute.For<IAsyncDelayer>();
+            _asyncDelayer.Delay(Arg.Any<TimeSpan>(), Arg.Any<CancellationToken>())
+                .ReturnsForAnyArgs(Task.CompletedTask);
+            var backgroundTaskQueue = Substitute.For<IBackgroundTaskQueue>();
+            backgroundTaskQueue
+                .WhenForAnyArgs(x => x.QueueBackgroundWorkItem(Arg.Any<Func<CancellationToken, Task>>()))
+                .Do(async x => await ((Func<CancellationToken, Task>) x[0])(new CancellationToken()));
+            _subject = new Unpeg(_randomnessHandler, _chatHelper, backgroundTaskQueue, _asyncDelayer,
+                Substitute.For<ILogger<Unpeg>>());
         }
 
         [Theory]
@@ -40,6 +50,18 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 .And(x => GivenTheNextRandomIs(number))
                 .When(x => WhenRespondingToAMessage())
                 .Then(x => ThenItShouldReturnAMessage(response))
+                .BDDfy();
+        }
+
+        [Theory]
+        [MemberData(nameof(UnpegTestData.DelayedUnpegMessageTestData), MemberType = typeof(UnpegTestData))]
+        public void TestUnpegDelayedMessage(Message message, int number, Message response, Message delayedResponse)
+        {
+            this.Given(x => GivenAMessage(message))
+                .And(x => GivenTheNextRandomIs(number))
+                .When(x => WhenRespondingToAMessage())
+                .Then(x => ThenItShouldReturnAMessage(response))
+                .And(x => ThenItShouldReturnADelayedResponse(delayedResponse))
                 .BDDfy();
         }
 
@@ -60,20 +82,33 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void ThenItShouldReturnAMessage(Message result)
         {
-            _result.Text.ShouldBe(result.Text);
-            _result.RoomId.ShouldBe(result.RoomId);
-            if (result.MessageParts != null)
+            CompareMessages(result, _result);
+        }
+
+        private void ThenItShouldReturnADelayedResponse(Message delayedResponse)
+        {
+            _asyncDelayer.ReceivedWithAnyArgs(1).Delay(Arg.Any<TimeSpan>(), Arg.Any<CancellationToken>());
+            _chatHelper.Messages.Received(1).SendMessageAsync(Arg.Any<Message>());
+            var response = _chatHelper.Messages.ReceivedCalls().First().GetArguments()[0];
+            CompareMessages(delayedResponse, (Message)response);
+        }
+
+        private static void CompareMessages(Message expected, Message actual)
+        {
+            actual.Text.ShouldBe(expected.Text);
+            actual.RoomId.ShouldBe(expected.RoomId);
+
+            if (expected.MessageParts == null) return;
+
+            actual.MessageParts.ShouldNotBeNull();
+            actual.MessageParts.Length.ShouldBe(expected.MessageParts.Length);
+            for (var i = 0; i < actual.MessageParts.Length; i++)
             {
-                _result.MessageParts.ShouldNotBeNull();
-                _result.MessageParts.Length.ShouldBe(result.MessageParts.Length);
-                for (var i = 0; i < _result.MessageParts.Length; i++)
-                {
-                    var actualPart = _result.MessageParts[i];
-                    var expectedPart = result.MessageParts[i];
-                    actualPart.Text.ShouldBe(expectedPart.Text);
-                    actualPart.MessageType.ShouldBe(expectedPart.MessageType);
-                    actualPart.UserId.ShouldBe(expectedPart.UserId);
-                }
+                var actualPart = actual.MessageParts[i];
+                var expectedPart = expected.MessageParts[i];
+                actualPart.Text.ShouldBe(expectedPart.Text);
+                actualPart.MessageType.ShouldBe(expectedPart.MessageType);
+                actualPart.UserId.ShouldBe(expectedPart.UserId);
             }
         }
     }

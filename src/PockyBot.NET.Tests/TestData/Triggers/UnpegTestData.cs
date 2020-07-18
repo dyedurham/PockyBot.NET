@@ -348,5 +348,294 @@ Error: Access Denied user Test User 2 does not have the correct privileges
                 }
             };
         }
+
+        public static IEnumerable<object[]> DelayedUnpegMessageTestData()
+        {
+            yield return new object[]
+            {
+                new Message
+                {
+                    Text = "TestBot unpeg TestUser1 for reasons",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " unpeg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "TestUser1",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUser1Id"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for reasons",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    },
+                    RoomId = "testRoomId"
+                },
+                0,
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart {Text = "Peg removed from ", MessageType = MessageType.Text},
+                        new MessagePart
+                            {MessageType = MessageType.PersonMention, UserId = "testUser1Id", Text = "TestUser1"},
+                        new MessagePart {Text = ".", MessageType = MessageType.Text}
+                    }
+                },
+                new Message
+                {
+                    Text = "Kidding!",
+                    RoomId = "testRoomId"
+                }
+            };
+
+            yield return new object[]
+            {
+                new Message
+                {
+                    Text = "TestBot unpeg abstract sender because reasons",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " unpeg abstract sender because reasons",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    },
+                    RoomId = "testRoomId"
+                },
+                0,
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "Peg removed from abstract sender.",
+                            MessageType = MessageType.Text
+                        }
+                    }
+                },
+                new Message
+                {
+                    Text = "Kidding!",
+                    RoomId = "testRoomId"
+                }
+            };
+
+            yield return new object[]
+            {
+                new Message
+                {
+                    Text = "TestBot unpeg TestUser1 for reasons",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " unpeg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "TestUser1",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUser1Id"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for reasons",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    },
+                    RoomId = "testRoomId"
+                },
+                2,
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                            {MessageType = MessageType.PersonMention, UserId = "testUser2Id", Text = "Test User 2"},
+                        new MessagePart
+                        {
+                            Text = "'s peg has been removed...",
+                            MessageType = MessageType.Text
+                        }
+                    }
+                },
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart {Text = "But ", MessageType = MessageType.Text},
+                        new MessagePart
+                            {MessageType = MessageType.PersonMention, UserId = "testUser2Id", Text = "Test User 2"},
+                        new MessagePart {Text = " stole it back!", MessageType = MessageType.Text}
+                    },
+                    RoomId = "testRoomId"
+                }
+            };
+
+            yield return new object[]
+            {
+                new Message
+                {
+                    Text = "TestBot unpeg TestUser1 for reasons",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " unpeg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "TestUser1",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUser1Id"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for reasons",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    },
+                    RoomId = "testRoomId"
+                },
+                3,
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart {Text = "Peg given to ", MessageType = MessageType.Text},
+                        new MessagePart
+                            {MessageType = MessageType.PersonMention, UserId = "testUser1Id", Text = "TestUser1"},
+                        new MessagePart
+                        {
+                            Text = ".",
+                            MessageType = MessageType.Text
+                        }
+                    }
+                },
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart {Text = "But ", MessageType = MessageType.Text},
+                        new MessagePart
+                            {MessageType = MessageType.PersonMention, UserId = "testUser1Id", Text = "TestUser1"},
+                        new MessagePart {Text = " didn't want it!", MessageType = MessageType.Text}
+                    },
+                    RoomId = "testRoomId"
+                }
+            };
+
+            yield return new object[]
+            {
+                new Message
+                {
+                    Text = "TestBot unpeg abstract sender reasons",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " unpeg abstract sender reasons",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUser2Id",
+                        Username = "Test User 2",
+                        Type = PersonType.Person
+                    },
+                    RoomId = "testRoomId"
+                },
+                3,
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "Peg given to abstract.",
+                            MessageType = MessageType.Text
+                        }
+                    }
+                },
+                new Message
+                {
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "But abstract didn't want it!",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    RoomId = "testRoomId"
+                }
+            };
+        }
     }
 }
