@@ -170,7 +170,7 @@ namespace PockyBot.NET.Services.Triggers
             });
         }
 
-        private MessagePart[] GetRecipientPegRemovedResponse(bool recipientIsPerson, string recipientName, string recipientId)
+        private static MessagePart[] GetRecipientPegRemovedResponse(bool recipientIsPerson, string recipientName, string recipientId)
         {
             if (recipientIsPerson)
             {
@@ -186,7 +186,7 @@ namespace PockyBot.NET.Services.Triggers
             return new[] { new MessagePart { Text = $"Peg removed from {recipientName}." } };
         }
 
-        private MessagePart[] GetPegsHiddenResponse(bool recipientIsPerson, string recipientName, string recipientId)
+        private static MessagePart[] GetPegsHiddenResponse(bool recipientIsPerson, string recipientName, string recipientId)
         {
             if (recipientIsPerson)
             {
@@ -217,7 +217,7 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
-        private MessagePart[] GetSenderPegRemovedResponse(Person sender)
+        private static MessagePart[] GetSenderPegRemovedResponse(Person sender)
         {
             return new[]
             {
@@ -227,7 +227,7 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
-        private MessagePart[] GetSenderPegStolenBackResponse(Person sender)
+        private static MessagePart[] GetSenderPegStolenBackResponse(Person sender)
         {
             return new[]
             {
@@ -238,7 +238,7 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
-        private MessagePart[] GetPegGivenToRecipientResponse(bool recipientIsPerson, string recipientName,
+        private static MessagePart[] GetPegGivenToRecipientResponse(bool recipientIsPerson, string recipientName,
             string recipientId)
         {
             if (recipientIsPerson)
@@ -255,7 +255,7 @@ namespace PockyBot.NET.Services.Triggers
             return new[] {new MessagePart {Text = $"Peg given to {recipientName}.", MessageType = MessageType.Text}};
         }
 
-        private MessagePart[] GetRecipientDidntWantItResponse(bool recipientIsPerson, string recipientName,
+        private static MessagePart[] GetRecipientDidntWantItResponse(bool recipientIsPerson, string recipientName,
             string recipientId)
         {
             if (recipientIsPerson)
@@ -272,7 +272,7 @@ namespace PockyBot.NET.Services.Triggers
             return new[] { new MessagePart { Text = $"But {recipientName} didn't want it!", MessageType = MessageType.Text } };
         }
 
-        private MessagePart[] GetICantDoThatResponse(Person sender)
+        private static MessagePart[] GetICantDoThatResponse(Person sender)
         {
             return new[]
             {
@@ -287,7 +287,7 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
-        private MessagePart[] GetPermissionDeniedResponse(Person sender)
+        private static MessagePart[] GetPermissionDeniedResponse(Person sender)
         {
             Regex nonAlphaRegex = new Regex("[^0-9a-z]", RegexOptions.IgnoreCase);
             string cleanSenderName = nonAlphaRegex.Replace(sender.Username, "");

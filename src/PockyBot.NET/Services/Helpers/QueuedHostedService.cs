@@ -26,7 +26,7 @@ namespace PockyBot.NET.Services.Helpers
                 $"{Environment.NewLine}Tap W to add a work item to the " +
                 $"background queue.{Environment.NewLine}");
 
-            await BackgroundProcessing(stoppingToken);
+            await BackgroundProcessing(stoppingToken).ConfigureAwait(false);
         }
 
         private async Task BackgroundProcessing(CancellationToken stoppingToken)
