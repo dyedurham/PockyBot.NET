@@ -7,6 +7,7 @@ using GlobalX.ChatBots.Core.People;
 using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Models;
+using PockyBot.NET.Services.Helpers;
 
 namespace PockyBot.NET.Services.Triggers
 {
@@ -15,6 +16,7 @@ namespace PockyBot.NET.Services.Triggers
         private readonly IRandomnessHandler _randomnessHandler;
         private readonly IChatHelper _chatHelper;
         private readonly IBackgroundTaskQueue _backgroundTaskQueue;
+        private readonly IAsyncDelayer _asyncDelayer;
         private readonly ILogger<Unpeg> _logger;
         private readonly string[] _separatorWords = { "for", "because" };
 
@@ -26,11 +28,12 @@ namespace PockyBot.NET.Services.Triggers
 
         public Role[] Permissions => Array.Empty<Role>();
 
-        public Unpeg(IRandomnessHandler randomnessHandler, IChatHelper chatHelper, IBackgroundTaskQueue backgroundTaskQueue, ILogger<Unpeg> logger)
+        public Unpeg(IRandomnessHandler randomnessHandler, IChatHelper chatHelper, IBackgroundTaskQueue backgroundTaskQueue, IAsyncDelayer asyncDelayer, ILogger<Unpeg> logger)
         {
             _randomnessHandler = randomnessHandler;
             _chatHelper = chatHelper;
             _backgroundTaskQueue = backgroundTaskQueue;
+            _asyncDelayer = asyncDelayer;
             _logger = logger;
         }
 
@@ -86,7 +89,7 @@ namespace PockyBot.NET.Services.Triggers
                 case 2:
                     SendQueuedMessage(new Message
                     {
-                        MessageParts = GetPegStolenBackResponse(recipientIsPerson, recipientName, recipientId),
+                        MessageParts = GetSenderPegStolenBackResponse(sender),
                         RoomId = roomId
                     });
                     return GetSenderPegRemovedResponse(sender);
@@ -153,7 +156,7 @@ namespace PockyBot.NET.Services.Triggers
             {
                 try
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(30), token);
+                    await _asyncDelayer.Delay(TimeSpan.FromSeconds(30), token);
                 }
                 catch (OperationCanceledException)
                 {
@@ -224,20 +227,15 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
-        private MessagePart[] GetPegStolenBackResponse(bool recipientIsPerson, string recipientName, string recipientId)
+        private MessagePart[] GetSenderPegStolenBackResponse(Person sender)
         {
-            if (recipientIsPerson)
+            return new[]
             {
-                return new[]
-                {
-                    new MessagePart {Text = "But ", MessageType = MessageType.Text},
-                    new MessagePart
-                        {MessageType = MessageType.PersonMention, UserId = recipientId, Text = recipientName},
-                    new MessagePart {Text = " stole it back!", MessageType = MessageType.Text}
-                };
-            }
-
-            return new[] {new MessagePart {Text = $"But {recipientName} stole it back!"}};
+                new MessagePart {Text = "But ", MessageType = MessageType.Text},
+                new MessagePart
+                    {MessageType = MessageType.PersonMention, UserId = sender.UserId, Text = sender.Username},
+                new MessagePart {Text = " stole it back!", MessageType = MessageType.Text}
+            };
         }
 
         private MessagePart[] GetPegGivenToRecipientResponse(bool recipientIsPerson, string recipientName,

@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.Helpers
 {
     public class BackgroundTaskQueue : IBackgroundTaskQueue
     {

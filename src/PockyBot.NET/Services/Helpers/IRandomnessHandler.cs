@@ -1,6 +1,6 @@
 using System;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.Helpers
 {
     interface IRandomnessHandler
     {

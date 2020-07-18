@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Persistence;
 using PockyBot.NET.Services;
+using PockyBot.NET.Services.Helpers;
 using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Services.Triggers;
 using PockyBot.NET.Services.UserLocation;
@@ -44,6 +45,7 @@ namespace PockyBot.NET
             services.AddSingleton<IRandomnessHandler, RandomnessHandler>();
             services.AddHostedService<QueuedHostedService>();
             services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
+            services.AddTransient<IAsyncDelayer, AsyncDelayer>();
             services.AddTransient<ITrigger, Ping>();
             services.AddTransient<ITrigger, Help>();
             services.AddTransient<ITrigger, Welcome>();

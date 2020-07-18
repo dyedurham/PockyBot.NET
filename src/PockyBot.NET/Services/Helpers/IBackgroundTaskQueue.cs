@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.Helpers
 {
     public interface IBackgroundTaskQueue
     {
