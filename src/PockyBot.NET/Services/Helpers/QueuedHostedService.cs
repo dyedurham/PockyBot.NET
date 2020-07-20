@@ -21,10 +21,7 @@ namespace PockyBot.NET.Services.Helpers
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation(
-                $"Queued Hosted Service is running.{Environment.NewLine}" +
-                $"{Environment.NewLine}Tap W to add a work item to the " +
-                $"background queue.{Environment.NewLine}");
+            _logger.LogInformation($"Queued Hosted Service is running.");
 
             await BackgroundProcessing(stoppingToken).ConfigureAwait(false);
         }
@@ -33,8 +30,7 @@ namespace PockyBot.NET.Services.Helpers
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                var workItem =
-                    await TaskQueue.DequeueAsync(stoppingToken);
+                var workItem = await TaskQueue.DequeueAsync(stoppingToken);
 
                 try
                 {
@@ -42,8 +38,7 @@ namespace PockyBot.NET.Services.Helpers
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex,
-                        "Error occurred executing {WorkItem}.", nameof(workItem));
+                    _logger.LogError(ex, "Error occurred executing {WorkItem}.", nameof(workItem));
                 }
             }
         }
