@@ -78,31 +78,38 @@ namespace PockyBot.NET.Services.Triggers
         private MessagePart[] SendRandomResponse(Person sender, bool recipientIsPerson, string recipientName,
             string recipientId, string roomId)
         {
-            var random = _randomnessHandler.Random.Next(7);
-            switch (random)
+            Func<MessagePart[]>[] actions =
             {
-                case 0:
+                () =>
+                {
                     SendQueuedMessage(new Message {Text = "Kidding!", RoomId = roomId});
                     return GetRecipientPegRemovedResponse(recipientIsPerson, recipientName, recipientId);
-                case 1:
-                    return GetPegsHiddenResponse(recipientIsPerson, recipientName, recipientId);
-                case 2:
+                },
+                () =>
+                    GetPegsHiddenResponse(recipientIsPerson, recipientName, recipientId),
+                () =>
+                {
                     SendQueuedMessage(new Message
                     {
                         MessageParts = GetSenderPegStolenBackResponse(sender),
                         RoomId = roomId
                     });
                     return GetSenderPegRemovedResponse(sender);
-                case 3:
+                },
+                () =>
+                {
                     SendQueuedMessage(new Message
                     {
-                        MessageParts = GetRecipientDidntWantItResponse(recipientIsPerson, recipientName, recipientId),
+                        MessageParts =
+                            GetRecipientDidntWantItResponse(recipientIsPerson, recipientName, recipientId),
                         RoomId = roomId
                     });
                     return GetPegGivenToRecipientResponse(recipientIsPerson, recipientName, recipientId);
-                case 4:
-                    return GetICantDoThatResponse(sender);
-                case 5:
+                },
+                () =>
+                    GetICantDoThatResponse(sender),
+                () =>
+                {
                     return new[]
                     {
                         new MessagePart
@@ -111,18 +118,12 @@ namespace PockyBot.NET.Services.Triggers
                             MessageType = MessageType.Text
                         }
                     };
-                case 6:
-                    return GetPermissionDeniedResponse(sender);
-                default:
-                    return new[]
-                    {
-                        new MessagePart
-                        {
-                            Text = "Whoops, looks like RNGesus did not smile upon you today.",
-                            MessageType = MessageType.Text
-                        }
-                    };
-            }
+                },
+                () => GetPermissionDeniedResponse(sender)
+            };
+
+            var random = _randomnessHandler.Random.Next(actions.Length);
+            return actions[random]();
         }
 
         private string GetRecipientNameFromString(string message)
