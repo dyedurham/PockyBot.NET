@@ -102,7 +102,11 @@ namespace PockyBot.NET.Services.Triggers
 
         private static bool UserHasOutstandingPegs(PockyUser user)
         {
-            if (user == null) return false;
+            if (user == null)
+            {
+                return false;
+            }
+
             return (user.PegsGiven != null && user.PegsGiven.Any()) || (user.PegsReceived != null && user.PegsReceived.Any());
         }
     }

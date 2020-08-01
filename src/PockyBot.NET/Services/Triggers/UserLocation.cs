@@ -6,6 +6,7 @@ using GlobalX.ChatBots.Core.People;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
+using PockyBot.NET.Services.UserLocation;
 
 namespace PockyBot.NET.Services.Triggers
 {
@@ -55,7 +56,7 @@ namespace PockyBot.NET.Services.Triggers
             var command = commands[1];
             commands = commands.Skip(2).ToArray();
 
-            await createUser;
+            await createUser.ConfigureAwait(false);
 
             return new Message
             {

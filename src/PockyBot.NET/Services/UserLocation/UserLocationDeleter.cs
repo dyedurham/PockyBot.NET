@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Repositories;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.UserLocation
 {
     internal class UserLocationDeleter : IUserLocationDeleter
     {

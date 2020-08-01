@@ -5,6 +5,7 @@ using Xunit;
 using NSubstitute;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services;
+using PockyBot.NET.Services.UserLocation;
 
 namespace PockyBot.NET.Tests.Services
 {

@@ -8,6 +8,7 @@ using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services;
 using PockyBot.NET.Services.Pegs;
 using PockyBot.NET.Services.Triggers;
+using PockyBot.NET.Services.UserLocation;
 
 namespace PockyBot.NET
 {

@@ -2,7 +2,7 @@ using System.Text;
 using PockyBot.NET.Constants;
 using PockyBot.NET.Persistence.Repositories;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.UserLocation
 {
     internal class UserLocationGetter : IUserLocationGetter
     {

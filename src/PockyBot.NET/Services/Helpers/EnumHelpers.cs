@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace PockyBot.NET.Services
+namespace PockyBot.NET.Services.Helpers
 {
     internal static class EnumHelpers
     {

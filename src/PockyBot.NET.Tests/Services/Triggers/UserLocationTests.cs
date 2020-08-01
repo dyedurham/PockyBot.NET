@@ -6,6 +6,7 @@ using NSubstitute;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services;
+using PockyBot.NET.Services.UserLocation;
 using PockyBot.NET.Tests.TestData.Triggers;
 using Shouldly;
 using TestStack.BDDfy;

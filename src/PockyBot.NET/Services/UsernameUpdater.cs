@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.People;
@@ -35,7 +35,7 @@ namespace PockyBot.NET.Services
                 return u;
             }).ToList();
 
-            await Task.WhenAll(dbUpdates);
+            await Task.WhenAll(dbUpdates).ConfigureAwait(false);
             return updatedUsers;
         }
     }

@@ -1,23 +1,19 @@
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using NSubstitute;
+using PockyBot.NET.Persistence.Models;
+using PockyBot.NET.Persistence.Repositories;
+using PockyBot.NET.Services.UserLocation;
 using Shouldly;
 using TestStack.BDDfy;
 using Xunit;
-using NSubstitute;
-using NSubstitute.ReceivedExtensions;
-using PockyBot.NET.Persistence.Models;
-using PockyBot.NET.Persistence.Repositories;
-using PockyBot.NET.Services;
 
 namespace PockyBot.NET.Tests.Services
 {
     public class UserLocationSetterTests
     {
-        private readonly IPockyUserRepository _pockyUserRepository;
         private readonly ILocationRepository _locationRepository;
         private readonly IUserLocationRepository _userLocationRepository;
-        private readonly IChatHelper _chatHelper;
 
         private string[] _commands;
         private string[] _mentionedUsers;
@@ -29,16 +25,16 @@ namespace PockyBot.NET.Tests.Services
 
         public UserLocationSetterTests()
         {
-            _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _pockyUserRepository.GetUser(Arg.Any<string>()).Returns(x => new PockyUser
+            var pockyUserRepository = Substitute.For<IPockyUserRepository>();
+            pockyUserRepository.GetUser(Arg.Any<string>()).Returns(x => new PockyUser
             {
                 UserId = (string) x[0]
             });
 
             _locationRepository = Substitute.For<ILocationRepository>();
             _userLocationRepository = Substitute.For<IUserLocationRepository>();
-            _chatHelper = Substitute.For<IChatHelper>();
-            _subject = new UserLocationSetter(_pockyUserRepository, _locationRepository, _userLocationRepository, _chatHelper);
+            var chatHelper = Substitute.For<IChatHelper>();
+            _subject = new UserLocationSetter(pockyUserRepository, _locationRepository, _userLocationRepository, chatHelper);
         }
 
         [Theory]
