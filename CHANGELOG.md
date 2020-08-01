@@ -1,3 +1,11 @@
+# [1.13.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.12.0...v1.13.0) (2020-08-01)
+
+
+### Features
+
+* implement unpeg trigger ([46f611a](https://github.com/GlobalX/PockyBot.NET/commit/46f611acf5d50271c9d453c660f0827c3037db60))
+* move delay into service ([102b3da](https://github.com/GlobalX/PockyBot.NET/commit/102b3da1b5e903a5cae146d368f623612c01e783))
+
 # [1.12.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.11.1...v1.12.0) (2020-05-12)
 
 
