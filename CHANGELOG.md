@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.0...v1.13.1) (2020-08-06)
+
+
+### Bug Fixes
+
+* make keyword detection case insensitive in finish ([6036b30](https://github.com/GlobalX/PockyBot.NET/commit/6036b309bbed0a14d830678a06c0c89306bd75c6))
+
 # [1.13.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.12.0...v1.13.0) (2020-08-01)
 
 
