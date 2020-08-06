@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PockyBot.NET.Models;
@@ -97,7 +98,7 @@ namespace PockyBot.NET.Services.Pegs
                     SenderName = y.Sender.Username,
                     Weight = _pegHelper.GetPegWeighting(y.Sender.Location?.Location, receiverLocation),
                     Comment = y.Comment,
-                    Keywords = keywords.Where(z => y.Comment.Contains(z)).ToList(),
+                    Keywords = keywords.Where(z => y.Comment.Contains(z, StringComparison.OrdinalIgnoreCase)).ToList(),
                     SenderLocation = y.Sender.Location?.Location
                 })
                 .ToList();
@@ -112,7 +113,7 @@ namespace PockyBot.NET.Services.Pegs
                     SenderName = y.Receiver.Username,
                     Weight = 1,
                     Comment = y.Comment,
-                    Keywords = penaltyKeywords.Where(z => y.Comment.Contains(z)).ToList(),
+                    Keywords = penaltyKeywords.Where(z => y.Comment.Contains(z, StringComparison.OrdinalIgnoreCase)).ToList(),
                     SenderLocation = y.Receiver.Location?.Location
                 })
                 .ToList();
