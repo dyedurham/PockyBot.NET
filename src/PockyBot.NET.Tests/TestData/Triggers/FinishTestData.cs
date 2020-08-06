@@ -41,7 +41,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         {
                             new Peg
                             {
-                                Comment = "This is a peg keyword1 keyword2",
+                                Comment = "This is a peg Keyword1 keyword2",
                                 Sender = new PockyUser
                                 {
                                     UserId = "User2Id",
@@ -74,7 +74,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                         {
                             new Peg
                             {
-                                Comment = "This is a peg keyword1 keyword2",
+                                Comment = "This is a peg Keyword1 keyword2",
                                 Receiver = new PockyUser
                                 {
                                     Username = "User 2",
@@ -101,7 +101,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                             {
                                 SenderName = "User 2",
                                 Weight = 1,
-                                Comment = "This is a peg keyword1 keyword2",
+                                Comment = "This is a peg Keyword1 keyword2",
                                 Keywords = new List<string> { "keyword1", "keyword2" },
                                 SenderLocation = "Location1"
                             }
@@ -166,7 +166,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                                     {
                                         SenderName = "User 2",
                                         Weight = 1,
-                                        Comment = "This is a peg keyword1 keyword2",
+                                        Comment = "This is a peg Keyword1 keyword2",
                                         Keywords = new List<string> { "keyword1", "keyword2" },
                                         SenderLocation = "Location1"
                                     }
@@ -205,7 +205,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                                     {
                                         SenderName = "User 2",
                                         Weight = 1,
-                                        Comment = "This is a peg keyword1 keyword2",
+                                        Comment = "This is a peg Keyword1 keyword2",
                                         Keywords = new List<string> { "keyword1", "keyword2" },
                                         SenderLocation = "Location1"
                                     }
