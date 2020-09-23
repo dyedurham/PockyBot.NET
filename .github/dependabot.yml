@@ -13,7 +13,7 @@ updates:
   - chromadream
   - gillianmilne
   - drewfreyling
-  commit_message:
+  commit-message:
     prefix: "fix"
-    prefix_development: "chore"
-    include_scope: true
+    prefix-development: "chore"
+    include: "scope"
