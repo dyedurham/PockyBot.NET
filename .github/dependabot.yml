@@ -3,9 +3,7 @@ updates:
 - package-ecosystem: nuget
   directory: "/"
   schedule:
-    interval: daily
-    time: "05:30"
-    timezone: Australia/Brisbane
+    interval: "weekly"
   open-pull-requests-limit: 10
   reviewers:
   - lauraducky
