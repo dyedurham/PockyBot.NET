@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - lauraducky
+      - jimcullenaus
+      - evangelinexx
+      - arthurs
+      - chromadream
+      - gillianmilne
+      - drewfreyling
+    commit-message:
+      prefix: "fix"
+      prefix-development: "chore"
+      include: "scope"
