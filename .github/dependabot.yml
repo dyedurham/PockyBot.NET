@@ -1,0 +1,21 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "05:30"
+    timezone: Australia/Brisbane
+  open-pull-requests-limit: 10
+  reviewers:
+  - lauraducky
+  - jimcullenaus
+  - evangelinexx
+  - arthurs
+  - chromadream
+  - gillianmilne
+  - drewfreyling
+  commit_message:
+    prefix: "fix"
+    prefix_development: "chore"
+    include_scope: true
