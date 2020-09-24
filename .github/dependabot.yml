@@ -35,4 +35,10 @@ updates:
     labels:
       - dev-dependencies
     ignore:
-      - dependency-name: PockyBot.NET
+      - dependency-name: GlobalX.ChatBots.Core
+      - dependency-name: Microsoft.Extensions.DependencyInjection.Abstractions
+      - dependency-name: Microsoft.Extensions.Hosting
+      - dependency-name: Microsoft.Extensions.Logging.Abstractions
+      - dependency-name: Microsoft.Extensions.Options.ConfigurationExtensions
+      - dependency-name: Npgsql.EntityFrameworkCore.PostgreSQL
+      - dependency-name: Scriban
