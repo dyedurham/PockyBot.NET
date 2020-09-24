@@ -34,3 +34,5 @@ updates:
       include: "scope"
     labels:
       - dev-dependencies
+    ignore:
+      - dependency-name: PockyBot.NET
