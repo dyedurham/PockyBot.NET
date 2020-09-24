@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: nuget
-    directory: "/"
+    directory: "/src/PockyBot.NET"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
@@ -15,5 +15,20 @@ updates:
       - drewfreyling
     commit-message:
       prefix: "fix"
-      prefix-development: "chore"
+      include: "scope"
+  - package-ecosystem: nuget
+    directory: "/src/PockyBot.NET.Tests"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - lauraducky
+      - jimcullenaus
+      - evangelinexx
+      - arthurs
+      - chromadream
+      - gillianmilne
+      - drewfreyling
+    commit-message:
+      prefix: "chore"
       include: "scope"
