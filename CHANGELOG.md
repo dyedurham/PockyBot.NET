@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.1...v1.13.2) (2020-09-25)
+
+
+### Bug Fixes
+
+* **deps:** bump GlobalX.ChatBots.Core in /src/PockyBot.NET ([5b0d196](https://github.com/GlobalX/PockyBot.NET/commit/5b0d1968d6a181b8fb54bb3808f14f7563dceb41))
+
 ## [1.13.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.0...v1.13.1) (2020-08-06)
 
 
