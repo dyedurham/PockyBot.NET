@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.People;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
@@ -25,7 +26,8 @@ namespace PockyBot.NET.Tests.Services
         {
             _personHandler = Substitute.For<IPersonHandler>();
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _subject = new UsernameUpdater(_personHandler, _pockyUserRepository);
+            var logger = Substitute.For<ILogger<UsernameUpdater>>();
+            _subject = new UsernameUpdater(_personHandler, _pockyUserRepository, logger);
 
             _inputPockyUsers = new List<PockyUser>();
         }
