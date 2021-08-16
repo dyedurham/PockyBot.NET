@@ -29,7 +29,7 @@ namespace PockyBot.NET.Services.Triggers
         {
             var newMessage = "## Hello world!\n" +
                              $"I'm {_pockyBotSettings.BotName}. I help you spread the word about the great work that your team mates are doing! " +
-                             "I hand ouy pegs to everyone you tell me about. ";
+                             "I hand out pegs to everyone you tell me about. ";
 
             var keywordsRequired = _configRepository.GetGeneralConfig("requireValues") == 1;
             if (keywordsRequired)
