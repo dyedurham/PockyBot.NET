@@ -148,7 +148,7 @@ pockybot.Respond(message);
 
 ## Database
 
-PockyBot requires a postgres database. THe `database` folder in this
+PockyBot requires a postgres database. The `database` folder in this
 repository contains a number of `.sql` files you can use to set this up.
 
 Table `generalconfig` is initalised with default values as follows:
