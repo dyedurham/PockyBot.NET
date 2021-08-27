@@ -542,6 +542,51 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 },
                 "I'm sorry, you have to include a keyword in your comment. Please include one of the below keywords in your comment:\n\nkeyword1, keyword2, keyword3"
             };
+            // attempts to peg self
+            yield return new object[]
+            {
+                GetBasicSettings(),
+                1, // commentsRequired
+                new List<string> { "keyword1", "keyword2", "keyword3" },
+                new List<string> { "penaltyKeyword" },
+                1, // requireValues
+                new Message
+                {
+                    Text = "TestBot peg testUserId for doing some keyword2 things",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " peg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "Test User",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUserId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for doing some keyword2 things",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
+                },
+                "I'm sorry, I couldn't understand your peg request. You can't give a peg request to yourself."
+            };
         }
 
         private static PockyBotSettings GetBasicSettings()
