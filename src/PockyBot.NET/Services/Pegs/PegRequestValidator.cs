@@ -48,7 +48,7 @@ namespace PockyBot.NET.Services.Pegs
             if (message.Sender.UserId == message.MessageParts[2].UserId)
             {
                 throw new PegValidationException(
-                    $"I'm sorry, I couldn't understand your peg request. You can't give a peg request to yourself.");
+                    $"You can't peg yourself.");
             }
         }
 

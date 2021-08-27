@@ -585,7 +585,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                         Type = PersonType.Person
                     }
                 },
-                "I'm sorry, I couldn't understand your peg request. You can't give a peg request to yourself."
+                "You can't peg yourself."
             };
         }
 
