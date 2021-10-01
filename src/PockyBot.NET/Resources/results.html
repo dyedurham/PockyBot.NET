@@ -103,6 +103,9 @@
                             {{- for peg in recipient.pegs }}
                             <tr>
                                 <td>{{ peg.sender_name }}</td>
+                                <td>{{ for line in peg.comment | string.split `\n` }}
+                                    {{ line | string.escape }}{{ if !for.last }}<br/>{{ end }}
+                                {{ end }}</td>
                                 <td>{{ peg.comment }}</td>
                                 <td>{{ peg.keywords | array.join ", " }}</td>
                             </tr>
