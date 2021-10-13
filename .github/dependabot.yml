@@ -11,7 +11,6 @@ updates:
       - evangelinexx
       - arthurs
       - chromadream
-      - gillianmilne
       - drewfreyling
     commit-message:
       prefix: "fix"
@@ -27,7 +26,6 @@ updates:
       - evangelinexx
       - arthurs
       - chromadream
-      - gillianmilne
       - drewfreyling
     commit-message:
       prefix: "chore"
