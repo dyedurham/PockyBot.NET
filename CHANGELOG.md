@@ -1,3 +1,11 @@
+## [1.13.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.2...v1.13.3) (2021-10-13)
+
+
+### Bug Fixes
+
+* Fixing various typos in readme and welcome ([cf126bd](https://github.com/GlobalX/PockyBot.NET/commit/cf126bd89faaa260504a362517e8f2e5e8484d5c))
+* typo in welcome message fixed form ouy to out ([8d3e0de](https://github.com/GlobalX/PockyBot.NET/commit/8d3e0de1bf4476ecc9b15951ec08ffa75f8d5e8a))
+
 ## [1.13.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.1...v1.13.2) (2020-09-25)
 
 
