@@ -130,7 +130,7 @@
                             {{- for penalty in recipient.penalties }}
                             <tr>
                                 <td>{{ penalty.sender_name }}</td>
-                                <td>{{ for line in peg.comment | string.split `\n` -}}
+                                <td>{{ for line in penalty.comment | string.split `\n` -}}
                                     {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
                                     {{- end }}</td>
                                 <td>{{ penalty.sender_location }}</td>
