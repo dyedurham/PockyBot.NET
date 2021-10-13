@@ -58,7 +58,9 @@
                             <tr>
                                 <td>{{ peg.sender_name }}</td>
                                 <td>{{ peg.weight }}</td>
-                                <td>{{ peg.comment }}</td>
+                                <td>{{ for line in peg.comment | string.split `\n` -}}
+                                    {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
+                                    {{- end }}</td>
                                 <td>{{ peg.keywords | array.join ", " }}</td>
                                 <td>{{ peg.sender_location }}</td>
                             </tr>
@@ -79,7 +81,9 @@
                             <tr>
                                 <td>{{ peg.sender_name }}</td>
                                 <td>{{ peg.weight }}</td>
-                                <td>{{ peg.comment }}</td>
+                                <td>{{ for line in peg.comment | string.split `\n` -}}
+                                    {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
+                                    {{- end }}</td>
                                 <td>{{ peg.keywords | array.join ", " }}</td>
                                 <td>{{ peg.sender_location }}</td>
                             </tr>
@@ -103,10 +107,9 @@
                             {{- for peg in recipient.pegs }}
                             <tr>
                                 <td>{{ peg.sender_name }}</td>
-                                <td>{{ for line in peg.comment | string.split `\n` }}
-                                    {{ line | string.escape }}{{ if !for.last }}<br/>{{ end }}
-                                {{ end }}</td>
-                                <td>{{ peg.comment }}</td>
+                                <td>{{ for line in peg.comment | string.split `\n` -}}
+                                    {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
+                                    {{- end }}</td>
                                 <td>{{ peg.keywords | array.join ", " }}</td>
                             </tr>
                             {{- end}}
@@ -127,7 +130,9 @@
                             {{- for penalty in recipient.penalties }}
                             <tr>
                                 <td>{{ penalty.sender_name }}</td>
-                                <td>{{ penalty.comment }}</td>
+                                <td>{{ for line in peg.comment | string.split `\n` -}}
+                                    {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
+                                    {{- end }}</td>
                                 <td>{{ penalty.sender_location }}</td>
                             </tr>
                             {{- end }}
