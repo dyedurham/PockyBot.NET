@@ -1,3 +1,12 @@
+## [1.13.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.3...v1.13.4) (2021-10-13)
+
+
+### Bug Fixes
+
+* **generation:** bad code ([85a87d2](https://github.com/GlobalX/PockyBot.NET/commit/85a87d2cc1e93990b4725177c46d2e09f7161136))
+* **generation:** sanitise template outputs and display newlines ([92762ab](https://github.com/GlobalX/PockyBot.NET/commit/92762abef00b88c27f0d6562cc09263804d9dcee))
+* **generation:** sanitise template outputs and display newlines for all comments ([f6278d0](https://github.com/GlobalX/PockyBot.NET/commit/f6278d0632cf9196ea1c1e48e26ed5c66f30d3e0))
+
 ## [1.13.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.2...v1.13.3) (2021-10-13)
 
 
