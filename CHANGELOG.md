@@ -1,3 +1,10 @@
+## [1.13.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.4...v1.13.5) (2021-10-15)
+
+
+### Bug Fixes
+
+* **database:** update maximum comment length to 2000 chars ([6c1a501](https://github.com/GlobalX/PockyBot.NET/commit/6c1a501e57c9fc58fe259457d919ae83a76c60b1))
+
 ## [1.13.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.3...v1.13.4) (2021-10-13)
 
 
