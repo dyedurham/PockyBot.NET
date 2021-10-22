@@ -1,3 +1,11 @@
+## [1.13.6](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.5...v1.13.6) (2021-10-22)
+
+
+### Bug Fixes
+
+* minor rewording ([60dee52](https://github.com/GlobalX/PockyBot.NET/commit/60dee52841c41bddc12301be9ad1893633104ba4))
+* validate whether peg sender is the same as peg receiver ([1b8155f](https://github.com/GlobalX/PockyBot.NET/commit/1b8155f75cd446114fa58c9a5c2661c2bdb42c7b))
+
 ## [1.13.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.4...v1.13.5) (2021-10-15)
 
 
