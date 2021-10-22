@@ -24,6 +24,7 @@ namespace PockyBot.NET.Services.Pegs
         {
             ValidateMessageFormat(message);
 
+            ValidateRecipient(message);
             var comment = GetCommentText(message);
             ValidateComment(comment);
 
@@ -39,6 +40,15 @@ namespace PockyBot.NET.Services.Pegs
             {
                 throw new PegValidationException(
                     $"I'm sorry, I couldn't understand your peg request. Please use the following format: `@{_settings.BotName} peg @Person this is the reason for giving you a peg`.");
+            }
+        }
+
+        private void ValidateRecipient(Message message)
+        {
+            if (message.Sender.UserId == message.MessageParts[2].UserId)
+            {
+                throw new PegValidationException(
+                    $"You can't peg yourself.");
             }
         }
 
