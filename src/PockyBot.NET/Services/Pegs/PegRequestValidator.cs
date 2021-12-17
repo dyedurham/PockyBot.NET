@@ -69,12 +69,14 @@ namespace PockyBot.NET.Services.Pegs
         {
             var keywords = _configRepository.GetStringConfig("keyword");
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword");
-            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => x.Split(':')[1]);
+            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => x.Split(':'));
+            var validLinkedKeywords =
+                linkedKeywords.Where(x => keywords.Contains(x[0], StringComparer.OrdinalIgnoreCase)).Select(x => x[1]);
 
             if (_configRepository.GetGeneralConfig("requireValues") == 1
                 && !keywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)
                     && !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)
-                        && !linkedKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0))
+                        && !validLinkedKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0))
             {
                 throw new PegValidationException(
                     $"I'm sorry, you have to include a keyword in your comment. Please include one of the below keywords in your comment:\n\n{string.Join(", ", keywords)}");

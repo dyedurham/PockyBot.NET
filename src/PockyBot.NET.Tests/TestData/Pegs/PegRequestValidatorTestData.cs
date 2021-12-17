@@ -15,6 +15,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -60,6 +61,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 0, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -105,6 +107,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 0, // requireValues
                 new Message
                 {
@@ -150,6 +153,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 0, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 0, // requireValues
                 new Message
                 {
@@ -190,6 +194,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -235,6 +240,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -278,6 +284,52 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                     }
                 }
             };
+
+            //including linked keywords
+            yield return new object[]
+            {
+                GetBasicSettings(),
+                1, // commentsRequired
+                new List<string> { "keyword1", "keyword2", "keyword3" },
+                new List<string> { "penaltyKeyword" },
+                new List<string> { "keyword1:link1", "keyword1:link2" },
+                1, // requireValues
+                new Message
+                {
+                    Text = "TestBot peg Test User 2 for doing some link1 things",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " peg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "Test User 2",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUser2Id"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for doing some link1 things",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
+                }
+            };
         }
 
         public static IEnumerable<object[]> InvalidTestData()
@@ -289,6 +341,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -324,6 +377,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -371,6 +425,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -417,6 +472,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -463,6 +519,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -504,6 +561,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -549,6 +607,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 1, // commentsRequired
                 new List<string> { "keyword1", "keyword2", "keyword3" },
                 new List<string> { "penaltyKeyword" },
+                new List<string>(),
                 1, // requireValues
                 new Message
                 {
@@ -586,6 +645,53 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                     }
                 },
                 "You can't peg yourself."
+            };
+
+            // keyword required, invalid linked keyword supplied
+            yield return new object[]
+            {
+                GetBasicSettings(),
+                1, // commentsRequired
+                new List<string> { "keyword1", "keyword2", "keyword3" },
+                new List<string> { "penaltyKeyword" },
+                new List<string> { "keyword4:link1" },
+                1, // requireValues
+                new Message
+                {
+                    Text = "TestBot peg Test User 2 for doing some link1 things",
+                    MessageParts = new []
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " peg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "Test User 2",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUser2Id"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for doing some link1 things",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
+                },
+                "I'm sorry, you have to include a keyword in your comment. Please include one of the below keywords in your comment:\n\nkeyword1, keyword2, keyword3"
             };
         }
 
