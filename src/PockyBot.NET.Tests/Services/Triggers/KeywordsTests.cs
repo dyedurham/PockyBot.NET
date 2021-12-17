@@ -29,11 +29,12 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         [Theory]
         [MemberData(nameof(KeywordsTestData.RespondTestData), MemberType = typeof(KeywordsTestData))]
-        public void TestRespond(IList<string> keywords, IList<string> penaltyKeywords, Message response)
+        public void TestRespond(IList<string> keywords, IList<string> penaltyKeywords, IList<string> linkedKeywords, Message response)
         {
             this.Given(x => GivenAMessage(GetKeywordsMessage()))
                 .And(x => GivenAStringConfig("keyword", keywords))
                 .And(x => GivenAStringConfig("penaltyKeyword", penaltyKeywords))
+                .And(x => GivenAStringConfig("linkedKeyword", linkedKeywords))
                 .When(x => WhenRespondingToAMessage())
                 .Then(x => ThenItShouldReturnAResponse(response))
                 .BDDfy();

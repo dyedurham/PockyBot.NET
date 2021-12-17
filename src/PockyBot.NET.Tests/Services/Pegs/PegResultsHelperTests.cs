@@ -38,6 +38,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
             this.Given(x => GivenAListOfPockyUsers(pockyUsers))
                 .And(x => GivenAStringConfig("keyword", new List<string> {"keyword1", "keyword2"}))
                 .And(x => GivenAStringConfig("penaltyKeyword", new List<string> {"penaltyKeyword"}))
+                .And(x => GivenAStringConfig("linkedKeyword", new List<string> {"keyword1:link1"}))
                 .And(x => GivenAGeneralConfig("requireValues", 1))
                 .And(x => GivenPegValidity("penaltyKeyword"))
                 .And(x => GivenPegWeighting())
@@ -64,6 +65,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
         {
             this.Given(x => GivenAListOfPegRecipients(mappedUsers))
                 .And(x => GivenAStringConfig("keyword", new List<string> {"keyword1", "keyword2"}))
+                .And(x => GivenAStringConfig("linkedKeyword", new List<string> {"keyword1:link1"}))
                 .When(x => WhenGettingCategories())
                 .Then(x => ThenItShouldReturnAListOfCategories(expected))
                 .BDDfy();

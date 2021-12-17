@@ -39,6 +39,16 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                                     Username = "User 3",
                                     Location = new UserLocation { Location = "Location2" }
                                 }
+                            },
+                            new Peg
+                            {
+                                Comment = "This is a peg link1",
+                                Sender = new PockyUser
+                                {
+                                    UserId = "User2Id",
+                                    Username = "User 2",
+                                    Location = new UserLocation { Location = "Location1" }
+                                }
                             }
                         },
                         PegsGiven = new List<Peg>
@@ -66,6 +76,15 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             new Peg
                             {
                                 Comment = "This is a peg keyword1 keyword2",
+                                Receiver = new PockyUser
+                                {
+                                    Username = "User 1",
+                                    Location = new UserLocation { Location = "Location1" }
+                                }
+                            },
+                            new Peg
+                            {
+                                Comment = "This is a peg link1",
                                 Receiver = new PockyUser
                                 {
                                     Username = "User 1",
@@ -102,8 +121,8 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                         UserId = "User1Id",
                         Name = "User 1",
                         Location = "Location1",
-                        TotalPoints = 2,
-                        PegCount = 2,
+                        TotalPoints = 3,
+                        PegCount = 3,
                         PenaltyCount = 1,
                         PegsGivenCount = 0,
                         Pegs = new List<PegDetails>
@@ -114,6 +133,14 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                                 Weight = 1,
                                 Comment = "This is a peg keyword1 keyword2",
                                 Keywords = new List<string> { "keyword1", "keyword2" },
+                                SenderLocation = "Location1"
+                            },
+                             new PegDetails
+                            {
+                                SenderName = "User 2",
+                                Weight = 1,
+                                Comment = "This is a peg link1",
+                                Keywords = new List<string> { "keyword1" },
                                 SenderLocation = "Location1"
                             },
                             new PegDetails
@@ -342,7 +369,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                             {
                                 SenderName = "User 3",
                                 Weight = 1,
-                                Comment = "This is a peg keyword1",
+                                Comment = "This is a peg link1",
                                 Keywords = new List<string> {"keyword1"},
                                 SenderLocation = "Location2"
                             },
@@ -442,7 +469,7 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                                     {
                                         SenderName = "User 3",
                                         Weight = 1,
-                                        Comment = "This is a peg keyword1",
+                                        Comment = "This is a peg link1",
                                         Keywords = new List<string> {"keyword1"},
                                         SenderLocation = "Location2"
                                     }
