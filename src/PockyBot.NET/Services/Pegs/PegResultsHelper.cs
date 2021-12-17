@@ -23,14 +23,15 @@ namespace PockyBot.NET.Services.Pegs
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");
             var keywords = _configRepository.GetStringConfig("keyword").ToArray();
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
+            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").ToArray();
 
             return users.Select(x =>
             {
                 var receiverLocation = x.Location?.Location;
                 var validPegs = GetValidPegs(x.PegsReceived, requireKeywords, keywords, penaltyKeywords,
-                    receiverLocation);
+                    linkedKeywords, receiverLocation);
                 var penaltyPegs = GetPenaltyPegs(x.PegsGiven, requireKeywords, keywords, penaltyKeywords);
-                    
+
                 return new PegRecipient
                 {
                     Name = x.Username,
@@ -90,15 +91,16 @@ namespace PockyBot.NET.Services.Pegs
         }
 
         private List<PegDetails> GetValidPegs(List<Peg> pegs, int? requireKeywords, string[] keywords,
-            string[] penaltyKeywords, string receiverLocation)
+            string[] penaltyKeywords, string[] linkedKeywords, string receiverLocation)
         {
-            return pegs.Where(y => _pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
+            var splitLinkedKeywords = linkedKeywords.Select(x => x.Split(':')[1]).ToArray();
+            return pegs.Where(y => _pegHelper.IsPegValid(y.Comment, requireKeywords, keywords.Concat(splitLinkedKeywords).ToArray(), penaltyKeywords))
                 .Select(y => new PegDetails
                 {
                     SenderName = y.Sender.Username,
                     Weight = _pegHelper.GetPegWeighting(y.Sender.Location?.Location, receiverLocation),
                     Comment = y.Comment,
-                    Keywords = keywords.Where(z => y.Comment.Contains(z, StringComparison.OrdinalIgnoreCase)).ToList(),
+                    Keywords = GetPegKeywords(y.Comment, keywords, linkedKeywords),
                     SenderLocation = y.Sender.Location?.Location
                 })
                 .ToList();
@@ -117,6 +119,13 @@ namespace PockyBot.NET.Services.Pegs
                     SenderLocation = y.Receiver.Location?.Location
                 })
                 .ToList();
+        }
+
+        private List<string> GetPegKeywords(string comment, string[] keywords, string[] linkedKeywords)
+        {
+            var splitLinkedKeywords = linkedKeywords.Select(x => x.Split(':'));
+            return keywords.Where(x => comment.Contains(x, StringComparison.OrdinalIgnoreCase)).Union(
+                splitLinkedKeywords.Where(x => comment.Contains(x[1], StringComparison.OrdinalIgnoreCase)).Select(x => x[0])).ToList();
         }
 
         private static List<PegRecipient> MapRecipientsToCategoryRecipients(List<PegRecipient> allRecipients, string keyword)
