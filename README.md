@@ -164,8 +164,14 @@ Table `generalconfig` is initalised with default values as follows:
 
 Table `stringconfig` is used to define keywords.
 Name field is 'keyword' and 'value' is the value of the keyword desired.
-Default keywords are 'customer', 'brave', 'awesome', 'collaborative', and
-'real', shorthands for the GlobalX company values.
+Default keywords are 'customer', 'collaboration', 'amazing', 'integrity', and
+'improvement', shorthands for the Dye & Durham company values.
+
+Table `stringconfig` is also used to define linked keywords.
+Name field is 'linkedKeyword' and 'value' is the value of the keyword and a
+linked word, separated by a colon (e.g. 'amazing:awesome').
+These are used to define other words that will act as one of the main
+keywords for validation and results purposes. 
 
 Existing roles are 'ADMIN', 'UNMETERED', 'RESULTS', 'FINISH', 'RESET',
 'UPDATE', and 'WINNERS'. Users can have more than one role. Any users with the

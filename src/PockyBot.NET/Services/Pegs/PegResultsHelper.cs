@@ -23,7 +23,7 @@ namespace PockyBot.NET.Services.Pegs
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");
             var keywords = _configRepository.GetStringConfig("keyword").ToArray();
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
-            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").ToArray();
+            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => new LinkedKeyword(x)).ToArray();
 
             return users.Select(x =>
             {
@@ -91,10 +91,9 @@ namespace PockyBot.NET.Services.Pegs
         }
 
         private List<PegDetails> GetValidPegs(List<Peg> pegs, int? requireKeywords, string[] keywords,
-            string[] penaltyKeywords, string[] linkedKeywords, string receiverLocation)
+            string[] penaltyKeywords, LinkedKeyword[] linkedKeywords, string receiverLocation)
         {
-            var splitLinkedKeywords = linkedKeywords.Select(x => x.Split(':')[1]).ToArray();
-            return pegs.Where(y => _pegHelper.IsPegValid(y.Comment, requireKeywords, keywords.Concat(splitLinkedKeywords).ToArray(), penaltyKeywords))
+            return pegs.Where(y => _pegHelper.IsPegValid(y.Comment, requireKeywords, keywords.Concat(linkedKeywords.Select(x => x.LinkedWord)).ToArray(), penaltyKeywords))
                 .Select(y => new PegDetails
                 {
                     SenderName = y.Sender.Username,
@@ -121,11 +120,10 @@ namespace PockyBot.NET.Services.Pegs
                 .ToList();
         }
 
-        private List<string> GetPegKeywords(string comment, string[] keywords, string[] linkedKeywords)
+        private List<string> GetPegKeywords(string comment, string[] keywords, LinkedKeyword[] linkedKeywords)
         {
-            var splitLinkedKeywords = linkedKeywords.Select(x => x.Split(':'));
             return keywords.Where(x => comment.Contains(x, StringComparison.OrdinalIgnoreCase)).Union(
-                splitLinkedKeywords.Where(x => comment.Contains(x[1], StringComparison.OrdinalIgnoreCase)).Select(x => x[0])).ToList();
+                linkedKeywords.Where(x => comment.Contains(x.LinkedWord, StringComparison.OrdinalIgnoreCase)).Select(x => x.Keyword)).ToList();
         }
 
         private static List<PegRecipient> MapRecipientsToCategoryRecipients(List<PegRecipient> allRecipients, string keyword)
