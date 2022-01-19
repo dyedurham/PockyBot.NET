@@ -4,6 +4,5 @@ dotnet test src/PockyBot.NET.Tests/PockyBot.NET.Tests.csproj /p:CollectCoverage=
 bash <(curl -s https://codecov.io/bash) -f src/PockyBot.NET.Tests/coverage.opencover.xml
 
 # Codacy
-curl -Ls "https://github.com/codacy/csharp-codacy-coverage/releases/download/$CODACY_COVERAGE_VERSION/Codacy.CSharpCoverage_linux-x64" --output "Codacy.CSharpCoverage_linux-x64"
-chmod +x ./Codacy.CSharpCoverage_linux-x64
-./Codacy.CSharpCoverage_linux-x64 -c "$TRAVIS_COMMIT" -t "$CODACY_PROJECT_TOKEN" -r src/PockyBot.NET.Tests/coverage.opencover.xml -e opencover
+export CODACY_PROJECT_TOKEN="$CODACY_PROJECT_TOKEN"
+bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r src/PockyBot.NET.Tests/coverage.opencover.xml
