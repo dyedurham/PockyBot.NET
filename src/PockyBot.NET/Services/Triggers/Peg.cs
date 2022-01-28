@@ -5,6 +5,7 @@ using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Logging;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Models;
 using PockyBot.NET.Models.Exceptions;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
@@ -67,6 +68,8 @@ namespace PockyBot.NET.Services.Triggers
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");
             var keywords = _configRepository.GetStringConfig("keyword").ToArray();
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
+            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => new LinkedKeyword(x));
+            keywords = keywords.Concat(linkedKeywords.Select(x => x.LinkedWord)).ToArray();
 
             var isPegValid = _pegHelper.IsPegValid(comment, requireKeywords, keywords, penaltyKeywords);
             var numPegsGiven = sender.PegsGiven?.Count(x =>

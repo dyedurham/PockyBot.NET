@@ -35,10 +35,10 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         [Theory]
         [MemberData(nameof(PegRequestValidatorTestData.ValidTestData), MemberType = typeof(PegRequestValidatorTestData))]
-        public void TestValidateValidPegRequest(PockyBotSettings settings, int commentsRequired, List<string> keywords, List<string> penaltyKeywords, int requireValues, Message message)
+        public void TestValidateValidPegRequest(PockyBotSettings settings, int commentsRequired, List<string> keywords, List<string> penaltyKeywords, List<string> linkedKeywords, int requireValues, Message message)
         {
             this.Given(x => GivenPockyBotSettings(settings))
-                .And(x => GivenAConfig(commentsRequired, keywords, penaltyKeywords, requireValues))
+                .And(x => GivenAConfig(commentsRequired, keywords, penaltyKeywords, linkedKeywords, requireValues))
                 .And(x => GivenAMessage(message))
                 .When(x => WhenValidatingAPegRequest())
                 .Then(x => ThenTheMessageShouldBeValid())
@@ -47,10 +47,10 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         [Theory]
         [MemberData(nameof(PegRequestValidatorTestData.InvalidTestData), MemberType = typeof(PegRequestValidatorTestData))]
-        public void TestValidateInvalidPegRequest(PockyBotSettings settings, int commentsRequired, List<string> keywords, List<string> penaltyKeywords, int requireValues, Message message, string errorMessage)
+        public void TestValidateInvalidPegRequest(PockyBotSettings settings, int commentsRequired, List<string> keywords, List<string> penaltyKeywords,  List<string> linkedKeywords, int requireValues, Message message, string errorMessage)
         {
             this.Given(x => GivenPockyBotSettings(settings))
-                .And(x => GivenAConfig(commentsRequired, keywords, penaltyKeywords, requireValues))
+                .And(x => GivenAConfig(commentsRequired, keywords, penaltyKeywords, linkedKeywords, requireValues))
                 .And(x => GivenAMessage(message))
                 .When(x => WhenValidatingAPegRequest())
                 .Then(x =>ThenTheMessageShouldBeInvalid())
@@ -65,11 +65,12 @@ namespace PockyBot.NET.Tests.Services.Pegs
             _settings.DatabaseConnectionString = settings.DatabaseConnectionString;
         }
 
-        private void GivenAConfig(int commentsRequired, List<string> keywords, List<string> penaltyKeywords, int requireValues)
+        private void GivenAConfig(int commentsRequired, List<string> keywords, List<string> penaltyKeywords, List<string> linkedKeywords, int requireValues)
         {
             _configRepository.GetGeneralConfig("commentsRequired").Returns(commentsRequired);
             _configRepository.GetStringConfig("keyword").Returns(keywords);
             _configRepository.GetStringConfig("penaltyKeyword").Returns(penaltyKeywords);
+            _configRepository.GetStringConfig("linkedKeyword").Returns(linkedKeywords);
             _configRepository.GetGeneralConfig("requireValues").Returns(requireValues);
         }
 
