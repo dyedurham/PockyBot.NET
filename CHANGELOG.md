@@ -1,3 +1,14 @@
+# [1.14.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.6...v1.14.0) (2022-01-28)
+
+
+### Features
+
+* add clarification around linked keywords ([b3b9390](https://github.com/GlobalX/PockyBot.NET/commit/b3b9390ce1b1b716777fcb9898e2556fc9cef81e))
+* add examples to the stringconfig help ([61f2d3c](https://github.com/GlobalX/PockyBot.NET/commit/61f2d3c3e7beb10a302ef86de455ff6bd8c69983))
+* initial linked keywords additions ([9c6cbb7](https://github.com/GlobalX/PockyBot.NET/commit/9c6cbb70543e018d4d597a442f95fbf5f9ebfc13))
+* update peg request validator unit tests for addition of linked keywords ([6742de2](https://github.com/GlobalX/PockyBot.NET/commit/6742de29d6b0d1139fede50a4a05f56d7af9ea6d))
+* update peg request validator unit tests for addition of linked keywords ([f9fe369](https://github.com/GlobalX/PockyBot.NET/commit/f9fe3698e2b7bd03dabee15bee41e93e0875985b))
+
 ## [1.13.6](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.5...v1.13.6) (2021-10-22)
 
 
