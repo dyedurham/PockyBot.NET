@@ -108,7 +108,7 @@ namespace PockyBot.NET.Services.Pegs
         private List<PegDetails> GetPenaltyPegs(List<Peg> pegs, int? requireKeywords, string[] keywords,
             string[] penaltyKeywords)
         {
-            return pegs.Where(y => !_pegHelper.IsPegValid(y.Comment, requireKeywords, keywords, penaltyKeywords))
+            return pegs.Where(y => _pegHelper.IsPenaltyPeg(y.Comment, requireKeywords, penaltyKeywords))
                 .Select(y => new PegDetails
                 {
                     SenderName = y.Receiver.Username,
