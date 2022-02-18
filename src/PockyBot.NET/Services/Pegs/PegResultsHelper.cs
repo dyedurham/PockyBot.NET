@@ -30,7 +30,7 @@ namespace PockyBot.NET.Services.Pegs
                 var receiverLocation = x.Location?.Location;
                 var validPegs = GetValidPegs(x.PegsReceived, requireKeywords, keywords, penaltyKeywords,
                     linkedKeywords, receiverLocation);
-                var penaltyPegs = GetPenaltyPegs(x.PegsGiven, requireKeywords, keywords, penaltyKeywords);
+                var penaltyPegs = GetPenaltyPegs(x.PegsGiven, requireKeywords, keywords.Concat(linkedKeywords.Select(x =>  x.Keyword)).ToArray(), penaltyKeywords);
 
                 return new PegRecipient
                 {
@@ -108,7 +108,7 @@ namespace PockyBot.NET.Services.Pegs
         private List<PegDetails> GetPenaltyPegs(List<Peg> pegs, int? requireKeywords, string[] keywords,
             string[] penaltyKeywords)
         {
-            return pegs.Where(y => _pegHelper.IsPenaltyPeg(y.Comment, requireKeywords, penaltyKeywords))
+            return pegs.Where(y => _pegHelper.IsPenaltyPeg(y.Comment, requireKeywords, penaltyKeywords, keywords))
                 .Select(y => new PegDetails
                 {
                     SenderName = y.Receiver.Username,

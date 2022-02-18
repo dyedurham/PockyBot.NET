@@ -95,7 +95,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         private void GivenPenaltyPeg(string penaltyKeyword)
         {
-            _pegHelper.IsPenaltyPeg(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<string[]>()).Returns(
+            _pegHelper.IsPenaltyPeg(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>()).Returns(
                 x => ((string)x[0]).Contains(penaltyKeyword));
         }
 
