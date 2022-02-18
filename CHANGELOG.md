@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.14.0...v1.15.0) (2022-02-11)
+
+
+### Features
+
+* respond with parentId ([3c1d262](https://github.com/GlobalX/PockyBot.NET/commit/3c1d262103e7a0ae92032dd94f4e560a1ea2cff8))
+
 # [1.14.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.6...v1.14.0) (2022-01-28)
 
 
