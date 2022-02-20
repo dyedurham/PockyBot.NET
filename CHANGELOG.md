@@ -1,3 +1,13 @@
+## [1.15.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.0...v1.15.1) (2022-02-20)
+
+
+### Bug Fixes
+
+* add unit test for penaltyKeyword ([072fa4c](https://github.com/GlobalX/PockyBot.NET/commit/072fa4c30cdadad012166fd13f68b9db564e9446))
+* incorrect peg checking behavior ([6c9ae52](https://github.com/GlobalX/PockyBot.NET/commit/6c9ae522a91271b7729f5265e1fe2fbb9b53eea1))
+* separate check for penalty pegs ([eb6a310](https://github.com/GlobalX/PockyBot.NET/commit/eb6a310e1dc2fd0593d5b8619e8f5fbf3047d2ba))
+* unit tests ([c676a51](https://github.com/GlobalX/PockyBot.NET/commit/c676a5173be7e75b4eebae64ebf7460acca0e76d))
+
 # [1.15.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.14.0...v1.15.0) (2022-02-11)
 
 
