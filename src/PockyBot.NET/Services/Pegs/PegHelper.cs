@@ -45,5 +45,10 @@ namespace PockyBot.NET.Services.Pegs
 
             return _configRepository.GetGeneralConfig("remoteLocationWeightingDefault") ?? DefaultRemoteLocationWeighting;
         }
+
+        public bool IsPenaltyPeg(string comment, int? requireKeywords, string[] penaltyKeywords, string[] validKeywords)
+        {
+            return penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0) && !validKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
     }
 }

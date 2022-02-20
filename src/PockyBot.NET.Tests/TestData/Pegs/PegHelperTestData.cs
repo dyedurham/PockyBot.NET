@@ -74,6 +74,75 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             };
         }
 
+        public static IEnumerable<object[]> IsPenaltyPegTestData()
+        {
+            var keywords = new[] { "keyword1", "keyword2", "keyword3" };
+            var penaltyKeywords = new[] { "penaltyKeyword" };
+
+            yield return new object[]
+            {
+                "This is a comment",
+                0, // requireKeywords
+                keywords,
+                penaltyKeywords,
+                false
+            };
+
+            yield return new object[]
+            {
+                "This is a comment",
+                1, // requireKeywords
+                keywords,
+                penaltyKeywords,
+                false
+            };
+
+            yield return new object[]
+            {
+                "This is a comment keyword1",
+                1, // requireKeywords
+                keywords,
+                penaltyKeywords,
+                false
+            };
+
+            yield return new object[]
+            {
+                "This is a comment penaltyKeyword",
+                0, // requireKeywords
+                keywords,
+                penaltyKeywords,
+                true
+            };
+
+            yield return new object[]
+            {
+                "This is a comment penaltyKeyword",
+                1, // requireKeywords
+                keywords,
+                penaltyKeywords,
+                true
+            };
+
+            yield return new object[]
+            {
+                "This is a comment KeyWord1",
+                1, // requireKeywords
+                keywords,
+                penaltyKeywords,
+                false
+            };
+
+            yield return new object[]
+            {
+                "This is a comment keyword2 penaltyKeyword",
+                1, // requireKeywords
+                keywords,
+                penaltyKeywords,
+                false
+            };
+        }
+
         public static IEnumerable<object[]> GetPegWeightingTestData()
         {
             yield return new object[]
