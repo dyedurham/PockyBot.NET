@@ -74,17 +74,14 @@ namespace PockyBot.NET.Services.Triggers
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");
             var keywords = _configRepository.GetStringConfig("keyword").ToArray();
             var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => new LinkedKeyword(x)).ToArray();
+            var validKeywords = keywords.Concat(linkedKeywords.Select(x => x.Keyword)).ToArray();
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
 
-            var validPegs = pockyUser.PegsGiven.GroupBy(x =>
-                    _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords.Concat(linkedKeywords.Select(x => x.Keyword)).ToArray(), penaltyKeywords))
-                .ToDictionary(x => x.Key, x => x.ToList()).Single((x) => x.Key).Value;
+            var groupedPegs = pockyUser.PegsGiven.GroupBy(x =>
+                    _pegHelper.IsPegValid(x.Comment, requireKeywords, validKeywords, penaltyKeywords))
+                .ToDictionary(x => x.Key, x => x.ToList());
 
-            var penaltyPegs = pockyUser.PegsGiven.GroupBy(x =>
-                    _pegHelper.IsPenaltyPeg(x.Comment, requireKeywords, keywords.Concat(linkedKeywords.Select(x => x.Keyword)).ToArray(), penaltyKeywords))
-                .ToDictionary(x => x.Key, x => x.ToList()).Single((x) => x.Key).Value;
-
-            return new Dictionary<bool, List<Persistence.Models.Peg>>() { { true, validPegs }, { false, penaltyPegs } };
+            return groupedPegs;
         }
 
         private static string GetPegsLeftText(PockyUser pockyUser, int limit, int pegsGiven = 0)
