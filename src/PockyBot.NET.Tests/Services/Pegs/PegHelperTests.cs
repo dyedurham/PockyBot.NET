@@ -48,6 +48,19 @@ namespace PockyBot.NET.Tests.Services.Pegs
         }
 
         [Theory]
+        [MemberData(nameof(PegHelperTestData.IsPenaltyPegTestData), MemberType = typeof(PegHelperTestData))]
+        public void IsPenaltyPegTest(string comment, int? requireKeywords, string[] keywords, string[] penaltyKeywords, bool isPegValid)
+        {
+            this.Given(x => GivenAComment(comment))
+                .And(x => GivenRequireKeywords(requireKeywords))
+                .And(x => GivenKeywords(keywords))
+                .And(x => GivenPenaltyKeywords(penaltyKeywords))
+                .When(x => WhenIsPenaltyPegIsCalled())
+                .Then(x => ThenItShouldReturnIsPegValid(isPegValid))
+                .BDDfy();
+        }
+
+        [Theory]
         [MemberData(nameof(PegHelperTestData.GetPegWeightingTestData), MemberType = typeof(PegHelperTestData))]
         internal void GetPegWeightingTest(string senderLocation, string receiverLocation, List<GeneralConfig> allGeneralConfig, int? defaultRemoteLocationWeighting, int pegWeighting)
         {
@@ -103,6 +116,11 @@ namespace PockyBot.NET.Tests.Services.Pegs
         private void WhenIsPegValidIsCalled()
         {
             _isPegValid = _subject.IsPegValid(_comment, _requireKeywords, _keywords, _penaltyKeywords);
+        }
+
+        private void WhenIsPenaltyPegIsCalled()
+        {
+            _isPegValid = _subject.IsPenaltyPeg(_comment, _requireKeywords, _penaltyKeywords, _keywords);
         }
 
         private void WhenGettingAPegWeighting()

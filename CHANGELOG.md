@@ -1,3 +1,55 @@
+## [1.15.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.0...v1.15.1) (2022-02-20)
+
+
+### Bug Fixes
+
+* add unit test for penaltyKeyword ([072fa4c](https://github.com/GlobalX/PockyBot.NET/commit/072fa4c30cdadad012166fd13f68b9db564e9446))
+* incorrect peg checking behavior ([6c9ae52](https://github.com/GlobalX/PockyBot.NET/commit/6c9ae522a91271b7729f5265e1fe2fbb9b53eea1))
+* separate check for penalty pegs ([eb6a310](https://github.com/GlobalX/PockyBot.NET/commit/eb6a310e1dc2fd0593d5b8619e8f5fbf3047d2ba))
+* unit tests ([c676a51](https://github.com/GlobalX/PockyBot.NET/commit/c676a5173be7e75b4eebae64ebf7460acca0e76d))
+
+# [1.15.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.14.0...v1.15.0) (2022-02-11)
+
+
+### Features
+
+* respond with parentId ([3c1d262](https://github.com/GlobalX/PockyBot.NET/commit/3c1d262103e7a0ae92032dd94f4e560a1ea2cff8))
+
+# [1.14.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.6...v1.14.0) (2022-01-28)
+
+
+### Features
+
+* add clarification around linked keywords ([b3b9390](https://github.com/GlobalX/PockyBot.NET/commit/b3b9390ce1b1b716777fcb9898e2556fc9cef81e))
+* add examples to the stringconfig help ([61f2d3c](https://github.com/GlobalX/PockyBot.NET/commit/61f2d3c3e7beb10a302ef86de455ff6bd8c69983))
+* initial linked keywords additions ([9c6cbb7](https://github.com/GlobalX/PockyBot.NET/commit/9c6cbb70543e018d4d597a442f95fbf5f9ebfc13))
+* update peg request validator unit tests for addition of linked keywords ([6742de2](https://github.com/GlobalX/PockyBot.NET/commit/6742de29d6b0d1139fede50a4a05f56d7af9ea6d))
+* update peg request validator unit tests for addition of linked keywords ([f9fe369](https://github.com/GlobalX/PockyBot.NET/commit/f9fe3698e2b7bd03dabee15bee41e93e0875985b))
+
+## [1.13.6](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.5...v1.13.6) (2021-10-22)
+
+
+### Bug Fixes
+
+* minor rewording ([60dee52](https://github.com/GlobalX/PockyBot.NET/commit/60dee52841c41bddc12301be9ad1893633104ba4))
+* validate whether peg sender is the same as peg receiver ([1b8155f](https://github.com/GlobalX/PockyBot.NET/commit/1b8155f75cd446114fa58c9a5c2661c2bdb42c7b))
+
+## [1.13.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.4...v1.13.5) (2021-10-15)
+
+
+### Bug Fixes
+
+* **database:** update maximum comment length to 2000 chars ([6c1a501](https://github.com/GlobalX/PockyBot.NET/commit/6c1a501e57c9fc58fe259457d919ae83a76c60b1))
+
+## [1.13.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.3...v1.13.4) (2021-10-13)
+
+
+### Bug Fixes
+
+* **generation:** bad code ([85a87d2](https://github.com/GlobalX/PockyBot.NET/commit/85a87d2cc1e93990b4725177c46d2e09f7161136))
+* **generation:** sanitise template outputs and display newlines ([92762ab](https://github.com/GlobalX/PockyBot.NET/commit/92762abef00b88c27f0d6562cc09263804d9dcee))
+* **generation:** sanitise template outputs and display newlines for all comments ([f6278d0](https://github.com/GlobalX/PockyBot.NET/commit/f6278d0632cf9196ea1c1e48e26ed5c66f30d3e0))
+
 ## [1.13.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.13.2...v1.13.3) (2021-10-13)
 
 

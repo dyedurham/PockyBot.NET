@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
@@ -30,6 +31,7 @@ namespace PockyBot.NET.Services.Triggers
             var messageBuilder = new StringBuilder();
             var keywords = _configRepository.GetStringConfig("keyword");
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword");
+            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword");
 
             if (keywords.Count == 0)
             {
@@ -40,6 +42,22 @@ namespace PockyBot.NET.Services.Triggers
                 messageBuilder.Append("## Here is the list of possible keywords to include in your message\n\n* ");
                 messageBuilder.Append(string.Join("\n* ", keywords));
                 messageBuilder.Append("\n\n");
+            }
+
+            if (linkedKeywords.Count == 0)
+            {
+                messageBuilder.Append("No linked keywords set.\n\n");
+            }
+            else
+            {
+                messageBuilder.Append("## Here is the list of related keywords that are linked to the main set\n\n");
+                foreach (var keyword in keywords)
+                {
+                    var matchingLinkedKeywords = linkedKeywords.Where(x => x.StartsWith(keyword + ":")).Select(x => x.Split(':')[1]);
+                    messageBuilder.Append($"* {keyword}: ");
+                    messageBuilder.Append(string.Join(", ", matchingLinkedKeywords) + "\n");
+                }
+                messageBuilder.Append("\n");
             }
 
             if (penaltyKeywords.Count == 0)

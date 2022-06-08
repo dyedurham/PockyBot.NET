@@ -4,6 +4,7 @@ using GlobalX.ChatBots.Core.Messages;
 using Microsoft.Extensions.Options;
 using PockyBot.NET.Configuration;
 using PockyBot.NET.Constants;
+using PockyBot.NET.Models;
 using PockyBot.NET.Models.Exceptions;
 using PockyBot.NET.Persistence.Repositories;
 
@@ -24,6 +25,7 @@ namespace PockyBot.NET.Services.Pegs
         {
             ValidateMessageFormat(message);
 
+            ValidateRecipient(message);
             var comment = GetCommentText(message);
             ValidateComment(comment);
 
@@ -39,6 +41,15 @@ namespace PockyBot.NET.Services.Pegs
             {
                 throw new PegValidationException(
                     $"I'm sorry, I couldn't understand your peg request. Please use the following format: `@{_settings.BotName} peg @Person this is the reason for giving you a peg`.");
+            }
+        }
+
+        private void ValidateRecipient(Message message)
+        {
+            if (message.Sender.UserId == message.MessageParts[2].UserId)
+            {
+                throw new PegValidationException(
+                    $"You can't peg yourself.");
             }
         }
 
@@ -59,10 +70,14 @@ namespace PockyBot.NET.Services.Pegs
         {
             var keywords = _configRepository.GetStringConfig("keyword");
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword");
+            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => new LinkedKeyword(x));
+            var validLinkedWords =
+                linkedKeywords.Where(x => keywords.Contains(x.Keyword, StringComparer.OrdinalIgnoreCase)).Select(x => x.LinkedWord);
 
             if (_configRepository.GetGeneralConfig("requireValues") == 1
-                && (!keywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)
-                    && !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)))
+                && !keywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)
+                    && !penaltyKeywords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0)
+                        && !validLinkedWords.Any(x => comment.IndexOf(x, StringComparison.OrdinalIgnoreCase) >= 0))
             {
                 throw new PegValidationException(
                     $"I'm sorry, you have to include a keyword in your comment. Please include one of the below keywords in your comment:\n\n{string.Join(", ", keywords)}");

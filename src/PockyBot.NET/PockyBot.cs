@@ -63,6 +63,7 @@ namespace PockyBot.NET
                 if (response.RoomId == null)
                 {
                     response.RoomId = message.RoomId;
+                    response.ParentId = message.Id;
                 }
 
                 await _chatHelper.Messages.SendMessageAsync(response).ConfigureAwait(false);

@@ -38,8 +38,10 @@ namespace PockyBot.NET.Tests.Services.Pegs
             this.Given(x => GivenAListOfPockyUsers(pockyUsers))
                 .And(x => GivenAStringConfig("keyword", new List<string> {"keyword1", "keyword2"}))
                 .And(x => GivenAStringConfig("penaltyKeyword", new List<string> {"penaltyKeyword"}))
+                .And(x => GivenAStringConfig("linkedKeyword", new List<string> {"keyword1:link1"}))
                 .And(x => GivenAGeneralConfig("requireValues", 1))
                 .And(x => GivenPegValidity("penaltyKeyword"))
+                .And(x => GivenPenaltyPeg("penaltyKeyword"))
                 .And(x => GivenPegWeighting())
                 .When(x => WhenMappingUsersToPegRecipients())
                 .Then(x => ThenItShouldReturnAListOfPegRecipients(expected))
@@ -64,6 +66,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
         {
             this.Given(x => GivenAListOfPegRecipients(mappedUsers))
                 .And(x => GivenAStringConfig("keyword", new List<string> {"keyword1", "keyword2"}))
+                .And(x => GivenAStringConfig("linkedKeyword", new List<string> {"keyword1:link1"}))
                 .When(x => WhenGettingCategories())
                 .Then(x => ThenItShouldReturnAListOfCategories(expected))
                 .BDDfy();
@@ -88,6 +91,12 @@ namespace PockyBot.NET.Tests.Services.Pegs
         {
             _pegHelper.IsPegValid(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>()).Returns(
                 x => !((string)x[0]).Contains(penaltyKeyword));
+        }
+
+        private void GivenPenaltyPeg(string penaltyKeyword)
+        {
+            _pegHelper.IsPenaltyPeg(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>()).Returns(
+                x => ((string)x[0]).Contains(penaltyKeyword));
         }
 
         private void GivenPegWeighting()
