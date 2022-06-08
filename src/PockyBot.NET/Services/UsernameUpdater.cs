@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.People;
+using Microsoft.Extensions.Logging;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 
@@ -11,16 +14,18 @@ namespace PockyBot.NET.Services
     {
         private readonly IPersonHandler _personHandler;
         private readonly IPockyUserRepository _pockyUserRepository;
+        private readonly ILogger<UsernameUpdater> _logger;
 
-        public UsernameUpdater(IPersonHandler personHandler, IPockyUserRepository pockyUserRepository)
+        public UsernameUpdater(IPersonHandler personHandler, IPockyUserRepository pockyUserRepository, ILogger<UsernameUpdater> logger)
         {
             _personHandler = personHandler;
             _pockyUserRepository = pockyUserRepository;
+            _logger = logger;
         }
 
         public async Task<List<PockyUser>> UpdateUsernames(List<PockyUser> users)
         {
-            var usersDetails = await Task.WhenAll(users.Select(x => _personHandler.GetPersonAsync(x.UserId)));
+            var usersDetails = await Task.WhenAll(users.Select(x => GetUser(x.UserId, x.Username)));
             var dbUpdates = new List<Task>();
 
             var updatedUsers = users.Select(u =>
@@ -37,6 +42,19 @@ namespace PockyBot.NET.Services
 
             await Task.WhenAll(dbUpdates).ConfigureAwait(false);
             return updatedUsers;
+        }
+
+        private Task<Person> GetUser(string userId, string username)
+        {
+            try
+            {
+                return _personHandler.GetPersonAsync(userId);
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"Error retrieving details for user {userId}", ex);
+                return Task.FromResult(new Person{UserId = userId, Username = username});
+            }
         }
     }
 }
