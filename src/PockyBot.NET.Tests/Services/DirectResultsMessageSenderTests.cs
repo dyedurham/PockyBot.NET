@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PockyBot.NET.Models;
 using PockyBot.NET.Services;
@@ -21,7 +22,8 @@ namespace PockyBot.NET.Tests.Services
         public DirectResultsMessageSenderTests()
         {
             _messageHandler = Substitute.For<IMessageHandler>();
-            _subject = new DirectResultsMessageSender(_messageHandler);
+            var logger = Substitute.For<ILogger<DirectResultsMessageSender>>();
+            _subject = new DirectResultsMessageSender(_messageHandler, logger);
         }
 
         [Theory]

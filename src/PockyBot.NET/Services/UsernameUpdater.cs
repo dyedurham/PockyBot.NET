@@ -52,7 +52,7 @@ namespace PockyBot.NET.Services
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError($"Error retrieving details for user {userId}");
+                _logger.LogError($"Error retrieving details for user {userId}", ex);
                 return Task.FromResult(new Person{UserId = userId, Username = username});
             }
         }

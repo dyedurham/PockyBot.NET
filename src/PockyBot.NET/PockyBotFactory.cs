@@ -28,7 +28,7 @@ namespace PockyBot.NET
             var pegRequestValidator = new PegRequestValidator(wrappedSettings, configRepository);
             var pegHelper = new PegHelper(configRepository);
             var pegGiver = new PegGiver(pegRepository, chatHelper);
-            var directResultsMessageSender = new DirectResultsMessageSender(chatHelper.Messages);
+            var directResultsMessageSender = new DirectResultsMessageSender(chatHelper.Messages, loggerFactory.CreateLogger<DirectResultsMessageSender>());
             var pegResultsHelper = new PegResultsHelper(configRepository, pegHelper);
             var userLocationGetter = new UserLocationGetter(pockyUserRepository);
             var userLocationSetter =

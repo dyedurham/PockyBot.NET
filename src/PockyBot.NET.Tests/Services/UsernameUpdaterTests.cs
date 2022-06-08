@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.People;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using PockyBot.NET.Persistence.Models;
 using PockyBot.NET.Persistence.Repositories;
 using PockyBot.NET.Services;
@@ -63,6 +65,15 @@ namespace PockyBot.NET.Tests.Services
                 .BDDfy();
         }
 
+        [Fact]
+        public void ItShouldNotErrorIfTheUserCannotBeFound()
+        {
+            this.Given(x => GivenAUserThatIsNotReturnedFromThePersonHandler("user6", "person"))
+                .When(x => WhenUpdateUsernamesIsCalled())
+                .Then(x => ThenItShouldNotUpdateTheUsersUsername("user6"))
+                .BDDfy();
+        }
+
         private void GivenAUser(string userId, string previousUsername, string currentUsername)
         {
             _inputPockyUsers.Add(new PockyUser
@@ -76,6 +87,17 @@ namespace PockyBot.NET.Tests.Services
                 UserId = userId,
                 Username = currentUsername
             }));
+        }
+
+        private void GivenAUserThatIsNotReturnedFromThePersonHandler(string userId, string username)
+        {
+            _inputPockyUsers.Add(new PockyUser
+            {
+                UserId = userId,
+                Username = username
+            });
+
+            _personHandler.GetPersonAsync(userId).Throws(new HttpRequestException());
         }
 
         private async Task WhenUpdateUsernamesIsCalled()
