@@ -1,3 +1,11 @@
+## [1.15.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.1...v1.15.2) (2022-06-08)
+
+
+### Bug Fixes
+
+* **username updater:** suppress user not found errors in username updater so that finish doesn't stop if the usernames can't be updated ([f35f332](https://github.com/GlobalX/PockyBot.NET/commit/f35f33274b07574ce5a0e80d0c88112ac13ef98a))
+* add error handling for direct message sending and add test ([2518422](https://github.com/GlobalX/PockyBot.NET/commit/2518422536122905895f8f723cce5b77dff84ce8))
+
 ## [1.15.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.0...v1.15.1) (2022-02-20)
 
 
