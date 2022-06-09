@@ -44,16 +44,16 @@ namespace PockyBot.NET.Services
             return updatedUsers;
         }
 
-        private Task<Person> GetUser(string userId, string username)
+        private async Task<Person> GetUser(string userId, string username)
         {
             try
             {
-                return _personHandler.GetPersonAsync(userId);
+                return await _personHandler.GetPersonAsync(userId);
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError($"Error retrieving details for user {userId}", ex);
-                return Task.FromResult(new Person{UserId = userId, Username = username});
+                return new Person{UserId = userId, Username = username};
             }
         }
     }
