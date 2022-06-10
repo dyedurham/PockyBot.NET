@@ -120,7 +120,7 @@ namespace PockyBot.NET.Tests.Services.Pegs
 
         private void WhenIsPenaltyPegIsCalled()
         {
-            _isPegValid = _subject.IsPenaltyPeg(_comment, _requireKeywords, _penaltyKeywords, _keywords);
+            _isPegValid = _subject.IsPenaltyPeg(_comment, _penaltyKeywords, _keywords);
         }
 
         private void WhenGettingAPegWeighting()
