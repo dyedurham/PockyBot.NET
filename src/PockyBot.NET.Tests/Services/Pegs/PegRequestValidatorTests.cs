@@ -58,6 +58,28 @@ namespace PockyBot.NET.Tests.Services.Pegs
                 .BDDfy();
         }
 
+        [Theory]
+        [MemberData(nameof(PegRequestValidatorTestData.ValidFormatTestData), MemberType = typeof(PegRequestValidatorTestData))]
+        public void TestValidateValidPegRequestFormat(Message message)
+        {
+            this.Given(x => GivenAMessage(message))
+                .When(x => WhenValidatingAPegRequestsFormat())
+                .Then(x => ThenTheMessageShouldBeValid())
+                .BDDfy();
+        }
+
+        [Theory]
+        [MemberData(nameof(PegRequestValidatorTestData.InvalidFormatTestData), MemberType = typeof(PegRequestValidatorTestData))]
+        public void TestValidateInvalidPegRequestFormat(PockyBotSettings settings, Message message, string errorMessage)
+        {
+            this.Given(x => GivenPockyBotSettings(settings))
+                .And(x => GivenAMessage(message))
+                .When(x => WhenValidatingAPegRequestsFormat())
+                .Then(x =>ThenTheMessageShouldBeInvalid())
+                .And(x => ThenTheErrorMessageShouldBe(errorMessage))
+                .BDDfy();
+        }
+
         private void GivenPockyBotSettings(PockyBotSettings settings)
         {
             _settings.BotId = settings.BotId;
@@ -82,6 +104,11 @@ namespace PockyBot.NET.Tests.Services.Pegs
         private void WhenValidatingAPegRequest()
         {
             _exception = Record.Exception(() => _subject.ValidatePegRequest(_message));
+        }
+
+        private void WhenValidatingAPegRequestsFormat()
+        {
+            _exception = Record.Exception(() => _subject.ValidatePegRequestFormat(_message));
         }
 
         private void ThenTheMessageShouldBeValid()

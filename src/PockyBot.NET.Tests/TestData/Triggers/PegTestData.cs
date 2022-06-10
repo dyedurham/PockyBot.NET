@@ -62,7 +62,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 5, // limit
                 "for reasons", // comment
-                true, // is peg valid
+                false, // is penalty peg
                 new Person // receiver
                 {
                     UserId = "testUser1Id",
@@ -133,7 +133,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 1, // limit
                 "for reasons", // comment
-                true, // is peg valid
+                false, // is penalty peg
                 new Person // receiver
                 {
                     UserId = "testUser1Id",
@@ -199,7 +199,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 1, // limit
                 "for shameful reasons", // comment
-                false, // is peg valid
+                true, // is penalty peg
                 new Person // receiver
                 {
                     UserId = "testUser1Id",
@@ -265,7 +265,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 1, // limit
                 "for shameful reasons", // comment
-                false, // is peg valid
+                true, // is penalty peg
                 new Person // receiver
                 {
                     UserId = "testUser1Id",
@@ -334,7 +334,7 @@ namespace PockyBot.NET.Tests.TestData.Triggers
                 },
                 1, // limit
                 "for reasons", // comment
-                true, // is peg valid
+                false, // is penalty peg
                 new Person // receiver
                 {
                     UserId = "testUser1Id",
