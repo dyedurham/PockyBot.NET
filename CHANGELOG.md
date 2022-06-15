@@ -1,3 +1,12 @@
+## [1.15.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.3...v1.15.4) (2022-06-15)
+
+
+### Bug Fixes
+
+* change order of peg checks so that peg limit is checked before peg validity ([51c979a](https://github.com/GlobalX/PockyBot.NET/commit/51c979a6ab11c2fc32c21864286fe48048c62f4e))
+* fix unit tests ([1cb7775](https://github.com/GlobalX/PockyBot.NET/commit/1cb77750cef9951421a0bb748d92f0edb2e5f309))
+* update status trigger to not treat linked keyword pegs as penalty pegs ([dfd80ab](https://github.com/GlobalX/PockyBot.NET/commit/dfd80abc99e055360b5726a2c41bddda676a461f))
+
 ## [1.15.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.2...v1.15.3) (2022-06-09)
 
 
