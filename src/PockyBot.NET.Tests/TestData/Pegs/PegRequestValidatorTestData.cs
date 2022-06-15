@@ -332,17 +332,104 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             };
         }
 
-        public static IEnumerable<object[]> InvalidTestData()
+        public static IEnumerable<object[]> ValidFormatTestData()
+        {
+            yield return new object[]
+            {
+                new Message
+                {
+                    Text = "TestBot peg Test User 2 for doing some keyword2 things",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " peg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "Test User 2",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUser2Id"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for doing some keyword2 things",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
+                }
+            };
+
+            // extra mentions in text
+            yield return new object[]
+            {
+                new Message
+                {
+                    Text = "TestBot peg Test User 2 for doing some keyword2 things",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " peg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "Test User 2",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testUser2Id"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for doing some keyword2 things with ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "User3",
+                            MessageType = MessageType.PersonMention
+                        },
+                        new MessagePart
+                        {
+                            Text = " and I to fix things",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
+                }
+            };
+        }
+
+        public static IEnumerable<object[]> InvalidFormatTestData()
         {
             // not enough parts
             yield return new object[]
             {
                 GetBasicSettings(),
-                1, // commentsRequired
-                new List<string> { "keyword1", "keyword2", "keyword3" },
-                new List<string> { "penaltyKeyword" },
-                new List<string>(),
-                1, // requireValues
                 new Message
                 {
                     Text = "TestBot peg ",
@@ -374,11 +461,6 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             yield return new object[]
             {
                 GetBasicSettings(),
-                1, // commentsRequired
-                new List<string> { "keyword1", "keyword2", "keyword3" },
-                new List<string> { "penaltyKeyword" },
-                new List<string>(),
-                1, // requireValues
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some keyword2 things",
@@ -422,11 +504,6 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             yield return new object[]
             {
                 GetBasicSettings(),
-                1, // commentsRequired
-                new List<string> { "keyword1", "keyword2", "keyword3" },
-                new List<string> { "penaltyKeyword" },
-                new List<string>(),
-                1, // requireValues
                 new Message
                 {
                     Text = "TestBot pegg Test User 2 for doing some keyword2 things",
@@ -469,11 +546,6 @@ namespace PockyBot.NET.Tests.TestData.Pegs
             yield return new object[]
             {
                 GetBasicSettings(),
-                1, // commentsRequired
-                new List<string> { "keyword1", "keyword2", "keyword3" },
-                new List<string> { "penaltyKeyword" },
-                new List<string>(),
-                1, // requireValues
                 new Message
                 {
                     Text = "TestBot peg Test User 2 for doing some keyword2 things",
@@ -511,7 +583,10 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 },
                 "I'm sorry, I couldn't understand your peg request. Please use the following format: `@TestBot peg @Person this is the reason for giving you a peg`."
             };
+        }
 
+        public static IEnumerable<object[]> InvalidTestData()
+        {
             // comment required, not provided
             yield return new object[]
             {

@@ -23,13 +23,16 @@ namespace PockyBot.NET.Services.Pegs
 
         public void ValidatePegRequest(Message message)
         {
-            ValidateMessageFormat(message);
-
             ValidateRecipient(message);
             var comment = GetCommentText(message);
             ValidateComment(comment);
 
             ValidateKeywords(comment);
+        }
+
+        public void ValidatePegRequestFormat(Message message)
+        {
+            ValidateMessageFormat(message);
         }
 
         private void ValidateMessageFormat(Message message)
