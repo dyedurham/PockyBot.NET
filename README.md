@@ -1,5 +1,7 @@
 # PockyBot.NET
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ce25539ce3b74494b9f8087a20b88abb)](https://app.codacy.com/gh/GlobalX/PockyBot.NET?utm_source=github.com&utm_medium=referral&utm_content=GlobalX/PockyBot.NET&utm_campaign=Badge_Grade_Settings)
+
 <p align="center">
     <a href="https://www.nuget.org/packages/PockyBot.NET">
         <img src="https://flat.badgen.net/nuget/v/pockybot.net" alt="PockyBot.NET nuget package" />
