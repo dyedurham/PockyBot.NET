@@ -192,26 +192,40 @@ Use any of these commands in a room PockyBot is participating in to perform
 commands.
 
 - `@PockyBot ping` — verify that the bot is alive.
+
 - `@PockyBot peg @Person <reason>` — give someone a peg.
+
 - `@PockyBot status` — get the list of pegs you have given.
+
 - `@PockyBot help` — get help with using the bot.
+
 - `@PockyBot rotation` — get the snack buying rotation.
+
 - `@PockyBot welcome` — welcome users.
+
 - `@PockyBot locationconfig get|add|set|delete <location>` — manage locations.
+
 - `@PockyBot userlocation`:
-    - `@PockyBot userlocation get me|all|unset|@User` — get users' locations.
-    - `@PockyBot userlocation set <location> me` — set your location.
-    - `@PockyBot userlocation delete me` — delete your location.
+
+  - `@PockyBot userlocation get me|all|unset|@User` — get users' locations.
+  - `@PockyBot userlocation set <location> me` — set your location.
+  - `@PockyBot userlocation delete me` — delete your location.
 
 #### Admin-only commands
 
 These commands require special permissions to use.
 
 - `@PockyBot finish` — get the results of the cycle.
+
 - `@PockyBot reset` — clear all pegs from the last cycle.
+
 - `@PockyBot userlocation`:
-    - `@PockyBot userlocation set <location> @User1 @User2` — set one or more users' locations.
-    - `@PockyBot userlocation delete @User1 @User2` — delete one or more users' locations.
+
+  - `@PockyBot userlocation set <location> @User1 @User2` — set one or more
+    users' locations.
+
+  - `@PockyBot userlocation delete @User1 @User2` — delete one or more users'
+    locations.
 
 #### Direct Message Commands
 

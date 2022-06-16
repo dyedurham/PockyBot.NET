@@ -19,12 +19,11 @@ namespace PockyBot.NET.Tests.Services.Triggers
     {
         private readonly Help _subject;
         private readonly IPockyUserRepository _pockyUserRepository;
-        private readonly IConfigRepository _configRepository;
 
         private const string BotName = "Pocky";
         private const string SenderId = "testSender";
-        private readonly List<UserRole> noRoles = new List<UserRole>();
-        private readonly List<UserRole> adminRole = new List<UserRole>{new UserRole{Role = Role.Admin}};
+        private readonly List<UserRole> _noRoles = new List<UserRole>();
+        private readonly List<UserRole> _adminRole = new List<UserRole>{new UserRole{Role = Role.Admin}};
 
         private Message _message;
         private Message _result;
@@ -37,15 +36,15 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 BotName = BotName
             });
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _configRepository = Substitute.For<IConfigRepository>();
-            _subject = new Help(_pockyUserRepository, pockyUserSettings, _configRepository);
+            var configRepository = Substitute.For<IConfigRepository>();
+            _subject = new Help(_pockyUserRepository, pockyUserSettings, configRepository);
         }
 
         [Fact]
         public void ItShouldShowAListOfCommandsToANonAdminUser()
         {
             this.Given(x => GivenAHelpMessage(""))
-                .And(x => GivenTheUserHasRoles(noRoles))
+                .And(x => GivenTheUserHasRoles(_noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowAListOfNonAdminCommands())
                 .BDDfy();
@@ -55,7 +54,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowAListOfCommandsToANonAdminUserInADirectMessage()
         {
             this.Given(x => GivenADirectMessageHelpMessage(""))
-                .And(x => GivenTheUserHasRoles(noRoles))
+                .And(x => GivenTheUserHasRoles(_noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowAListOfNonAdminCommands())
                 .BDDfy();
@@ -65,7 +64,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowAListOfAdminCommandsToAnAdminUser()
         {
             this.Given(x => GivenAHelpMessage(""))
-                .And(x => GivenTheUserHasRoles(adminRole))
+                .And(x => GivenTheUserHasRoles(_adminRole))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowAListOfAdminCommands())
                 .BDDfy();
@@ -75,7 +74,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowTheDefaultHelpMessageWhenTheCommandDoesNotExist()
         {
             this.Given(x => GivenAHelpMessage("bogusCommand"))
-                .And(x => GivenTheUserHasRoles(noRoles))
+                .And(x => GivenTheUserHasRoles(_noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheDefaultHelpMessage())
                 .BDDfy();
@@ -85,7 +84,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowTheDefaultHelpMessageWhenTheCommandDoesNotExistInADirectMessage()
         {
             this.Given(x => GivenADirectMessageHelpMessage("bogusCommand"))
-                .And(x => GivenTheUserHasRoles(noRoles))
+                .And(x => GivenTheUserHasRoles(_noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheDefaultHelpMessage())
                 .BDDfy();
@@ -102,7 +101,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowTheHelpMessageForNonAdminCommands(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
-                .And(x => GivenTheUserHasRoles(noRoles))
+                .And(x => GivenTheUserHasRoles(_noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheCommandHelpMessage(command))
                 .BDDfy();
@@ -119,7 +118,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowTheHelpMessageForNonAdminCommandsInADirectMessage(string command)
         {
             this.Given(x => GivenADirectMessageHelpMessage(command))
-                .And(x => GivenTheUserHasRoles(noRoles))
+                .And(x => GivenTheUserHasRoles(_noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheCommandHelpMessage(command))
                 .BDDfy();
@@ -163,7 +162,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowTheDefaultHelpMessageForAdminCommandsToNonAdminUsers(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
-                .And(x => GivenTheUserHasRoles(noRoles))
+                .And(x => GivenTheUserHasRoles(_noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheDefaultHelpMessage())
                 .BDDfy();

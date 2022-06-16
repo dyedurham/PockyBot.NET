@@ -98,7 +98,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
             actual.Text.ShouldBe(expected.Text);
             actual.RoomId.ShouldBe(expected.RoomId);
 
-            if (expected.MessageParts == null) return;
+            if (expected.MessageParts == null)
+            {
+                return;
+            }
 
             actual.MessageParts.ShouldNotBeNull();
             actual.MessageParts.Length.ShouldBe(expected.MessageParts.Length);

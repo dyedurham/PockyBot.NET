@@ -57,7 +57,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 .And(x => GivenAStringConfig("penaltyKeyword", new List<string> {"penaltyKeyword"}))
                 .And(x => GivenAGeneralConfig("requireValues", 1))
                 .And(x => GivenAGeneralConfig("limit", limit))
-                .And(x => GivenIsPenaltyPegReturns(comment, isPenaltyPeg))
+                .And(x => GivenIsPenaltyPegReturns(isPenaltyPeg))
                 .And(x => GivenAChatUser(receiverChatUser))
                 .When(x => WhenRespondingToAMessage())
                 .Then(x => ThenItShouldReturnAResponse(response))
@@ -96,7 +96,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _configRepository.GetGeneralConfig(configName).Returns(config);
         }
 
-        private void GivenIsPenaltyPegReturns(string comment, bool isPenaltyPeg)
+        private void GivenIsPenaltyPegReturns(bool isPenaltyPeg)
         {
             _pegHelper
                 .IsPenaltyPeg(Arg.Any<string>(), Arg.Any<string[]>(), Arg.Any<string[]>())
