@@ -115,7 +115,7 @@ namespace PockyBot.NET.Services.Triggers
 
         private static string FormatPeg(Persistence.Models.Peg peg)
         {
-            return $"* **{peg.Receiver.Username}** — \"_{peg.Comment}_\"";
+            return $"* **{peg.Receiver.Username}** — \"_{peg.Comment.Replace("\n", " / ")}_\"";
         }
     }
 }
