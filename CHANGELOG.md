@@ -1,3 +1,12 @@
+## [1.15.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.4...v1.15.5) (2022-06-28)
+
+
+### Bug Fixes
+
+* replace double newlines properly ([3557db6](https://github.com/GlobalX/PockyBot.NET/commit/3557db64253f997904fde5f4bcbf898d7b98fa9f))
+* replace newlines in status command so that pegs display properly ([f7400f8](https://github.com/GlobalX/PockyBot.NET/commit/f7400f82c006b4e3d7dbba46bfe1e734bc92c22b))
+* use correct quotes in template ([77d4cf6](https://github.com/GlobalX/PockyBot.NET/commit/77d4cf6c30c63bf4d593f5109c8341c953b0916e))
+
 ## [1.15.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.3...v1.15.4) (2022-06-15)
 
 
