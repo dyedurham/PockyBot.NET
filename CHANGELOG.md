@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.5...v1.16.0) (2022-07-04)
+
+
+### Features
+
+* add database migrations ([57badfe](https://github.com/GlobalX/PockyBot.NET/commit/57badfec816302074f479e02942aec5952ec25c7))
+
 ## [1.15.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.4...v1.15.5) (2022-06-28)
 
 
