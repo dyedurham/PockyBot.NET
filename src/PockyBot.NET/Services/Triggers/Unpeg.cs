@@ -68,7 +68,8 @@ namespace PockyBot.NET.Services.Triggers
                 }
             }
 
-            var response = SendRandomResponse(message.Sender, recipientIsPerson, recipientName, recipientId, message.RoomId);
+            var response = SendRandomResponse(message.Sender, recipientIsPerson, recipientName, recipientId,
+                message.RoomId, message.Id);
             return Task.FromResult(new Message
             {
                 MessageParts = response
@@ -76,13 +77,13 @@ namespace PockyBot.NET.Services.Triggers
         }
 
         private MessagePart[] SendRandomResponse(Person sender, bool recipientIsPerson, string recipientName,
-            string recipientId, string roomId)
+            string recipientId, string roomId, string parentId)
         {
             Func<MessagePart[]>[] actions =
             {
                 () =>
                 {
-                    SendQueuedMessage(new Message {Text = "Kidding!", RoomId = roomId});
+                    SendQueuedMessage(new Message {Text = "Kidding!", RoomId = roomId, ParentId = parentId});
                     return GetRecipientPegRemovedResponse(recipientIsPerson, recipientName, recipientId);
                 },
                 () =>
@@ -92,7 +93,8 @@ namespace PockyBot.NET.Services.Triggers
                     SendQueuedMessage(new Message
                     {
                         MessageParts = GetSenderPegStolenBackResponse(sender),
-                        RoomId = roomId
+                        RoomId = roomId,
+                        ParentId = parentId
                     });
                     return GetSenderPegRemovedResponse(sender);
                 },
@@ -102,7 +104,8 @@ namespace PockyBot.NET.Services.Triggers
                     {
                         MessageParts =
                             GetRecipientDidntWantItResponse(recipientIsPerson, recipientName, recipientId),
-                        RoomId = roomId
+                        RoomId = roomId,
+                        ParentId = parentId
                     });
                     return GetPegGivenToRecipientResponse(recipientIsPerson, recipientName, recipientId);
                 },

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core;
 using GlobalX.ChatBots.Core.Messages;
@@ -143,6 +144,10 @@ namespace PockyBot.NET.Services.Triggers
 
         private async Task GivePeg(Message message, string comment, PockyUser sender, bool isPenaltyPeg, int numPegsGiven)
         {
+            if (Regex.IsMatch(message.Text, "\bpog(g)?(er)?\b"))
+            {
+                throw new InvalidOperationException("Pog is not a legal peg message");
+            }
             var receiverId = message.MessageParts[2].UserId;
             var receiver = await _chatHelper.People.GetPersonAsync(receiverId).ConfigureAwait(false);
             var dbReceiver = await _pockyUserRepository.AddOrUpdateUserAsync(receiver.UserId, receiver.Username);
