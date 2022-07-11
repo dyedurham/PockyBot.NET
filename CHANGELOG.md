@@ -1,3 +1,11 @@
+## [1.16.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.0...v1.16.1) (2022-07-11)
+
+
+### Bug Fixes
+
+* remove code added as a joke ([77a5bd0](https://github.com/GlobalX/PockyBot.NET/commit/77a5bd0c565ae713d4fdc4caba9095b4f2332729))
+* reply inline to unpeg messages ([255f79a](https://github.com/GlobalX/PockyBot.NET/commit/255f79aac1361fe302e26b83c80615efc6791ddc))
+
 # [1.16.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.5...v1.16.0) (2022-07-04)
 
 
