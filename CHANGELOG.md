@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.1...v1.16.2) (2022-08-15)
+
+
+### Bug Fixes
+
+* don't use task.whenall for dbcontext calls ([55c000c](https://github.com/GlobalX/PockyBot.NET/commit/55c000c513447c9189e1f3cd3ea14fd4cb8c15b1))
+
 ## [1.16.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.0...v1.16.1) (2022-07-11)
 
 
