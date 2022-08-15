@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -26,21 +25,19 @@ namespace PockyBot.NET.Services
         public async Task<List<PockyUser>> UpdateUsernames(List<PockyUser> users)
         {
             var usersDetails = await Task.WhenAll(users.Select(x => GetUser(x.UserId, x.Username)));
-            var dbUpdates = new List<Task>();
 
-            var updatedUsers = users.Select(u =>
+            var updatedUsers = new List<PockyUser>();
+            foreach (var user in users)
             {
-                var userDetails = usersDetails.FirstOrDefault(x => x.UserId == u.UserId);
-                if (userDetails?.Username != u.Username)
+                var userDetails = usersDetails.FirstOrDefault(x => x.UserId == user.UserId);
+                if (userDetails?.Username != user.Username)
                 {
-                    u.Username = userDetails?.Username;
-                    dbUpdates.Add(_pockyUserRepository.UpdateUsernameAsync(u.UserId, u.Username));
+                    user.Username = userDetails?.Username;
+                    await _pockyUserRepository.UpdateUsernameAsync(user.UserId, user.Username);
                 }
+                updatedUsers.Add(user);
+            }
 
-                return u;
-            }).ToList();
-
-            await Task.WhenAll(dbUpdates).ConfigureAwait(false);
             return updatedUsers;
         }
 
