@@ -44,10 +44,10 @@ namespace PockyBot.NET.Services.UserLocation
 
         private async Task DeleteMentionedUsers(string[] mentionedUsers)
         {
-            var tasks = mentionedUsers.Select(user =>
-                _userLocationRepository.DeleteUserLocation(user)).ToList();
-
-            await Task.WhenAll(tasks);
+            foreach (var user in mentionedUsers)
+            {
+                await _userLocationRepository.DeleteUserLocation(user);
+            }
         }
     }
 }
