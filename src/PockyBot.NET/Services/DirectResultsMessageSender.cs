@@ -54,7 +54,7 @@ namespace PockyBot.NET.Services
         {
             var location = peg.SenderLocation ?? "No Location";
             var pointsPlural = peg.Weight == 1 ? string.Empty : "s";
-            return $"* **{peg.SenderName}** ({location}, {peg.Weight} point{pointsPlural}) — \"_{peg.Comment}_\"";
+            return $"* **{peg.SenderName}** ({location}, {peg.Weight} point{pointsPlural}) — \"_{peg.Comment.Replace("\n\n", " // ").Replace("\n", " / ")}_\"";
         }
     }
 }
