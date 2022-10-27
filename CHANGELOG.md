@@ -1,3 +1,10 @@
+## [1.16.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.3...v1.16.4) (2022-10-27)
+
+
+### Bug Fixes
+
+* allow newlines in peg results ([4c55cd0](https://github.com/GlobalX/PockyBot.NET/commit/4c55cd088e7fe216a6f7e4b41e9bb37bee5572dc))
+
 ## [1.16.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.2...v1.16.3) (2022-10-27)
 
 
