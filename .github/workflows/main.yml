@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 env:
   CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 jobs:
   build:
     name: Build, Test, Deploy and Cover .NET Core
