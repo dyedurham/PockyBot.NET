@@ -66,11 +66,3 @@ jobs:
         run: dotnet test src/PockyBot.NET.Tests/PockyBot.NET.Tests.csproj
       - name: Run coverage script
         run: chmod +x ./cover.sh && ./cover.sh
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: 10.18.x
-      - name: Display node version
-        run: node --version
-      - name: Run deploy script
-        run: chmod +x ./deploy.sh && ./deploy.sh ${{ secrets.NUGET_API_KEY }}
