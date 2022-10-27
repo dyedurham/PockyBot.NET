@@ -13,6 +13,7 @@ on:
 env:
   CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 jobs:
   build:
     name: Build, Test, Deploy and Cover .NET Core
@@ -41,7 +42,7 @@ jobs:
       - name: Display node version
         run: node --version
       - name: Run deploy script
-        run: chmod +x ./deploy.sh && ./deploy.sh ${{ secrets.NUGET_API_KEY }}
+        run: chmod +x ./deploy.sh && ./deploy.sh
   build_pr:
     name: Build, Test, Deploy and Cover .NET Core PR
     runs-on: ubuntu-latest
