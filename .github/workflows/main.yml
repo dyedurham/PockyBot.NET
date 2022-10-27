@@ -3,9 +3,7 @@ on:
   push:
     branches:
       - master
-  pull_request_target:
-    types:
-      - opened
+  pull_request:
     branches:
       - master
   workflow_dispatch:
