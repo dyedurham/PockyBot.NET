@@ -7,6 +7,8 @@ on:
     branches:
       - master
   workflow_dispatch:
+env:
+  CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
 jobs:
   build:
     name: Build, Test, Deploy and Cover .NET Core
