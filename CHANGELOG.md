@@ -1,3 +1,10 @@
+## [1.16.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.2...v1.16.3) (2022-10-27)
+
+
+### Bug Fixes
+
+* **deps:** bump Scriban from 2.1.2 to 5.5.0 in /src/PockyBot.NET ([5c578f3](https://github.com/GlobalX/PockyBot.NET/commit/5c578f31ad9d56bda7978789d879b2df8f45750f))
+
 ## [1.16.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.1...v1.16.2) (2022-08-15)
 
 
