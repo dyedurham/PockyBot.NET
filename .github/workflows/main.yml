@@ -17,7 +17,7 @@ jobs:
   build:
     name: Build, Test, Deploy and Cover .NET Core
     runs-on: ubuntu-latest
-    if: ${{ github.event_name }} == 'push' || ${{ github.event_name }} == 'workflow_dispatch'
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup dotnet 3.1
@@ -45,7 +45,7 @@ jobs:
   build_pr:
     name: Build, Test, Deploy and Cover .NET Core PR
     runs-on: ubuntu-latest
-    if: ${{ github.event_name }} == 'pull_request_target'
+    if: ${{ github.event_name == 'pull_request_target' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
