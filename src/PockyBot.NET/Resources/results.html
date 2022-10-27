@@ -81,7 +81,7 @@
                             <tr>
                                 <td>{{ peg.sender_name }}</td>
                                 <td>{{ peg.weight }}</td>
-                                <td>{{ for line in peg.comment | string.split `\n` -}}
+                                <td>{{ for line in peg.comment | string.split '\n' -}}
                                     {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
                                     {{- end }}</td>
                                 <td>{{ peg.keywords | array.join ", " }}</td>
@@ -107,7 +107,7 @@
                             {{- for peg in recipient.pegs }}
                             <tr>
                                 <td>{{ peg.sender_name }}</td>
-                                <td>{{ for line in peg.comment | string.split `\n` -}}
+                                <td>{{ for line in peg.comment | string.split '\n' -}}
                                     {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
                                     {{- end }}</td>
                                 <td>{{ peg.keywords | array.join ", " }}</td>
@@ -130,7 +130,7 @@
                             {{- for penalty in recipient.penalties }}
                             <tr>
                                 <td>{{ penalty.sender_name }}</td>
-                                <td>{{ for line in penalty.comment | string.split `\n` -}}
+                                <td>{{ for line in penalty.comment | string.split '\n' -}}
                                     {{- line | html.escape }}{{ if !for.last }}<br/>{{ end }}
                                     {{- end }}</td>
                                 <td>{{ penalty.sender_location }}</td>
