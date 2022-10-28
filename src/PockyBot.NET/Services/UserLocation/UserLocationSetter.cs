@@ -68,7 +68,7 @@ namespace PockyBot.NET.Services.UserLocation
                 return;
             }
 
-            var tasks = mentionedUsers.Select(async mentionedUser =>
+            foreach (var mentionedUser in mentionedUsers)
             {
                 var user = _pockyUserRepository.GetUser(mentionedUser);
                 if (user == null)
@@ -77,9 +77,7 @@ namespace PockyBot.NET.Services.UserLocation
                     user = await _pockyUserRepository.AddOrUpdateUserAsync(chatUser.UserId, chatUser.Username);
                 }
                 await _userLocationRepository.UpsertUserLocation(user, givenLocation);
-            }).ToList();
-
-            await Task.WhenAll(tasks);
+            }
         }
     }
 }

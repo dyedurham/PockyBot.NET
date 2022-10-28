@@ -4,14 +4,14 @@
     <a href="https://www.nuget.org/packages/PockyBot.NET">
         <img src="https://flat.badgen.net/nuget/v/pockybot.net" alt="PockyBot.NET nuget package" />
     </a>
-    <a href="https://travis-ci.org/GlobalX/PockyBot.NET">
-        <img src="https://flat.badgen.net/travis/GlobalX/PockyBot.NET" alt="PockyBot.NET on Travis CI" />
+    <a href="https://app.travis-ci.com/github/GlobalX/PockyBot.NET">
+        <img src="https://app.travis-ci.com/GlobalX/PockyBot.NET.svg?branch=master" alt="PockyBot.NET on Travis CI" />
     </a>
-    <a href="https://www.codacy.com/manual/Lauraducky/PockyBot.NET?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GlobalX/PockyBot.NET&amp;utm_campaign=Badge_Grade">
-        <img src="https://api.codacy.com/project/badge/Grade/03867acd8d03437c94f2f135b014e45b" alt="Codacy Grade Badge" />  
+    <a href="https://www.codacy.com/gh/GlobalX/PockyBot.NET/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GlobalX/PockyBot.NET&amp;utm_campaign=Badge_Grade">
+        <img src="https://app.codacy.com/project/badge/Grade/8fa5a933c8604d1db3bf402771f28716" alt="Codacy Grade Badge"/>
     </a>
-    <a href="https://www.codacy.com/manual/Lauraducky/PockyBot.NET?utm_source=github.com&utm_medium=referral&utm_content=GlobalX/PockyBot.NET&utm_campaign=Badge_Coverage">
-        <img src="https://api.codacy.com/project/badge/Coverage/03867acd8d03437c94f2f135b014e45b" alt="Codacy Coverage Badge" />  
+    <a href="https://www.codacy.com/gh/GlobalX/PockyBot.NET/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GlobalX/PockyBot.NET&amp;utm_campaign=Badge_Coverage">
+        <img src="https://app.codacy.com/project/badge/Coverage/8fa5a933c8604d1db3bf402771f28716" alt="Codacy Coverage Badge" />  
     </a>
     <a href="https://codecov.io/gh/GlobalX/PockyBot.NET">
         <img src="https://flat.badgen.net/codecov/c/github/globalx/pockybot.net" alt="PockyBot.NET on Codecov" />

@@ -52,7 +52,7 @@ namespace PockyBot.NET.Services
             var template = GetTemplate();
 
             var parsedTemplate = Template.Parse(template);
-            var html = parsedTemplate.Render(new { model = results });
+            var html = await parsedTemplate.RenderAsync(new { model = results });
 
             var uri = await _resultsUploader.UploadResults(html);
             return uri;

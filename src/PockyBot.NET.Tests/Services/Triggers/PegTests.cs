@@ -46,7 +46,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [MemberData(nameof(PegTestData.RespondTestData), MemberType = typeof(PegTestData))]
         internal void TestRespond(Message message, string errorMessage, PockyUser senderUser,
-            PockyUser receiverUser, int limit, string comment, bool isPegValid, Person receiverChatUser,
+            PockyUser receiverUser, int limit, string comment, bool isPenaltyPeg, Person receiverChatUser,
             Message response, bool givePeg)
         {
             this.Given(x => GivenAMessage(message))
@@ -57,7 +57,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 .And(x => GivenAStringConfig("penaltyKeyword", new List<string> {"penaltyKeyword"}))
                 .And(x => GivenAGeneralConfig("requireValues", 1))
                 .And(x => GivenAGeneralConfig("limit", limit))
-                .And(x => GivenPegValidity(comment, isPegValid))
+                .And(x => GivenIsPenaltyPegReturns(comment, isPenaltyPeg))
                 .And(x => GivenAChatUser(receiverChatUser))
                 .When(x => WhenRespondingToAMessage())
                 .Then(x => ThenItShouldReturnAResponse(response))
@@ -75,6 +75,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
             if (errorMessage != null)
             {
                 SubstituteExtensions.When(_pegRequestValidator, x => x.ValidatePegRequest(Arg.Any<Message>()))
+                    .Do(x => throw new PegValidationException(errorMessage));
+                SubstituteExtensions.When(_pegRequestValidator, x => x.ValidatePegRequestFormat(Arg.Any<Message>()))
                     .Do(x => throw new PegValidationException(errorMessage));
             }
         }
@@ -94,13 +96,11 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _configRepository.GetGeneralConfig(configName).Returns(config);
         }
 
-        private void GivenPegValidity(string comment, bool isPegValid)
+        private void GivenIsPenaltyPegReturns(string comment, bool isPenaltyPeg)
         {
-            _pegHelper.IsPegValid(comment, Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>())
-                .Returns(isPegValid);
             _pegHelper
-                .IsPegValid(Arg.Any<string>(), Arg.Any<int?>(), Arg.Any<string[]>(), Arg.Any<string[]>())
-                .Returns(isPegValid);
+                .IsPenaltyPeg(Arg.Any<string>(), Arg.Any<string[]>(), Arg.Any<string[]>())
+                .Returns(isPenaltyPeg);
         }
 
         private void GivenAChatUser(Person person)

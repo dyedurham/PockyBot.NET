@@ -1,3 +1,93 @@
+## [1.16.7](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.6...v1.16.7) (2022-10-28)
+
+
+### Bug Fixes
+
+* specify commit hash for codacy ([6a42f65](https://github.com/GlobalX/PockyBot.NET/commit/6a42f65cbd8a7fb7983b332bfb8ccc0f2ce13754))
+
+## [1.16.6](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.5...v1.16.6) (2022-10-28)
+
+
+### Bug Fixes
+
+* **deps:** bump Microsoft.Extensions.DependencyInjection.Abstractions ([aca01b1](https://github.com/GlobalX/PockyBot.NET/commit/aca01b18e216c5df41a7e07a9f67da36e6597a0e))
+
+## [1.16.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.4...v1.16.5) (2022-10-28)
+
+
+### Bug Fixes
+
+* **deps:** bump Microsoft.Extensions.Logging.Abstractions ([92cd15b](https://github.com/GlobalX/PockyBot.NET/commit/92cd15b6ed0e1aeba0481a9fc8c1e113cde8ebec))
+
+## [1.16.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.3...v1.16.4) (2022-10-27)
+
+
+### Bug Fixes
+
+* allow newlines in peg results ([4c55cd0](https://github.com/GlobalX/PockyBot.NET/commit/4c55cd088e7fe216a6f7e4b41e9bb37bee5572dc))
+
+## [1.16.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.2...v1.16.3) (2022-10-27)
+
+
+### Bug Fixes
+
+* **deps:** bump Scriban from 2.1.2 to 5.5.0 in /src/PockyBot.NET ([5c578f3](https://github.com/GlobalX/PockyBot.NET/commit/5c578f31ad9d56bda7978789d879b2df8f45750f))
+
+## [1.16.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.1...v1.16.2) (2022-08-15)
+
+
+### Bug Fixes
+
+* don't use task.whenall for dbcontext calls ([55c000c](https://github.com/GlobalX/PockyBot.NET/commit/55c000c513447c9189e1f3cd3ea14fd4cb8c15b1))
+
+## [1.16.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.0...v1.16.1) (2022-07-11)
+
+
+### Bug Fixes
+
+* remove code added as a joke ([77a5bd0](https://github.com/GlobalX/PockyBot.NET/commit/77a5bd0c565ae713d4fdc4caba9095b4f2332729))
+* reply inline to unpeg messages ([255f79a](https://github.com/GlobalX/PockyBot.NET/commit/255f79aac1361fe302e26b83c80615efc6791ddc))
+
+# [1.16.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.5...v1.16.0) (2022-07-04)
+
+
+### Features
+
+* add database migrations ([57badfe](https://github.com/GlobalX/PockyBot.NET/commit/57badfec816302074f479e02942aec5952ec25c7))
+
+## [1.15.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.4...v1.15.5) (2022-06-28)
+
+
+### Bug Fixes
+
+* replace double newlines properly ([3557db6](https://github.com/GlobalX/PockyBot.NET/commit/3557db64253f997904fde5f4bcbf898d7b98fa9f))
+* replace newlines in status command so that pegs display properly ([f7400f8](https://github.com/GlobalX/PockyBot.NET/commit/f7400f82c006b4e3d7dbba46bfe1e734bc92c22b))
+* use correct quotes in template ([77d4cf6](https://github.com/GlobalX/PockyBot.NET/commit/77d4cf6c30c63bf4d593f5109c8341c953b0916e))
+
+## [1.15.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.3...v1.15.4) (2022-06-15)
+
+
+### Bug Fixes
+
+* change order of peg checks so that peg limit is checked before peg validity ([51c979a](https://github.com/GlobalX/PockyBot.NET/commit/51c979a6ab11c2fc32c21864286fe48048c62f4e))
+* fix unit tests ([1cb7775](https://github.com/GlobalX/PockyBot.NET/commit/1cb77750cef9951421a0bb748d92f0edb2e5f309))
+* update status trigger to not treat linked keyword pegs as penalty pegs ([dfd80ab](https://github.com/GlobalX/PockyBot.NET/commit/dfd80abc99e055360b5726a2c41bddda676a461f))
+
+## [1.15.3](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.2...v1.15.3) (2022-06-09)
+
+
+### Bug Fixes
+
+* make getuser async so that getpersonasync can be awaited and exception can be caught ([997ee0a](https://github.com/GlobalX/PockyBot.NET/commit/997ee0a9137d15adb6213cc64426d7db9a2bded8))
+
+## [1.15.2](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.1...v1.15.2) (2022-06-08)
+
+
+### Bug Fixes
+
+* **username updater:** suppress user not found errors in username updater so that finish doesn't stop if the usernames can't be updated ([f35f332](https://github.com/GlobalX/PockyBot.NET/commit/f35f33274b07574ce5a0e80d0c88112ac13ef98a))
+* add error handling for direct message sending and add test ([2518422](https://github.com/GlobalX/PockyBot.NET/commit/2518422536122905895f8f723cce5b77dff84ce8))
+
 ## [1.15.1](https://github.com/GlobalX/PockyBot.NET/compare/v1.15.0...v1.15.1) (2022-02-20)
 
 
