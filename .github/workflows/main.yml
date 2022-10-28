@@ -20,6 +20,8 @@ jobs:
     name: Build, Test, Deploy and Cover .NET Core
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+    env:
+      COMMIT_SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -50,6 +52,8 @@ jobs:
     name: Build, Test, Deploy and Cover .NET Core PR
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request_target' }}
+    env:
+      COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
