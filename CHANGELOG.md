@@ -1,3 +1,10 @@
+## [1.16.8](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.7...v1.16.8) (2022-10-28)
+
+
+### Bug Fixes
+
+* return error if command is called when not allowed in direct message ([d9fcae1](https://github.com/GlobalX/PockyBot.NET/commit/d9fcae19ce59d71f268c9af144a4d7af7636c681))
+
 ## [1.16.7](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.6...v1.16.7) (2022-10-28)
 
 
