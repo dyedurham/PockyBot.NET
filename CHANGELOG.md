@@ -1,3 +1,11 @@
+## [1.16.9](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.8...v1.16.9) (2022-10-28)
+
+
+### Bug Fixes
+
+* I overcomplicated it ([5269c4d](https://github.com/GlobalX/PockyBot.NET/commit/5269c4d3c2735015dd9d3c2c728f166aea8f7672))
+* incorrect behavior on linked keyword when status trigger is called ([bf6ed05](https://github.com/GlobalX/PockyBot.NET/commit/bf6ed050d486e3202d486daee737697f633e5011))
+
 ## [1.16.8](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.7...v1.16.8) (2022-10-28)
 
 
