@@ -1,3 +1,10 @@
+## [1.16.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.4...v1.16.5) (2022-10-28)
+
+
+### Bug Fixes
+
+* **deps:** bump Microsoft.Extensions.Logging.Abstractions ([92cd15b](https://github.com/GlobalX/PockyBot.NET/commit/92cd15b6ed0e1aeba0481a9fc8c1e113cde8ebec))
+
 ## [1.16.4](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.3...v1.16.4) (2022-10-27)
 
 
