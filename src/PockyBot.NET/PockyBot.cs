@@ -49,8 +49,21 @@ namespace PockyBot.NET
             Message response = null;
             if (responder != null)
             {
-                _logger.LogInformation("Responding to message with responder {responderName}", responder.GetType().Name);
-                response = await responder.Respond(message).ConfigureAwait(false);
+                if (message.RoomType == RoomType.Direct && !responder.DirectMessageAllowed)
+                {
+                    _logger.LogInformation("Responder does not allow direct messages. Responding with error.");
+                    response = new Message
+                    {
+                        Text =
+                            $"Command {responder.Command} is not allowed to be called in a direct message. Please try again in a room."
+                    };
+                }
+                else
+                {
+                    _logger.LogInformation("Responding to message with responder {responderName}",
+                        responder.GetType().Name);
+                    response = await responder.Respond(message).ConfigureAwait(false);
+                }
             }
             else
             {

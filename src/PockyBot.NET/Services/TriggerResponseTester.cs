@@ -42,8 +42,7 @@ namespace PockyBot.NET.Services
 
         public bool ShouldTriggerInDirectMessage(Message message, ITrigger trigger)
         {
-            if (!trigger.DirectMessageAllowed ||
-                (trigger.Permissions.Length > 0 && !HasPermission(message.Sender.UserId, trigger.Permissions)))
+            if (trigger.Permissions.Length > 0 && !HasPermission(message.Sender.UserId, trigger.Permissions))
             {
                 return false;
             }
