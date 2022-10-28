@@ -1,3 +1,10 @@
+## [1.16.7](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.6...v1.16.7) (2022-10-28)
+
+
+### Bug Fixes
+
+* specify commit hash for codacy ([6a42f65](https://github.com/GlobalX/PockyBot.NET/commit/6a42f65cbd8a7fb7983b332bfb8ccc0f2ce13754))
+
 ## [1.16.6](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.5...v1.16.6) (2022-10-28)
 
 
