@@ -73,12 +73,12 @@ namespace PockyBot.NET.Services.Triggers
         {
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");
             var keywords = _configRepository.GetStringConfig("keyword").ToArray();
-            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => new LinkedKeyword(x));
-            keywords = keywords.Concat(linkedKeywords.Select(x => x.LinkedWord)).ToArray();
+            var linkedKeywords = _configRepository.GetStringConfig("linkedKeyword").Select(x => new LinkedKeyword(x)).ToArray();
+            var validKeywords = keywords.Concat(linkedKeywords.Select(x => x.Keyword)).ToArray();
             var penaltyKeywords = _configRepository.GetStringConfig("penaltyKeyword").ToArray();
 
             var groupedPegs = pockyUser.PegsGiven.GroupBy(x =>
-                    _pegHelper.IsPegValid(x.Comment, requireKeywords, keywords, penaltyKeywords))
+                    _pegHelper.IsPegValid(x.Comment, requireKeywords, validKeywords, penaltyKeywords))
                 .ToDictionary(x => x.Key, x => x.ToList());
 
             return groupedPegs;
