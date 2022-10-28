@@ -1,3 +1,10 @@
+## [1.16.6](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.5...v1.16.6) (2022-10-28)
+
+
+### Bug Fixes
+
+* **deps:** bump Microsoft.Extensions.DependencyInjection.Abstractions ([aca01b1](https://github.com/GlobalX/PockyBot.NET/commit/aca01b18e216c5df41a7e07a9f67da36e6597a0e))
+
 ## [1.16.5](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.4...v1.16.5) (2022-10-28)
 
 
