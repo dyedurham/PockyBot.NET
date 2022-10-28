@@ -407,7 +407,7 @@ namespace PockyBot.NET.Tests.TestData
                     }
                 },
                 GetTrigger("ping", false, false, new Role[0]),
-                false
+                true
             };
 
             // no permissions, wrong command, no args
