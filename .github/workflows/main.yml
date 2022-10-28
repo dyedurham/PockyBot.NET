@@ -14,6 +14,7 @@ env:
   CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 jobs:
   build:
     name: Build, Test, Deploy and Cover .NET Core
