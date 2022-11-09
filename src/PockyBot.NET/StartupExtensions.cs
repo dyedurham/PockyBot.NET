@@ -13,7 +13,8 @@ namespace PockyBot.NET
 {
     public static class StartupExtensions
     {
-        public static IServiceCollection ConfigurePockyBot(this IServiceCollection services, PockyBotSettings settings) {
+        public static IServiceCollection ConfigurePockyBot(this IServiceCollection services, PockyBotSettings settings)
+        {
             var options = new OptionsWrapper<PockyBotSettings>(settings);
             services.AddSingleton<IOptions<PockyBotSettings>>(options);
             services.ConfigureCommonServices();
@@ -21,7 +22,8 @@ namespace PockyBot.NET
             return services;
         }
 
-        public static IServiceCollection ConfigurePockyBot(this IServiceCollection services, IConfiguration configuration) {
+        public static IServiceCollection ConfigurePockyBot(this IServiceCollection services, IConfiguration configuration)
+        {
             var section = configuration.GetSection("PockyBot.NET");
             services.Configure<PockyBotSettings>(section);
             services.ConfigureCommonServices();
@@ -29,7 +31,8 @@ namespace PockyBot.NET
             return services;
         }
 
-        private static void ConfigureCommonServices(this IServiceCollection services) {
+        private static void ConfigureCommonServices(this IServiceCollection services)
+        {
             services.AddTransient<ITriggerResponseTester, TriggerResponseTester>();
             services.AddTransient<IPegRequestValidator, PegRequestValidator>();
             services.AddTransient<IPegHelper, PegHelper>();
