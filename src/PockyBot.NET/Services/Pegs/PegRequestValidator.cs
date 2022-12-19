@@ -54,6 +54,9 @@ namespace PockyBot.NET.Services.Pegs
                 throw new PegValidationException(
                     $"You can't peg yourself.");
             }
+            if (message.MessageParts[2].UserId == _settings.BotId){
+                throw new PegValidationException("You can't give pegs to me.");
+            }
         }
 
         private static string GetCommentText(Message message)
