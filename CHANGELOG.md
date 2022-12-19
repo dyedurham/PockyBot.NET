@@ -1,3 +1,12 @@
+## [1.16.10](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.9...v1.16.10) (2022-12-19)
+
+
+### Bug Fixes
+
+* disallow giving pegs to pockybot ([922d975](https://github.com/GlobalX/PockyBot.NET/commit/922d9759bf9b96f23179bd222f78db492425aabc))
+* move test project to .net 6.0 and update packages ([b53fc6e](https://github.com/GlobalX/PockyBot.NET/commit/b53fc6e7bc0cb03e06bdb0b16ca0195658d21cef))
+* update cover script to run in docker container to fix coverage report ([0a92ff4](https://github.com/GlobalX/PockyBot.NET/commit/0a92ff42c5cb00cd8abd99f12f8f8feedc426a5b))
+
 ## [1.16.9](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.8...v1.16.9) (2022-10-28)
 
 
