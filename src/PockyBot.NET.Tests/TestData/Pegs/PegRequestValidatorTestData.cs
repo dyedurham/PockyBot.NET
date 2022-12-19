@@ -722,6 +722,53 @@ namespace PockyBot.NET.Tests.TestData.Pegs
                 "You can't peg yourself."
             };
 
+            // attempts to peg PockyBot
+            yield return new object[]
+            {
+                GetBasicSettings(),
+                1, // commentsRequired
+                new List<string> { "keyword1", "keyword2", "keyword3" },
+                new List<string> { "penaltyKeyword" },
+                new List<string>(),
+                1, // requireValues
+                new Message
+                {
+                    Text = "TestBot peg testUserId for doing some keyword2 things",
+                    MessageParts = new[]
+                    {
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " peg ",
+                            MessageType = MessageType.Text
+                        },
+                        new MessagePart
+                        {
+                            Text = "TestBot",
+                            MessageType = MessageType.PersonMention,
+                            UserId = "testBotId"
+                        },
+                        new MessagePart
+                        {
+                            Text = " for doing some keyword2 things",
+                            MessageType = MessageType.Text
+                        }
+                    },
+                    Sender = new Person
+                    {
+                        UserId = "testUserId",
+                        Username = "Test User",
+                        Type = PersonType.Person
+                    }
+                },
+                "You can't give pegs to me."
+            };
+
             // keyword required, invalid linked keyword supplied
             yield return new object[]
             {
