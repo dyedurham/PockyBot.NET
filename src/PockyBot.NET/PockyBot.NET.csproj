@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.2" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1.1" />
-    <PackageReference Include="Scriban" Version="5.5.1" />
+    <PackageReference Include="Scriban" Version="5.5.2" />
   </ItemGroup>
 
   <ItemGroup>
