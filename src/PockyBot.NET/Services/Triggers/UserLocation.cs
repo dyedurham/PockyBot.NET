@@ -71,6 +71,23 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            if (user.HasRole(Role.Admin) || user.HasRole(Role.Config)) {
+                return "### How to configure user location values!\n" +
+                       $"1. To get user locations for yourself or others, type `@{botName} {Commands.UserLocation} {Actions.Get} me|all|unset|@User`\n" +
+                       $"1. To set user locations, type `@{botName} {Commands.UserLocation} {Actions.Set} {{location}} me|@User1 @User2`\n" +
+                       $"1. To delete user locations, type `@{botName} {Commands.UserLocation} {Actions.Delete} me|@User1 @User2`\n" +
+                       "1. I will respond in the room you messaged me in.";
+            }
+            return "### How to config your user location value!\n" +
+                   $"1. To get user locations for yourself or others, type `@{botName} {Commands.UserLocation} {Actions.Get} me|all|unset|@User`\n" +
+                   $"1. To set your user location, type `@{botName} {Commands.UserLocation} {Actions.Set} {{location}} me`\n" +
+                   "    * To bulk configure user locations, please ask an admin.\n" +
+                   $"1. To delete your user location, type `@{botName} {Commands.UserLocation} {Actions.Delete} me`\n" +
+                   "1. I will respond in the room you messaged me in.";
+        }
+
         private async Task CreateUser(Person user)
         {
             await _pockyUserRepository.AddOrUpdateUserAsync(user.UserId, user.Username);

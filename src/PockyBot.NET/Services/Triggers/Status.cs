@@ -69,6 +69,13 @@ namespace PockyBot.NET.Services.Triggers
             });
         }
 
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to check your status 📈!\n" +
+                   $"1. To get a PM type: `@{botName} {Commands.Status}` OR direct message me with `{Commands.Status}`.\n" +
+                   "1. I will PM you number of pegs you have left and who you gave it to.";
+        }
+
         private Dictionary<bool, List<Persistence.Models.Peg>> GroupPegsByValidity(PockyUser pockyUser)
         {
             var requireKeywords = _configRepository.GetGeneralConfig("requireValues");

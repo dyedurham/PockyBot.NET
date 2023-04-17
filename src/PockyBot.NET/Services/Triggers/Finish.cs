@@ -55,5 +55,12 @@ namespace PockyBot.NET.Services.Triggers
                 Text = $"[Here are all pegs given this cycle]({uri})"
             };
         }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to complete the cycle 🚲!\n" +
+                   $"1. To display winners and results and clear the database, type `@{botName} {Commands.Finish}`.\n" +
+                   "1. I will respond in the room you messaged me in.";
+        }
     }
 }

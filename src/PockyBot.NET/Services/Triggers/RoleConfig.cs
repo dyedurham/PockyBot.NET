@@ -69,6 +69,13 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to configure role config values 🗞️!\n" +
+                   $"1. To get/set/delete user roles, type `@{botName} {Commands.RoleConfig} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{@User}} {{role}}`\n" +
+                   "1. I will respond in the room you messaged me in.";
+        }
+
         private async Task<string> GetRoleConfigMessage()
         {
             var users = await _pockyUserRepository.GetAllUserRolesAsync();

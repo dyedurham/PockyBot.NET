@@ -37,5 +37,12 @@ namespace PockyBot.NET.Services.Triggers
                 Text = builder.ToString()
             });
         }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to check the rotation 🔄!\n" +
+                   $"1. To check the rotation of teams responsible for buying snacks, type `@{botName} {Commands.Rotation}` OR direct message me with `{Commands.Rotation}`.\n" +
+                   "1. I will respond in the room you messaged me in.";
+        }
     }
 }

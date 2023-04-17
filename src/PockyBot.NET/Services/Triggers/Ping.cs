@@ -21,5 +21,12 @@ namespace PockyBot.NET.Services.Triggers
                 Text = "pong. I'm alive!"
             });
         }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to ping me 🏓!\n" +
+                   $"1. To check whether I'm alive, type: `@{botName} {Commands.Ping}` OR direct message me with `{Commands.Ping}`.\n" +
+                   "1. I will respond in the room you messaged me in if I am alive.";
+        }
     }
 }

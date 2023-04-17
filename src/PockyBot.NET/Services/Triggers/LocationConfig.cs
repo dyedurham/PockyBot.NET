@@ -67,6 +67,19 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            if (user.HasRole(Role.Admin) || user.HasRole(Role.Config)) {
+                return "### How to configure location config values 🌏!\n" +
+                       $"1. To get/edit/delete locations, type `@{botName} {Commands.LocationConfig} {Actions.Get}|{Actions.Add}|{Actions.Delete} {{location}}`\n" +
+                       "1. I will respond in the room you messaged me in.";
+            }
+            return "### How to get location values 🌏!\n" +
+                   $"1. To get a list of locations, type `@{botName} {Commands.LocationConfig} {Actions.Get}`\n" +
+                   "    * To configure locations, please ask an admin.\n" +
+                   "1. I will respond in the room you messaged me in.";
+        }
+
         private static string GetLocationMessage(string[] locations)
         {
             if (locations.Length == 0)

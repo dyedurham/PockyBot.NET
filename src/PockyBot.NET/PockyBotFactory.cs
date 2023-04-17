@@ -40,7 +40,7 @@ namespace PockyBot.NET
             var triggers = new List<ITrigger>
             {
                 new Ping(),
-                new Help(pockyUserRepository, wrappedSettings, configRepository),
+                new Help(pockyUserRepository, wrappedSettings, configRepository, null),
                 new Welcome(wrappedSettings, configRepository),
                 new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver, loggerFactory.CreateLogger<Peg>()),
                 new Status(pockyUserRepository, configRepository, pegHelper, loggerFactory.CreateLogger<Status>()),

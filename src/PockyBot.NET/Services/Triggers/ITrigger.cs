@@ -11,5 +11,6 @@ namespace PockyBot.NET.Services.Triggers
         bool CanHaveArgs { get; }
         Role[] Permissions { get; }
         Task<Message> Respond(Message message);
+        string GetHelpMessage(string botName, PockyUser user);
     }
 }

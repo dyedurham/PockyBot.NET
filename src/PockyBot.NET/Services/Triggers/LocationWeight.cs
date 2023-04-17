@@ -68,6 +68,13 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to configure location weight values ⚖️!\n" +
+                   $"1. To get/edit/delete location weight values, type `@{botName} {Commands.LocationWeight} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{location1}} {{location2}} {{weight}}`\n" +
+                   "1. I will respond in the room you messaged me in.";
+        }
+
         private string GetLocationWeightMessage(string[] locations)
         {
             var allConfigs = _configRepository.GetAllGeneralConfig();

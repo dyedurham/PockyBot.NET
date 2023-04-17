@@ -76,6 +76,12 @@ namespace PockyBot.NET.Services.Triggers
             });
         }
 
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to unpeg someone 💔!\n" +
+                   $"1. To unpeg someone or something type: `@{botName} {Commands.Unpeg} @Person/thing {{comment}}`.\n";
+        }
+
         private MessagePart[] SendRandomResponse(Person sender, bool recipientIsPerson, string recipientName,
             string recipientId, string roomId, string parentId)
         {
