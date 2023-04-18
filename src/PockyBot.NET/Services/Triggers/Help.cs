@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,18 +15,16 @@ namespace PockyBot.NET.Services.Triggers
     internal class Help : ITrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
-        private readonly IConfigRepository _configRepository;
-        private readonly IEnumerable<ITrigger> _triggers;
+        private readonly IEnumerable<IHelpMessageTrigger> _triggers;
         private readonly PockyBotSettings _pockyBotSettings;
         public string Command => Commands.Help;
         public bool DirectMessageAllowed => true;
         public bool CanHaveArgs => true;
         public Role[] Permissions => Array.Empty<Role>();
 
-        public Help(IPockyUserRepository pockyUserRepository, IOptions<PockyBotSettings> pockySettings, IConfigRepository configRepository, IEnumerable<ITrigger> triggers)
+        public Help(IPockyUserRepository pockyUserRepository, IOptions<PockyBotSettings> pockySettings, IEnumerable<IHelpMessageTrigger> triggers)
         {
             _pockyUserRepository = pockyUserRepository;
-            _configRepository = configRepository;
             _triggers = triggers;
             _pockyBotSettings = pockySettings.Value;
         }
@@ -42,11 +39,6 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = newMessage
             });
-        }
-
-        public string GetHelpMessage(string botName, PockyUser user)
-        {
-            return $"Type `@{botName} {Commands.Help} <command-name>` for information on a command";
         }
 
         private string CreateHelpResponseMessage(string command, PockyUser user)

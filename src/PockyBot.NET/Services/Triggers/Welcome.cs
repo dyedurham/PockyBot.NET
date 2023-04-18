@@ -9,7 +9,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Welcome : ITrigger
+    internal class Welcome : ITrigger, IHelpMessageTrigger
     {
         private readonly IConfigRepository _configRepository;
         private readonly PockyBotSettings _pockyBotSettings;

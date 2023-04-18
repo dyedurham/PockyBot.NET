@@ -11,7 +11,7 @@ using PockyBot.NET.Services.Helpers;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class RoleConfig : ITrigger
+    internal class RoleConfig : ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IChatHelper _chatHelper;

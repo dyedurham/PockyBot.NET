@@ -8,7 +8,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class RemoveUser : ITrigger
+    internal class RemoveUser : ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly ILogger<RemoveUser> _logger;

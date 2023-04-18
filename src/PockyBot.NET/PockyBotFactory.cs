@@ -37,25 +37,46 @@ namespace PockyBot.NET
             var resultsFileGenerator = new ResultsFileGenerator(pegResultsHelper, loggerFactory.CreateLogger<ResultsFileGenerator>(), resultsUploader);
             var usernameUpdater = new UsernameUpdater(chatHelper.People, pockyUserRepository, loggerFactory.CreateLogger<UsernameUpdater>());
 
+            var ping = new Ping();
+            var welcome = new Welcome(wrappedSettings, configRepository);
+            var peg = new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver, loggerFactory.CreateLogger<Peg>());
+            var status = new Status(pockyUserRepository, configRepository, pegHelper, loggerFactory.CreateLogger<Status>());
+            var results = new Results(pockyUserRepository, pegResultsHelper, resultsFileGenerator, loggerFactory.CreateLogger<Results>());
+            var finish = new Finish(pockyUserRepository, pegResultsHelper, directResultsMessageSender, resultsFileGenerator, loggerFactory.CreateLogger<Finish>(), usernameUpdater);
+            var reset = new Reset(pegRepository, loggerFactory.CreateLogger<Reset>());
+            var keywords = new Keywords(configRepository);
+            var rotation = new Rotation(configRepository);
+            var locationConfig = new LocationConfig(locationRepository, pockyUserRepository);
+            var userLocation = new UserLocation(pockyUserRepository, userLocationGetter, userLocationSetter, userLocationDeleter);
+            var numberConfig = new NumberConfig(configRepository);
+            var stringConfig = new StringConfig(configRepository);
+            var roleConfig = new RoleConfig(pockyUserRepository, chatHelper);
+            var removeUser = new RemoveUser(pockyUserRepository, loggerFactory.CreateLogger<RemoveUser>());
+            var locationWeight = new LocationWeight(configRepository, locationRepository);
             var triggers = new List<ITrigger>
             {
-                new Ping(),
-                new Help(pockyUserRepository, wrappedSettings, configRepository, null),
-                new Welcome(wrappedSettings, configRepository),
-                new Peg(pegRequestValidator, pockyUserRepository, pegHelper, configRepository, chatHelper, pegGiver, loggerFactory.CreateLogger<Peg>()),
-                new Status(pockyUserRepository, configRepository, pegHelper, loggerFactory.CreateLogger<Status>()),
-                new Results(pockyUserRepository, pegResultsHelper, resultsFileGenerator, loggerFactory.CreateLogger<Results>()),
-                new Finish(pockyUserRepository, pegResultsHelper, directResultsMessageSender, resultsFileGenerator, loggerFactory.CreateLogger<Finish>(), usernameUpdater),
-                new Reset(pegRepository, loggerFactory.CreateLogger<Reset>()),
-                new Keywords(configRepository),
-                new Rotation(configRepository),
-                new LocationConfig(locationRepository, pockyUserRepository),
-                new UserLocation(pockyUserRepository, userLocationGetter, userLocationSetter, userLocationDeleter),
-                new NumberConfig(configRepository),
-                new StringConfig(configRepository),
-                new RoleConfig(pockyUserRepository, chatHelper),
-                new RemoveUser(pockyUserRepository, loggerFactory.CreateLogger<RemoveUser>()),
-                new LocationWeight(configRepository, locationRepository),
+                ping,
+                new Help(pockyUserRepository, wrappedSettings,
+                    new IHelpMessageTrigger[]
+                    {
+                        ping, welcome, peg, status, results, finish, reset, keywords, rotation, locationConfig,
+                        userLocation, numberConfig, stringConfig, roleConfig, removeUser, locationWeight
+                    }),
+                welcome,
+                peg,
+                status,
+                results,
+                finish,
+                reset,
+                keywords,
+                rotation,
+                locationConfig,
+                userLocation,
+                numberConfig,
+                stringConfig,
+                roleConfig,
+                removeUser,
+                locationWeight,
                 new Default(wrappedSettings)
             };
 

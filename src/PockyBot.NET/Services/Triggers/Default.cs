@@ -36,10 +36,5 @@ namespace PockyBot.NET.Services.Triggers
 I am still being worked on, so more features to come : )"
             });
         }
-
-        public string GetHelpMessage(string botName, PockyUser user)
-        {
-            return string.Empty;
-        }
     }
 }

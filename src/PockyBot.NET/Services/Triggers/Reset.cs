@@ -8,7 +8,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Reset : ITrigger
+    internal class Reset : ITrigger, IHelpMessageTrigger
     {
         private readonly IPegRepository _pegRepository;
         private readonly ILogger<Reset> _logger;

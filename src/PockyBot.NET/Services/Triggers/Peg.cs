@@ -13,7 +13,7 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Peg : ITrigger
+    internal class Peg : ITrigger, IHelpMessageTrigger
     {
         private readonly IPegRequestValidator _pegRequestValidator;
         private readonly IPockyUserRepository _pockyUserRepository;

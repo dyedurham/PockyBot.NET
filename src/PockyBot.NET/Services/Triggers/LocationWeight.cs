@@ -10,7 +10,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class LocationWeight : ITrigger
+    internal class LocationWeight : ITrigger, IHelpMessageTrigger
     {
         private readonly IConfigRepository _configRepository;
         private readonly ILocationRepository _locationRepository;

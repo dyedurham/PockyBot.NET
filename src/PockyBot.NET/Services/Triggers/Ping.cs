@@ -6,7 +6,7 @@ using PockyBot.NET.Persistence.Models;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Ping : ITrigger
+    internal class Ping : ITrigger, IHelpMessageTrigger
     {
         public string Command => Commands.Ping;
 

@@ -10,7 +10,7 @@ using PockyBot.NET.Services.UserLocation;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class UserLocation : ITrigger
+    internal class UserLocation : ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IUserLocationGetter _userLocationGetter;

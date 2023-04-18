@@ -12,7 +12,7 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Status : ITrigger
+    internal class Status : ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IConfigRepository _configRepository;

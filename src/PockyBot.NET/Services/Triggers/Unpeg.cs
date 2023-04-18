@@ -11,7 +11,7 @@ using PockyBot.NET.Services.Helpers;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Unpeg : ITrigger
+    internal class Unpeg : ITrigger, IHelpMessageTrigger
     {
         private readonly IRandomnessHandler _randomnessHandler;
         private readonly IChatHelper _chatHelper;

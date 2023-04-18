@@ -8,7 +8,7 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Results: ITrigger
+    internal class Results: ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IPegResultsHelper _pegResultsHelper;

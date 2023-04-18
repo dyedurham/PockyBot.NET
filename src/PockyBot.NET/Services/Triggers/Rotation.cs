@@ -9,7 +9,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Rotation : ITrigger
+    internal class Rotation : ITrigger, IHelpMessageTrigger
     {
         private readonly IConfigRepository _configRepository;
         public string Command => Commands.Rotation;

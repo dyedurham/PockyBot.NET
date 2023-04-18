@@ -20,13 +20,12 @@ namespace PockyBot.NET.Tests.Services.Triggers
     {
         private readonly Help _subject;
         private readonly IPockyUserRepository _pockyUserRepository;
-        private readonly IConfigRepository _configRepository;
 
         private const string BotName = "Pocky";
         private const string SenderId = "testSender";
         private readonly List<UserRole> noRoles = new List<UserRole>();
         private readonly List<UserRole> adminRole = new List<UserRole>{new UserRole{Role = Role.Admin}};
-        private readonly List<ITrigger> triggers = new List<ITrigger>();
+        private readonly List<IHelpMessageTrigger> triggers = new List<IHelpMessageTrigger>();
 
         private Message _message;
         private Message _result;
@@ -39,8 +38,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 BotName = BotName
             });
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _configRepository = Substitute.For<IConfigRepository>();
-            _subject = new Help(_pockyUserRepository, pockyUserSettings, _configRepository, triggers);
+            _subject = new Help(_pockyUserRepository, pockyUserSettings, triggers);
         }
 
         [Fact]
@@ -198,25 +196,25 @@ namespace PockyBot.NET.Tests.Services.Triggers
 
         private void GivenAListOfTriggers()
         {
-            var peg = Substitute.For<ITrigger>();
+            var peg = Substitute.For<IHelpMessageTrigger>();
             peg.Command.Returns(Commands.Peg);
             peg.Permissions.Returns(Array.Empty<Role>());
             peg.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Peg}");
             triggers.Add(peg);
 
-            var status = Substitute.For<ITrigger>();
+            var status = Substitute.For<IHelpMessageTrigger>();
             status.Command.Returns(Commands.Status);
             status.Permissions.Returns(Array.Empty<Role>());
             status.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Status}");
             triggers.Add(status);
 
-            var reset = Substitute.For<ITrigger>();
+            var reset = Substitute.For<IHelpMessageTrigger>();
             reset.Command.Returns(Commands.Reset);
             reset.Permissions.Returns(new [] { Role.Reset, Role.Admin });
             reset.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Reset}");
             triggers.Add(reset);
 
-            var finish = Substitute.For<ITrigger>();
+            var finish = Substitute.For<IHelpMessageTrigger>();
             finish.Command.Returns(Commands.Finish);
             finish.Permissions.Returns(new [] { Role.Finish, Role.Admin });
             finish.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Finish}");
