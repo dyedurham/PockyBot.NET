@@ -13,7 +13,7 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Peg : ITrigger
+    internal class Peg : ITrigger, IHelpMessageTrigger
     {
         private readonly IPegRequestValidator _pegRequestValidator;
         private readonly IPockyUserRepository _pockyUserRepository;
@@ -76,6 +76,18 @@ namespace PockyBot.NET.Services.Triggers
 
             await GivePeg(message, comment, sender, isPenaltyPeg, numPegsGiven);
             return null;
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            var keywordsRequired = _configRepository.GetGeneralConfig("requireValues") == 1;
+            var newMessage = "### How to give a peg 🎁!\n" +
+                             $"1. To give someone a peg type: `@{botName} {Commands.Peg} @bob {{comment}}`.\n";
+
+            if (keywordsRequired) {
+                newMessage += "1. Note that your comment MUST include a keyword.";
+            }
+            return newMessage;
         }
 
         private bool IsPegFormatValid(Message message, out Message errorMessage)

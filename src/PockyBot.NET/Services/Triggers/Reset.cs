@@ -8,7 +8,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Reset : ITrigger
+    internal class Reset : ITrigger, IHelpMessageTrigger
     {
         private readonly IPegRepository _pegRepository;
         private readonly ILogger<Reset> _logger;
@@ -48,6 +48,13 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = "Pegs cleared."
             };
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to reset all pegs 🙅!\n" +
+                   $"1. To clear all pegs, type `@{botName} {Commands.Reset}`.\n" +
+                   "1. I will respond in the room you messaged me in.";
         }
     }
 }

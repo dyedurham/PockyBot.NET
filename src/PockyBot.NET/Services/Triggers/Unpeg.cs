@@ -11,7 +11,7 @@ using PockyBot.NET.Services.Helpers;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Unpeg : ITrigger
+    internal class Unpeg : ITrigger, IHelpMessageTrigger
     {
         private readonly IRandomnessHandler _randomnessHandler;
         private readonly IChatHelper _chatHelper;
@@ -74,6 +74,12 @@ namespace PockyBot.NET.Services.Triggers
             {
                 MessageParts = response
             });
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to unpeg someone 💔!\n" +
+                   $"1. To unpeg someone or something type: `@{botName} {Commands.Unpeg} @Person/thing {{comment}}`.\n";
         }
 
         private MessagePart[] SendRandomResponse(Person sender, bool recipientIsPerson, string recipientName,

@@ -8,7 +8,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class RemoveUser : ITrigger
+    internal class RemoveUser : ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly ILogger<RemoveUser> _logger;
@@ -62,6 +62,13 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = messageText
             };
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to remove users 🛑!\n" +
+                   $"1. To remove a user, type `@{botName} {Commands.RemoveUser} {{@User}}|'{{username}}'`\n" +
+                   "1. I will respond in the room you messaged me in.";
         }
 
         private async Task<string> RemoveUserByUsername(string username)

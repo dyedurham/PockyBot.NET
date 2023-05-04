@@ -12,7 +12,7 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Status : ITrigger
+    internal class Status : ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IConfigRepository _configRepository;
@@ -67,6 +67,13 @@ namespace PockyBot.NET.Services.Triggers
                 Text = $"{pegsLeftText}{validPegsSentText}{penaltyPegsReceivedText}",
                 RoomId = message.Sender.UserId
             });
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to check your status 📈!\n" +
+                   $"1. To get a PM type: `@{botName} {Commands.Status}` OR direct message me with `{Commands.Status}`.\n" +
+                   "1. I will PM you number of pegs you have left and who you gave it to.";
         }
 
         private Dictionary<bool, List<Persistence.Models.Peg>> GroupPegsByValidity(PockyUser pockyUser)

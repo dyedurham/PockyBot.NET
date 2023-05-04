@@ -10,7 +10,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class LocationWeight : ITrigger
+    internal class LocationWeight : ITrigger, IHelpMessageTrigger
     {
         private readonly IConfigRepository _configRepository;
         private readonly ILocationRepository _locationRepository;
@@ -66,6 +66,13 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = response
             };
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to configure location weight values ⚖️!\n" +
+                   $"1. To get/edit/delete location weight values, type `@{botName} {Commands.LocationWeight} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{location1}} {{location2}} {{weight}}`\n" +
+                   "1. I will respond in the room you messaged me in.";
         }
 
         private string GetLocationWeightMessage(string[] locations)

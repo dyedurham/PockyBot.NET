@@ -11,7 +11,7 @@ using PockyBot.NET.Services.Helpers;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class RoleConfig : ITrigger
+    internal class RoleConfig : ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IChatHelper _chatHelper;
@@ -69,6 +69,13 @@ namespace PockyBot.NET.Services.Triggers
             };
         }
 
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to configure role config values 🗞️!\n" +
+                   $"1. To get/set/delete user roles, type `@{botName} {Commands.RoleConfig} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{@User}} {{role}}`\n" +
+                   "1. I will respond in the room you messaged me in.";
+        }
+
         private async Task<string> GetRoleConfigMessage()
         {
             var users = await _pockyUserRepository.GetAllUserRolesAsync();
@@ -79,10 +86,10 @@ namespace PockyBot.NET.Services.Triggers
             }
 
             var roleConfigMessageBuilder = new StringBuilder("Here is the current config:\n\n");
-            foreach (var user in users)
+            foreach (var user in users.OrderBy(x => x.Username))
             {
                 roleConfigMessageBuilder.AppendLine(
-                    $"* {user.Username}: {string.Join(", ", user.Roles.Select(x => x.Role))}");
+                    $"* {user.Username}: {string.Join(", ", user.Roles.Select(x => x.Role).OrderBy(x => x))}");
             }
 
             return roleConfigMessageBuilder.ToString();

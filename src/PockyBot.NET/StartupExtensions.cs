@@ -65,6 +65,24 @@ namespace PockyBot.NET
             services.AddTransient<ITrigger, RemoveUser>();
             services.AddTransient<ITrigger, LocationWeight>();
             services.AddTransient<ITrigger, Default>();
+
+            services.AddTransient<IHelpMessageTrigger, Ping>();
+            services.AddTransient<IHelpMessageTrigger, Welcome>();
+            services.AddTransient<IHelpMessageTrigger, Peg>();
+            services.AddTransient<IHelpMessageTrigger, Unpeg>();
+            services.AddTransient<IHelpMessageTrigger, Status>();
+            services.AddTransient<IHelpMessageTrigger, Results>();
+            services.AddTransient<IHelpMessageTrigger, Finish>();
+            services.AddTransient<IHelpMessageTrigger, Reset>();
+            services.AddTransient<IHelpMessageTrigger, Keywords>();
+            services.AddTransient<IHelpMessageTrigger, Rotation>();
+            services.AddTransient<IHelpMessageTrigger, LocationConfig>();
+            services.AddTransient<IHelpMessageTrigger, UserLocation>();
+            services.AddTransient<IHelpMessageTrigger, NumberConfig>();
+            services.AddTransient<IHelpMessageTrigger, StringConfig>();
+            services.AddTransient<IHelpMessageTrigger, RoleConfig>();
+            services.AddTransient<IHelpMessageTrigger, RemoveUser>();
+            services.AddTransient<IHelpMessageTrigger, LocationWeight>();
         }
     }
 }

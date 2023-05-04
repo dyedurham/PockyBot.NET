@@ -9,7 +9,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Welcome : ITrigger
+    internal class Welcome : ITrigger, IHelpMessageTrigger
     {
         private readonly IConfigRepository _configRepository;
         private readonly PockyBotSettings _pockyBotSettings;
@@ -48,6 +48,13 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = newMessage
             });
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to welcome someone 👐!\n" +
+                   $"1. To get a welcome message from me, type `@{botName} {Commands.Welcome}` OR direct message me with `{Commands.Welcome}`.\n" +
+                   "1. I will respond in the room you messaged me in.";
         }
     }
 }

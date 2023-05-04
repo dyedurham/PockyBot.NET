@@ -8,7 +8,7 @@ using PockyBot.NET.Services.Pegs;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class Results: ITrigger
+    internal class Results: ITrigger, IHelpMessageTrigger
     {
         private readonly IPockyUserRepository _pockyUserRepository;
         private readonly IPegResultsHelper _pegResultsHelper;
@@ -41,6 +41,13 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = $"[Here are all pegs given this cycle]({uri})"
             };
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to display the results 📃!\n" +
+                   $"1. To display results, type `@{botName} {Commands.Results}`.\n" +
+                   "1. I will respond in the room you messaged me in.";
         }
     }
 }

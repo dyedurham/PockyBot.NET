@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GlobalX.ChatBots.Core.Messages;
@@ -19,12 +20,12 @@ namespace PockyBot.NET.Tests.Services.Triggers
     {
         private readonly Help _subject;
         private readonly IPockyUserRepository _pockyUserRepository;
-        private readonly IConfigRepository _configRepository;
 
         private const string BotName = "Pocky";
         private const string SenderId = "testSender";
         private readonly List<UserRole> noRoles = new List<UserRole>();
         private readonly List<UserRole> adminRole = new List<UserRole>{new UserRole{Role = Role.Admin}};
+        private readonly List<IHelpMessageTrigger> triggers = new List<IHelpMessageTrigger>();
 
         private Message _message;
         private Message _result;
@@ -37,14 +38,14 @@ namespace PockyBot.NET.Tests.Services.Triggers
                 BotName = BotName
             });
             _pockyUserRepository = Substitute.For<IPockyUserRepository>();
-            _configRepository = Substitute.For<IConfigRepository>();
-            _subject = new Help(_pockyUserRepository, pockyUserSettings, _configRepository);
+            _subject = new Help(_pockyUserRepository, pockyUserSettings, triggers);
         }
 
         [Fact]
         public void ItShouldShowAListOfCommandsToANonAdminUser()
         {
             this.Given(x => GivenAHelpMessage(""))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowAListOfNonAdminCommands())
@@ -55,6 +56,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowAListOfCommandsToANonAdminUserInADirectMessage()
         {
             this.Given(x => GivenADirectMessageHelpMessage(""))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowAListOfNonAdminCommands())
@@ -65,6 +67,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowAListOfAdminCommandsToAnAdminUser()
         {
             this.Given(x => GivenAHelpMessage(""))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(adminRole))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowAListOfAdminCommands())
@@ -75,6 +78,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowTheDefaultHelpMessageWhenTheCommandDoesNotExist()
         {
             this.Given(x => GivenAHelpMessage("bogusCommand"))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheDefaultHelpMessage())
@@ -85,6 +89,7 @@ namespace PockyBot.NET.Tests.Services.Triggers
         public void ItShouldShowTheDefaultHelpMessageWhenTheCommandDoesNotExistInADirectMessage()
         {
             this.Given(x => GivenADirectMessageHelpMessage("bogusCommand"))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheDefaultHelpMessage())
@@ -94,14 +99,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
-        [InlineData(Commands.Keywords)]
-        [InlineData(Commands.Ping)]
-        [InlineData(Commands.Welcome)]
-        [InlineData(Commands.Rotation)]
-        [InlineData(Commands.LocationConfig)]
         public void ItShouldShowTheHelpMessageForNonAdminCommands(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheCommandHelpMessage(command))
@@ -111,14 +112,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Peg)]
         [InlineData(Commands.Status)]
-        [InlineData(Commands.Keywords)]
-        [InlineData(Commands.Ping)]
-        [InlineData(Commands.Welcome)]
-        [InlineData(Commands.Rotation)]
-        [InlineData(Commands.LocationConfig)]
         public void ItShouldShowTheHelpMessageForNonAdminCommandsInADirectMessage(string command)
         {
             this.Given(x => GivenADirectMessageHelpMessage(command))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheCommandHelpMessage(command))
@@ -130,21 +127,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [InlineData(Commands.Finish, Role.Admin)]
         [InlineData(Commands.Reset, Role.Reset)]
         [InlineData(Commands.Reset, Role.Admin)]
-        [InlineData(Commands.StringConfig, Role.Admin)]
-        [InlineData(Commands.StringConfig, Role.Config)]
-        [InlineData(Commands.RoleConfig, Role.Admin)]
-        [InlineData(Commands.RoleConfig, Role.Config)]
-        [InlineData(Commands.LocationWeight, Role.Admin)]
-        [InlineData(Commands.LocationWeight, Role.Config)]
-        [InlineData(Commands.RemoveUser, Role.Admin)]
-        [InlineData(Commands.RemoveUser, Role.RemoveUser)]
-        [InlineData(Commands.Results, Role.Admin)]
-        [InlineData(Commands.Results, Role.Results)]
-        [InlineData(Commands.NumberConfig, Role.Admin)]
-        [InlineData(Commands.NumberConfig, Role.Config)]
         internal void ItShouldShowTheHelpMessageForAdminCommandsToAdminUsers(string command, Role userRole)
         {
             this.Given(x => GivenAHelpMessage(command))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(new List<UserRole>{new UserRole{Role = userRole}}))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheCommandHelpMessage(command))
@@ -154,15 +140,10 @@ namespace PockyBot.NET.Tests.Services.Triggers
         [Theory]
         [InlineData(Commands.Finish)]
         [InlineData(Commands.Reset)]
-        [InlineData(Commands.StringConfig)]
-        [InlineData(Commands.RoleConfig)]
-        [InlineData(Commands.LocationWeight)]
-        [InlineData(Commands.RemoveUser)]
-        [InlineData(Commands.Results)]
-        [InlineData(Commands.NumberConfig)]
         public void ItShouldShowTheDefaultHelpMessageForAdminCommandsToNonAdminUsers(string command)
         {
             this.Given(x => GivenAHelpMessage(command))
+                .And(x => GivenAListOfTriggers())
                 .And(x => GivenTheUserHasRoles(noRoles))
                 .When(x => WhenRespondIsCalled())
                 .Then(x => ThenItShouldShowTheDefaultHelpMessage())
@@ -213,6 +194,33 @@ namespace PockyBot.NET.Tests.Services.Triggers
             };
         }
 
+        private void GivenAListOfTriggers()
+        {
+            var peg = Substitute.For<IHelpMessageTrigger>();
+            peg.Command.Returns(Commands.Peg);
+            peg.Permissions.Returns(Array.Empty<Role>());
+            peg.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Peg}");
+            triggers.Add(peg);
+
+            var status = Substitute.For<IHelpMessageTrigger>();
+            status.Command.Returns(Commands.Status);
+            status.Permissions.Returns(Array.Empty<Role>());
+            status.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Status}");
+            triggers.Add(status);
+
+            var reset = Substitute.For<IHelpMessageTrigger>();
+            reset.Command.Returns(Commands.Reset);
+            reset.Permissions.Returns(new [] { Role.Reset, Role.Admin });
+            reset.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Reset}");
+            triggers.Add(reset);
+
+            var finish = Substitute.For<IHelpMessageTrigger>();
+            finish.Command.Returns(Commands.Finish);
+            finish.Permissions.Returns(new [] { Role.Finish, Role.Admin });
+            finish.GetHelpMessage(BotName, Arg.Any<PockyUser>()).Returns($"@{BotName} {Commands.Finish}");
+            triggers.Add(finish);
+        }
+
         private void GivenTheUserHasRoles(List<UserRole> roles)
         {
             _pockyUserRepository.GetUser(SenderId).Returns(new PockyUser
@@ -232,23 +240,11 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldStartWith("## What I can do (List of Commands)");
             _result.Text.ShouldContain($"* {Commands.Peg}");
             _result.Text.ShouldContain($"* {Commands.Status}");
-            _result.Text.ShouldContain($"* {Commands.Keywords}");
-            _result.Text.ShouldContain($"* {Commands.Ping}");
-            _result.Text.ShouldContain($"* {Commands.Welcome}");
-            _result.Text.ShouldContain($"* {Commands.Rotation}");
-            _result.Text.ShouldContain($"* {Commands.LocationConfig}");
-            _result.Text.ShouldContain($"* {Commands.UserLocation}");
             _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");
             _result.Text.ShouldContain("I am still being worked on, so more features to come.");
 
             _result.Text.ShouldNotContain($"* {Commands.Reset}");
             _result.Text.ShouldNotContain($"* {Commands.Finish}");
-            _result.Text.ShouldNotContain($"* {Commands.StringConfig}");
-            _result.Text.ShouldNotContain($"* {Commands.RoleConfig}");
-            _result.Text.ShouldNotContain($"* {Commands.LocationWeight}");
-            _result.Text.ShouldNotContain($"* {Commands.RemoveUser}");
-            _result.Text.ShouldNotContain($"* {Commands.Results}");
-            _result.Text.ShouldNotContain($"* {Commands.NumberConfig}");
         }
 
         private void ThenItShouldShowAListOfAdminCommands()
@@ -256,20 +252,8 @@ namespace PockyBot.NET.Tests.Services.Triggers
             _result.Text.ShouldStartWith("## What I can do (List of Commands)");
             _result.Text.ShouldContain($"* {Commands.Peg}");
             _result.Text.ShouldContain($"* {Commands.Status}");
-            _result.Text.ShouldContain($"* {Commands.Keywords}");
-            _result.Text.ShouldContain($"* {Commands.Ping}");
-            _result.Text.ShouldContain($"* {Commands.Welcome}");
-            _result.Text.ShouldContain($"* {Commands.Rotation}");
-            _result.Text.ShouldContain($"* {Commands.LocationConfig}");
-            _result.Text.ShouldContain($"* {Commands.UserLocation}");
             _result.Text.ShouldContain($"* {Commands.Reset}");
             _result.Text.ShouldContain($"* {Commands.Finish}");
-            _result.Text.ShouldContain($"* {Commands.StringConfig}");
-            _result.Text.ShouldContain($"* {Commands.RoleConfig}");
-            _result.Text.ShouldContain($"* {Commands.LocationWeight}");
-            _result.Text.ShouldContain($"* {Commands.RemoveUser}");
-            _result.Text.ShouldContain($"* {Commands.Results}");
-            _result.Text.ShouldContain($"* {Commands.NumberConfig}");
             _result.Text.ShouldContain($"For more information on a command type `@{BotName} help command-name` or direct message me with `help command-name`");
             _result.Text.ShouldContain("I am still being worked on, so more features to come.");
         }

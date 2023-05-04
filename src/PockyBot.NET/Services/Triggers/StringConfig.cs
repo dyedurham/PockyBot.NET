@@ -11,7 +11,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class StringConfig : ITrigger
+    internal class StringConfig : ITrigger, IHelpMessageTrigger
     {
         private readonly IConfigRepository _configRepository;
         public string Command => Commands.StringConfig;
@@ -58,6 +58,15 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = newMessage
             };
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to configure string config values 🎻!\n" +
+                   $"1. To get/add/delete string config values, type `@{botName} {Commands.StringConfig} {string.Join("|",ConfigActions.All())} {{name}} {{value}}`\n" +
+                   $"    * Example 1: To add a keyword called \"amazing\", type `@{botName} {Commands.StringConfig} {ConfigActions.Add} keyword amazing`\n" +
+                   $"    * Example 2: To add a linked keyword called \"awesome\" to the \"amazing\" keyword, type `@{botName} {Commands.StringConfig} {ConfigActions.Add} linkedKeyword amazing:awesome`\n" +
+                   "1. I will respond in the room you messaged me in.";
         }
 
         private string GetStringConfig()

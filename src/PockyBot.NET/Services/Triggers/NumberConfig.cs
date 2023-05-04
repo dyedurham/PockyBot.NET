@@ -9,7 +9,7 @@ using PockyBot.NET.Persistence.Repositories;
 
 namespace PockyBot.NET.Services.Triggers
 {
-    internal class NumberConfig : ITrigger
+    internal class NumberConfig : ITrigger, IHelpMessageTrigger
     {
         private readonly IConfigRepository _configRepository;
 
@@ -61,6 +61,13 @@ namespace PockyBot.NET.Services.Triggers
             {
                 Text = responseText
             };
+        }
+
+        public string GetHelpMessage(string botName, PockyUser user)
+        {
+            return "### How to configure number config values 🔢!\n" +
+                   $"1. To get/edit/refresh/delete number config values, type `@{botName} {Commands.NumberConfig} {Actions.Get}|{Actions.Set}|{Actions.Delete} {{name}} {{number}}`\n" +
+                   "1. I will respond in the room you messaged me in.";
         }
 
         private string GetNumberConfigMessage()
