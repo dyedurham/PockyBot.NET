@@ -1,3 +1,16 @@
+# [1.17.0](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.10...v1.17.0) (2023-05-04)
+
+
+### Bug Fixes
+
+* use separate interface for help messages ([30121e8](https://github.com/GlobalX/PockyBot.NET/commit/30121e85c7e0265ccf9eddc67a45e3d756360b02))
+
+
+### Features
+
+* display sorted roles ([e474c5c](https://github.com/GlobalX/PockyBot.NET/commit/e474c5c65d2050511f38fa4fe3cbab78625b2cc2))
+* refactor help messages ([4cd44ef](https://github.com/GlobalX/PockyBot.NET/commit/4cd44efdd1777edcae1c801ec6bde761f0a3c7e5))
+
 ## [1.16.10](https://github.com/GlobalX/PockyBot.NET/compare/v1.16.9...v1.16.10) (2022-12-19)
 
 
